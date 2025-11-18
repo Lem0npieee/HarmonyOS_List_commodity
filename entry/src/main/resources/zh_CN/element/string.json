@@ -1,0 +1,324 @@
+{
+  "string": [
+    {
+      "name": "entry_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "List"
+    },
+    {
+      "name": "selected",
+      "value": "精选"
+    },
+    {
+      "name": "mobile_phone",
+      "value": "手机"
+    },
+    {
+      "name": "clothes",
+      "value": "服饰"
+    },
+    {
+      "name": "wear",
+      "value": "食品"
+    },
+    {
+      "name": "food",
+      "value": "食品"
+    },
+    {
+      "name": "home_furnishing",
+      "value": "家居"
+    },
+    {
+      "name": "goodsName",
+      "value": "【新品上市】畅乐冰晶绿低脂新品"
+    },
+    {
+      "name": "another_goodsName",
+      "value": "【新品上市】奶茶自然清新亲近自然"
+    },
+    {
+      "name": "goods_tea_drink",
+      "value": "畅乐冰晶绿低脂茶饮 500ml*12瓶"
+    },
+    {
+      "name": "goods_milk_tea",
+      "value": "香港风味丝袖奶茶 原味 450ml*6杯"
+    },
+    {
+      "name": "goods_android_phone",
+      "value": "华为 Mate 60 Pro 5G智能手机 12GB+512GB"
+    },
+    {
+      "name": "goods_ios_phone",
+      "value": "iPhone 15 Pro Max 256GB 蓝色钛金属"
+    },
+    {
+      "name": "goods_mens_coat",
+      "value": "男士羊毛大衣 加厚保暖 商务休闲两用"
+    },
+    {
+      "name": "goods_womens_dress",
+      "value": "春季花卉连衣裙 法式复古 淡雅纷花"
+    },
+    {
+      "name": "goods_snacks",
+      "value": "三只松鼠坚果组合装 每日坚果 750g"
+    },
+    {
+      "name": "goods_drinks",
+      "value": "农夫山泉100%NFC鲜榨汁 300ml*10瓶"
+    },
+    {
+      "name": "goods_smart_speaker",
+      "value": "小爱音箱Pro 智能音箱 AI语音助手"
+    },
+    {
+      "name": "goods_kitchen_appliance",
+      "value": "九阳破壁料理机 家用多功能研磨机"
+    },
+    {
+      "name": "advertising_language",
+      "value": "重磅推荐，MD新品试用中！"
+    },
+    {
+      "name": "evaluate",
+      "value": "6662人评价 95%好评"
+    },
+    {
+      "name": "price_199",
+      "value": "¥199"
+    },
+    {
+      "name": "price_265",
+      "value": "¥265"
+    },
+    {
+      "name": "price_810",
+      "value": "¥810"
+    },
+    {
+      "name": "price_999",
+      "value": "¥999"
+    },
+    {
+      "name": "to_bottom",
+      "value": "-- 已经到底了 --"
+    },
+    {
+      "name": "refresh_text",
+      "value": "正在刷新"
+    },
+    {
+      "name": "shopping_mall",
+      "value": "商城"
+    },
+    {
+      "name": "search_placeholder",
+      "value": "搜索商品或标签"
+    },
+    {
+      "name": "filter_free_shipping",
+      "value": "包邮"
+    },
+    {
+      "name": "filter_coupon",
+      "value": "优惠券"
+    },
+    {
+      "name": "filter_hot",
+      "value": "热卖"
+    },
+    {
+      "name": "filter_new",
+      "value": "新品"
+    },
+    {
+      "name": "sort_comprehensive",
+      "value": "综合"
+    },
+    {
+      "name": "sort_new",
+      "value": "最新"
+    },
+    {
+      "name": "sort_price_low",
+      "value": "价格↑"
+    },
+    {
+      "name": "sort_price_high",
+      "value": "价格↓"
+    },
+    {
+      "name": "sort_section_title",
+      "value": "排序"
+    },
+    {
+      "name": "filter_section_title",
+      "value": "筛选"
+    },
+    {
+      "name": "sub_all",
+      "value": "全部"
+    },
+    {
+      "name": "sub_trending",
+      "value": "热度榜"
+    },
+    {
+      "name": "sub_limited",
+      "value": "限量"
+    },
+    {
+      "name": "sub_android",
+      "value": "安卓"
+    },
+    {
+      "name": "sub_ios",
+      "value": "iOS"
+    },
+    {
+      "name": "sub_accessories",
+      "value": "配件"
+    },
+    {
+      "name": "sub_men",
+      "value": "男装"
+    },
+    {
+      "name": "sub_women",
+      "value": "女装"
+    },
+    {
+      "name": "sub_kids",
+      "value": "童装"
+    },
+    {
+      "name": "sub_outdoor",
+      "value": "户外"
+    },
+    {
+      "name": "sub_street",
+      "value": "街头"
+    },
+    {
+      "name": "sub_office",
+      "value": "通勤"
+    },
+    {
+      "name": "sub_snacks",
+      "value": "零食"
+    },
+    {
+      "name": "sub_drinks",
+      "value": "饮料"
+    },
+    {
+      "name": "sub_fresh",
+      "value": "生鲜"
+    },
+    {
+      "name": "sub_furniture",
+      "value": "家具"
+    },
+    {
+      "name": "sub_smart",
+      "value": "智能家居"
+    },
+    {
+      "name": "sub_kitchen",
+      "value": "厨房"
+    },
+    {
+      "name": "banner_selected_primary",
+      "value": "精选限时好物"
+    },
+    {
+      "name": "banner_selected_secondary",
+      "value": "每日09:00焕新"
+    },
+    {
+      "name": "banner_phone_primary",
+      "value": "旗舰手机直降"
+    },
+    {
+      "name": "banner_phone_secondary",
+      "value": "以旧换新补贴"
+    },
+    {
+      "name": "banner_clothes_primary",
+      "value": "当季人气穿搭"
+    },
+    {
+      "name": "banner_clothes_secondary",
+      "value": "新面料陆续到货"
+    },
+    {
+      "name": "banner_wear_primary",
+      "value": "新鲜食材速递"
+    },
+    {
+      "name": "banner_wear_secondary",
+      "value": "美味不等待"
+    },
+    {
+      "name": "banner_food_primary",
+      "value": "新鲜食材速递"
+    },
+    {
+      "name": "banner_food_secondary",
+      "value": "美味不等待"
+    },
+    {
+      "name": "banner_home_primary",
+      "value": "舒适居家灵感"
+    },
+    {
+      "name": "banner_home_secondary",
+      "value": "智能设备套装"
+    },
+    {
+      "name": "tag_hot",
+      "value": "热卖"
+    },
+    {
+      "name": "tag_new",
+      "value": "新品"
+    },
+    {
+      "name": "tag_free_shipping",
+      "value": "包邮"
+    },
+    {
+      "name": "tag_coupon",
+      "value": "券"
+    },
+    {
+      "name": "empty_list_hint",
+      "value": "暂无符合条件的商品"
+    },
+    {
+      "name": "loading_more_text",
+      "value": "更多好物加载中..."
+    },
+    {
+      "name": "refresh_wait_text",
+      "value": "网络稍慢，请稍候"
+    },
+    {
+      "name": "refresh_done_text",
+      "value": "已更新"
+    },
+    {
+      "name": "refresh_failed_text",
+      "value": "网络繁忙，请重试"
+    }
+  ]
+}
