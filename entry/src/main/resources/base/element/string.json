@@ -1,0 +1,260 @@
+{
+  "string": [
+    {
+      "name": "entry_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "List"
+    },
+    {
+      "name": "selected",
+      "value": "Choice"
+    },
+    {
+      "name": "mobile_phone",
+      "value": "Cellphone"
+    },
+    {
+      "name": "clothes",
+      "value": "Costume"
+    },
+    {
+      "name": "wear",
+      "value": "Wear"
+    },
+    {
+      "name": "home_furnishing",
+      "value": "Home"
+    },
+    {
+      "name": "goodsName",
+      "value": "【New Arrival】Changle ice crystal green low-fat new products"
+    },
+    {
+      "name": "another_goodsName",
+      "value": "【New Arrival】Milk tea is natural, fresh and close to nature"
+    },
+    {
+      "name": "advertising_language",
+      "value": "Heavy recommendation, MD new product trial!"
+    },
+    {
+      "name": "evaluate",
+      "value": "6,662 people rated it 95% positive"
+    },
+    {
+      "name": "price_199",
+      "value": "¥199"
+    },
+    {
+      "name": "price_265",
+      "value": "¥265"
+    },
+    {
+      "name": "price_810",
+      "value": "¥810"
+    },
+    {
+      "name": "price_999",
+      "value": "¥999"
+    },
+    {
+      "name": "to_bottom",
+      "value": "-- Have reached the end --"
+    },
+    {
+      "name": "refresh_text",
+      "value": "Refresh"
+    },
+    {
+      "name": "shopping_mall",
+      "value": "Shopping Mall"
+    },
+    {
+      "name": "search_placeholder",
+      "value": "Search products or tags"
+    },
+    {
+      "name": "filter_free_shipping",
+      "value": "Free shipping"
+    },
+    {
+      "name": "filter_coupon",
+      "value": "Coupon"
+    },
+    {
+      "name": "filter_hot",
+      "value": "Hot"
+    },
+    {
+      "name": "filter_new",
+      "value": "New"
+    },
+    {
+      "name": "sort_comprehensive",
+      "value": "Comprehensive"
+    },
+    {
+      "name": "sort_new",
+      "value": "Newest"
+    },
+    {
+      "name": "sort_price_low",
+      "value": "Price ↑"
+    },
+    {
+      "name": "sort_price_high",
+      "value": "Price ↓"
+    },
+    {
+      "name": "sort_section_title",
+      "value": "Sort"
+    },
+    {
+      "name": "filter_section_title",
+      "value": "Filter"
+    },
+    {
+      "name": "sub_all",
+      "value": "All"
+    },
+    {
+      "name": "sub_trending",
+      "value": "Trending"
+    },
+    {
+      "name": "sub_limited",
+      "value": "Limited"
+    },
+    {
+      "name": "sub_android",
+      "value": "Android"
+    },
+    {
+      "name": "sub_ios",
+      "value": "iOS"
+    },
+    {
+      "name": "sub_accessories",
+      "value": "Accessories"
+    },
+    {
+      "name": "sub_men",
+      "value": "Men"
+    },
+    {
+      "name": "sub_women",
+      "value": "Women"
+    },
+    {
+      "name": "sub_kids",
+      "value": "Kids"
+    },
+    {
+      "name": "sub_outdoor",
+      "value": "Outdoor"
+    },
+    {
+      "name": "sub_street",
+      "value": "Street"
+    },
+    {
+      "name": "sub_office",
+      "value": "Office"
+    },
+    {
+      "name": "sub_furniture",
+      "value": "Furniture"
+    },
+    {
+      "name": "sub_smart",
+      "value": "Smart home"
+    },
+    {
+      "name": "sub_kitchen",
+      "value": "Kitchen"
+    },
+    {
+      "name": "banner_selected_primary",
+      "value": "Curated limited offer"
+    },
+    {
+      "name": "banner_selected_secondary",
+      "value": "Daily refresh at 09:00"
+    },
+    {
+      "name": "banner_phone_primary",
+      "value": "Flagship phones"
+    },
+    {
+      "name": "banner_phone_secondary",
+      "value": "Trade-in subsidy is live"
+    },
+    {
+      "name": "banner_clothes_primary",
+      "value": "Seasonal picks"
+    },
+    {
+      "name": "banner_clothes_secondary",
+      "value": "New fabrics in stock"
+    },
+    {
+      "name": "banner_wear_primary",
+      "value": "Mix & match"
+    },
+    {
+      "name": "banner_wear_secondary",
+      "value": "Ideas from stylists"
+    },
+    {
+      "name": "banner_home_primary",
+      "value": "Cozy living"
+    },
+    {
+      "name": "banner_home_secondary",
+      "value": "Smart devices bundle"
+    },
+    {
+      "name": "tag_hot",
+      "value": "HOT"
+    },
+    {
+      "name": "tag_new",
+      "value": "NEW"
+    },
+    {
+      "name": "tag_free_shipping",
+      "value": "Ship Free"
+    },
+    {
+      "name": "tag_coupon",
+      "value": "Coupon"
+    },
+    {
+      "name": "empty_list_hint",
+      "value": "No items match the filters"
+    },
+    {
+      "name": "loading_more_text",
+      "value": "Loading more..."
+    },
+    {
+      "name": "refresh_wait_text",
+      "value": "Still refreshing, please wait"
+    },
+    {
+      "name": "refresh_done_text",
+      "value": "Updated"
+    },
+    {
+      "name": "refresh_failed_text",
+      "value": "Network busy, try again"
+    }
+  ]
+}

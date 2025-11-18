@@ -1,0 +1,40 @@
+{
+  "color": [
+    {
+      "name": "white",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "primaryBgColor",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "gray",
+      "value": "#989A9C"
+    },
+    {
+      "name": "deepGray",
+      "value": "#182431"
+    },
+    {
+      "name": "freshRed",
+      "value": "#E92F4F"
+    },
+    {
+      "name": "accent",
+      "value": "#FF6A6A"
+    },
+    {
+      "name": "softAccent",
+      "value": "#FFF4F5"
+    },
+    {
+      "name": "divider",
+      "value": "#E4E7EB"
+    },
+    {
+      "name": "cardBg",
+      "value": "#FFFFFF"
+    }
+  ]
+}
