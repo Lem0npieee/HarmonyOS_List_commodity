@@ -19,6 +19,7 @@ interface Bubble {
 struct CarePage {
   @State private lineOpacities: number[] = [0, 0, 0];
   @State private bubbles: Bubble[] = [];
+  @State private hotlineOpacity: number = 0;
   private spawnInterval: number = 0;
   private fadeIntervals: number[] = [];
 
@@ -33,6 +34,13 @@ struct CarePage {
   private readonly bubblePhrases: string[] = [
     '多喝热水', '天天开心', '你已经很棒啦', '按时吃饭', '累了就休息一下',
     '深呼吸~', '今天天气好吗？', '试着出去走走', '加油加油加油', '抱抱你'
+  ];
+
+  // 紧急/公共热线（显示在鼓励话下面，字体稍小）
+  private readonly hotlines: string[] = [
+    '全国公共卫生健康热线 12320',
+    '全国青少年心理咨询热线 12355',
+    '全国妇女儿童心理咨询热线 12338'
   ];
 
   // 一些淡色背景
@@ -54,6 +62,11 @@ struct CarePage {
     this.fadeInLine(0, 600);
     setTimeout(() => this.fadeInLine(1, 600), 900);
     setTimeout(() => this.fadeInLine(2, 600), 1800); 
+
+    // 第三句淡入完成（1800 + 600 ms）后，再一起淡入三条热线
+    setTimeout(() => {
+      this.fadeInHotlines(600);
+    }, 1800 + 600);
 
     // 持续生成背景气泡（0.1s 一个）
     this.spawnInterval = setInterval(() => {
@@ -81,6 +94,21 @@ struct CarePage {
       const next = [...this.lineOpacities];
       next[index] = v;
       this.lineOpacities = next;
+      if (v >= 1) {
+        clearInterval(id);
+      }
+    }, stepTime);
+    this.fadeIntervals.push(id);
+  }
+
+  private fadeInHotlines(duration: number): void {
+    const steps = 12;
+    const stepTime = Math.max(10, Math.floor(duration / steps));
+    let cur = 0;
+    const id = setInterval(() => {
+      cur++;
+      const v = Math.min(1, cur / steps);
+      this.hotlineOpacity = v;
       if (v >= 1) {
         clearInterval(id);
       }
@@ -180,6 +208,16 @@ struct CarePage {
               .textAlign(TextAlign.Center)
               .opacity(this.lineOpacities[idx])
               .margin({ bottom: 12 })
+          })
+
+          // 顶部鼓励语下方显示三条全国热线，字体稍小
+          ForEach(this.hotlines, (h: string, hi: number) => {
+            Text(h)
+              .fontSize(14)
+              .fontColor('#666666')
+              .textAlign(TextAlign.Center)
+              .margin({ top: 8 })
+              .opacity(this.hotlineOpacity)
           })
         }
         .width('86%')

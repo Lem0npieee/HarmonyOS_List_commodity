@@ -4,10 +4,12 @@ if (!("finalizeConstruction" in ViewPU.prototype)) {
 interface CarePage_Params {
     lineOpacities?: number[];
     bubbles?: Bubble[];
+    hotlineOpacity?: number;
     spawnInterval?: number;
     fadeIntervals?: number[];
     lines?: string[];
     bubblePhrases?: string[];
+    hotlines?: string[];
     pastelColors?: string[];
 }
 interface Bubble {
@@ -27,6 +29,7 @@ class CarePage extends ViewPU {
         }
         this.__lineOpacities = new ObservedPropertyObjectPU([0, 0, 0], this, "lineOpacities");
         this.__bubbles = new ObservedPropertyObjectPU([], this, "bubbles");
+        this.__hotlineOpacity = new ObservedPropertySimplePU(0, this, "hotlineOpacity");
         this.spawnInterval = 0;
         this.fadeIntervals = [];
         this.lines = [
@@ -37,6 +40,11 @@ class CarePage extends ViewPU {
         this.bubblePhrases = [
             '多喝热水', '天天开心', '你已经很棒啦', '按时吃饭', '累了就休息一下',
             '深呼吸~', '今天天气好吗？', '试着出去走走', '加油加油加油', '抱抱你'
+        ];
+        this.hotlines = [
+            '全国公共卫生健康热线 12320',
+            '全国青少年心理咨询热线 12355',
+            '全国妇女儿童心理咨询热线 12338'
         ];
         this.pastelColors = [
             '#fff68888',
@@ -59,6 +67,9 @@ class CarePage extends ViewPU {
         if (params.bubbles !== undefined) {
             this.bubbles = params.bubbles;
         }
+        if (params.hotlineOpacity !== undefined) {
+            this.hotlineOpacity = params.hotlineOpacity;
+        }
         if (params.spawnInterval !== undefined) {
             this.spawnInterval = params.spawnInterval;
         }
@@ -71,6 +82,9 @@ class CarePage extends ViewPU {
         if (params.bubblePhrases !== undefined) {
             this.bubblePhrases = params.bubblePhrases;
         }
+        if (params.hotlines !== undefined) {
+            this.hotlines = params.hotlines;
+        }
         if (params.pastelColors !== undefined) {
             this.pastelColors = params.pastelColors;
         }
@@ -80,10 +94,12 @@ class CarePage extends ViewPU {
     purgeVariableDependenciesOnElmtId(rmElmtId) {
         this.__lineOpacities.purgeDependencyOnElmtId(rmElmtId);
         this.__bubbles.purgeDependencyOnElmtId(rmElmtId);
+        this.__hotlineOpacity.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
         this.__lineOpacities.aboutToBeDeleted();
         this.__bubbles.aboutToBeDeleted();
+        this.__hotlineOpacity.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
     }
@@ -101,12 +117,21 @@ class CarePage extends ViewPU {
     set bubbles(newValue: Bubble[]) {
         this.__bubbles.set(newValue);
     }
+    private __hotlineOpacity: ObservedPropertySimplePU<number>;
+    get hotlineOpacity() {
+        return this.__hotlineOpacity.get();
+    }
+    set hotlineOpacity(newValue: number) {
+        this.__hotlineOpacity.set(newValue);
+    }
     private spawnInterval: number;
     private fadeIntervals: number[];
     // 三句鼓励话（占位，用户可后续修改）
     private readonly lines: string[];
     // 背景气泡内的一些短句（10条）
     private readonly bubblePhrases: string[];
+    // 紧急/公共热线（显示在鼓励话下面，字体稍小）
+    private readonly hotlines: string[];
     // 一些淡色背景
     // 一些淡色背景（9 种柔和的彩虹色）
     private readonly pastelColors: string[];
@@ -115,6 +140,10 @@ class CarePage extends ViewPU {
         this.fadeInLine(0, 600);
         setTimeout(() => this.fadeInLine(1, 600), 900);
         setTimeout(() => this.fadeInLine(2, 600), 1800);
+        // 第三句淡入完成（1800 + 600 ms）后，再一起淡入三条热线
+        setTimeout(() => {
+            this.fadeInHotlines(600);
+        }, 1800 + 600);
         // 持续生成背景气泡（0.1s 一个）
         this.spawnInterval = setInterval(() => {
             this.spawnBubble();
@@ -140,6 +169,20 @@ class CarePage extends ViewPU {
             const next = [...this.lineOpacities];
             next[index] = v;
             this.lineOpacities = next;
+            if (v >= 1) {
+                clearInterval(id);
+            }
+        }, stepTime);
+        this.fadeIntervals.push(id);
+    }
+    private fadeInHotlines(duration: number): void {
+        const steps = 12;
+        const stepTime = Math.max(10, Math.floor(duration / steps));
+        let cur = 0;
+        const id = setInterval(() => {
+            cur++;
+            const v = Math.min(1, cur / steps);
+            this.hotlineOpacity = v;
             if (v >= 1) {
                 clearInterval(id);
             }
@@ -280,6 +323,25 @@ class CarePage extends ViewPU {
             };
             this.forEachUpdateFunction(elmtId, this.lines, forEachItemGenFunction, undefined, true, false);
         }, ForEach);
+        ForEach.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // 顶部鼓励语下方显示三条全国热线，字体稍小
+            ForEach.create();
+            const forEachItemGenFunction = (_item, hi: number) => {
+                const h = _item;
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create(h);
+                    Text.fontSize(14);
+                    Text.fontColor('#666666');
+                    Text.textAlign(TextAlign.Center);
+                    Text.margin({ top: 8 });
+                    Text.opacity(this.hotlineOpacity);
+                }, Text);
+                Text.pop();
+            };
+            this.forEachUpdateFunction(elmtId, this.hotlines, forEachItemGenFunction, undefined, true, false);
+        }, ForEach);
+        // 顶部鼓励语下方显示三条全国热线，字体稍小
         ForEach.pop();
         Column.pop();
         // 中央三句（垂直居中），放入白色矩形并置于气泡上层
