@@ -31,6 +31,7 @@ import {
 import GoodsList from './GoodsListComponent';
 import PutDownRefresh from './PutDownRefreshLayout';
 import SelectedComponent from './SelectedComponent';
+import router from '@ohos.router';
 import BannerComponent from './BannerComponent';
 import { ListDataSource, ListQueryState } from '../viewmodel/ListDataSource';
 
@@ -134,13 +135,35 @@ export default struct TabBar {
 			sortOption: state.sort,
 			activeFilters: state.filters,
 			onSearchChange: (value: string) => this.handleSearchChange(index, value),
+			onAISearch: (value: string) => {
+				// 点击 AI 搜索按钮，跳转到 AI 对话页面并传入当前搜索内容
+				router.pushUrl({ url: 'pages/AIChatPage', params: { query: value } }).catch((err: Error) => {
+					console.error('跳转到 AI 页面失败:', err.message);
+				});
+			},
 			onSubCategoryChange: (subId: string) => this.handleSubCategoryChange(index, subId),
 			onSortChange: (sort: SortOption) => this.handleSortChange(index, sort),
 			onFilterToggle: (filter: FilterId) => this.handleFilterToggle(index, filter)
 		})
 	}
 
-	private handleSearchChange(index: number, value: string): void {
+	private async handleSearchChange(index: number, value: string): Promise<void> {
+		// 点击搜索后先打点，便于诊断
+		console.info('handleSearchChange called with:', value);
+		// 在点击搜索按钮后处理危险关键词（例如自杀/安眠药）并进行关怀页面跳转
+		const dangerKeywords = ['安眠药', '安乐死', '自杀', '自残', '服药', '上吊', '割腕'];
+		for (let k of dangerKeywords) {
+			if (value && value.indexOf(k) >= 0) {
+				try {
+					await router.pushUrl({ url: 'pages/CarePage' }).catch((err: Error) => {
+						console.error('导航到关怀页失败:', String(err));
+					});
+				} catch (err) {
+					console.error('导航到关怀页异常:', String(err));
+				}
+				return;
+			}
+		}
 		this.updateTabState(index, { search: value });
 	}
 

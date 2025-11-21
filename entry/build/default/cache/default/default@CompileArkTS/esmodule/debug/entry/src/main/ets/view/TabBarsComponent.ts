@@ -11,12 +11,13 @@ interface TabBar_Params {
     refreshText?: Resource;
     tabStates?: TabUIState[];
 }
-import { tabBarMeta, SortOption } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
-import type { TabMeta, CategoryType, FilterId } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
+import { tabBarMeta, SortOption, CategoryType } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
+import type { TabMeta, FilterId } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
 import { LAYOUT_WIDTH_OR_HEIGHT, NORMAL_FONT_SIZE, BIGGER_FONT_SIZE, MAX_LINES_TEXT, MAX_OFFSET_Y, REFRESH_TIME } from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
 import GoodsList from "@bundle:com.example.list_harmony/entry/ets/view/GoodsListComponent";
 import PutDownRefresh from "@bundle:com.example.list_harmony/entry/ets/view/PutDownRefreshLayout";
 import SelectedComponent from "@bundle:com.example.list_harmony/entry/ets/view/SelectedComponent";
+import router from "@ohos:router";
 import BannerComponent from "@bundle:com.example.list_harmony/entry/ets/view/BannerComponent";
 import { ListDataSource } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/ListDataSource";
 import type { ListQueryState } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/ListDataSource";
@@ -165,7 +166,7 @@ export default class TabBar extends ViewPU {
                             {
                                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                                     if (isInitialRender) {
-                                        let componentCall = new PutDownRefresh(this, { refreshText: this.__refreshText }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/TabBarsComponent.ets", line: 78, col: 7 });
+                                        let componentCall = new PutDownRefresh(this, { refreshText: this.__refreshText }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/TabBarsComponent.ets", line: 79, col: 7 });
                                         ViewPU.create(componentCall);
                                         let paramsLambda = () => {
                                             return {
@@ -187,31 +188,43 @@ export default class TabBar extends ViewPU {
                     }
                 }, If);
                 If.pop();
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    If.create();
+                    if (tab.id === CategoryType.Featured) {
+                        this.ifElseBranchUpdateFunction(0, () => {
+                            {
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    if (isInitialRender) {
+                                        let componentCall = new BannerComponent(this, { banner: tab.banner }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/TabBarsComponent.ets", line: 82, col: 7 });
+                                        ViewPU.create(componentCall);
+                                        let paramsLambda = () => {
+                                            return {
+                                                banner: tab.banner
+                                            };
+                                        };
+                                        componentCall.paramsGenerator_ = paramsLambda;
+                                    }
+                                    else {
+                                        this.updateStateVarsOfChildByElmtId(elmtId, {});
+                                    }
+                                }, { name: "BannerComponent" });
+                            }
+                        });
+                    }
+                    else {
+                        this.ifElseBranchUpdateFunction(1, () => {
+                        });
+                    }
+                }, If);
+                If.pop();
                 this.renderSelectedSection.bind(this)(tab, tabIndex);
-                {
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        if (isInitialRender) {
-                            let componentCall = new BannerComponent(this, { banner: tab.banner }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/TabBarsComponent.ets", line: 81, col: 6 });
-                            ViewPU.create(componentCall);
-                            let paramsLambda = () => {
-                                return {
-                                    banner: tab.banner
-                                };
-                            };
-                            componentCall.paramsGenerator_ = paramsLambda;
-                        }
-                        else {
-                            this.updateStateVarsOfChildByElmtId(elmtId, {});
-                        }
-                    }, { name: "BannerComponent" });
-                }
                 {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         if (isInitialRender) {
                             let componentCall = new GoodsList(this, {
                                 dataSource: this.getDataSourceByIndex(tabIndex),
                                 onLoadMore: () => this.handleLoadMore(tab.id)
-                            }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/TabBarsComponent.ets", line: 82, col: 6 });
+                            }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/TabBarsComponent.ets", line: 85, col: 6 });
                             ViewPU.create(componentCall);
                             let paramsLambda = () => {
                                 return {
@@ -261,7 +274,19 @@ export default class TabBar extends ViewPU {
         Column.pop();
     }
     private renderSelectedSection(tab: TabMeta, index: number, parent = null) {
-        this.renderSelectedSectionBody.bind(this)(tab, this.readTabState(index), index);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            if (this.tabStates[index] !== undefined) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.renderSelectedSectionBody.bind(this)(tab, this.tabStates[index], index);
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
     }
     private renderSelectedSectionBody(tab: TabMeta, state: TabUIState, index: number, parent = null) {
         {
@@ -274,10 +299,16 @@ export default class TabBar extends ViewPU {
                         sortOption: state.sort,
                         activeFilters: state.filters,
                         onSearchChange: (value: string) => this.handleSearchChange(index, value),
+                        onAISearch: (value: string) => {
+                            // 点击 AI 搜索按钮，跳转到 AI 对话页面并传入当前搜索内容
+                            router.pushUrl({ url: 'pages/AIChatPage', params: { query: value } }).catch((err: Error) => {
+                                console.error('跳转到 AI 页面失败:', err.message);
+                            });
+                        },
                         onSubCategoryChange: (subId: string) => this.handleSubCategoryChange(index, subId),
                         onSortChange: (sort: SortOption) => this.handleSortChange(index, sort),
                         onFilterToggle: (filter: FilterId) => this.handleFilterToggle(index, filter)
-                    }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/TabBarsComponent.ets", line: 126, col: 3 });
+                    }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/TabBarsComponent.ets", line: 131, col: 3 });
                     ViewPU.create(componentCall);
                     let paramsLambda = () => {
                         return {
@@ -287,6 +318,12 @@ export default class TabBar extends ViewPU {
                             sortOption: state.sort,
                             activeFilters: state.filters,
                             onSearchChange: (value: string) => this.handleSearchChange(index, value),
+                            onAISearch: (value: string) => {
+                                // 点击 AI 搜索按钮，跳转到 AI 对话页面并传入当前搜索内容
+                                router.pushUrl({ url: 'pages/AIChatPage', params: { query: value } }).catch((err: Error) => {
+                                    console.error('跳转到 AI 页面失败:', err.message);
+                                });
+                            },
                             onSubCategoryChange: (subId: string) => this.handleSubCategoryChange(index, subId),
                             onSortChange: (sort: SortOption) => this.handleSortChange(index, sort),
                             onFilterToggle: (filter: FilterId) => this.handleFilterToggle(index, filter)
@@ -300,7 +337,24 @@ export default class TabBar extends ViewPU {
             }, { name: "SelectedComponent" });
         }
     }
-    private handleSearchChange(index: number, value: string): void {
+    private async handleSearchChange(index: number, value: string): Promise<void> {
+        // 点击搜索后先打点，便于诊断
+        console.info('handleSearchChange called with:', value);
+        // 在点击搜索按钮后处理危险关键词（例如自杀/安眠药）并进行关怀页面跳转
+        const dangerKeywords = ['安眠药', '安乐死', '自杀', '自残', '服药', '上吊', '割腕'];
+        for (let k of dangerKeywords) {
+            if (value && value.indexOf(k) >= 0) {
+                try {
+                    await router.pushUrl({ url: 'pages/CarePage' }).catch((err: Error) => {
+                        console.error('导航到关怀页失败:', String(err));
+                    });
+                }
+                catch (err) {
+                    console.error('导航到关怀页异常:', String(err));
+                }
+                return;
+            }
+        }
         this.updateTabState(index, { search: value });
     }
     private handleSubCategoryChange(index: number, value: string): void {
@@ -342,9 +396,9 @@ export default class TabBar extends ViewPU {
             sort: partial.sort !== undefined ? partial.sort : current.sort,
             filters: partial.filters !== undefined ? partial.filters.slice() : current.filters.slice()
         };
-        const clone: TabUIState[] = this.tabStates.slice();
-        clone[index] = updated;
-        this.tabStates = clone;
+        const newStates: TabUIState[] = this.tabStates.slice();
+        newStates[index] = updated;
+        this.tabStates = newStates;
         this.syncDataSource(index, updated);
     }
     private getDataSourceByIndex(index: number): ListDataSource {

@@ -89,10 +89,15 @@ color primaryBgColor 0x01000049
 color softAccent 0x0100004a
 color white 0x0100004b
 media app_icon 0x01000000
+media dianpu 0x01000065
+media failure 0x01000062
 media goodsImg 0x01000042
 media goodsImg_2 0x01000050
 media goodsImg_3 0x0100004e
 media goodsImg_4 0x0100004f
 media icon 0x0100004d
+media kefu 0x01000064
 media refreshing 0x0100004c
+media shoucang 0x01000063
+media yishoucang 0x01000066
 profile main_pages 0x01000051

@@ -391,5 +391,25 @@
 			"type":	"string",
 			"name":	"sub_snacks",
 			"id":	"0x01000061"
+		}, {
+			"type":	"media",
+			"name":	"failure",
+			"id":	"0x01000062"
+		}, {
+			"type":	"media",
+			"name":	"shoucang",
+			"id":	"0x01000063"
+		}, {
+			"type":	"media",
+			"name":	"kefu",
+			"id":	"0x01000064"
+		}, {
+			"type":	"media",
+			"name":	"dianpu",
+			"id":	"0x01000065"
+		}, {
+			"type":	"media",
+			"name":	"yishoucang",
+			"id":	"0x01000066"
 		}]
 }

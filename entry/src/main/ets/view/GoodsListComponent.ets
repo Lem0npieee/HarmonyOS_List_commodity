@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import router from '@ohos.router';
 import * as commonConst from '../common/CommonConstants';
 import { GoodsListItemType, CategoryType } from '../viewmodel/InitialData';
 import { ListDataSource, EmptyListener } from '../viewmodel/ListDataSource';
@@ -103,10 +104,10 @@ export default struct GoodsList {
   @Builder
   private renderEmptyState() {
     Column() {
-      Image($r('app.media.icon'))
-        .width(80)
-        .height(80)
-        .margin({ bottom: 12 })
+      Image($r('app.media.failure'))
+        .width(120)
+        .height(120)
+        .margin({ bottom: 16 })
       Text($r('app.string.empty_list_hint'))
         .fontSize(commonConst.NORMAL_FONT_SIZE)
         .fontColor($r('app.color.gray'))
@@ -171,12 +172,21 @@ export default struct GoodsList {
       }
       .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
       .alignItems(VerticalAlign.Center)
+      .padding({ top: 12, bottom: 12 })
+      .onClick(() => {
+        router.pushUrl({
+          url: 'pages/GoodsDetailPage',
+          params: { goods: item }
+        }).catch((err: Error) => {
+          console.error('跳转失败:', err.message);
+        });
+      })
+      
       Divider()
         .color($r('app.color.divider'))
         .opacity(0.6)
         .margin({ top: 12 })
     }
-    .padding({ top: 12, bottom: 12 })
     .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
     .margin({ left: 4, right: 4 })
   }
