@@ -68,12 +68,22 @@ export interface GoodsListItemType {
   category: CategoryType;
   subCategory: string;
   keyword: string;
+  searchIndex: string;  // 智能搜索索引
   isNew: boolean;
   isHot: boolean;
   isFreeShipping: boolean;
   hasCoupon: boolean;
   tags: Resource[];
   height: number;
+  // 详情页所需字段
+  detailImages?: Resource[];  // 商品详情图片
+  originalPrice?: number;     // 原价
+  salesCount?: number;        // 销量
+  rating?: number;            // 评分
+  ratingCount?: number;       // 评价数
+  shopName?: string;          // 店铺名称
+  specifications?: string[];  // 规格选项
+  deliveryInfo?: string;      // 配送信息
 }
 
 export const sortOptionMetas: SortOptionMeta[] = [
@@ -176,10 +186,20 @@ interface GoodsSeed {
   category: CategoryType;
   subCategory: string;
   keyword: string;
+  searchIndex: string;  // 智能搜索索引
   isNew: boolean;
   isHot: boolean;
   isFreeShipping: boolean;
   hasCoupon: boolean;
+  // 详情页字段
+  detailImages?: Resource[];
+  originalPrice?: number;
+  salesCount?: number;
+  rating?: number;
+  ratingCount?: number;
+  shopName?: string;
+  specifications?: string[];
+  deliveryInfo?: string;
 }
 
 const goodsSeeds: GoodsSeed[] = [
@@ -192,10 +212,19 @@ const goodsSeeds: GoodsSeed[] = [
     category: CategoryType.Featured,
     subCategory: 'trending',
     keyword: 'tea limited low fat featured',
+    searchIndex: '畅乐冰晶绿低脂茶饮 茶 绿茶 低脂 新品 饮料 冰晶绿 tea drink low fat',
     isNew: true,
     isHot: true,
     isFreeShipping: true,
-    hasCoupon: true
+    hasCoupon: true,
+    detailImages: [$r('app.media.goodsImg_2'), $r('app.media.goodsImg_3'), $r('app.media.goodsImg_4')],
+    originalPrice: 299,
+    salesCount: 7,
+    rating: 4.8,
+    ratingCount: 5234,
+    shopName: '畅乐官方旗舰店',
+    specifications: ['小薇', '中薇', '大薇'],
+    deliveryInfo: '不支持7天无理由退换'
   },
   {
     cover: $r('app.media.goodsImg_2'),
@@ -206,10 +235,19 @@ const goodsSeeds: GoodsSeed[] = [
     category: CategoryType.Featured,
     subCategory: 'limited',
     keyword: 'milk tea limited selected',
+    searchIndex: '香港风味丝袖奶茶 奶茶 香港 丝袖 饮料 milk tea limited',
     isNew: false,
     isHot: true,
     isFreeShipping: true,
-    hasCoupon: false
+    hasCoupon: false,
+    detailImages: [$r('app.media.goodsImg'), $r('app.media.goodsImg_3')],
+    originalPrice: 350,
+    salesCount: 12,
+    rating: 4.9,
+    ratingCount: 8956,
+    shopName: '港式饮品专卖',
+    specifications: ['原味', '少糖', '无糖'],
+    deliveryInfo: '支持7天无理由退换'
   },
   
   {
@@ -221,10 +259,19 @@ const goodsSeeds: GoodsSeed[] = [
     category: CategoryType.Phone,
     subCategory: 'android',
     keyword: 'android phone flagship 5g',
+    searchIndex: '华为 Mate 60 Pro 5G智能手机 华为 手机 智能 安卓 5G 旗舰 mate android phone',
     isNew: true,
     isHot: true,
     isFreeShipping: true,
-    hasCoupon: true
+    hasCoupon: true,
+    detailImages: [$r('app.media.goodsImg_4'), $r('app.media.goodsImg_2')],
+    originalPrice: 6999,
+    salesCount: 3456,
+    rating: 4.9,
+    ratingCount: 12845,
+    shopName: '华为官方旗舰店',
+    specifications: ['12GB+256GB', '12GB+512GB', '12GB+1TB'],
+    deliveryInfo: '支持7天无理由退换'
   },
   {
     cover: $r('app.media.goodsImg_4'),
@@ -235,10 +282,19 @@ const goodsSeeds: GoodsSeed[] = [
     category: CategoryType.Phone,
     subCategory: 'ios',
     keyword: 'ios phone flagship',
+    searchIndex: 'iPhone 15 Pro Max 苹果 手机 蓝色 钛金属 旗舰 iphone ios apple',
     isNew: false,
     isHot: true,
     isFreeShipping: false,
-    hasCoupon: true
+    hasCoupon: true,
+    detailImages: [$r('app.media.goodsImg'), $r('app.media.goodsImg_2'), $r('app.media.goodsImg_3')],
+    originalPrice: 9999,
+    salesCount: 8900,
+    rating: 5.0,
+    ratingCount: 23456,
+    shopName: 'Apple官方旗舰店',
+    specifications: ['256GB', '512GB', '1TB'],
+    deliveryInfo: '支持7天无理由退换'
   },
   {
     cover: $r('app.media.goodsImg'),
@@ -249,10 +305,19 @@ const goodsSeeds: GoodsSeed[] = [
     category: CategoryType.Clothes,
     subCategory: 'men',
     keyword: 'men coat winter',
+    searchIndex: '男士羊毛大衣 男装 大衣 羊毛 冬季 保暖 商务 men coat winter',
     isNew: true,
     isHot: false,
     isFreeShipping: true,
-    hasCoupon: true
+    hasCoupon: true,
+    detailImages: [$r('app.media.goodsImg_2'), $r('app.media.goodsImg_3'), $r('app.media.goodsImg_4')],
+    originalPrice: 899,
+    salesCount: 567,
+    rating: 4.7,
+    ratingCount: 3421,
+    shopName: '男士服饰旗舰店',
+    specifications: ['M码', 'L码', 'XL码', 'XXL码'],
+    deliveryInfo: '支持7天无理由退换'
   },
   {
     cover: $r('app.media.goodsImg_2'),
@@ -263,10 +328,19 @@ const goodsSeeds: GoodsSeed[] = [
     category: CategoryType.Clothes,
     subCategory: 'women',
     keyword: 'dress women spring',
+    searchIndex: '春季花卉连衣裙 女装 连衣裙 春季 花卉 法式 复古 dress women spring',
     isNew: true,
     isHot: true,
     isFreeShipping: true,
-    hasCoupon: false
+    hasCoupon: false,
+    detailImages: [$r('app.media.goodsImg'), $r('app.media.goodsImg_3'), $r('app.media.goodsImg_4')],
+    originalPrice: 699,
+    salesCount: 1234,
+    rating: 4.8,
+    ratingCount: 6789,
+    shopName: '法式女装馆',
+    specifications: ['S码', 'M码', 'L码'],
+    deliveryInfo: '支持7天无理由退换'
   },
   {
     cover: $r('app.media.goodsImg_3'),
@@ -277,10 +351,19 @@ const goodsSeeds: GoodsSeed[] = [
     category: CategoryType.Food,
     subCategory: 'snacks',
     keyword: 'snacks imported healthy',
+    searchIndex: '三只松鼠坚果组合装 零食 坚果 三只松鼠 健康 每日坚果 snacks nuts healthy',
     isNew: false,
     isHot: true,
     isFreeShipping: true,
-    hasCoupon: true
+    hasCoupon: true,
+    detailImages: [$r('app.media.goodsImg'), $r('app.media.goodsImg_2'), $r('app.media.goodsImg_4')],
+    originalPrice: 358,
+    salesCount: 5678,
+    rating: 4.9,
+    ratingCount: 15432,
+    shopName: '三只松鼠旗舰店',
+    specifications: ['经典装', '豪华装', '礼盒装'],
+    deliveryInfo: '支持7天无理由退换'
   },
   {
     cover: $r('app.media.goodsImg_4'),
@@ -291,10 +374,19 @@ const goodsSeeds: GoodsSeed[] = [
     category: CategoryType.Food,
     subCategory: 'drinks',
     keyword: 'drinks fresh juice',
+    searchIndex: '农夫山泉100%NFC鲜榨汁 饮料 果汁 鲜榨汁 农夫山泉 NFC 橙汁 drinks juice orange',
     isNew: true,
     isHot: false,
     isFreeShipping: false,
-    hasCoupon: true
+    hasCoupon: true,
+    detailImages: [$r('app.media.goodsImg_2'), $r('app.media.goodsImg_3'), $r('app.media.goodsImg')],
+    originalPrice: 450,
+    salesCount: 2345,
+    rating: 4.8,
+    ratingCount: 8765,
+    shopName: '农夫山泉官方店',
+    specifications: ['300ml*10瓶', '300ml*20瓶', '300ml*30瓶'],
+    deliveryInfo: '不支持7天无理由退换'
   },
   {
     cover: $r('app.media.goodsImg_2'),
@@ -305,10 +397,19 @@ const goodsSeeds: GoodsSeed[] = [
     category: CategoryType.Home,
     subCategory: 'smart',
     keyword: 'smart home speaker',
+    searchIndex: '小爱音箱Pro 智能音箱 AI语音助手 智能家居 音箱 小爱 AI smart speaker home',
     isNew: true,
     isHot: true,
     isFreeShipping: true,
-    hasCoupon: true
+    hasCoupon: true,
+    detailImages: [$r('app.media.goodsImg'), $r('app.media.goodsImg_3'), $r('app.media.goodsImg_4')],
+    originalPrice: 899,
+    salesCount: 4567,
+    rating: 4.9,
+    ratingCount: 11234,
+    shopName: '小米智能家居',
+    specifications: ['白色', '黑色', '灰色'],
+    deliveryInfo: '支持7天无理由退换'
   },
   {
     cover: $r('app.media.goodsImg_3'),
@@ -319,10 +420,19 @@ const goodsSeeds: GoodsSeed[] = [
     category: CategoryType.Home,
     subCategory: 'kitchen',
     keyword: 'kitchen appliance compact',
+    searchIndex: '九阳破壁料理机 厨房 电器 破壁机 九阳 料理机 研磨机 kitchen appliance',
     isNew: false,
     isHot: true,
     isFreeShipping: true,
-    hasCoupon: false
+    hasCoupon: false,
+    detailImages: [$r('app.media.goodsImg_4'), $r('app.media.goodsImg'), $r('app.media.goodsImg_2')],
+    originalPrice: 799,
+    salesCount: 3456,
+    rating: 4.7,
+    ratingCount: 9876,
+    shopName: '九阳官方旗舰店',
+    specifications: ['基础版', '升级版', '旗舰版'],
+    deliveryInfo: '支持7天无理由退换'
   }
 ];
 
@@ -367,12 +477,22 @@ export const goodsPool: GoodsListItemType[] = (() => {
         category: seed.category,
         subCategory: seed.subCategory,
         keyword: `${seed.keyword} ${seed.subCategory} round${offset} seed${seedIndex}`,
+        searchIndex: seed.searchIndex,
         isNew: dynamicNew,
         isHot: dynamicHot,
         isFreeShipping: seed.isFreeShipping,
         hasCoupon: dynamicCoupon,
         tags: buildTags(seed, dynamicHot, dynamicNew, dynamicCoupon),
-        height: WATERFALL_HEIGHTS[(seedIndex + offset) % WATERFALL_HEIGHTS.length]
+        height: WATERFALL_HEIGHTS[(seedIndex + offset) % WATERFALL_HEIGHTS.length],
+        // 详情页字段
+        detailImages: seed.detailImages,
+        originalPrice: seed.originalPrice,
+        salesCount: seed.salesCount,
+        rating: seed.rating,
+        ratingCount: seed.ratingCount,
+        shopName: seed.shopName,
+        specifications: seed.specifications,
+        deliveryInfo: seed.deliveryInfo
       });
     }
   });

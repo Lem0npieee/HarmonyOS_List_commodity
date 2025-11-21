@@ -1,5 +1,5 @@
-import { goodsPool, SortOption } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
-import type { GoodsListItemType, CategoryType, FilterId } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
+import { goodsPool, CategoryType, SortOption } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
+import type { GoodsListItemType, FilterId } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
 import { REFRESH_TIME } from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
 export interface EmptyListener {
     onEmptyChanged(empty: boolean): void;
@@ -69,7 +69,7 @@ export class ListDataSource extends BasicDataSource {
     };
     private filteredData: GoodsListItemType[] = [];
     private visibleData: GoodsListItemType[] = [];
-    private readonly pageSize: number = 20;
+    private readonly pageSize: number = 10;
     private isLoadingMore: boolean = false;
     private emptyListeners: EmptyListener[] = [];
     constructor(category: CategoryType) {
@@ -162,12 +162,60 @@ export class ListDataSource extends BasicDataSource {
     }
     private rebuildData(): void {
         const keyword: string = this.query.search.trim().toLowerCase();
+        // 精选类别:先筛选后根据排序决定是随机还是稳定排序
+        if (this.category === CategoryType.Featured) {
+            // 步骤1: 应用所有筛选条件(子分类/搜索/标签)
+            let filteredGoods: GoodsListItemType[] = goodsPool
+                .filter((item: GoodsListItemType) => this.query.subCategory === 'all' ? true :
+                item.subCategory === this.query.subCategory)
+                .filter((item: GoodsListItemType) => {
+                if (keyword.length === 0) {
+                    return true;
+                }
+                const searchText: string = item.searchIndex.toLowerCase();
+                const keywords: string[] = keyword.split(/\s+/).filter((k: string) => k.length > 0);
+                return keywords.every((k: string) => searchText.indexOf(k) >= 0);
+            })
+                .filter((item: GoodsListItemType) => this.matchesFilters(item));
+            // 如果排序为综合(默认)，才进行随机化选择；否则严格按排序规则排序并取前N
+            if (this.query.sort === SortOption.Comprehensive) {
+                // 随机打乱筛选后的结果
+                for (let i = filteredGoods.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    const temp = filteredGoods[i];
+                    filteredGoods[i] = filteredGoods[j];
+                    filteredGoods[j] = temp;
+                }
+                // 不再一次性截断为 10 条；保留完整结果以支持分页加载
+                this.filteredData = filteredGoods.slice();
+            }
+            else {
+                // 非综合排序: 按当前排序规则稳定排序 (不随机, 刷新不会改变顺序)
+                const sorted: GoodsListItemType[] = this.sortByCurrentOption(filteredGoods);
+                // 保留完整排序结果以支持分页加载
+                this.filteredData = sorted.slice();
+            }
+            // 初始可见数据为第一页（pageSize 条）
+            this.visibleData = this.filteredData.slice(0, this.pageSize);
+            this.notifyDataReload();
+            this.notifyEmpty();
+            return;
+        }
+        // 其他类别:正常的过滤和排序逻辑
         this.filteredData = goodsPool
             .filter((item: GoodsListItemType) => item.category === this.category)
             .filter((item: GoodsListItemType) => this.query.subCategory === 'all' ? true :
             item.subCategory === this.query.subCategory)
-            .filter((item: GoodsListItemType) => keyword.length === 0 ? true :
-            item.keyword.toLowerCase().indexOf(keyword) >= 0)
+            .filter((item: GoodsListItemType) => {
+            if (keyword.length === 0) {
+                return true;
+            }
+            // 使用智能搜索索引进行匹配
+            const searchText: string = item.searchIndex.toLowerCase();
+            // 支持空格分隔的多关键词搜索(AND逻辑)
+            const keywords: string[] = keyword.split(/\s+/).filter((k: string) => k.length > 0);
+            return keywords.every((k: string) => searchText.indexOf(k) >= 0);
+        })
             .filter((item: GoodsListItemType) => this.matchesFilters(item));
         this.filteredData = this.sortByCurrentOption(this.filteredData);
         const initialLength: number = Math.min(this.pageSize, this.filteredData.length);
@@ -176,20 +224,27 @@ export class ListDataSource extends BasicDataSource {
         this.notifyEmpty();
     }
     private matchesFilters(item: GoodsListItemType): boolean {
-        return this.query.filters.every((filterId: FilterId) => {
+        const result = this.query.filters.every((filterId: FilterId) => {
             switch (filterId) {
                 case 'free_shipping':
-                    return item.isFreeShipping;
+                    return item.isFreeShipping === true;
                 case 'coupon':
-                    return item.hasCoupon;
+                    return item.hasCoupon === true;
                 case 'hot':
-                    return item.isHot;
+                    return item.isHot === true;
                 case 'new':
-                    return item.isNew;
+                    return item.isNew === true;
                 default:
                     return true;
             }
         });
+        // 调试日志
+        if (this.query.filters.length > 0) {
+            console.log(`商品: ${item.id}, 筛选条件: [${this.query.filters.join(',')}], ` +
+                `isHot:${item.isHot}, isNew:${item.isNew}, isFreeShipping:${item.isFreeShipping}, ` +
+                `hasCoupon:${item.hasCoupon}, 结果:${result}, tags数量:${item.tags.length}`);
+        }
+        return result;
     }
     private sortByCurrentOption(list: GoodsListItemType[]): GoodsListItemType[] {
         const copied: GoodsListItemType[] = list.slice();

@@ -8,6 +8,7 @@ interface GoodsList_Params {
     showLoading?: boolean;
     emptyListener?: GoodsListEmptyListener;
 }
+import router from "@ohos:router";
 import * as commonConst from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
 import { CategoryType } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
 import type { GoodsListItemType } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
@@ -189,10 +190,10 @@ export default class GoodsList extends ViewPU {
             Column.alignItems(HorizontalAlign.Center);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777295, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Image.width(80);
-            Image.height(80);
-            Image.margin({ bottom: 12 });
+            Image.create({ "id": 16777315, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.width(120);
+            Image.height(120);
+            Image.margin({ bottom: 16 });
         }, Image);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create({ "id": 16777233, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
@@ -205,7 +206,6 @@ export default class GoodsList extends ViewPU {
     private listRow(item: GoodsListItemType, index: number, parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
-            Column.padding({ top: 12, bottom: 12 });
             Column.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
             Column.margin({ left: 4, right: 4 });
         }, Column);
@@ -213,6 +213,15 @@ export default class GoodsList extends ViewPU {
             Row.create({ space: 8 });
             Row.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
             Row.alignItems(VerticalAlign.Center);
+            Row.padding({ top: 12, bottom: 12 });
+            Row.onClick(() => {
+                router.pushUrl({
+                    url: 'pages/GoodsDetailPage',
+                    params: { goods: item }
+                }).catch((err: Error) => {
+                    console.error('跳转失败:', err.message);
+                });
+            });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create(item.cover);
@@ -225,6 +234,7 @@ export default class GoodsList extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
             Column.alignItems(HorizontalAlign.Start);
+            Column.layoutWeight(1);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(item.title);
@@ -233,6 +243,8 @@ export default class GoodsList extends ViewPU {
             Text.fontColor({ "id": 16777284, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Text.maxLines(2);
             Text.textAlign(TextAlign.Start);
+            Text.textOverflow({ overflow: TextOverflow.Ellipsis });
+            Text.width('100%');
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -241,6 +253,8 @@ export default class GoodsList extends ViewPU {
             Text.fontColor({ "id": 16777287, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Text.maxLines(2);
             Text.textAlign(TextAlign.Start);
+            Text.textOverflow({ overflow: TextOverflow.Ellipsis });
+            Text.width('100%');
             Text.margin({ top: 4, bottom: 4 });
         }, Text);
         Text.pop();

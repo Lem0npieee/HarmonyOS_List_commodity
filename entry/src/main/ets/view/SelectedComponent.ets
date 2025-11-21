@@ -33,6 +33,7 @@ export default struct SelectedComponent {
   sortOptionMetasData: SortOptionMeta[] = sortOptionMetas;
   filterOptionMetasData: FilterOptionMeta[] = filterOptionMetas;
   onSearchChange: (value: string) => void = () => {};
+  onAISearch: (value: string) => void = () => {};
   onSubCategoryChange: (id: string) => void = () => {};
   onSortChange: (sort: SortOption) => void = () => {};
   onFilterToggle: (filter: FilterId) => void = () => {};
@@ -61,18 +62,37 @@ export default struct SelectedComponent {
 
   @Builder
   private renderSearchBar() {
-    Search({ value: this.searchValue, placeholder: this.searchPlaceholder })
-      .searchButton('Go')
-      .border({ width: 1, color: $r('app.color.divider') })
-      .height(40)
-      .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
-      .backgroundColor(Color.White)
-      .onSubmit((value: string) => {
-        this.onSearchChange(value);
-      })
-      .onChange((value: string) => {
-        this.onSearchChange(value);
-      })
+    Row() {
+      Search({ value: this.searchValue, placeholder: this.searchPlaceholder })
+        .searchButton('搜索')
+        .border({ width: 1, color: $r('app.color.divider') })
+        .height(40)
+        .layoutWeight(1)
+        .backgroundColor(Color.White)
+        .onSubmit((value: string) => {
+          this.searchValue = value;
+          this.onSearchChange(value);
+        })
+        .onChange((value: string) => {
+          // 仅更新本地输入值，避免实时触发父组件搜索
+          this.searchValue = value;
+        })
+
+      Button('AI搜索')
+        .fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE)
+        .margin({ left: 8 })
+        .height(40)
+        .padding({ left: 12, right: 12 })
+        .backgroundColor($r('app.color.accent'))
+        .fontColor(Color.White)
+        .borderRadius(8)
+        .onClick(() => {
+          // 点击 AI 搜索时，调用父组件提供的回调
+          this.onAISearch(this.searchValue);
+        })
+    }
+    .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
+    .margin({ bottom: 8 })
   }
 
   @Builder

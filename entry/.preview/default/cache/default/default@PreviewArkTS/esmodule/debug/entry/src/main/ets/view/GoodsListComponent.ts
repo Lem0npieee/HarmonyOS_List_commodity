@@ -8,6 +8,7 @@ interface GoodsList_Params {
     showLoading?: boolean;
     emptyListener?: GoodsListEmptyListener;
 }
+import router from "@ohos:router";
 import * as commonConst from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
 import { CategoryType } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
 import type { GoodsListItemType } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
@@ -94,7 +95,7 @@ export default class GoodsList extends ViewPU {
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
-            Column.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(51:5)", "entry");
+            Column.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(52:5)", "entry");
             Column.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
             Column.justifyContent(FlexAlign.Start);
         }, Column);
@@ -109,7 +110,7 @@ export default class GoodsList extends ViewPU {
                 this.ifElseBranchUpdateFunction(1, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         List.create({ space: 0 });
-                        List.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(55:9)", "entry");
+                        List.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(56:9)", "entry");
                         List.edgeEffect(EdgeEffect.Spring);
                         List.width(commonConst.GOODS_LIST_WIDTH);
                         List.listDirection(Axis.Vertical);
@@ -127,7 +128,7 @@ export default class GoodsList extends ViewPU {
                                             this.triggerLoadMore();
                                         }
                                     });
-                                    ListItem.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(57:13)", "entry");
+                                    ListItem.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(58:13)", "entry");
                                 };
                                 const observedDeepRender = () => {
                                     this.observeComponentCreation2(itemCreation2, ListItem);
@@ -152,7 +153,7 @@ export default class GoodsList extends ViewPU {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Text.create({ "id": 16777243, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-                        Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(75:9)", "entry");
+                        Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(76:9)", "entry");
                         Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
                         Text.fontColor({ "id": 16777288, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                         Text.margin({ top: 8 });
@@ -187,7 +188,7 @@ export default class GoodsList extends ViewPU {
     private renderEmptyState(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
-            Column.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(105:5)", "entry");
+            Column.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(106:5)", "entry");
             Column.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
             Column.height(200);
             Column.justifyContent(FlexAlign.Center);
@@ -195,14 +196,14 @@ export default class GoodsList extends ViewPU {
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 16777293, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Image.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(106:7)", "entry");
+            Image.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(107:7)", "entry");
             Image.width(80);
             Image.height(80);
             Image.margin({ bottom: 12 });
         }, Image);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create({ "id": 16777233, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(110:7)", "entry");
+            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(111:7)", "entry");
             Text.fontSize(commonConst.NORMAL_FONT_SIZE);
             Text.fontColor({ "id": 16777288, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Text);
@@ -212,20 +213,28 @@ export default class GoodsList extends ViewPU {
     private listRow(item: GoodsListItemType, index: number, parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
-            Column.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(122:5)", "entry");
-            Column.padding({ top: 12, bottom: 12 });
+            Column.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(123:5)", "entry");
             Column.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
             Column.margin({ left: 4, right: 4 });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create({ space: 8 });
-            Row.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(123:7)", "entry");
+            Row.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(124:7)", "entry");
             Row.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
             Row.alignItems(VerticalAlign.Center);
+            Row.padding({ top: 12, bottom: 12 });
+            Row.onClick(() => {
+                router.pushUrl({
+                    url: 'pages/GoodsDetailPage',
+                    params: { goods: item }
+                }).catch((err: Error) => {
+                    console.error('跳转失败:', err.message);
+                });
+            });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create(item.cover);
-            Image.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(124:9)", "entry");
+            Image.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(125:9)", "entry");
             Image.width(112);
             Image.height(112);
             Image.borderRadius(16);
@@ -234,13 +243,13 @@ export default class GoodsList extends ViewPU {
         }, Image);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
-            Column.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(130:9)", "entry");
+            Column.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(131:9)", "entry");
             Column.alignItems(HorizontalAlign.Start);
             Column.layoutWeight(1);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(item.title);
-            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(131:11)", "entry");
+            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(132:11)", "entry");
             Text.fontSize(commonConst.NORMAL_FONT_SIZE);
             Text.fontWeight(FontWeight.Medium);
             Text.fontColor({ "id": 16777285, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
@@ -252,7 +261,7 @@ export default class GoodsList extends ViewPU {
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(item.description);
-            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(139:11)", "entry");
+            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(140:11)", "entry");
             Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
             Text.fontColor({ "id": 16777288, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Text.maxLines(2);
@@ -264,7 +273,7 @@ export default class GoodsList extends ViewPU {
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create({ space: 6 });
-            Row.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(147:11)", "entry");
+            Row.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(148:11)", "entry");
             Row.margin({ bottom: 6 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -273,7 +282,7 @@ export default class GoodsList extends ViewPU {
                 const tag = _item;
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Text.create(tag);
-                    Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(149:15)", "entry");
+                    Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(150:15)", "entry");
                     Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
                     Text.fontColor({ "id": 16777287, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                     Text.padding({ left: 8, right: 8, top: 2, bottom: 2 });
@@ -288,20 +297,20 @@ export default class GoodsList extends ViewPU {
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create({ space: 8 });
-            Row.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(158:11)", "entry");
+            Row.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(159:11)", "entry");
             Row.alignItems(VerticalAlign.Center);
             Row.justifyContent(FlexAlign.Start);
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(`¥${item.price.toFixed(0)}`);
-            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(159:13)", "entry");
+            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(160:13)", "entry");
             Text.fontSize(commonConst.BIGGER_FONT_SIZE);
             Text.fontColor({ "id": 16777287, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(item.evaluate);
-            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(162:13)", "entry");
+            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(163:13)", "entry");
             Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
             Text.fontColor({ "id": 16777288, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Text);
@@ -311,7 +320,7 @@ export default class GoodsList extends ViewPU {
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Divider.create();
-            Divider.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(174:7)", "entry");
+            Divider.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(185:7)", "entry");
             Divider.color({ "id": 16777286, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Divider.opacity(0.6);
             Divider.margin({ top: 12 });

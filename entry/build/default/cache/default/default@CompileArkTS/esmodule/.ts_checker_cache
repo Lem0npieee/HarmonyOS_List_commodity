@@ -50,7 +50,10 @@
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\ability\\startAbilityParameter.d.ts",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.bundle.d.ts",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\application\\AppServiceExtensionContext.d.ts",
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\embedded_component.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\embedded_component.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.FormMenu.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.window.floatingBall.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.pluginComponent.d.ts"
       ],
       "error": false
     },
@@ -95,7 +98,23 @@
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.web.webview.d.ts",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.security.cert.d.ts",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.security.cryptoFramework.d.ts",
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.print.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.print.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.http.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.connection.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.socket.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.atomicservice.AtomicServiceNavigation.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.FormMenu.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.atomicservice.AtomicServiceWeb.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.display.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.PiPWindow.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.window.floatingBall.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.pluginComponent.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.prompt.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.FoldSplitContainer.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.uiExtension.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.FullScreenLaunchComponent.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.MultiNavigation.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.atomicservice.HalfScreenLaunchComponent.d.ets"
       ],
       "error": false
     },
@@ -128,7 +147,10 @@
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.ability.featureAbility.d.ts",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\folder_stack.d.ts",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\nav_destination.d.ts",
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\navigation.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\navigation.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.FoldSplitContainer.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.uiExtension.d.ts"
       ],
       "error": false
     },
@@ -446,7 +468,9 @@
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\application\\Context.d.ts",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.common.d.ts",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\app\\context.d.ts",
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.rdb.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.rdb.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.PiPWindow.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.window.floatingBall.d.ts"
       ],
       "error": false
     },
@@ -471,7 +495,9 @@
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\application\\PhotoEditorExtensionContext.d.ts",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.multimodalInput.pointer.d.ts",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\common.d.ts",
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.web.webview.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.web.webview.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.window.floatingBall.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.screenshot.d.ts"
       ],
       "error": false
     },
@@ -503,7 +529,9 @@
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ComponentContent.d.ts",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\NodeController.d.ts",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\XComponentNode.d.ts",
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\common.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\common.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.atomicservice.InterstitialDialogAction.d.ets"
       ],
       "error": false
     },
@@ -528,7 +556,13 @@
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.window.d.ts",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\content_slot.d.ts",
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\node_container.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\node_container.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ArcButton.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ProgressButtonV2.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ToolBar.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ToolBarV2.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.SegmentButtonV2.d.ets"
       ],
       "error": false
     },
@@ -537,7 +571,8 @@
       "children": [],
       "parent": [
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.multimedia.image.d.ts",
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.graphics.drawing.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.graphics.drawing.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.display.d.ts"
       ],
       "error": false
     },
@@ -570,7 +605,8 @@
       ],
       "parent": [
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.resourceManager.d.ts",
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\image.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\image.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
       ],
       "error": false
     },
@@ -578,7 +614,8 @@
       "mtimeMs": 1761109925000,
       "children": [],
       "parent": [
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
       ],
       "error": false
     },
@@ -588,7 +625,8 @@
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts"
       ],
       "parent": [
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
       ],
       "error": false
     },
@@ -598,7 +636,8 @@
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts"
       ],
       "parent": [
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
       ],
       "error": false
     },
@@ -612,7 +651,8 @@
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\action_sheet.d.ts",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\alert_dialog.d.ts",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\common.d.ts",
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\custom_dialog_controller.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\custom_dialog_controller.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
       ],
       "error": false
     },
@@ -622,7 +662,13 @@
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts"
       ],
       "parent": [
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\GoodsListComponent.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\GoodsDetailPage.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\TabBarsComponent.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\AIChatPage.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\CarePage.ets"
       ],
       "error": false
     },
@@ -630,7 +676,8 @@
       "mtimeMs": 1761109925000,
       "children": [],
       "parent": [
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
       ],
       "error": false
     },
@@ -638,7 +685,8 @@
       "mtimeMs": 1761109925000,
       "children": [],
       "parent": [
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
       ],
       "error": false
     },
@@ -651,7 +699,8 @@
       ],
       "parent": [
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts",
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\common.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\common.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
       ],
       "error": false
     },
@@ -659,7 +708,8 @@
       "mtimeMs": 1761109925000,
       "children": [],
       "parent": [
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
       ],
       "error": false
     },
@@ -670,7 +720,8 @@
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.multimedia.image.d.ts"
       ],
       "parent": [
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
       ],
       "error": false
     },
@@ -682,7 +733,8 @@
       ],
       "parent": [
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts",
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\common.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\common.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
       ],
       "error": false
     },
@@ -748,7 +800,8 @@
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\Graphics.d.ts"
       ],
       "parent": [
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.node.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.node.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.PiPWindow.d.ts"
       ],
       "error": false
     },
@@ -767,7 +820,8 @@
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\NodeController.d.ts",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\XComponentNode.d.ts",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\NodeContent.d.ts",
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\canvas.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\canvas.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.PiPWindow.d.ts"
       ],
       "error": false
     },
@@ -921,7 +975,9 @@
       ],
       "parent": [
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\application\\UIAbilityContext.d.ts",
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\application\\UIExtensionContext.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\application\\UIExtensionContext.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.FullScreenLaunchComponent.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.atomicservice.HalfScreenLaunchComponent.d.ets"
       ],
       "error": false
     },
@@ -1032,7 +1088,8 @@
       "children": [],
       "parent": [
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.StartOptions.d.ts",
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\application\\Context.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\application\\Context.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.StateManagement.d.ts"
       ],
       "error": false
     },
@@ -1450,20 +1507,24 @@
       "error": false
     },
     "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\TabBarsComponent.ets": {
-      "mtimeMs": 1763451632434.8457,
+      "mtimeMs": 1763713531178.552,
       "children": [
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\viewmodel\\InitialData.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CommonConstants.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\GoodsListComponent.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\PutDownRefreshLayout.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\SelectedComponent.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\BannerComponent.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\viewmodel\\ListDataSource.ets"
       ],
       "parent": [
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\ListIndex.ets"
       ],
-      "error": false
+      "error": true,
+      "errorCodes": [
+        28007
+      ]
     },
     "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CommonConstants.ets": {
       "mtimeMs": 1763447193264.2615,
@@ -1475,7 +1536,9 @@
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\viewmodel\\ListDataSource.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\PutDownRefreshLayout.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\SelectedComponent.ets",
-        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\BannerComponent.ets"
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\BannerComponent.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\AIChatPage.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\GoodsDetailPage.ets"
       ],
       "error": false
     },
@@ -1489,20 +1552,23 @@
       "error": false
     },
     "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\viewmodel\\InitialData.ets": {
-      "mtimeMs": 1763449499518.8127,
+      "mtimeMs": 1763546608721.422,
       "children": [],
       "parent": [
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\TabBarsComponent.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\GoodsListComponent.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\viewmodel\\ListDataSource.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\SelectedComponent.ets",
-        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\BannerComponent.ets"
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\BannerComponent.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\GoodsDetailPage.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\AIChatPage.ets"
       ],
       "error": false
     },
     "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\GoodsListComponent.ets": {
-      "mtimeMs": 1763461985572.5327,
+      "mtimeMs": 1763534863419.5393,
       "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CommonConstants.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\viewmodel\\InitialData.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\viewmodel\\ListDataSource.ets"
@@ -1510,7 +1576,10 @@
       "parent": [
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\TabBarsComponent.ets"
       ],
-      "error": false
+      "error": true,
+      "errorCodes": [
+        28007
+      ]
     },
     "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\PutDownRefreshLayout.ets": {
       "mtimeMs": 1763447193336.798,
@@ -1523,7 +1592,7 @@
       "error": false
     },
     "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\SelectedComponent.ets": {
-      "mtimeMs": 1763461985572.5327,
+      "mtimeMs": 1763712711377.0088,
       "children": [
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CommonConstants.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\viewmodel\\InitialData.ets"
@@ -1545,7 +1614,7 @@
       "error": false
     },
     "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\viewmodel\\ListDataSource.ets": {
-      "mtimeMs": 1763450403028.636,
+      "mtimeMs": 1763536305216.9585,
       "children": [
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\viewmodel\\InitialData.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CommonConstants.ets"
@@ -1602,7 +1671,8 @@
       "mtimeMs": 1761109925000,
       "children": [],
       "parent": [
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\common.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\common.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
       ],
       "error": false
     },
@@ -1610,7 +1680,8 @@
       "mtimeMs": 1761109925000,
       "children": [],
       "parent": [
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\common.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\common.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
       ],
       "error": false
     },
@@ -1618,7 +1689,8 @@
       "mtimeMs": 1761109925000,
       "children": [],
       "parent": [
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\common.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\common.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
       ],
       "error": false
     },
@@ -1627,7 +1699,8 @@
       "children": [],
       "parent": [
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\common.d.ts",
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\image.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\image.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
       ],
       "error": false
     },
@@ -1644,7 +1717,9 @@
       "children": [],
       "parent": [
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\common.d.ts",
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\with_theme.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\with_theme.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.Dialog.d.ets"
       ],
       "error": false
     },
@@ -1862,7 +1937,8 @@
       "mtimeMs": 1761109925000,
       "children": [],
       "parent": [
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\tabs.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\tabs.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
       ],
       "error": false
     },
@@ -1971,7 +2047,8 @@
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.security.cryptoFramework.d.ts"
       ],
       "parent": [
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.web.webview.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.web.webview.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.socket.d.ts"
       ],
       "error": false
     },
@@ -2002,6 +2079,1410 @@
       "parent": [
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.security.cert.d.ts"
       ],
+      "error": false
+    },
+    "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\GoodsDetailPage.ets": {
+      "mtimeMs": 1763709262033.5557,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\viewmodel\\InitialData.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CommonConstants.ets"
+      ],
+      "parent": [],
+      "error": true,
+      "errorCodes": [
+        28007
+      ]
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.http.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.connection.d.ts"
+      ],
+      "parent": [
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\AIChatPage.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.connection.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\AIChatPage.ets": {
+      "mtimeMs": 1763712711379.3623,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.http.d.ts",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\viewmodel\\InitialData.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CommonConstants.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CommonConstants.ets"
+      ],
+      "parent": [],
+      "error": true,
+      "errorCodes": [
+        28007
+      ]
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.connection.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.http.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.socket.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.http.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.socket.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.socket.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.connection.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.security.cert.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.connection.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.animator.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.atomicservice.AtomicServiceNavigation.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.atomicservice.AtomicServiceSearch.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ArcButton.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.Chip.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.atomicservice.NavPushPathHelper.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ChipGroup.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ComposeListItem.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ComposeTitleBar.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.Counter.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.Dialog.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.DialogV2.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.EditableTitleBar.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ExceptionPrompt.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.Filter.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.FormMenu.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.GridObjectSortComponent.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.Popup.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ProgressButton.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ProgressButtonV2.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.SegmentButton.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.SelectionMenu.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.SelectTitleBar.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.SplitLayout.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.SubHeader.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.SwipeRefresher.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.TabTitleBar.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ToolBar.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ToolBarV2.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.TreeView.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.atomicservice.InterstitialDialogAction.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.componentSnapshot.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.componentUtils.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.dragController.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.drawableDescriptor.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.inspector.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.node.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.observer.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.StateManagement.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.shape.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.curves.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.atomicservice.AtomicServiceWeb.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.display.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.font.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.matrix4.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.measure.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.mediaquery.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.PiPWindow.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.window.floatingBall.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.pluginComponent.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.prompt.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.promptAction.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.screenshot.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.uiAppearance.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.window.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@system.app.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@system.configuration.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@system.mediaquery.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@system.prompt.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@system.router.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.ArcList.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.ArcAlphabetIndexer.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.ArcScrollBar.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.theme.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.FoldSplitContainer.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.uiExtension.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.FullScreenLaunchComponent.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.atomicservice.AtomicServiceTabs.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.Prefetcher.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.DownloadFileButton.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.MultiNavigation.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ArcSlider.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.ArcSwiper.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.SubHeaderV2.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.SegmentButtonV2.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.atomicservice.HalfScreenLaunchComponent.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts"
+      ],
+      "parent": [
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\AIChatPage.ets"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.atomicservice.AtomicServiceNavigation.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.atomicservice.AtomicServiceSearch.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.SubHeader.d.ets"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ArcButton.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.node.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.Chip.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ChipGroup.d.ets"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.atomicservice.NavPushPathHelper.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ChipGroup.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.Chip.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ComposeListItem.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ComposeTitleBar.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.Counter.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.Dialog.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.theme.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.DialogV2.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.EditableTitleBar.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ExceptionPrompt.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.Filter.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.FormMenu.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.form.formBindingData.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.Want.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.GridObjectSortComponent.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.Popup.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ProgressButton.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ProgressButtonV2.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.node.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.node.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.SegmentButton.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.SelectionMenu.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.SelectTitleBar.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.SplitLayout.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.SubHeader.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.atomicservice.AtomicServiceSearch.d.ets"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.SwipeRefresher.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.TabTitleBar.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ToolBar.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.node.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ToolBarV2.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.node.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.TreeView.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.atomicservice.InterstitialDialogAction.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.StateManagement.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.contextConstant.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.curves.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.atomicservice.AtomicServiceWeb.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.display.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.graphics.colorSpaceManager.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.graphics.hdrCapability.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.FoldSplitContainer.d.ets"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.PiPWindow.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\application\\BaseContext.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\NodeController.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\FrameNode.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.window.floatingBall.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\application\\BaseContext.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.multimedia.image.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.Want.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.pluginComponent.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.Want.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.prompt.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.screenshot.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.multimedia.image.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.uiAppearance.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@system.app.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@system.configuration.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@system.mediaquery.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@system.prompt.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@system.router.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.ArcList.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.ArcAlphabetIndexer.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.ArcScrollBar.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.FoldSplitContainer.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.display.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.window.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.uiExtension.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.window.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.FullScreenLaunchComponent.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.AtomicServiceOptions.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.atomicservice.AtomicServiceTabs.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\CommonModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\AlphabetIndexerModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\BlankModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ButtonModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\CalendarPickerModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\CheckboxModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\CheckboxGroupModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ColumnModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ColumnSplitModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\CounterModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\DataPanelModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\DatePickerModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\DividerModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\GaugeModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\GridModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\GridColModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\GridItemModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\GridRowModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\HyperlinkModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ImageAnimatorModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ImageModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\SymbolGlyphModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ImageSpanModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\LineModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ListModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ListItemModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ListItemGroupModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\LoadingProgressModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\MarqueeModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\MenuModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\MenuItemModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\NavDestinationModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\NavigationModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\NavigatorModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\NavRouterModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\PanelModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\PathModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\PatternLockModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\PolygonModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\PolylineModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ProgressModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\QRCodeModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\RadioModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\RatingModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\RectModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\RefreshModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\RichEditorModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\RowModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\RowSplitModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ScrollModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\SearchModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\SelectModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ShapeModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\SideBarContainerModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\SliderModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\SpanModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\StackModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\StepperItemModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\SwiperModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\TabsModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\TextAreaModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\TextModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\TextClockModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\TextInputModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\TextPickerModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\TextTimerModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\TimePickerModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ToggleModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\VideoModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\WaterFlowModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\AttributeUpdater.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ContainerSpanModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\SymbolSpanModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ParticleModifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\StepperModifier.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.SubHeader.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.Chip.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ChipGroup.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ToolBar.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ToolBarV2.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.SubHeaderV2.d.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.SegmentButtonV2.d.ets"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.Prefetcher.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.DownloadFileButton.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.MultiNavigation.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.ArcSlider.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.ArcSwiper.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.SubHeaderV2.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.SegmentButtonV2.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.node.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.node.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.atomicservice.HalfScreenLaunchComponent.d.ets": {
+      "mtimeMs": 1761109925000,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.AtomicServiceOptions.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\AlphabetIndexerModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\BlankModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ButtonModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\CalendarPickerModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\CheckboxModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\CheckboxGroupModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ColumnModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ColumnSplitModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\CounterModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\DataPanelModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\DatePickerModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\DividerModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\GaugeModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\GridModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\GridColModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\GridItemModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\GridRowModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\HyperlinkModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ImageAnimatorModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ImageSpanModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\LineModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ListModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ListItemModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ListItemGroupModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\LoadingProgressModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\MarqueeModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\MenuModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\MenuItemModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\NavDestinationModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\NavigationModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\NavigatorModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\NavRouterModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\PanelModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\PathModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\PatternLockModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\PolygonModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\PolylineModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ProgressModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\QRCodeModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\RadioModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\RatingModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\RectModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\RefreshModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\RichEditorModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\RowModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\RowSplitModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ScrollModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\SearchModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\SelectModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ShapeModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\SideBarContainerModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\SliderModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\SpanModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\StackModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\StepperItemModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\SwiperModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\TabsModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\TextAreaModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\TextModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\TextClockModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\TextInputModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\TextPickerModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\TextTimerModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\TimePickerModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ToggleModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\VideoModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\WaterFlowModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\AttributeUpdater.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ContainerSpanModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\SymbolSpanModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\ParticleModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\arkui\\StepperModifier.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.modifier.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.form.formBindingData.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.advanced.FormMenu.d.ets"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.graphics.hdrCapability.d.ts": {
+      "mtimeMs": 1761109925000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.display.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\CarePage.ets": {
+      "mtimeMs": 1763717049723.8208,
+      "children": [
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts"
+      ],
+      "parent": [],
       "error": false
     }
   }

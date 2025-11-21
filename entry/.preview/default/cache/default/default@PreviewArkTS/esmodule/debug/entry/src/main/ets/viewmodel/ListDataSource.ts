@@ -166,8 +166,16 @@ export class ListDataSource extends BasicDataSource {
             .filter((item: GoodsListItemType) => item.category === this.category)
             .filter((item: GoodsListItemType) => this.query.subCategory === 'all' ? true :
             item.subCategory === this.query.subCategory)
-            .filter((item: GoodsListItemType) => keyword.length === 0 ? true :
-            item.keyword.toLowerCase().indexOf(keyword) >= 0)
+            .filter((item: GoodsListItemType) => {
+            if (keyword.length === 0) {
+                return true;
+            }
+            // 使用智能搜索索引进行匹配
+            const searchText: string = item.searchIndex.toLowerCase();
+            // 支持空格分隔的多关键词搜索(AND逻辑)
+            const keywords: string[] = keyword.split(/\s+/).filter((k: string) => k.length > 0);
+            return keywords.every((k: string) => searchText.indexOf(k) >= 0);
+        })
             .filter((item: GoodsListItemType) => this.matchesFilters(item));
         this.filteredData = this.sortByCurrentOption(this.filteredData);
         const initialLength: number = Math.min(this.pageSize, this.filteredData.length);
