@@ -7,20 +7,39 @@ import { GoodsListItemType } from '../viewmodel/InitialData';
 
 @Component
 export default struct CartPage {
+  private cartListener!: () => void;
+  @State private items: CartItem[] = CartStore.getItems();
+
+  constructor() {
+    super();
+    this.cartListener = () => {
+      try {
+        this.items = CartStore.getItems();
+      } catch (e) {
+        console.error('更新购物车列表失败:', String(e));
+      }
+    };
+    CartStore.subscribe(this.cartListener);
+  }
+
+  onDestroy() {
+    CartStore.unsubscribe(this.cartListener);
+  }
+
   build() {
     Column() {
       Text('购物车')
         .fontSize(24)
         .fontWeight(FontWeight.Bold)
         .padding({ top: 8, bottom: 8 })
-      if (CartStore.getItems().length === 0) {
+      if (this.items.length === 0) {
         Text('购物车为空')
           .fontSize(14)
           .fontColor($r('app.color.gray'))
           .padding({ left: 16, right: 16 })
       } else {
         List({ space: 0 }) {
-          ForEach(CartStore.getItems(), (entry: CartItem, index?: number) => {
+          ForEach(this.items, (entry: CartItem, index?: number) => {
             ListItem() {
               Column() {
                 Row({ space: 8 }) {

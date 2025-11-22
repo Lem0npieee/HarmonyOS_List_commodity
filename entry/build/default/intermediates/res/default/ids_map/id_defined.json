@@ -443,5 +443,13 @@
 			"type":	"media",
 			"name":	"tuikuanshouhou",
 			"id":	"0x0100006E"
+		}, {
+			"type":	"media",
+			"name":	"robottouxiang",
+			"id":	"0x0100006F"
+		}, {
+			"type":	"media",
+			"name":	"usertouxiang",
+			"id":	"0x01000070"
 		}]
 }

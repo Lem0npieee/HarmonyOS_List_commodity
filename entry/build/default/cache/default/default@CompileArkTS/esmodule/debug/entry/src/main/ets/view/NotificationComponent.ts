@@ -2,12 +2,13 @@ if (!("finalizeConstruction" in ViewPU.prototype)) {
     Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
 }
 interface NotificationComponent_Params {
-    text?: string;
+    payload?: NotificationPayload | null;
     visible?: boolean;
     hideTimer?: number | null;
-    listener?: (msg: string, duration?: number) => void;
+    listener?: (payload: NotificationPayload, duration?: number) => void;
 }
 import NotificationStore from "@bundle:com.example.list_harmony/entry/ets/common/NotificationStore";
+import type { NotificationPayload, NotificationPayloadResource } from "@bundle:com.example.list_harmony/entry/ets/common/NotificationStore";
 import * as commonConst from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
 export default class NotificationComponent extends ViewPU {
     constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
@@ -15,7 +16,7 @@ export default class NotificationComponent extends ViewPU {
         if (typeof paramsLambda === "function") {
             this.paramsGenerator_ = paramsLambda;
         }
-        this.__text = new ObservedPropertySimplePU('', this, "text");
+        this.__payload = new ObservedPropertyObjectPU(null, this, "payload");
         this.__visible = new ObservedPropertySimplePU(false, this, "visible");
         this.hideTimer = null;
         this.listener = undefined;
@@ -23,8 +24,8 @@ export default class NotificationComponent extends ViewPU {
         this.finalizeConstruction();
     }
     setInitiallyProvidedValue(params: NotificationComponent_Params) {
-        if (params.text !== undefined) {
-            this.text = params.text;
+        if (params.payload !== undefined) {
+            this.payload = params.payload;
         }
         if (params.visible !== undefined) {
             this.visible = params.visible;
@@ -39,21 +40,21 @@ export default class NotificationComponent extends ViewPU {
     updateStateVars(params: NotificationComponent_Params) {
     }
     purgeVariableDependenciesOnElmtId(rmElmtId) {
-        this.__text.purgeDependencyOnElmtId(rmElmtId);
+        this.__payload.purgeDependencyOnElmtId(rmElmtId);
         this.__visible.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
-        this.__text.aboutToBeDeleted();
+        this.__payload.aboutToBeDeleted();
         this.__visible.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
     }
-    private __text: ObservedPropertySimplePU<string>;
-    get text() {
-        return this.__text.get();
+    private __payload: ObservedPropertyObjectPU<NotificationPayload | null>;
+    get payload() {
+        return this.__payload.get();
     }
-    set text(newValue: string) {
-        this.__text.set(newValue);
+    set payload(newValue: NotificationPayload | null) {
+        this.__payload.set(newValue);
     }
     private __visible: ObservedPropertySimplePU<boolean>;
     get visible() {
@@ -63,7 +64,7 @@ export default class NotificationComponent extends ViewPU {
         this.__visible.set(newValue);
     }
     private hideTimer: number | null;
-    private listener: (msg: string, duration?: number) => void;
+    private listener: (payload: NotificationPayload, duration?: number) => void;
     onDestroy() {
         NotificationStore.unsubscribe(this.listener);
         if (this.hideTimer) {
@@ -71,8 +72,8 @@ export default class NotificationComponent extends ViewPU {
             this.hideTimer = null;
         }
     }
-    private show(msg: string, duration: number): void {
-        this.text = msg;
+    private show(msg: NotificationPayload, duration: number): void {
+        this.payload = msg;
         this.visible = true;
         if (this.hideTimer) {
             clearTimeout(this.hideTimer);
@@ -95,20 +96,55 @@ export default class NotificationComponent extends ViewPU {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Column.create();
+                        Column.padding({ left: 14, right: 14, top: 8, bottom: 8 });
+                        Column.backgroundColor('#333333');
+                        Column.borderRadius(20);
+                        Column.alignItems(HorizontalAlign.Center);
                         Column.alignItems(HorizontalAlign.Center);
                         Column.margin({ top: 12 });
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create(this.text);
-                        Text.fontSize(14);
-                        Text.fontColor(Color.White);
-                        Text.backgroundColor('#333333');
-                        Text.padding({ left: 14, right: 14, top: 8, bottom: 8 });
-                        Text.borderRadius(20);
-                        Text.maxLines(2);
-                        Text.textAlign(TextAlign.Center);
-                    }, Text);
-                    Text.pop();
+                        If.create();
+                        // payload can be a string or { resource, suffix }
+                        if (typeof this.payload === 'string') {
+                            this.ifElseBranchUpdateFunction(0, () => {
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    Text.create(this.payload);
+                                    Text.fontSize(14);
+                                    Text.fontColor(Color.White);
+                                    Text.textAlign(TextAlign.Center);
+                                }, Text);
+                                Text.pop();
+                            });
+                        }
+                        else if (this.payload && typeof this.payload !== 'string') {
+                            this.ifElseBranchUpdateFunction(1, () => {
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    Row.create();
+                                }, Row);
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    Text.create((this.payload as NotificationPayloadResource).resource);
+                                    Text.fontSize(14);
+                                    Text.fontColor(Color.White);
+                                    Text.textAlign(TextAlign.Center);
+                                }, Text);
+                                Text.pop();
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    Text.create((this.payload as NotificationPayloadResource).suffix);
+                                    Text.fontSize(14);
+                                    Text.fontColor(Color.White);
+                                    Text.textAlign(TextAlign.Center);
+                                }, Text);
+                                Text.pop();
+                                Row.pop();
+                            });
+                        }
+                        else {
+                            this.ifElseBranchUpdateFunction(2, () => {
+                            });
+                        }
+                    }, If);
+                    If.pop();
                     Column.pop();
                 });
             }

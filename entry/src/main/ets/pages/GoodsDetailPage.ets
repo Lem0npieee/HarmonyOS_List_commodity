@@ -6,7 +6,7 @@ import { GoodsListItemType, CategoryType, goodsPool } from '../viewmodel/Initial
 import CartStore from '../common/CartStore';
 import FavoritesStore from '../common/FavoritesStore';
 import OrderStore from '../common/OrderStore';
-import NotificationStore from '../common/NotificationStore';
+import NotificationStore, { NotificationPayload } from '../common/NotificationStore';
 import { LAYOUT_WIDTH_OR_HEIGHT, STORE } from '../common/CommonConstants';
 import prompt from '@system.prompt';
 
@@ -997,6 +997,17 @@ struct GoodsDetailPage {
       }
       .width(50)
       .justifyContent(FlexAlign.Center)
+      .onClick(() => {
+        try {
+          if (this.goods) {
+            router.pushUrl({ url: 'pages/CustomerServicePage', params: { goods: this.goods } });
+          } else {
+            router.pushUrl({ url: 'pages/CustomerServicePage' });
+          }
+        } catch (e) {
+          console.error('跳转客服页面失败:', String(e));
+        }
+      })
       
       Blank()
       
@@ -1031,24 +1042,39 @@ struct GoodsDetailPage {
         .onClick(() => {
           try {
             if (this.goods) {
-              OrderStore.incrementPendingShipCount(1);
+              // 记录此订单为待发货（以商品 id 为 key）
+              const goodsId = this.goods.id;
+              const goodsTitle = this.goods.title;
+              OrderStore.addOrderPendingShip(goodsId);
               prompt.showToast({ message: '购买成功', duration: 1500 });
               // 安排后续的发货和到货通知（示意）
-              const title = this.goods ? this.goods.title : '您购买的商品';
               setTimeout(() => {
                 try {
-                  const msg = `${title} 现已发货`;
-                  NotificationStore.show(msg, 5000);
-                  prompt.showToast({ message: msg, duration: 3000 });
+                  // Use resource payload so NotificationComponent can render resource correctly
+                  if (goodsTitle) {
+                    const payload: NotificationPayload = { resource: goodsTitle, suffix: ' 现已发货' } as NotificationPayload;
+                    NotificationStore.show(payload, 5000);
+                  } else {
+                    NotificationStore.show('商品已发货', 5000);
+                  }
+                  // 标记已发货：如果之前是待发货，该操作会让待发货数 -1
+                  OrderStore.markShipped(goodsId);
+                  prompt.showToast({ message: '您购买的商品已发货', duration: 3000 });
                 } catch (e) {
                   console.error('发货通知失败:', String(e));
                 }
               }, 5000);
               setTimeout(() => {
                 try {
-                  const msg2 = `${title} 现已到货，请注意查收`;
-                  NotificationStore.show(msg2, 5000);
-                  prompt.showToast({ message: msg2, duration: 3000 });
+                  if (goodsTitle) {
+                    const payload2: NotificationPayload = { resource: goodsTitle, suffix: ' 现已到货，请注意查收' } as NotificationPayload;
+                    NotificationStore.show(payload2, 5000);
+                  } else {
+                    NotificationStore.show('商品已到货', 5000);
+                  }
+                  // 标记已到货：如果之前是已发货/待发货，则会增加待收货计数
+                  OrderStore.markArrived(goodsId);
+                  prompt.showToast({ message: '您购买的商品已到货，请注意查收', duration: 3000 });
                 } catch (e) {
                   console.error('到货通知失败:', String(e));
                 }

@@ -105,7 +105,9 @@ media icon 0x0100004f
 media kefu 0x01000064
 media me 0x01000069
 media refreshing 0x01000050
+media robottouxiang 0x0100006f
 media shoucang 0x01000065
 media tuikuanshouhou 0x0100006e
+media usertouxiang 0x01000070
 media yishoucang 0x01000066
 profile main_pages 0x01000051

@@ -5,6 +5,7 @@ interface ProfilePage_Params {
     touchStartMap?: Map<number, number>;
     favorites?: FavoriteItem[];
     pendingShipCount?: number;
+    pendingReceiveCount?: number;
     orderListener?: () => void;
     favoritesListener?: () => void;
 }
@@ -23,6 +24,7 @@ export default class ProfilePage extends ViewPU {
         this.touchStartMap = new Map();
         this.__favorites = new ObservedPropertyObjectPU(FavoritesStore.getItems(), this, "favorites");
         this.__pendingShipCount = new ObservedPropertySimplePU(OrderStore.getPendingShipCount(), this, "pendingShipCount");
+        this.__pendingReceiveCount = new ObservedPropertySimplePU(OrderStore.getPendingReceiveCount(), this, "pendingReceiveCount");
         this.orderListener = undefined;
         this.favoritesListener = undefined;
         this.setInitiallyProvidedValue(params);
@@ -38,6 +40,9 @@ export default class ProfilePage extends ViewPU {
         if (params.pendingShipCount !== undefined) {
             this.pendingShipCount = params.pendingShipCount;
         }
+        if (params.pendingReceiveCount !== undefined) {
+            this.pendingReceiveCount = params.pendingReceiveCount;
+        }
         if (params.orderListener !== undefined) {
             this.orderListener = params.orderListener;
         }
@@ -50,10 +55,12 @@ export default class ProfilePage extends ViewPU {
     purgeVariableDependenciesOnElmtId(rmElmtId) {
         this.__favorites.purgeDependencyOnElmtId(rmElmtId);
         this.__pendingShipCount.purgeDependencyOnElmtId(rmElmtId);
+        this.__pendingReceiveCount.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
         this.__favorites.aboutToBeDeleted();
         this.__pendingShipCount.aboutToBeDeleted();
+        this.__pendingReceiveCount.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
     }
@@ -71,6 +78,13 @@ export default class ProfilePage extends ViewPU {
     }
     set pendingShipCount(newValue: number) {
         this.__pendingShipCount.set(newValue);
+    }
+    private __pendingReceiveCount: ObservedPropertySimplePU<number>;
+    get pendingReceiveCount() {
+        return this.__pendingReceiveCount.get();
+    }
+    set pendingReceiveCount(newValue: number) {
+        this.__pendingReceiveCount.set(newValue);
     }
     private orderListener: () => void;
     private favoritesListener: () => void;
@@ -239,10 +253,38 @@ export default class ProfilePage extends ViewPU {
             Column.layoutWeight(1);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Stack.create();
+        }, Stack);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 16777325, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.width(36);
             Image.height(36);
         }, Image);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            if (this.pendingReceiveCount > 0) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(this.pendingReceiveCount > 99 ? '99+' : `${this.pendingReceiveCount}`);
+                        Text.fontSize(12);
+                        Text.fontColor(Color.White);
+                        Text.backgroundColor('#FF3B30');
+                        Text.width(this.pendingReceiveCount > 9 ? 20 : 16);
+                        Text.height(16);
+                        Text.textAlign(TextAlign.Center);
+                        Text.borderRadius(8);
+                        Text.position({ left: this.pendingReceiveCount > 9 ? 22 : 24, top: -6 });
+                    }, Text);
+                    Text.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+        Stack.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('待收货');
             Text.fontSize(12);

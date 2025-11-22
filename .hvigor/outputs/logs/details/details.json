@@ -19,16 +19,16 @@
     "IS_HVIGORFILE_TYPE_CHECK": false,
     "TASK_TIME": {
       "1043bfc77febe75fafec0c4309faccf1": {
-        "CreateModuleInfo": 833600,
-        "ConfigureCmake": 850700,
-        "PreCheckSyscap": 435400,
-        "GeneratePkgContextInfo": 5625600,
-        "ProcessIntegratedHsp": 710400,
-        "BuildNativeWithCmake": 348800,
-        "SyscapTransform": 3561200,
-        "ProcessStartupConfig": 2564900,
-        "BuildNativeWithNinja": 828300,
-        "BuildJS": 2741300
+        "CreateModuleInfo": 1074200,
+        "ConfigureCmake": 288800,
+        "PreCheckSyscap": 304500,
+        "GeneratePkgContextInfo": 4980200,
+        "ProcessIntegratedHsp": 757300,
+        "BuildNativeWithCmake": 406600,
+        "SyscapTransform": 4970100,
+        "ProcessStartupConfig": 1832500,
+        "BuildNativeWithNinja": 1331000,
+        "BuildJS": 4515400
       }
     },
     "APIS": [
@@ -53,36 +53,12 @@
       "getStartParams"
     ],
     "CONFIG_PROPERTIES": {},
-    "TOTAL_TIME": 1857170400,
-    "BUILD_ID": "202511221741095230",
+    "TOTAL_TIME": 1575449600,
+    "BUILD_ID": "202511222210234860",
     "ERROR_MESSAGE": [
       {
         "CODE": "10505001",
-        "TIMESTAMP": "1763804471371"
-      },
-      {
-        "CODE": "10505001",
-        "TIMESTAMP": "1763804471371"
-      },
-      {
-        "CODE": "10505001",
-        "TIMESTAMP": "1763804471371"
-      },
-      {
-        "CODE": "10505001",
-        "TIMESTAMP": "1763804471371"
-      },
-      {
-        "CODE": "10505001",
-        "TIMESTAMP": "1763804471371"
-      },
-      {
-        "CODE": "10505001",
-        "TIMESTAMP": "1763804471371"
-      },
-      {
-        "CODE": "10505001",
-        "TIMESTAMP": "1763804471371"
+        "TIMESTAMP": "1763820625052"
       }
     ]
   }

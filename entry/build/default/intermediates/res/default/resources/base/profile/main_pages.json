@@ -3,6 +3,7 @@
     "pages/ListIndex",
     "pages/GoodsDetailPage",
     "pages/AIChatPage",
-    "pages/CarePage"
+    "pages/CarePage",
+    "pages/CustomerServicePage"
   ]
 }
