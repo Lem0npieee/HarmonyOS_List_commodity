@@ -12,7 +12,7 @@ export default class FakeUIAbility extends UIAbility {
   }
 
   onWindowStageCreate(windowStage: window.WindowStage): void {
-    windowStage.loadContent('pages/GoodsDetailPage', (err) => {
+    windowStage.loadContent('pages/CarePage', (err) => {
       if (err.code) {
         hilog.error(DOMAIN, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err));
         return;

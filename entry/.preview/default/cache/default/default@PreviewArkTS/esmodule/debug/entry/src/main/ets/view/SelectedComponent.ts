@@ -10,6 +10,7 @@ interface SelectedComponent_Params {
     sortOptionMetasData?: SortOptionMeta[];
     filterOptionMetasData?: FilterOptionMeta[];
     onSearchChange?: (value: string) => void;
+    onAISearch?: (value: string) => void;
     onSubCategoryChange?: (id: string) => void;
     onSortChange?: (sort: SortOption) => void;
     onFilterToggle?: (filter: FilterId) => void;
@@ -33,6 +34,7 @@ export default class SelectedComponent extends ViewPU {
         this.sortOptionMetasData = sortOptionMetas;
         this.filterOptionMetasData = filterOptionMetas;
         this.onSearchChange = () => { };
+        this.onAISearch = () => { };
         this.onSubCategoryChange = () => { };
         this.onSortChange = () => { };
         this.onFilterToggle = () => { };
@@ -65,6 +67,9 @@ export default class SelectedComponent extends ViewPU {
         }
         if (params.onSearchChange !== undefined) {
             this.onSearchChange = params.onSearchChange;
+        }
+        if (params.onAISearch !== undefined) {
+            this.onAISearch = params.onAISearch;
         }
         if (params.onSubCategoryChange !== undefined) {
             this.onSubCategoryChange = params.onSubCategoryChange;
@@ -130,6 +135,7 @@ export default class SelectedComponent extends ViewPU {
     private sortOptionMetasData: SortOptionMeta[];
     private filterOptionMetasData: FilterOptionMeta[];
     private onSearchChange: (value: string) => void;
+    private onAISearch: (value: string) => void;
     private onSubCategoryChange: (id: string) => void;
     private onSortChange: (sort: SortOption) => void;
     private onFilterToggle: (filter: FilterId) => void;
@@ -138,7 +144,7 @@ export default class SelectedComponent extends ViewPU {
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
-            Column.debugLine("entry/src/main/ets/view/SelectedComponent.ets(44:5)", "entry");
+            Column.debugLine("entry/src/main/ets/view/SelectedComponent.ets(45:5)", "entry");
             Column.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
             Column.padding({
                 left: commonConst.GOODS_LIST_PADDING,
@@ -165,7 +171,7 @@ export default class SelectedComponent extends ViewPU {
         If.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Divider.create();
-            Divider.debugLine("entry/src/main/ets/view/SelectedComponent.ets(51:7)", "entry");
+            Divider.debugLine("entry/src/main/ets/view/SelectedComponent.ets(52:7)", "entry");
             Divider.color({ "id": 16777286, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Divider.height(1);
         }, Divider);
@@ -173,49 +179,71 @@ export default class SelectedComponent extends ViewPU {
     }
     private renderSearchBar(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.debugLine("entry/src/main/ets/view/SelectedComponent.ets(65:5)", "entry");
+            Row.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
+            Row.margin({ bottom: 8 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
             Search.create({ value: this.searchValue, placeholder: this.searchPlaceholder });
-            Search.debugLine("entry/src/main/ets/view/SelectedComponent.ets(64:5)", "entry");
+            Search.debugLine("entry/src/main/ets/view/SelectedComponent.ets(66:7)", "entry");
             Search.searchButton('搜索');
             Search.border({ width: 1, color: { "id": 16777286, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } });
             Search.height(40);
-            Search.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
+            Search.layoutWeight(1);
             Search.backgroundColor(Color.White);
             Search.onSubmit((value: string) => {
                 this.searchValue = value;
                 this.onSearchChange(value);
             });
             Search.onChange((value: string) => {
+                // 仅更新本地输入值，避免实时触发父组件搜索
                 this.searchValue = value;
-                this.onSearchChange(value);
             });
-            Search.margin({ bottom: 8 });
         }, Search);
         Search.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('AI搜索');
+            Button.debugLine("entry/src/main/ets/view/SelectedComponent.ets(81:7)", "entry");
+            Button.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
+            Button.margin({ left: 8 });
+            Button.height(40);
+            Button.padding({ left: 12, right: 12 });
+            Button.backgroundColor({ "id": 16777283, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Button.fontColor(Color.White);
+            Button.borderRadius(8);
+            Button.onClick(() => {
+                // 点击 AI 搜索时，调用父组件提供的回调
+                this.onAISearch(this.searchValue);
+            });
+        }, Button);
+        Button.pop();
+        Row.pop();
     }
     private renderSubCategories(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create({ space: 8 });
-            Row.debugLine("entry/src/main/ets/view/SelectedComponent.ets(83:5)", "entry");
+            Row.debugLine("entry/src/main/ets/view/SelectedComponent.ets(100:5)", "entry");
             Row.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
             Row.justifyContent(FlexAlign.Start);
             Row.margin({ top: 6, bottom: 6 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('子分类');
-            Text.debugLine("entry/src/main/ets/view/SelectedComponent.ets(84:7)", "entry");
+            Text.debugLine("entry/src/main/ets/view/SelectedComponent.ets(101:7)", "entry");
             Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
             Text.fontColor({ "id": 16777285, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Scroll.create(this.subCategoryScroller);
-            Scroll.debugLine("entry/src/main/ets/view/SelectedComponent.ets(87:7)", "entry");
+            Scroll.debugLine("entry/src/main/ets/view/SelectedComponent.ets(104:7)", "entry");
             Scroll.scrollable(ScrollDirection.Horizontal);
             Scroll.scrollBar(BarState.Off);
         }, Scroll);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create({ space: 8 });
-            Row.debugLine("entry/src/main/ets/view/SelectedComponent.ets(88:9)", "entry");
+            Row.debugLine("entry/src/main/ets/view/SelectedComponent.ets(105:9)", "entry");
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             ForEach.create();
@@ -223,7 +251,7 @@ export default class SelectedComponent extends ViewPU {
                 const sub = _item;
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Text.create(sub.title);
-                    Text.debugLine("entry/src/main/ets/view/SelectedComponent.ets(90:13)", "entry");
+                    Text.debugLine("entry/src/main/ets/view/SelectedComponent.ets(107:13)", "entry");
                     Text.padding({ left: 12, right: 12, top: 6, bottom: 6 });
                     Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
                     Text.backgroundColor(this.currentSubCategory === sub.id ? { "id": 16777283, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : { "id": 16777290, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
@@ -246,14 +274,14 @@ export default class SelectedComponent extends ViewPU {
     private renderSortOptions(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create({ space: 8 });
-            Row.debugLine("entry/src/main/ets/view/SelectedComponent.ets(113:5)", "entry");
+            Row.debugLine("entry/src/main/ets/view/SelectedComponent.ets(130:5)", "entry");
             Row.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
             Row.justifyContent(FlexAlign.Start);
             Row.margin({ top: 6, bottom: 6 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create({ "id": 16777260, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Text.debugLine("entry/src/main/ets/view/SelectedComponent.ets(114:7)", "entry");
+            Text.debugLine("entry/src/main/ets/view/SelectedComponent.ets(131:7)", "entry");
             Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
             Text.fontColor({ "id": 16777285, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Text);
@@ -264,7 +292,7 @@ export default class SelectedComponent extends ViewPU {
                 const option = _item;
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Text.create(option.title);
-                    Text.debugLine("entry/src/main/ets/view/SelectedComponent.ets(118:9)", "entry");
+                    Text.debugLine("entry/src/main/ets/view/SelectedComponent.ets(135:9)", "entry");
                     Text.padding({ left: 12, right: 12, top: 6, bottom: 6 });
                     Text.borderRadius(16);
                     Text.backgroundColor(this.sortOption === option.id ? { "id": 16777283, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : Color.Transparent);
@@ -289,21 +317,21 @@ export default class SelectedComponent extends ViewPU {
     private renderFilterOptions(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create({ space: 8 });
-            Row.debugLine("entry/src/main/ets/view/SelectedComponent.ets(141:5)", "entry");
+            Row.debugLine("entry/src/main/ets/view/SelectedComponent.ets(158:5)", "entry");
             Row.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
             Row.alignItems(VerticalAlign.Top);
             Row.margin({ top: 6, bottom: 6 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create({ "id": 16777240, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Text.debugLine("entry/src/main/ets/view/SelectedComponent.ets(142:7)", "entry");
+            Text.debugLine("entry/src/main/ets/view/SelectedComponent.ets(159:7)", "entry");
             Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
             Text.fontColor({ "id": 16777285, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Flex.create({ direction: FlexDirection.Row, wrap: FlexWrap.Wrap, justifyContent: FlexAlign.Start });
-            Flex.debugLine("entry/src/main/ets/view/SelectedComponent.ets(145:7)", "entry");
+            Flex.debugLine("entry/src/main/ets/view/SelectedComponent.ets(162:7)", "entry");
         }, Flex);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             ForEach.create();
@@ -311,7 +339,7 @@ export default class SelectedComponent extends ViewPU {
                 const filter = _item;
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Text.create(filter.title);
-                    Text.debugLine("entry/src/main/ets/view/SelectedComponent.ets(147:11)", "entry");
+                    Text.debugLine("entry/src/main/ets/view/SelectedComponent.ets(164:11)", "entry");
                     Text.padding({ left: 12, right: 12, top: 6, bottom: 6 });
                     Text.borderRadius(16);
                     Text.border({

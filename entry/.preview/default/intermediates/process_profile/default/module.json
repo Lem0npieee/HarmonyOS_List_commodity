@@ -21,6 +21,11 @@
 	"module": {
 		"name": "entry",
 		"type": "entry",
+		"requestPermissions": [
+			{
+				"name": "ohos.permission.INTERNET"
+			}
+		],
 		"description": "$string:EntryAbility_desc",
 		"mainElement": "entryAbility",
 		"deviceTypes": [

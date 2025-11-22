@@ -3,7 +3,12 @@
  */
 import router from '@ohos.router';
 import { GoodsListItemType, CategoryType, goodsPool } from '../viewmodel/InitialData';
+import CartStore from '../common/CartStore';
+import FavoritesStore from '../common/FavoritesStore';
+import OrderStore from '../common/OrderStore';
+import NotificationStore from '../common/NotificationStore';
 import { LAYOUT_WIDTH_OR_HEIGHT, STORE } from '../common/CommonConstants';
+import prompt from '@system.prompt';
 
 // 定义接口
 interface ReviewItem {
@@ -139,6 +144,7 @@ struct GoodsDetailPage {
   @State displayedQA: QAItem[] = [];
   @State recommendedGoods: GoodsListItemType[] = [];
   @State isFavorited: boolean = false;
+  
   private scroller: Scroller = new Scroller();
 
   aboutToAppear() {
@@ -146,6 +152,14 @@ struct GoodsDetailPage {
       const params = router.getParams() as Record<string, Object>;
       if (params && params.goods) {
         this.goods = params.goods as GoodsListItemType;
+        // 同步收藏状态，确保返回详情页时能正确显示
+        try {
+          if (this.goods) {
+            this.isFavorited = FavoritesStore.isFavorited(this.goods.id);
+          }
+        } catch (e) {
+          console.error('同步收藏状态失败:', String(e));
+        }
         
         // 初始化评价数据
         this.initializeReviews();
@@ -961,7 +975,14 @@ struct GoodsDetailPage {
       .width(50)
       .justifyContent(FlexAlign.Center)
       .onClick(() => {
-        this.isFavorited = !this.isFavorited;
+        try {
+          if (!this.goods) return;
+          const added = FavoritesStore.toggle(this.goods);
+          this.isFavorited = added;
+          prompt.showToast({ message: added ? '已收藏' : '已取消收藏', duration: 1200 });
+        } catch (err) {
+          console.error('收藏操作失败:', String(err));
+        }
       })
       
       // 客服
@@ -979,14 +1000,24 @@ struct GoodsDetailPage {
       
       Blank()
       
-      // 进店逛逛
-      Button('进店逛逛')
+      // 加入购物车
+      Button('加入购物车')
         .fontSize(13)
         .fontColor('#FF6600')
         .backgroundColor('#FFE8D6')
         .borderRadius(20)
         .height(40)
         .width(90)
+        .onClick(() => {
+          try {
+            if (this.goods) {
+              CartStore.add(this.goods);
+              prompt.showToast({ message: '加入购物车成功', duration: 1500 });
+            }
+          } catch (err) {
+            console.error('加入购物车失败:', String(err));
+          }
+        })
       
       // 立即购买
       Button('立即购买')
@@ -997,6 +1028,36 @@ struct GoodsDetailPage {
         .height(40)
         .width(90)
         .margin({ left: 8 })
+        .onClick(() => {
+          try {
+            if (this.goods) {
+              OrderStore.incrementPendingShipCount(1);
+              prompt.showToast({ message: '购买成功', duration: 1500 });
+              // 安排后续的发货和到货通知（示意）
+              const title = this.goods ? this.goods.title : '您购买的商品';
+              setTimeout(() => {
+                try {
+                  const msg = `${title} 现已发货`;
+                  NotificationStore.show(msg, 5000);
+                  prompt.showToast({ message: msg, duration: 3000 });
+                } catch (e) {
+                  console.error('发货通知失败:', String(e));
+                }
+              }, 5000);
+              setTimeout(() => {
+                try {
+                  const msg2 = `${title} 现已到货，请注意查收`;
+                  NotificationStore.show(msg2, 5000);
+                  prompt.showToast({ message: msg2, duration: 3000 });
+                } catch (e) {
+                  console.error('到货通知失败:', String(e));
+                }
+              }, 10000);
+            }
+          } catch (err) {
+            console.error('购买失败:', String(err));
+          }
+        })
     }
     .width('100%')
     .height(60)

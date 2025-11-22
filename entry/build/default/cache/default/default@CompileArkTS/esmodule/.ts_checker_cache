@@ -668,7 +668,9 @@
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\TabBarsComponent.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\AIChatPage.ets",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts",
-        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\CarePage.ets"
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\CarePage.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\ListIndex.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\ProfilePage.ets"
       ],
       "error": false
     },
@@ -1507,7 +1509,7 @@
       "error": false
     },
     "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\TabBarsComponent.ets": {
-      "mtimeMs": 1763713531178.552,
+      "mtimeMs": 1763716224746.6958,
       "children": [
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\viewmodel\\InitialData.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CommonConstants.ets",
@@ -1538,14 +1540,20 @@
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\SelectedComponent.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\BannerComponent.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\AIChatPage.ets",
-        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\GoodsDetailPage.ets"
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\GoodsDetailPage.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\CartPage.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\ProfilePage.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\NotificationComponent.ets"
       ],
       "error": false
     },
     "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\ListIndex.ets": {
-      "mtimeMs": 1763447193309.1204,
+      "mtimeMs": 1763803649555.687,
       "children": [
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\TabBarsComponent.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\CartPage.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\ProfilePage.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\NotificationComponent.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CommonConstants.ets"
       ],
       "parent": [],
@@ -1561,7 +1569,11 @@
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\SelectedComponent.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\BannerComponent.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\GoodsDetailPage.ets",
-        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\AIChatPage.ets"
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\AIChatPage.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\CartPage.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CartStore.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\FavoritesStore.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\ProfilePage.ets"
       ],
       "error": false
     },
@@ -2082,11 +2094,16 @@
       "error": false
     },
     "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\GoodsDetailPage.ets": {
-      "mtimeMs": 1763709262033.5557,
+      "mtimeMs": 1763804301526.304,
       "children": [
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\viewmodel\\InitialData.ets",
-        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CommonConstants.ets"
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CartStore.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\FavoritesStore.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\OrderStore.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\NotificationStore.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CommonConstants.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@system.prompt.d.ts"
       ],
       "parent": [],
       "error": true,
@@ -2641,7 +2658,9 @@
       "mtimeMs": 1761109925000,
       "children": [],
       "parent": [
-        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts"
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\kits\\@kit.ArkUI.d.ts",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\GoodsDetailPage.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\ProfilePage.ets"
       ],
       "error": false
     },
@@ -3478,12 +3497,101 @@
       "error": false
     },
     "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\CarePage.ets": {
-      "mtimeMs": 1763717733204.1343,
+      "mtimeMs": 1763734692801.0742,
       "children": [
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts"
       ],
       "parent": [],
       "error": false
+    },
+    "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\CartPage.ets": {
+      "mtimeMs": 1763798757634.2217,
+      "children": [
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CommonConstants.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CartStore.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\viewmodel\\InitialData.ets"
+      ],
+      "parent": [
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\ListIndex.ets"
+      ],
+      "error": false
+    },
+    "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\ProfilePage.ets": {
+      "mtimeMs": 1763803262475.9548,
+      "children": [
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CommonConstants.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\FavoritesStore.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\OrderStore.ets",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
+        "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@system.prompt.d.ts"
+      ],
+      "parent": [
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\ListIndex.ets"
+      ],
+      "error": true,
+      "errorCodes": [
+        134,
+        28007
+      ]
+    },
+    "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CartStore.ets": {
+      "mtimeMs": 1763796662884.4788,
+      "children": [
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\viewmodel\\InitialData.ets"
+      ],
+      "parent": [
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\CartPage.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\GoodsDetailPage.ets"
+      ],
+      "error": false
+    },
+    "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\FavoritesStore.ets": {
+      "mtimeMs": 1763801673096.4224,
+      "children": [
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\viewmodel\\InitialData.ets"
+      ],
+      "parent": [
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\ProfilePage.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\GoodsDetailPage.ets"
+      ],
+      "error": false
+    },
+    "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\OrderStore.ets": {
+      "mtimeMs": 1763802537781.0005,
+      "children": [],
+      "parent": [
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\ProfilePage.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\GoodsDetailPage.ets"
+      ],
+      "error": false
+    },
+    "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\NotificationStore.ets": {
+      "mtimeMs": 1763804408835.4875,
+      "children": [],
+      "parent": [
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\GoodsDetailPage.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\NotificationComponent.ets"
+      ],
+      "error": false,
+      "errorCodes": [
+        40
+      ]
+    },
+    "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\NotificationComponent.ets": {
+      "mtimeMs": 1763804431958.0017,
+      "children": [
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\NotificationStore.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CommonConstants.ets"
+      ],
+      "parent": [
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\ListIndex.ets"
+      ],
+      "error": true,
+      "errorCodes": [
+        134,
+        2339,
+        2345
+      ]
     }
   }
 }
