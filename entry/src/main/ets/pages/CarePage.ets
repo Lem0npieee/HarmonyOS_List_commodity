@@ -218,6 +218,8 @@ struct CarePage {
               .textAlign(TextAlign.Center)
               .margin({ top: 8 })
               .opacity(this.hotlineOpacity)
+              .enableDataDetector(true)
+              .textAlign(TextAlign.Center)
           })
         }
         .width('86%')

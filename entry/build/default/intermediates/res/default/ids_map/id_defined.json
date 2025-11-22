@@ -411,5 +411,37 @@
 			"type":	"media",
 			"name":	"yishoucang",
 			"id":	"0x01000066"
+		}, {
+			"type":	"media",
+			"name":	"gouwuche",
+			"id":	"0x01000067"
+		}, {
+			"type":	"media",
+			"name":	"home",
+			"id":	"0x01000068"
+		}, {
+			"type":	"media",
+			"name":	"me",
+			"id":	"0x01000069"
+		}, {
+			"type":	"media",
+			"name":	"daifahuo",
+			"id":	"0x0100006A"
+		}, {
+			"type":	"media",
+			"name":	"daifukuan",
+			"id":	"0x0100006B"
+		}, {
+			"type":	"media",
+			"name":	"daipingjia",
+			"id":	"0x0100006C"
+		}, {
+			"type":	"media",
+			"name":	"daishouhuo",
+			"id":	"0x0100006D"
+		}, {
+			"type":	"media",
+			"name":	"tuikuanshouhou",
+			"id":	"0x0100006E"
 		}]
 }

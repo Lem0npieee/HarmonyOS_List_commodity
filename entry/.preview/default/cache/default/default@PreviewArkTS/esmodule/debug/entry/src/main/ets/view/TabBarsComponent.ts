@@ -17,6 +17,7 @@ import { LAYOUT_WIDTH_OR_HEIGHT, NORMAL_FONT_SIZE, BIGGER_FONT_SIZE, MAX_LINES_T
 import GoodsList from "@bundle:com.example.list_harmony/entry/ets/view/GoodsListComponent";
 import PutDownRefresh from "@bundle:com.example.list_harmony/entry/ets/view/PutDownRefreshLayout";
 import SelectedComponent from "@bundle:com.example.list_harmony/entry/ets/view/SelectedComponent";
+import router from "@ohos:router";
 import BannerComponent from "@bundle:com.example.list_harmony/entry/ets/view/BannerComponent";
 import { ListDataSource } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/ListDataSource";
 import type { ListQueryState } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/ListDataSource";
@@ -125,7 +126,7 @@ export default class TabBar extends ViewPU {
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Tabs.create();
-            Tabs.debugLine("entry/src/main/ets/view/TabBarsComponent.ets(63:3)", "entry");
+            Tabs.debugLine("entry/src/main/ets/view/TabBarsComponent.ets(64:3)", "entry");
             Tabs.onChange((index: number) => {
                 this.tabsIndex = index;
             });
@@ -147,7 +148,7 @@ export default class TabBar extends ViewPU {
             TabContent.create(() => {
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Scroll.create();
-                    Scroll.debugLine("entry/src/main/ets/view/TabBarsComponent.ets(75:4)", "entry");
+                    Scroll.debugLine("entry/src/main/ets/view/TabBarsComponent.ets(76:4)", "entry");
                     Scroll.scrollBar(BarState.Off);
                     Scroll.edgeEffect(EdgeEffect.Spring);
                     Scroll.width(LAYOUT_WIDTH_OR_HEIGHT);
@@ -158,7 +159,7 @@ export default class TabBar extends ViewPU {
                 }, Scroll);
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Column.create();
-                    Column.debugLine("entry/src/main/ets/view/TabBarsComponent.ets(76:5)", "entry");
+                    Column.debugLine("entry/src/main/ets/view/TabBarsComponent.ets(77:5)", "entry");
                     Column.width(LAYOUT_WIDTH_OR_HEIGHT);
                 }, Column);
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -168,7 +169,7 @@ export default class TabBar extends ViewPU {
                             {
                                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                                     if (isInitialRender) {
-                                        let componentCall = new PutDownRefresh(this, { refreshText: this.__refreshText }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/TabBarsComponent.ets", line: 78, col: 7 });
+                                        let componentCall = new PutDownRefresh(this, { refreshText: this.__refreshText }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/TabBarsComponent.ets", line: 79, col: 7 });
                                         ViewPU.create(componentCall);
                                         let paramsLambda = () => {
                                             return {
@@ -197,7 +198,7 @@ export default class TabBar extends ViewPU {
                             {
                                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                                     if (isInitialRender) {
-                                        let componentCall = new BannerComponent(this, { banner: tab.banner }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/TabBarsComponent.ets", line: 81, col: 7 });
+                                        let componentCall = new BannerComponent(this, { banner: tab.banner }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/TabBarsComponent.ets", line: 82, col: 7 });
                                         ViewPU.create(componentCall);
                                         let paramsLambda = () => {
                                             return {
@@ -226,7 +227,7 @@ export default class TabBar extends ViewPU {
                             let componentCall = new GoodsList(this, {
                                 dataSource: this.getDataSourceByIndex(tabIndex),
                                 onLoadMore: () => this.handleLoadMore(tab.id)
-                            }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/TabBarsComponent.ets", line: 84, col: 6 });
+                            }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/TabBarsComponent.ets", line: 85, col: 6 });
                             ViewPU.create(componentCall);
                             let paramsLambda = () => {
                                 return {
@@ -243,7 +244,7 @@ export default class TabBar extends ViewPU {
                 }
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Text.create({ "id": 16777280, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-                    Text.debugLine("entry/src/main/ets/view/TabBarsComponent.ets(88:6)", "entry");
+                    Text.debugLine("entry/src/main/ets/view/TabBarsComponent.ets(89:6)", "entry");
                     Text.fontSize(NORMAL_FONT_SIZE);
                     Text.fontColor({ "id": 16777288, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                     Text.margin({ top: 12, bottom: 12 });
@@ -255,21 +256,21 @@ export default class TabBar extends ViewPU {
             TabContent.tabBar({ builder: () => {
                     this.tabLabelBuilder.call(this, tab, tabIndex);
                 } });
-            TabContent.debugLine("entry/src/main/ets/view/TabBarsComponent.ets(74:3)", "entry");
+            TabContent.debugLine("entry/src/main/ets/view/TabBarsComponent.ets(75:3)", "entry");
         }, TabContent);
         TabContent.pop();
     }
     private tabLabelBuilder(tab: TabMeta, index: number, parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
-            Column.debugLine("entry/src/main/ets/view/TabBarsComponent.ets(108:3)", "entry");
+            Column.debugLine("entry/src/main/ets/view/TabBarsComponent.ets(109:3)", "entry");
             Column.width(LAYOUT_WIDTH_OR_HEIGHT);
             Column.height(LAYOUT_WIDTH_OR_HEIGHT);
             Column.justifyContent(FlexAlign.Center);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(tab.title);
-            Text.debugLine("entry/src/main/ets/view/TabBarsComponent.ets(109:4)", "entry");
+            Text.debugLine("entry/src/main/ets/view/TabBarsComponent.ets(110:4)", "entry");
             Text.fontSize(this.tabsIndex === index ? BIGGER_FONT_SIZE : NORMAL_FONT_SIZE);
             Text.fontColor(this.tabsIndex === index ? Color.Black : { "id": 16777288, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Text.maxLines(MAX_LINES_TEXT);
@@ -305,10 +306,16 @@ export default class TabBar extends ViewPU {
                         sortOption: state.sort,
                         activeFilters: state.filters,
                         onSearchChange: (value: string) => this.handleSearchChange(index, value),
+                        onAISearch: (value: string) => {
+                            // 点击 AI 搜索按钮，跳转到 AI 对话页面并传入当前搜索内容
+                            router.pushUrl({ url: 'pages/AIChatPage', params: { query: value } }).catch((err: Error) => {
+                                console.error('跳转到 AI 页面失败:', err.message);
+                            });
+                        },
                         onSubCategoryChange: (subId: string) => this.handleSubCategoryChange(index, subId),
                         onSortChange: (sort: SortOption) => this.handleSortChange(index, sort),
                         onFilterToggle: (filter: FilterId) => this.handleFilterToggle(index, filter)
-                    }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/TabBarsComponent.ets", line: 130, col: 3 });
+                    }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/TabBarsComponent.ets", line: 131, col: 3 });
                     ViewPU.create(componentCall);
                     let paramsLambda = () => {
                         return {
@@ -318,6 +325,12 @@ export default class TabBar extends ViewPU {
                             sortOption: state.sort,
                             activeFilters: state.filters,
                             onSearchChange: (value: string) => this.handleSearchChange(index, value),
+                            onAISearch: (value: string) => {
+                                // 点击 AI 搜索按钮，跳转到 AI 对话页面并传入当前搜索内容
+                                router.pushUrl({ url: 'pages/AIChatPage', params: { query: value } }).catch((err: Error) => {
+                                    console.error('跳转到 AI 页面失败:', err.message);
+                                });
+                            },
                             onSubCategoryChange: (subId: string) => this.handleSubCategoryChange(index, subId),
                             onSortChange: (sort: SortOption) => this.handleSortChange(index, sort),
                             onFilterToggle: (filter: FilterId) => this.handleFilterToggle(index, filter)
@@ -331,7 +344,24 @@ export default class TabBar extends ViewPU {
             }, { name: "SelectedComponent" });
         }
     }
-    private handleSearchChange(index: number, value: string): void {
+    private async handleSearchChange(index: number, value: string): Promise<void> {
+        // 点击搜索后先打点，便于诊断
+        console.info('handleSearchChange called with:', value);
+        // 在点击搜索按钮后处理危险关键词（例如自杀/安眠药）并进行关怀页面跳转
+        const dangerKeywords = ['安眠药', '安乐死', '自杀', '自残', '服药', '上吊', '割腕'];
+        for (let k of dangerKeywords) {
+            if (value && value.indexOf(k) >= 0) {
+                try {
+                    await router.pushUrl({ url: 'pages/CarePage' }).catch((err: Error) => {
+                        console.error('导航到关怀页失败:', String(err));
+                    });
+                }
+                catch (err) {
+                    console.error('导航到关怀页异常:', String(err));
+                }
+                return;
+            }
+        }
         this.updateTabState(index, { search: value });
     }
     private handleSubCategoryChange(index: number, value: string): void {

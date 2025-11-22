@@ -336,6 +336,8 @@ class CarePage extends ViewPU {
                     Text.textAlign(TextAlign.Center);
                     Text.margin({ top: 8 });
                     Text.opacity(this.hotlineOpacity);
+                    Text.enableDataDetector(true);
+                    Text.textAlign(TextAlign.Center);
                 }, Text);
                 Text.pop();
             };

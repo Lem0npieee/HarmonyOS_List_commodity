@@ -16,7 +16,12 @@ interface GoodsDetailPage_Params {
 import router from "@ohos:router";
 import { CategoryType, goodsPool } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
 import type { GoodsListItemType } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
+import CartStore from "@bundle:com.example.list_harmony/entry/ets/common/CartStore";
+import FavoritesStore from "@bundle:com.example.list_harmony/entry/ets/common/FavoritesStore";
+import OrderStore from "@bundle:com.example.list_harmony/entry/ets/common/OrderStore";
+import NotificationStore from "@bundle:com.example.list_harmony/entry/ets/common/NotificationStore";
 import { LAYOUT_WIDTH_OR_HEIGHT, STORE } from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
+import prompt from "@ohos:prompt";
 // 定义接口
 interface ReviewItem {
     user: string;
@@ -279,6 +284,15 @@ class GoodsDetailPage extends ViewPU {
             const params = router.getParams() as Record<string, Object>;
             if (params && params.goods) {
                 this.goods = params.goods as GoodsListItemType;
+                // 同步收藏状态，确保返回详情页时能正确显示
+                try {
+                    if (this.goods) {
+                        this.isFavorited = FavoritesStore.isFavorited(this.goods.id);
+                    }
+                }
+                catch (e) {
+                    console.error('同步收藏状态失败:', String(e));
+                }
                 // 初始化评价数据
                 this.initializeReviews();
                 // 初始化问大家数据
@@ -1446,7 +1460,16 @@ class GoodsDetailPage extends ViewPU {
             Column.justifyContent(FlexAlign.Center);
             // 收藏
             Column.onClick(() => {
-                this.isFavorited = !this.isFavorited;
+                try {
+                    if (!this.goods)
+                        return;
+                    const added = FavoritesStore.toggle(ObservedObject.GetRawObject(this.goods));
+                    this.isFavorited = added;
+                    prompt.showToast({ message: added ? '已收藏' : '已取消收藏', duration: 1200 });
+                }
+                catch (err) {
+                    console.error('收藏操作失败:', String(err));
+                }
             });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -1490,22 +1513,34 @@ class GoodsDetailPage extends ViewPU {
         }, Blank);
         Blank.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 进店逛逛
-            Button.createWithLabel('进店逛逛');
-            // 进店逛逛
+            // 加入购物车
+            Button.createWithLabel('加入购物车');
+            // 加入购物车
             Button.fontSize(13);
-            // 进店逛逛
+            // 加入购物车
             Button.fontColor('#FF6600');
-            // 进店逛逛
+            // 加入购物车
             Button.backgroundColor('#FFE8D6');
-            // 进店逛逛
+            // 加入购物车
             Button.borderRadius(20);
-            // 进店逛逛
+            // 加入购物车
             Button.height(40);
-            // 进店逛逛
+            // 加入购物车
             Button.width(90);
+            // 加入购物车
+            Button.onClick(() => {
+                try {
+                    if (this.goods) {
+                        CartStore.add(ObservedObject.GetRawObject(this.goods));
+                        prompt.showToast({ message: '加入购物车成功', duration: 1500 });
+                    }
+                }
+                catch (err) {
+                    console.error('加入购物车失败:', String(err));
+                }
+            });
         }, Button);
-        // 进店逛逛
+        // 加入购物车
         Button.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 立即购买
@@ -1524,6 +1559,40 @@ class GoodsDetailPage extends ViewPU {
             Button.width(90);
             // 立即购买
             Button.margin({ left: 8 });
+            // 立即购买
+            Button.onClick(() => {
+                try {
+                    if (this.goods) {
+                        OrderStore.incrementPendingShipCount(1);
+                        prompt.showToast({ message: '购买成功', duration: 1500 });
+                        // 安排后续的发货和到货通知（示意）
+                        const title = this.goods ? this.goods.title : '您购买的商品';
+                        setTimeout(() => {
+                            try {
+                                const msg = `${title} 现已发货`;
+                                NotificationStore.show(msg, 5000);
+                                prompt.showToast({ message: msg, duration: 3000 });
+                            }
+                            catch (e) {
+                                console.error('发货通知失败:', String(e));
+                            }
+                        }, 5000);
+                        setTimeout(() => {
+                            try {
+                                const msg2 = `${title} 现已到货，请注意查收`;
+                                NotificationStore.show(msg2, 5000);
+                                prompt.showToast({ message: msg2, duration: 3000 });
+                            }
+                            catch (e) {
+                                console.error('到货通知失败:', String(e));
+                            }
+                        }, 10000);
+                    }
+                }
+                catch (err) {
+                    console.error('购买失败:', String(err));
+                }
+            });
         }, Button);
         // 立即购买
         Button.pop();

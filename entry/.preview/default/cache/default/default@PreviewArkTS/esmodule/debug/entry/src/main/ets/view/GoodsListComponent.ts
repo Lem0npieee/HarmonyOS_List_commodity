@@ -195,11 +195,11 @@ export default class GoodsList extends ViewPU {
             Column.alignItems(HorizontalAlign.Center);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777293, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.create({ "id": 16777314, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(107:7)", "entry");
-            Image.width(80);
-            Image.height(80);
-            Image.margin({ bottom: 12 });
+            Image.width(120);
+            Image.height(120);
+            Image.margin({ bottom: 16 });
         }, Image);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create({ "id": 16777233, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });

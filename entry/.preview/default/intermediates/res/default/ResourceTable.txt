@@ -95,8 +95,11 @@ media goodsImg 0x01000042
 media goodsImg_2 0x01000050
 media goodsImg_3 0x0100004e
 media goodsImg_4 0x0100004f
+media gouwuche 0x01000067
+media home 0x01000069
 media icon 0x0100004d
 media kefu 0x01000064
+media me 0x01000068
 media refreshing 0x0100004c
 media shoucang 0x01000063
 media yishoucang 0x01000066
