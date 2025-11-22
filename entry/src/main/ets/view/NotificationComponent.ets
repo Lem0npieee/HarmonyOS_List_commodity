@@ -1,19 +1,19 @@
-import NotificationStore from '../common/NotificationStore';
+import NotificationStore, { NotificationPayload, NotificationPayloadResource } from '../common/NotificationStore';
 import * as commonConst from '../common/CommonConstants';
 
 @Component
 export default struct NotificationComponent {
-  @State private text: string = '';
+  @State private payload: NotificationPayload | null = null;
   @State private visible: boolean = false;
   private hideTimer: number | null = null;
 
-  private listener!: (msg: string, duration?: number) => void;
+  private listener!: (payload: NotificationPayload, duration?: number) => void;
 
   constructor() {
     super();
-    this.listener = (msg: string, duration: number = 5000) => {
+    this.listener = (payload: NotificationPayload, duration: number = 5000) => {
       try {
-        this.show(msg, duration);
+        this.show(payload, duration);
       } catch (e) {
         console.error('Notification listener failed:', String(e));
       }
@@ -29,8 +29,8 @@ export default struct NotificationComponent {
     }
   }
 
-  private show(msg: string, duration: number): void {
-    this.text = msg;
+  private show(msg: NotificationPayload, duration: number): void {
+    this.payload = msg;
     this.visible = true;
     if (this.hideTimer) {
       clearTimeout(this.hideTimer);
@@ -46,15 +46,29 @@ export default struct NotificationComponent {
     Column() {
       if (this.visible) {
         Column() {
-          Text(this.text)
-            .fontSize(14)
-            .fontColor(Color.White)
-            .backgroundColor('#333333')
-            .padding({ left: 14, right: 14, top: 8, bottom: 8 })
-            .borderRadius(20)
-            .maxLines(2)
-            .textAlign(TextAlign.Center)
+          // payload can be a string or { resource, suffix }
+          if (typeof this.payload === 'string') {
+            Text(this.payload)
+              .fontSize(14)
+              .fontColor(Color.White)
+              .textAlign(TextAlign.Center)
+          } else if (this.payload && typeof this.payload !== 'string') {
+            Row() {
+              Text((this.payload as NotificationPayloadResource).resource)
+                .fontSize(14)
+                .fontColor(Color.White)
+                .textAlign(TextAlign.Center)
+              Text((this.payload as NotificationPayloadResource).suffix)
+                .fontSize(14)
+                .fontColor(Color.White)
+                .textAlign(TextAlign.Center)
+            }
+          }
         }
+        .padding({ left: 14, right: 14, top: 8, bottom: 8 })
+        .backgroundColor('#333333')
+        .borderRadius(20)
+        .alignItems(HorizontalAlign.Center)
         .alignItems(HorizontalAlign.Center)
         .margin({ top: 12 })
       }

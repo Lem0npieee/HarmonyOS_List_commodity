@@ -1,11 +1,18 @@
-export default class NotificationStore {
-  private static listeners: Array<(msg: string, duration?: number) => void> = [];
+export interface NotificationPayloadResource {
+  resource: Resource;
+  suffix: string;
+}
 
-  static show(message: string, duration: number = 5000): void {
+export type NotificationPayload = string | NotificationPayloadResource;
+
+export default class NotificationStore {
+  private static listeners: Array<(payload: NotificationPayload, duration?: number) => void> = [];
+
+  static show(payload: NotificationPayload, duration: number = 5000): void {
     try {
       NotificationStore.listeners.forEach((l) => {
         try {
-          l(message, duration);
+          l(payload, duration);
         } catch (e) {
           console.error('Notification listener error:', String(e));
         }
@@ -15,12 +22,12 @@ export default class NotificationStore {
     }
   }
 
-  static subscribe(cb: (msg: string, duration?: number) => void): void {
+  static subscribe(cb: (payload: NotificationPayload, duration?: number) => void): void {
     if (!cb) return;
     NotificationStore.listeners.push(cb);
   }
 
-  static unsubscribe(cb: (msg: string, duration?: number) => void): void {
+  static unsubscribe(cb: (payload: NotificationPayload, duration?: number) => void): void {
     if (!cb) return;
     NotificationStore.listeners = NotificationStore.listeners.filter((l) => l !== cb);
   }

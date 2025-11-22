@@ -12,6 +12,7 @@ export default struct ProfilePage {
   private touchStartMap: Map<number, number> = new Map();
   @State private favorites: FavoriteItem[] = FavoritesStore.getItems();
   @State private pendingShipCount: number = OrderStore.getPendingShipCount();
+  @State private pendingReceiveCount: number = OrderStore.getPendingReceiveCount();
   private orderListener!: () => void;
   private favoritesListener!: () => void;
 
@@ -27,6 +28,7 @@ export default struct ProfilePage {
     this.orderListener = () => {
       try {
         this.pendingShipCount = OrderStore.getPendingShipCount();
+        this.pendingReceiveCount = OrderStore.getPendingReceiveCount();
       } catch (err) {
         console.error('更新订单数失败:', String(err));
       }
@@ -123,9 +125,22 @@ export default struct ProfilePage {
         .layoutWeight(1)
 
         Column() {
-          Image($r('app.media.daishouhuo'))
-            .width(36)
-            .height(36)
+          Stack() {
+            Image($r('app.media.daishouhuo'))
+              .width(36)
+              .height(36)
+            if (this.pendingReceiveCount > 0) {
+              Text(this.pendingReceiveCount > 99 ? '99+' : `${this.pendingReceiveCount}`)
+                .fontSize(12)
+                .fontColor(Color.White)
+                .backgroundColor('#FF3B30')
+                .width(this.pendingReceiveCount > 9 ? 20 : 16)
+                .height(16)
+                .textAlign(TextAlign.Center)
+                .borderRadius(8)
+                .position({ left: this.pendingReceiveCount > 9 ? 22 : 24, top: -6 })
+            }
+          }
           Text('待收货')
             .fontSize(12)
         }

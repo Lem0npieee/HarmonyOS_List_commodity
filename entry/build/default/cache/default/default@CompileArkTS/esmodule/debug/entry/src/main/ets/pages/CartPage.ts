@@ -2,6 +2,8 @@ if (!("finalizeConstruction" in ViewPU.prototype)) {
     Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
 }
 interface CartPage_Params {
+    cartListener?: () => void;
+    items?: CartItem[];
 }
 import { LAYOUT_WIDTH_OR_HEIGHT } from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
 import CartStore from "@bundle:com.example.list_harmony/entry/ets/common/CartStore";
@@ -12,18 +14,39 @@ export default class CartPage extends ViewPU {
         if (typeof paramsLambda === "function") {
             this.paramsGenerator_ = paramsLambda;
         }
+        this.cartListener = undefined;
+        this.__items = new ObservedPropertyObjectPU(CartStore.getItems(), this, "items");
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
     }
     setInitiallyProvidedValue(params: CartPage_Params) {
+        if (params.cartListener !== undefined) {
+            this.cartListener = params.cartListener;
+        }
+        if (params.items !== undefined) {
+            this.items = params.items;
+        }
     }
     updateStateVars(params: CartPage_Params) {
     }
     purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__items.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
+        this.__items.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
+    }
+    private cartListener: () => void;
+    private __items: ObservedPropertyObjectPU<CartItem[]>;
+    get items() {
+        return this.__items.get();
+    }
+    set items(newValue: CartItem[]) {
+        this.__items.set(newValue);
+    }
+    onDestroy() {
+        CartStore.unsubscribe(this.cartListener);
     }
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -43,7 +66,7 @@ export default class CartPage extends ViewPU {
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
-            if (CartStore.getItems().length === 0) {
+            if (this.items.length === 0) {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Text.create('购物车为空');
@@ -143,7 +166,7 @@ export default class CartPage extends ViewPU {
                                 ListItem.pop();
                             }
                         };
-                        this.forEachUpdateFunction(elmtId, CartStore.getItems(), forEachItemGenFunction, undefined, true, false);
+                        this.forEachUpdateFunction(elmtId, this.items, forEachItemGenFunction, undefined, true, false);
                     }, ForEach);
                     ForEach.pop();
                     List.pop();
