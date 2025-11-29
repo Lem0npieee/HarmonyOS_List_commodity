@@ -4,6 +4,7 @@
 import { LAYOUT_WIDTH_OR_HEIGHT } from '../common/CommonConstants';
 import FavoritesStore, { FavoriteItem } from '../common/FavoritesStore';
 import OrderStore from '../common/OrderStore';
+import ReviewStore from '../common/ReviewStore';
 import router from '@ohos.router';
 import prompt from '@system.prompt';
 
@@ -13,8 +14,10 @@ export default struct ProfilePage {
   @State private favorites: FavoriteItem[] = FavoritesStore.getItems();
   @State private pendingShipCount: number = OrderStore.getPendingShipCount();
   @State private pendingReceiveCount: number = OrderStore.getPendingReceiveCount();
+  @State private pendingReviewCount: number = ReviewStore.getPendingReviewCount();
   private orderListener!: () => void;
   private favoritesListener!: () => void;
+  private reviewListener!: () => void;
 
   constructor() {
     super();
@@ -33,13 +36,22 @@ export default struct ProfilePage {
         console.error('更新订单数失败:', String(err));
       }
     };
+    this.reviewListener = () => {
+      try {
+        this.pendingReviewCount = ReviewStore.getPendingReviewCount();
+      } catch (err) {
+        console.error('更新待评价数失败:', String(err));
+      }
+    };
     FavoritesStore.subscribe(this.favoritesListener);
     OrderStore.subscribe(this.orderListener);
+    ReviewStore.subscribe(this.reviewListener);
   }
 
   onDestroy() {
     FavoritesStore.unsubscribe(this.favoritesListener);
     OrderStore.unsubscribe(this.orderListener);
+    ReviewStore.unsubscribe(this.reviewListener);
   }
   build() {
     Column() {
@@ -146,16 +158,43 @@ export default struct ProfilePage {
         }
         .alignItems(HorizontalAlign.Center)
         .layoutWeight(1)
+        .onClick(() => {
+          try {
+            router.pushUrl({ url: 'pages/ConfirmReceiptPage' });
+          } catch (err) {
+            console.error('跳转待收货页面失败:', String(err));
+          }
+        })
 
         Column() {
-          Image($r('app.media.daipingjia'))
-            .width(36)
-            .height(36)
+          Stack() {
+            Image($r('app.media.daipingjia'))
+              .width(36)
+              .height(36)
+            if (this.pendingReviewCount > 0) {
+              Text(this.pendingReviewCount > 99 ? '99+' : `${this.pendingReviewCount}`)
+                .fontSize(12)
+                .fontColor(Color.White)
+                .backgroundColor('#FF3B30')
+                .width(this.pendingReviewCount > 9 ? 20 : 16)
+                .height(16)
+                .textAlign(TextAlign.Center)
+                .borderRadius(8)
+                .position({ left: this.pendingReviewCount > 9 ? 22 : 24, top: -6 })
+            }
+          }
           Text('待评价')
             .fontSize(12)
         }
         .alignItems(HorizontalAlign.Center)
         .layoutWeight(1)
+        .onClick(() => {
+          try {
+            router.pushUrl({ url: 'pages/PendingReviewPage' });
+          } catch (err) {
+            console.error('跳转待评价页面失败:', String(err));
+          }
+        })
 
         Column() {
           Image($r('app.media.tuikuanshouhou'))
