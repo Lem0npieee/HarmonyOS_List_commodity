@@ -17,6 +17,13 @@ import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
+import dataPreferences from '@ohos.data.preferences';
+import CartStore from '../common/CartStore';
+import FavoritesStore from '../common/FavoritesStore';
+import OrderStore from '../common/OrderStore';
+import ReviewStore from '../common/ReviewStore';
+
+const USER_DATA_STORE: string = 'user_persistent_state';
 
 export default class EntryAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
@@ -31,10 +38,17 @@ export default class EntryAbility extends UIAbility {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onDestroy');
   }
 
-  onWindowStageCreate(windowStage: window.WindowStage): void {
+  async onWindowStageCreate(windowStage: window.WindowStage): Promise<void> {
     // Main window is created, set main page for this ability
     hilog.isLoggable(0x0000, 'testTag', hilog.LogLevel.INFO);
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
+    // 等待各个 store 恢复持久化数据
+    try {
+      const prefs = await dataPreferences.getPreferences(this.context, USER_DATA_STORE);
+      await Promise.all([CartStore.init(prefs), FavoritesStore.init(prefs), OrderStore.init(prefs), ReviewStore.init(prefs)]);
+    } catch (e) {
+      hilog.error(0x0000, 'testTag', 'Store init failed: %{public}s', String(e));
+    }
 
     windowStage.loadContent('pages/ListIndex', (err, data) => {
       if (err.code) {

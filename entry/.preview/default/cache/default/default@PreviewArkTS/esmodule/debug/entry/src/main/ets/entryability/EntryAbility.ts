@@ -4,6 +4,9 @@ import type Want from "@ohos:app.ability.Want";
 import type { BusinessError as BusinessError } from "@ohos:base";
 import hilog from "@ohos:hilog";
 import window from "@ohos:window";
+import CartStore from "@bundle:com.example.list_harmony/entry/ets/common/CartStore";
+import FavoritesStore from "@bundle:com.example.list_harmony/entry/ets/common/FavoritesStore";
+import OrderStore from "@bundle:com.example.list_harmony/entry/ets/common/OrderStore";
 export default class EntryAbility extends UIAbility {
     onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
         hilog.isLoggable(0x0000, 'testTag', hilog.LogLevel.INFO);
@@ -15,10 +18,17 @@ export default class EntryAbility extends UIAbility {
         hilog.isLoggable(0x0000, 'testTag', hilog.LogLevel.INFO);
         hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onDestroy');
     }
-    onWindowStageCreate(windowStage: window.WindowStage): void {
+    async onWindowStageCreate(windowStage: window.WindowStage): Promise<void> {
         // Main window is created, set main page for this ability
         hilog.isLoggable(0x0000, 'testTag', hilog.LogLevel.INFO);
         hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
+        // 等待各个 store 恢复持久化数据
+        try {
+            await Promise.all([CartStore.init(), FavoritesStore.init(), OrderStore.init()]);
+        }
+        catch (e) {
+            hilog.error(0x0000, 'testTag', 'Store init failed: %{public}s', String(e));
+        }
         windowStage.loadContent('pages/ListIndex', (err, data) => {
             if (err.code) {
                 hilog.isLoggable(0x0000, 'testTag', hilog.LogLevel.ERROR);

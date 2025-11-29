@@ -4,6 +4,8 @@
     "pages/GoodsDetailPage",
     "pages/AIChatPage",
     "pages/CarePage",
-    "pages/CustomerServicePage"
+    "pages/CustomerServicePage",
+    "pages/ConfirmReceiptPage",
+    "pages/PendingReviewPage"
   ]
 }

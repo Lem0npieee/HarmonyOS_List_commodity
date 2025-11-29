@@ -8,6 +8,7 @@ import FavoritesStore from '../common/FavoritesStore';
 import OrderStore from '../common/OrderStore';
 import NotificationStore, { NotificationPayload } from '../common/NotificationStore';
 import { LAYOUT_WIDTH_OR_HEIGHT, STORE } from '../common/CommonConstants';
+import ReviewStore, { StoredReviewRecord } from '../common/ReviewStore';
 import prompt from '@system.prompt';
 
 // 定义接口
@@ -45,7 +46,7 @@ const REVIEWS_BY_CATEGORY: ReviewCategory = {
   phone: [
     { user: 'a**m', level: '钻石会员', rating: 5, content: '手机性能非常好,拍照效果惊艳,续航给力,值得购买!', spec: '[256GB 蓝色]' },
     { user: 'z**8', level: '黄金会员', rating: 5, content: '系统流畅,屏幕显示细腻,信号稳定,很满意!', spec: '[512GB 黑色]' },
-    { user: 'w**3', level: '银牌会员', rating: 4, content: '整体不错,就是价格有点贵,但品质确实好', spec: '[128GB 白色]' },
+    { user: 'w**3', level: '银牌会员', rating: 3, content: '整体不错,就是价格有点贵,但品质确实好', spec: '[128GB 白色]' },
     { user: 'l**n', level: '钻石会员', rating: 5, content: '5G网速飞快,玩游戏很流畅,散热也做得不错', spec: '[256GB 蓝色]' },
     { user: 'j**7', level: '黄金会员', rating: 5, content: '外观漂亮,手感舒适,拍照功能强大', spec: '[512GB 金色]' },
     { user: 'h**2', level: '银牌会员', rating: 4, content: '音质很好,屏幕亮度高,总体满意', spec: '[256GB 黑色]' },
@@ -59,7 +60,7 @@ const REVIEWS_BY_CATEGORY: ReviewCategory = {
   clothes: [
     { user: 'x**y', level: '钻石会员', rating: 5, content: '面料舒适,做工精细,版型很好看,非常满意!', spec: '[L码 蓝色]' },
     { user: 'b**c', level: '黄金会员', rating: 5, content: '颜色正,质量不错,穿着很舒服', spec: '[M码 黑色]' },
-    { user: 'n**f', level: '银牌会员', rating: 4, content: '款式好看,就是有点薄,秋天穿刚好', spec: '[XL码 灰色]' },
+    { user: 'n**f', level: '银牌会员', rating: 3, content: '款式好看,就是有点薄,秋天穿刚好', spec: '[XL码 灰色]' },
     { user: 'd**g', level: '钻石会员', rating: 5, content: '尺码标准,颜色漂亮,很有质感', spec: '[L码 白色]' },
     { user: 'e**h', level: '黄金会员', rating: 5, content: '洗过不缩水,不掉色,值得购买', spec: '[M码 蓝色]' },
     { user: 'f**i', level: '银牌会员', rating: 4, content: '性价比高,适合日常穿着', spec: '[XL码 黑色]' },
@@ -76,7 +77,7 @@ const REVIEWS_BY_CATEGORY: ReviewCategory = {
     { user: 'v**w', level: '银牌会员', rating: 4, content: '口味不错,就是有点甜,总体满意', spec: '[礼盒装]' },
     { user: 'i**j', level: '黄金会员', rating: 5, content: '新鲜度高,保质期长,很放心', spec: '[经典装]' },
     { user: 'k**l', level: '钻石会员', rating: 5, content: '孩子很喜欢吃,健康美味', spec: '[豪华装]' },
-    { user: 'm**n', level: '银牌会员', rating: 4, content: '性价比高,适合囤货', spec: '[经典装]' },
+    { user: 'm**n', level: '银牌会员', rating: 3, content: '性价比高,适合囤货', spec: '[经典装]' },
     { user: 'o**p', level: '黄金会员', rating: 5, content: '包装完整,没有破损,很满意', spec: '[礼盒装]' },
     { user: 'q**r', level: '钻石会员', rating: 5, content: '送人很体面,自己吃也不错', spec: '[豪华装]' },
     { user: 's**t', level: '银牌会员', rating: 4, content: '味道纯正,分量实在', spec: '[经典装]' },
@@ -87,7 +88,7 @@ const REVIEWS_BY_CATEGORY: ReviewCategory = {
   home: [
     { user: 'g**h', level: '钻石会员', rating: 5, content: '功能强大,使用方便,物有所值,推荐!', spec: '[白色]' },
     { user: 'a**b', level: '黄金会员', rating: 5, content: '质量好,噪音小,效果明显', spec: '[黑色]' },
-    { user: 'c**d', level: '银牌会员', rating: 4, content: '性价比不错,功能齐全', spec: '[灰色]' },
+    { user: 'c**d', level: '银牌会员', rating: 3, content: '性价比不错,功能齐全', spec: '[灰色]' },
     { user: 'e**f', level: '钻石会员', rating: 5, content: '设计人性化,操作简单', spec: '[白色]' },
     { user: 'g**h', level: '黄金会员', rating: 5, content: '省电省心,效果很好', spec: '[黑色]' },
     { user: 'i**j', level: '银牌会员', rating: 4, content: '外观漂亮,做工精细', spec: '[灰色]' },
@@ -141,17 +142,24 @@ struct GoodsDetailPage {
   @State showAllReviews: boolean = false;
   @State showAllQA: boolean = false;
   @State displayedReviews: ReviewItem[] = [];
+  @State userReviews: ReviewItem[] = [];
   @State displayedQA: QAItem[] = [];
   @State recommendedGoods: GoodsListItemType[] = [];
   @State isFavorited: boolean = false;
   
   private scroller: Scroller = new Scroller();
+  private reviewListener?: () => void;
+  private systemReviewsSnapshot: ReviewItem[] = [];
 
   aboutToAppear() {
     try {
       const params = router.getParams() as Record<string, Object>;
       if (params && params.goods) {
         this.goods = params.goods as GoodsListItemType;
+        this.showAllReviews = false;
+        this.systemReviewsSnapshot = [];
+        this.userReviews = [];
+        this.displayedReviews = [];
         // 同步收藏状态，确保返回详情页时能正确显示
         try {
           if (this.goods) {
@@ -169,9 +177,23 @@ struct GoodsDetailPage {
         
         // 初始化推荐商品
         this.initializeRecommendedGoods();
+        this.refreshUserReviews();
+        if (!this.reviewListener) {
+          this.reviewListener = () => {
+            this.refreshUserReviews();
+          };
+          ReviewStore.subscribe(this.reviewListener);
+        }
       }
     } catch (err) {
       console.error('获取参数失败:', err);
+    }
+  }
+
+  aboutToDisappear() {
+    if (this.reviewListener) {
+      ReviewStore.unsubscribe(this.reviewListener);
+      this.reviewListener = undefined;
     }
   }
   
@@ -202,7 +224,13 @@ struct GoodsDetailPage {
     
     // 随机打乱并取第一条作为默认显示
     const shuffled = this.shuffleArray([...reviewPool]);
-    this.displayedReviews = [shuffled[0]];
+    if (shuffled.length > 0) {
+      this.systemReviewsSnapshot = [shuffled[0]];
+      this.displayedReviews = this.mergeReviews(this.systemReviewsSnapshot);
+    } else {
+      this.systemReviewsSnapshot = [];
+      this.displayedReviews = this.mergeReviews(this.systemReviewsSnapshot);
+    }
   }
   
   // 初始化问大家数据
@@ -249,6 +277,28 @@ struct GoodsDetailPage {
     const shuffled = this.shuffleArray(sameCategory);
     this.recommendedGoods = shuffled.slice(0, 6);
   }
+
+  private refreshUserReviews() {
+    if (!this.goods) {
+      this.userReviews = [];
+      this.displayedReviews = this.mergeReviews(this.systemReviewsSnapshot);
+      return;
+    }
+    const stored = ReviewStore.getReviewsForGoods(this.goods.id).map((record: StoredReviewRecord): ReviewItem => ({
+      user: record.user,
+      level: record.level,
+      rating: record.rating,
+      content: record.content,
+      spec: record.spec
+    }));
+    this.userReviews = stored;
+    this.displayedReviews = this.mergeReviews(this.systemReviewsSnapshot);
+  }
+
+  private mergeReviews(base: ReviewItem[]): ReviewItem[] {
+    const baseList = base ? [...base] : [];
+    return [...this.userReviews, ...baseList];
+  }
   
   // 数组随机打乱
   private shuffleArray<T>(array: T[]): T[] {
@@ -286,8 +336,13 @@ struct GoodsDetailPage {
         reviewPool = REVIEWS_BY_CATEGORY.food;
     }
     
-    // 保留第一条,随机显示另外4条
-    const firstReview = this.displayedReviews[0];
+    let firstReview = this.systemReviewsSnapshot[0];
+    if (!firstReview && reviewPool.length > 0) {
+      firstReview = reviewPool[0];
+    }
+    if (!firstReview) {
+      return;
+    }
     const otherReviews: ReviewItem[] = [];
     for (let i = 0; i < reviewPool.length; i++) {
       if (reviewPool[i] !== firstReview) {
@@ -295,7 +350,8 @@ struct GoodsDetailPage {
       }
     }
     const shuffled = this.shuffleArray(otherReviews);
-    this.displayedReviews = [firstReview, ...shuffled.slice(0, 4)];
+    this.systemReviewsSnapshot = [firstReview, ...shuffled.slice(0, 4)];
+    this.displayedReviews = this.mergeReviews(this.systemReviewsSnapshot);
     this.showAllReviews = true;
   }
   
@@ -723,7 +779,12 @@ struct GoodsDetailPage {
               this.expandReviews();
             } else {
               this.showAllReviews = false;
-              this.displayedReviews = [this.displayedReviews[0]];
+              if (this.systemReviewsSnapshot.length > 0) {
+                this.systemReviewsSnapshot = [this.systemReviewsSnapshot[0]];
+              } else {
+                this.systemReviewsSnapshot = [];
+              }
+              this.displayedReviews = this.mergeReviews(this.systemReviewsSnapshot);
             }
           })
         Image($r('sys.symbol.chevron_right'))
@@ -774,10 +835,10 @@ struct GoodsDetailPage {
               
               Row() {
                 ForEach([1, 2, 3, 4, 5], (star: number) => {
-                  Image($r('sys.symbol.star_fill'))
+                  Image(star <= review.rating ? $r('app.media.star') : $r('app.media.no_star'))
                     .width(12)
                     .height(12)
-                    .fillColor(star <= review.rating ? '#FFB800' : '#E0E0E0')
+                    .margin({ right: 2 })
                 })
                 
                 Text(review.spec)

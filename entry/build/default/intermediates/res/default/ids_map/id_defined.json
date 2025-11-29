@@ -451,5 +451,13 @@
 			"type":	"media",
 			"name":	"usertouxiang",
 			"id":	"0x01000070"
+		}, {
+			"type":	"media",
+			"name":	"no_star",
+			"id":	"0x01000071"
+		}, {
+			"type":	"media",
+			"name":	"star",
+			"id":	"0x01000072"
 		}]
 }

@@ -104,9 +104,11 @@ media home 0x01000068
 media icon 0x0100004f
 media kefu 0x01000064
 media me 0x01000069
+media no_star 0x01000071
 media refreshing 0x01000050
 media robottouxiang 0x0100006f
 media shoucang 0x01000065
+media star 0x01000072
 media tuikuanshouhou 0x0100006e
 media usertouxiang 0x01000070
 media yishoucang 0x01000066

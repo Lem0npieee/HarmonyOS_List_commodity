@@ -368,7 +368,6 @@ export default class CustomerServicePage extends ViewPU {
                                 Column.alignItems(HorizontalAlign.Start);
                                 Column.margin({ left: 8 });
                                 Column.width('70%');
-                                Column.alignSelf(ItemAlign.Start);
                             }, Column);
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
                                 Text.create(msg.text);
@@ -383,7 +382,6 @@ export default class CustomerServicePage extends ViewPU {
                             Column.pop();
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
                                 Blank.create();
-                                Blank.layoutWeight(1);
                             }, Blank);
                             Blank.pop();
                         });
@@ -392,7 +390,6 @@ export default class CustomerServicePage extends ViewPU {
                         this.ifElseBranchUpdateFunction(1, () => {
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
                                 Blank.create();
-                                Blank.layoutWeight(1);
                             }, Blank);
                             Blank.pop();
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -400,7 +397,6 @@ export default class CustomerServicePage extends ViewPU {
                                 Column.alignItems(HorizontalAlign.End);
                                 Column.margin({ right: 8 });
                                 Column.width('70%');
-                                Column.alignSelf(ItemAlign.Start);
                             }, Column);
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
                                 Text.create(msg.text);

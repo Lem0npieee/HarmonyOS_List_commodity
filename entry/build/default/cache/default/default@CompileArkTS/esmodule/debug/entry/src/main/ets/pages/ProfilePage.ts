@@ -6,13 +6,16 @@ interface ProfilePage_Params {
     favorites?: FavoriteItem[];
     pendingShipCount?: number;
     pendingReceiveCount?: number;
+    pendingReviewCount?: number;
     orderListener?: () => void;
     favoritesListener?: () => void;
+    reviewListener?: () => void;
 }
 import { LAYOUT_WIDTH_OR_HEIGHT } from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
 import FavoritesStore from "@bundle:com.example.list_harmony/entry/ets/common/FavoritesStore";
 import type { FavoriteItem } from "@bundle:com.example.list_harmony/entry/ets/common/FavoritesStore";
 import OrderStore from "@bundle:com.example.list_harmony/entry/ets/common/OrderStore";
+import ReviewStore from "@bundle:com.example.list_harmony/entry/ets/common/ReviewStore";
 import router from "@ohos:router";
 import prompt from "@ohos:prompt";
 export default class ProfilePage extends ViewPU {
@@ -25,8 +28,10 @@ export default class ProfilePage extends ViewPU {
         this.__favorites = new ObservedPropertyObjectPU(FavoritesStore.getItems(), this, "favorites");
         this.__pendingShipCount = new ObservedPropertySimplePU(OrderStore.getPendingShipCount(), this, "pendingShipCount");
         this.__pendingReceiveCount = new ObservedPropertySimplePU(OrderStore.getPendingReceiveCount(), this, "pendingReceiveCount");
+        this.__pendingReviewCount = new ObservedPropertySimplePU(ReviewStore.getPendingReviewCount(), this, "pendingReviewCount");
         this.orderListener = undefined;
         this.favoritesListener = undefined;
+        this.reviewListener = undefined;
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
     }
@@ -43,11 +48,17 @@ export default class ProfilePage extends ViewPU {
         if (params.pendingReceiveCount !== undefined) {
             this.pendingReceiveCount = params.pendingReceiveCount;
         }
+        if (params.pendingReviewCount !== undefined) {
+            this.pendingReviewCount = params.pendingReviewCount;
+        }
         if (params.orderListener !== undefined) {
             this.orderListener = params.orderListener;
         }
         if (params.favoritesListener !== undefined) {
             this.favoritesListener = params.favoritesListener;
+        }
+        if (params.reviewListener !== undefined) {
+            this.reviewListener = params.reviewListener;
         }
     }
     updateStateVars(params: ProfilePage_Params) {
@@ -56,11 +67,13 @@ export default class ProfilePage extends ViewPU {
         this.__favorites.purgeDependencyOnElmtId(rmElmtId);
         this.__pendingShipCount.purgeDependencyOnElmtId(rmElmtId);
         this.__pendingReceiveCount.purgeDependencyOnElmtId(rmElmtId);
+        this.__pendingReviewCount.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
         this.__favorites.aboutToBeDeleted();
         this.__pendingShipCount.aboutToBeDeleted();
         this.__pendingReceiveCount.aboutToBeDeleted();
+        this.__pendingReviewCount.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
     }
@@ -86,11 +99,20 @@ export default class ProfilePage extends ViewPU {
     set pendingReceiveCount(newValue: number) {
         this.__pendingReceiveCount.set(newValue);
     }
+    private __pendingReviewCount: ObservedPropertySimplePU<number>;
+    get pendingReviewCount() {
+        return this.__pendingReviewCount.get();
+    }
+    set pendingReviewCount(newValue: number) {
+        this.__pendingReviewCount.set(newValue);
+    }
     private orderListener: () => void;
     private favoritesListener: () => void;
+    private reviewListener: () => void;
     onDestroy() {
         FavoritesStore.unsubscribe(this.favoritesListener);
         OrderStore.unsubscribe(this.orderListener);
+        ReviewStore.unsubscribe(this.reviewListener);
     }
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -251,6 +273,14 @@ export default class ProfilePage extends ViewPU {
             Column.create();
             Column.alignItems(HorizontalAlign.Center);
             Column.layoutWeight(1);
+            Column.onClick(() => {
+                try {
+                    router.pushUrl({ url: 'pages/ConfirmReceiptPage' });
+                }
+                catch (err) {
+                    console.error('跳转待收货页面失败:', String(err));
+                }
+            });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Stack.create();
@@ -295,12 +325,48 @@ export default class ProfilePage extends ViewPU {
             Column.create();
             Column.alignItems(HorizontalAlign.Center);
             Column.layoutWeight(1);
+            Column.onClick(() => {
+                try {
+                    router.pushUrl({ url: 'pages/PendingReviewPage' });
+                }
+                catch (err) {
+                    console.error('跳转待评价页面失败:', String(err));
+                }
+            });
         }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Stack.create();
+        }, Stack);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 16777324, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.width(36);
             Image.height(36);
         }, Image);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            if (this.pendingReviewCount > 0) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(this.pendingReviewCount > 99 ? '99+' : `${this.pendingReviewCount}`);
+                        Text.fontSize(12);
+                        Text.fontColor(Color.White);
+                        Text.backgroundColor('#FF3B30');
+                        Text.width(this.pendingReviewCount > 9 ? 20 : 16);
+                        Text.height(16);
+                        Text.textAlign(TextAlign.Center);
+                        Text.borderRadius(8);
+                        Text.position({ left: this.pendingReviewCount > 9 ? 22 : 24, top: -6 });
+                    }, Text);
+                    Text.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+        Stack.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('待评价');
             Text.fontSize(12);

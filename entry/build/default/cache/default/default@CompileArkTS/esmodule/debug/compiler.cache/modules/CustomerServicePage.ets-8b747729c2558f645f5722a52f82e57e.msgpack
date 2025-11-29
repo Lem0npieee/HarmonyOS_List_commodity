@@ -1,0 +1,799 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚWÄif (!("finalizeConstruction" in ViewPU.prototype)) {
+    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
+}
+import router from '@ohos.router';
+import http from '@ohos.net.http';
+import { LAYOUT_WIDTH_OR_HEIGHT } from '../common/CommonConstants';
+export default class CustomerServicePage extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.__messages = new ObservedPropertyObjectPU([
+            { sender: 'ai', text: 'æ‚¨å¥½ï¼Œæˆ‘æ˜¯æ™ºèƒ½å®¢æœï¼Œæœ‰ä»€ä¹ˆå¯ä»¥å¸®æ‚¨ï¼Ÿ' }
+        ], this, "messages");
+        this.__inputText = new ObservedPropertySimplePU('', this, "inputText");
+        this.__product = new ObservedPropertyObjectPU(null, this, "product");
+        this.scroller = new Scroller();
+        this.DEEPSEEK_API_KEY = 'sk-0d4c8b12e11143b78fd5a008b8dcae00';
+        this.DEEPSEEK_URL = 'https://api.deepseek.com/v1/chat/completions';
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        if (params.messages !== undefined) {
+            this.messages = params.messages;
+        }
+        if (params.inputText !== undefined) {
+            this.inputText = params.inputText;
+        }
+        if (params.product !== undefined) {
+            this.product = params.product;
+        }
+        if (params.scroller !== undefined) {
+            this.scroller = params.scroller;
+        }
+        if (params.DEEPSEEK_API_KEY !== undefined) {
+            this.DEEPSEEK_API_KEY = params.DEEPSEEK_API_KEY;
+        }
+        if (params.DEEPSEEK_URL !== undefined) {
+            this.DEEPSEEK_URL = params.DEEPSEEK_URL;
+        }
+    }
+    updateStateVars(params) {
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__messages.purgeDependencyOnElmtId(rmElmtId);
+        this.__inputText.purgeDependencyOnElmtId(rmElmtId);
+        this.__product.purgeDependencyOnElmtId(rmElmtId);
+    }
+    aboutToBeDeleted() {
+        this.__messages.aboutToBeDeleted();
+        this.__inputText.aboutToBeDeleted();
+        this.__product.aboutToBeDeleted();
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    get messages() {
+        return this.__messages.get();
+    }
+    set messages(newValue) {
+        this.__messages.set(newValue);
+    }
+    get inputText() {
+        return this.__inputText.get();
+    }
+    set inputText(newValue) {
+        this.__inputText.set(newValue);
+    }
+    get product() {
+        return this.__product.get();
+    }
+    set product(newValue) {
+        this.__product.set(newValue);
+    }
+    async pushUserMessage() {
+        const text = (this.inputText || '').trim();
+        if (!text)
+            return;
+        try {
+            // æ¨å…¥ç”¨æˆ·æ¶ˆæ¯
+            this.messages = [...this.messages, { sender: 'user', text }];
+            this.inputText = '';
+            // æ¨å…¥å ä½ AI å›å¤ä»¥æç¤ºæ­£åœ¨å¤„ç†
+            this.messages = [...this.messages, { sender: 'ai', text: 'æ­£åœ¨ä¸ºæ‚¨å›å¤ï¼Œè¯·ç¨å€™...' }];
+            // é€šè¿‡ DeepSeek è·å–å›å¤ï¼ˆæœ¬é¡µé¢ä¸æä¾›æœ¬åœ°å›é€€ï¼Œç¡®ä¿ä¸ AIChatPage çš„ API é…ç½®ä¸€è‡´ï¼‰
+            try {
+                const replyText = await this.fetchDeepSeekReply(this.product, text);
+                // æ›¿æ¢å ä½ä¸ºæ­£å¼å›å¤
+                const msgs = [...this.messages];
+                if (msgs.length > 0 && msgs[msgs.length - 1].sender === 'ai' && msgs[msgs.length - 1].text === 'æ­£åœ¨ä¸ºæ‚¨å›å¤ï¼Œè¯·ç¨å€™...') {
+                    msgs[msgs.length - 1] = { sender: 'ai', text: replyText };
+                }
+                else {
+                    msgs.push({ sender: 'ai', text: replyText });
+                }
+                this.messages = msgs;
+            }
+            catch (apiErr) {
+                console.error('DeepSeek è°ƒç”¨å¤±è´¥ï¼ˆæ— å›é€€ï¼‰ï¼š', String(apiErr));
+                const msgs = [...this.messages];
+                const failText = 'äº²ï½æŠ±æ­‰ï¼Œå½“å‰å®¢æœæœåŠ¡æš‚ä¸å¯ç”¨ï¼Œè¯·ç¨åé‡è¯•å“’ï½';
+                if (msgs.length > 0 && msgs[msgs.length - 1].sender === 'ai' && msgs[msgs.length - 1].text === 'æ­£åœ¨ä¸ºæ‚¨å›å¤ï¼Œè¯·ç¨å€™...') {
+                    msgs[msgs.length - 1] = { sender: 'ai', text: failText };
+                }
+                else {
+                    msgs.push({ sender: 'ai', text: failText });
+                }
+                this.messages = msgs;
+            }
+        }
+        catch (e) {
+            console.error('å‘é€æ¶ˆæ¯å¤±è´¥:', String(e));
+        }
+    }
+    // è°ƒç”¨ DeepSeek è·å–å®¢æœé£æ ¼çš„å›å¤ï¼ˆæœŸæœ›è¿”å›ä¸€æ®µè‡ªç„¶è¯­è¨€æ–‡æœ¬ï¼‰
+    async fetchDeepSeekReply(product, userText) {
+        const httpRequest = http.createHttp();
+        try {
+            const prodName = product ? String(product.title) : 'è¯¥å•†å“';
+            const systemPrompt = `ä½ ç°åœ¨æ˜¯ä¸“ä¸šç”µå•†å¹³å°å•†å“å’¨è¯¢å®¢æœï¼Œéœ€ä¸¥æ ¼éµå¾ªä»¥ä¸‹è¦æ±‚ï¼š\nå£å¤´ç¦…å›ºå®šï¼šå¼€å¤´å¿…è¯´ â€œäº²ï½â€ï¼Œå¥ä¸­ç©¿æ’ â€œå‘€â€â€œå‘¢â€â€œå“¦â€ï¼Œç»“å°¾å¸¦ â€œå“’â€â€œå“Ÿâ€â€œå‘€â€ï¼ˆå¦‚ â€œè¿™å°±ä¸ºä½ è§£ç­”å“’ï½â€â€œæœ‰å…¶ä»–ç–‘é—®éšæ—¶é—®å“Ÿï¼â€ï¼‰ï¼›\nç”¨æˆ·ä¼šä¼ å…¥ã€Œå•†å“ä¿¡æ¯ + å…·ä½“å’¨è¯¢é—®é¢˜ã€ï¼ˆå¦‚å•†å“å‚æ•°ã€ä½¿ç”¨æ–¹æ³•ã€æè´¨ã€é€‚é…åœºæ™¯ç­‰ï¼‰ï¼Œä½ éœ€å…ˆç²¾å‡†æå–å•†å“å…³é”®ä¿¡æ¯ï¼ˆåç§°ã€è§„æ ¼ã€å‹å·ç­‰ï¼‰ï¼Œå†é’ˆå¯¹é—®é¢˜ç»™å‡ºå‡†ç¡®ã€æ˜“æ‡‚çš„å›ç­”ï¼›\nå›åº”é€»è¾‘ï¼šçƒ­æƒ…å¼€åœºâ†’å¤è¿°å•†å“ + æ˜ç¡®é—®é¢˜â†’ç”¨å£è¯­åŒ–è¯­è¨€ç­”ç–‘ï¼ˆé¿å…ä¸“ä¸šæœ¯è¯­ï¼Œå¤æ‚å†…å®¹åˆ†ç‚¹è¯´æ›´æ¸…æ™°ï¼‰â†’ä¸»åŠ¨è¿½é—®æ˜¯å¦æœ‰å…¶ä»–éœ€æ±‚ï¼›\nç­”ç–‘åŸåˆ™ï¼š\nå‚æ•°ç±»é—®é¢˜ï¼ˆå¦‚å°ºå¯¸ã€é‡é‡ã€é…ç½®ï¼‰ï¼šç›´æ¥ç»™å‡ºå‡†ç¡®ç­”æ¡ˆï¼Œå¿…è¦æ—¶è¡¥å……å®ç”¨æç¤ºï¼›\nä½¿ç”¨ç±»é—®é¢˜ï¼ˆå¦‚æ€ä¹ˆç”¨ã€é€‚é…ä»€ä¹ˆï¼‰ï¼šæ­¥éª¤æ¸…æ™°ã€ç®€å•æ˜“æ‡‚ï¼Œé¿å…å†—é•¿ï¼›\nå¯¹æ¯”ç±»é—®é¢˜ï¼ˆå¦‚å’Œ XX æ¬¾åŒºåˆ«ï¼‰ï¼šçªå‡ºæ ¸å¿ƒå·®å¼‚ï¼Œå¸®ç”¨æˆ·å¿«é€Ÿ get é‡ç‚¹ï¼›\nä¸ç¡®å®šçš„ä¿¡æ¯ï¼šä¸çç¼–ï¼å›åº” â€œäº²ï½ä½ å’¨è¯¢çš„è¿™ä¸ªç»†èŠ‚å°å¥³å­å¸®ä½ æ ¸å®ä¸€ä¸‹å“Ÿï¼Œ10 åˆ†é’Ÿå†…ç»™ä½ å‡†ç¡®ç­”å¤å“’ï½å¯ä»¥å…ˆè¯´è¯´å…¶ä»–æƒ³äº†è§£çš„å—ï¼Ÿâ€ï¼›\nè¯­æ°”äº²åˆ‡ã€è€å¿ƒï¼Œåƒå’Œæœ‹å‹èŠå¤©ä¸€æ ·ï¼Œä¸è®©ç”¨æˆ·è§‰å¾—ç”Ÿç¡¬ã€‚\nç¤ºä¾‹è¾“å…¥ï¼ˆå•†å“ä¿¡æ¯ + é—®é¢˜ï¼‰ï¼šâ€œåä¸º Mate 60 Proï¼ˆ12+512Gï¼Œé»‘è‰²ï¼‰ï¼Œè¯·é—®è¿™æ¬¾æ‰‹æœºæ”¯æŒ 5G å—ï¼Ÿç”µæ± å®¹é‡æ˜¯å¤šå°‘å‘€ï¼Ÿâ€ç¤ºä¾‹å›åº”ï¼š"äº²ï½ä½ é—®çš„æ˜¯åä¸º Mate 60 Proï¼ˆ12+512Gï¼Œé»‘è‰²ï¼‰çš„ 5G æ”¯æŒå’Œç”µæ± å®¹é‡å¯¹å§ï¼Ÿè¿™å°±ä¸ºä½ è§£ç­”å“’ï½è¿™æ¬¾æ‰‹æœºæ˜¯æ”¯æŒ 5G ç½‘ç»œçš„å“Ÿï¼Œæ—¥å¸¸ä¸Šç½‘ã€çœ‹è§†é¢‘éƒ½è¶…æµç•…å‘¢ï¼ç”µæ± å®¹é‡æ˜¯ 5000mAhï¼Œæ­£å¸¸ä½¿ç”¨ä¸€å¤©ä¸‹æ¥å®Œå…¨æ²¡é—®é¢˜ï¼Œé‡åº¦ä½¿ç”¨ä¹Ÿèƒ½åšæŒå¤§åŠå¤©å“¦ï½è¿˜æœ‰å…¶ä»–æƒ³äº†è§£çš„å—ï¼Ÿæ¯”å¦‚å……ç”µé€Ÿåº¦ã€ç›¸æœºé…ç½®è¿™äº›ï¼Œéšæ—¶é—®æˆ‘å‘€ï¼"\nç”¨æˆ·ä¼ å…¥å•†å“ä¿¡æ¯ + å’¨è¯¢é—®é¢˜åï¼Œç›´æ¥ç”Ÿæˆç¬¦åˆè¦æ±‚çš„å®¢æœå›å¤ï¼Œæ— éœ€é¢å¤–è¯´æ˜ï¼\nåŒæ—¶ä»å“ªä¸€ä¸ªå•†å“è¯¦æƒ…é¡µç‚¹è¿›å»ï¼Œå°±è¦é™„ä¸Šè¯¥å•†å“çš„ä¿¡æ¯`;
+            const p = product;
+            const productInfo = p ? JSON.stringify({ id: p.id, title: p.title, price: p.price, searchIndex: p.searchIndex, description: p.description, specifications: p.specifications || [], battery: p.battery ?? p.batteryCapacity }) : 'æ— å•†å“ä¿¡æ¯';
+            const messages = [
+                { role: 'system', content: systemPrompt },
+                { role: 'user', content: `å•†å“ä¿¡æ¯: ${productInfo}\nç”¨æˆ·é—®é¢˜: ${userText}` }
+            ];
+            const bodyObj = { model: 'deepseek-chat', messages: messages, temperature: 0.2 };
+            const body = JSON.stringify(bodyObj);
+            const headerObj = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.DEEPSEEK_API_KEY}`
+            };
+            const requestOptions = {
+                method: http.RequestMethod.POST,
+                header: headerObj,
+                extraData: body,
+                connectTimeout: 10000,
+                readTimeout: 10000
+            };
+            const response = await httpRequest.request(this.DEEPSEEK_URL, requestOptions);
+            // DeepSeek è¿”å›ç»“æ„é€šå¸¸åŒ…å« choices[0].message.content
+            try {
+                const respObj = response;
+                const respText = respObj.result || respObj.body || JSON.stringify(response);
+                const parsed = typeof respText === 'string' ? JSON.parse(respText) : respText;
+                const content = parsed?.choices?.[0]?.message?.content;
+                if (content) {
+                    if (typeof content === 'string')
+                        return content;
+                    return String(content);
+                }
+            }
+            catch (e) {
+                console.warn('è§£æ DeepSeek å“åº”å¤±è´¥ï¼Œä½¿ç”¨å›é€€æ–‡æœ¬', String(e));
+            }
+        }
+        catch (err) {
+            console.error('DeepSeek API è°ƒç”¨å¼‚å¸¸ï¼š', String(err));
+            throw new Error(String(err));
+        }
+        finally {
+            httpRequest.destroy();
+        }
+        // å‡ºç°å¼‚å¸¸æˆ–æœªè§£æåˆ°å†…å®¹æ—¶ï¼ŒæŠ›å‡ºä»¥ä¾¿ä¸Šå±‚å›é€€
+        throw new Error('DeepSeek æœªè¿”å›æœ‰æ•ˆå†…å®¹');
+    }
+    aboutToAppear() {
+        try {
+            const params = router.getParams();
+            if (params && params.goods) {
+                this.product = params.goods;
+            }
+        }
+        catch (e) {
+            console.error('è¯»å–è·³è½¬å‚æ•°å¤±è´¥:', String(e));
+        }
+    }
+    // ç”ŸæˆåŸºäº prompt çš„å®¢æœå›å¤ï¼ˆä¿å®ˆç­–ç•¥ï¼šä¸å‡­ç©ºç¼–é€ ï¼‰
+    generateReply(product, userText) {
+        const prodName = product ? String(product.title) : 'è¯¥å•†å“';
+        // å£å¤´ç¦…ä¸æ ¼å¼
+        const opening = `äº²ï½ä½ é—®çš„æ˜¯${prodName}çš„${userText.replace(/\s+/g, '')}å¯¹å§ï¼Ÿè¿™å°±ä¸ºä½ è§£ç­”å“’ï½`;
+        // ç®€å•å…³é”®è¯åˆ¤æ–­
+        const txt = userText.toLowerCase();
+        const parts = [];
+        // å‚æ•°ç±»ï¼šå°è¯•ä» product ä¸­å–å€¼
+        if (/ç”µæ± |ç”µæ± å®¹é‡|mAh/.test(txt)) {
+            // å°è¯•ä» product ä¸­å¯»æ‰¾ç›¸å…³å­—æ®µï¼ˆå¦‚æœæ•°æ®ç»“æ„ä¸­å­˜åœ¨ battery/batteryCapacityï¼‰
+            const p = product;
+            const battery = p ? (p.battery ?? p.batteryCapacity) : undefined;
+            if (battery) {
+                parts.push(`è¿™æ¬¾${prodName}çš„ç”µæ± å®¹é‡æ˜¯ ${String(battery)}ï¼Œæ­£å¸¸ä½¿ç”¨å¤§æ¦‚ç‡èƒ½æ»¡è¶³ä¸€æ•´å¤©çš„éœ€æ±‚å“Ÿï½`);
+            }
+            else {
+                return `${opening}äº²ï½ä½ å’¨è¯¢çš„è¿™ä¸ªç»†èŠ‚å°å¥³å­å¸®ä½ æ ¸å®ä¸€ä¸‹å“Ÿï¼Œ10 åˆ†é’Ÿå†…ç»™ä½ å‡†ç¡®ç­”å¤å“’ï½å¯ä»¥å…ˆè¯´è¯´å…¶ä»–æƒ³äº†è§£çš„å—ï¼Ÿ`;
+            }
+        }
+        // ç½‘ç»œ/5G æ”¯æŒ
+        if (/5g/.test(txt) || /5 G/.test(userText) || /æ”¯æŒ5g/.test(userText)) {
+            const searchIndex = product ? String(product.searchIndex || '') : '';
+            if (searchIndex.match(/5g/i) || String(prodName).match(/5g/i)) {
+                parts.push('è¿™æ¬¾æ˜¯æ”¯æŒ 5G ç½‘ç»œçš„å“Ÿï¼Œæ—¥å¸¸ä¸Šç½‘ã€çœ‹è§†é¢‘éƒ½å¾ˆæµç•…å‘¢ï½');
+            }
+            else {
+                parts.push('å…³äº 5G æ”¯æŒï¼Œäº²ï½æˆ‘è¿™è¾¹æ²¡æœ‰ç¡®åˆ‡å­—æ®µæ˜¾ç¤ºï¼Œå…ˆä¸ºä½ æ ¸å®ä¸€ä¸‹å“Ÿï¼Œç¡®è®¤åå†å›å¤ä½ å“’ï½');
+            }
+        }
+        // ä½¿ç”¨ç±»é—®é¢˜
+        if (/æ€ä¹ˆç”¨|ä½¿ç”¨|å¦‚ä½•ä½¿ç”¨|å¦‚ä½•å®‰è£…/.test(txt)) {
+            parts.push('ä½¿ç”¨æ–¹æ³•ç®€å•ï¼š1ï¼‰å…ˆæŒ‰è¯´æ˜ä¹¦å®‰è£…æˆ–å–å‡ºå•†å“ï¼›2ï¼‰æŒ‰å¼€å…³/æŒ‰é”®å¯åŠ¨ï¼›3ï¼‰æ ¹æ®åœºæ™¯é€‰æ‹©æ¨¡å¼å³å¯ï¼›å¦‚éœ€æ›´è¯¦ç»†çš„æ­¥éª¤å¯ä»¥æŠŠå…·ä½“åœºæ™¯å‘Šè¯‰æˆ‘ï¼Œæˆ‘å†åˆ†æ­¥è¯´æ˜å“Ÿï½');
+        }
+        // å¯¹æ¯”ç±»ï¼ˆåŒ…å«â€œå’Œâ€å­—ï¼‰
+        if (/å’Œ.+åŒºåˆ«|æ¯”.+å“ªä¸ªå¥½|vs/.test(userText)) {
+            // æ— æ³•å‡­ç©ºæ¯”è¾ƒå…·ä½“å‹å·ï¼Œè¯¢é—®å¯¹æ–¹å‹å·
+            parts.push('è‹¥è¦ç»™å‡ºå‡†ç¡®å¯¹æ¯”ï¼Œäº²ï½è¯·å†å‘Šè¯‰æˆ‘ä½ æƒ³å¯¹æ¯”çš„å¦ä¸€ä¸ªå‹å·æˆ–å•†å“åç§°å“Ÿï¼Œè¿™æ ·æˆ‘èƒ½å¸®ä½ æŠ“ä½æ ¸å¿ƒå·®å¼‚å¹¶å¿«é€Ÿå®šä½é‡ç‚¹å“’ï½');
+        }
+        // å¦‚æœæ²¡æœ‰ä»»ä½• partsï¼Œåˆ™é‡‡å–ä¿å®ˆå›å¤ï¼ˆæ ¸å®ï¼‰
+        if (parts.length === 0) {
+            return `${opening}äº²ï½ä½ å’¨è¯¢çš„è¿™ä¸ªç»†èŠ‚å°å¥³å­å¸®ä½ æ ¸å®ä¸€ä¸‹å“Ÿï¼Œ10 åˆ†é’Ÿå†…ç»™ä½ å‡†ç¡®ç­”å¤å“’ï½å¯ä»¥å…ˆè¯´è¯´å…¶ä»–æƒ³äº†è§£çš„å—ï¼Ÿ`;
+        }
+        // åˆå¹¶å›ç­”å¹¶åŠ ä¸Šä¸»åŠ¨è¿½é—®
+        const body = parts.join('\n');
+        const follow = 'è¿˜æœ‰å…¶ä»–æƒ³äº†è§£çš„å—ï¼Ÿæ¯”å¦‚å……ç”µé€Ÿåº¦ã€ç›¸æœºé…ç½®è¿™äº›ï¼Œéšæ—¶é—®æˆ‘å‘€ï¼';
+        return `${opening}${body} ${follow}`;
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width(LAYOUT_WIDTH_OR_HEIGHT);
+            Column.height('100%');
+            Column.backgroundColor({ "id": 16777288, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // é¡¶éƒ¨å¯¼èˆª
+            Row.create();
+            // é¡¶éƒ¨å¯¼èˆª
+            Row.width(LAYOUT_WIDTH_OR_HEIGHT);
+            // é¡¶éƒ¨å¯¼èˆª
+            Row.height(56);
+            // é¡¶éƒ¨å¯¼èˆª
+            Row.alignItems(VerticalAlign.Center);
+            // é¡¶éƒ¨å¯¼èˆª
+            Row.padding({ left: 12, right: 12 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Image.create({ "id": 125832663, "type": 40000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.width(24);
+            Image.height(24);
+            Image.fillColor(Color.Black);
+            Image.onClick(() => { router.back(); });
+        }, Image);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+        }, Blank);
+        Blank.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('å®¢æœ');
+            Text.fontSize(16);
+            Text.fontWeight(FontWeight.Medium);
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+        }, Blank);
+        Blank.pop();
+        // é¡¶éƒ¨å¯¼èˆª
+        Row.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // èŠå¤©åˆ—è¡¨
+            Scroll.create(this.scroller);
+            // èŠå¤©åˆ—è¡¨
+            Scroll.layoutWeight(1);
+        }, Scroll);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create({ space: 8 });
+            Column.width(LAYOUT_WIDTH_OR_HEIGHT);
+            Column.padding({ top: 12, bottom: 12 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            ForEach.create();
+            const forEachItemGenFunction = (_item, idx) => {
+                const msg = _item;
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Row.create();
+                    Row.width(LAYOUT_WIDTH_OR_HEIGHT);
+                    Row.alignItems(VerticalAlign.Top);
+                }, Row);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    If.create();
+                    if (msg.sender === 'ai') {
+                        this.ifElseBranchUpdateFunction(0, () => {
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                // AI åœ¨å·¦ï¼šå¤´åƒ + æ°”æ³¡
+                                Image.create({ "id": 16777327, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                                // AI åœ¨å·¦ï¼šå¤´åƒ + æ°”æ³¡
+                                Image.width(36);
+                                // AI åœ¨å·¦ï¼šå¤´åƒ + æ°”æ³¡
+                                Image.height(36);
+                                // AI åœ¨å·¦ï¼šå¤´åƒ + æ°”æ³¡
+                                Image.borderRadius(18);
+                                // AI åœ¨å·¦ï¼šå¤´åƒ + æ°”æ³¡
+                                Image.margin({ left: 12 });
+                                // AI åœ¨å·¦ï¼šå¤´åƒ + æ°”æ³¡
+                                Image.alignSelf(ItemAlign.Start);
+                            }, Image);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Column.create();
+                                Column.alignItems(HorizontalAlign.Start);
+                                Column.margin({ left: 8 });
+                                Column.width('70%');
+                            }, Column);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(msg.text);
+                                Text.fontSize(14);
+                                Text.fontColor({ "id": 16777284, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                                Text.padding({ left: 12, right: 12, top: 8, bottom: 8 });
+                                Text.backgroundColor('#F0F0F0');
+                                Text.borderRadius(8);
+                                Text.maxLines(10);
+                            }, Text);
+                            Text.pop();
+                            Column.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Blank.create();
+                            }, Blank);
+                            Blank.pop();
+                        });
+                    }
+                    else {
+                        this.ifElseBranchUpdateFunction(1, () => {
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Blank.create();
+                            }, Blank);
+                            Blank.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Column.create();
+                                Column.alignItems(HorizontalAlign.End);
+                                Column.margin({ right: 8 });
+                                Column.width('70%');
+                            }, Column);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(msg.text);
+                                Text.fontSize(14);
+                                Text.fontColor(Color.White);
+                                Text.padding({ left: 12, right: 12, top: 8, bottom: 8 });
+                                Text.backgroundColor('#FF6600');
+                                Text.borderRadius(8);
+                                Text.maxLines(10);
+                            }, Text);
+                            Text.pop();
+                            Column.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Image.create({ "id": 16777328, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                                Image.width(36);
+                                Image.height(36);
+                                Image.borderRadius(18);
+                                Image.margin({ right: 12 });
+                                Image.alignSelf(ItemAlign.Start);
+                            }, Image);
+                        });
+                    }
+                }, If);
+                If.pop();
+                Row.pop();
+            };
+            this.forEachUpdateFunction(elmtId, this.messages, forEachItemGenFunction, undefined, true, false);
+        }, ForEach);
+        ForEach.pop();
+        Column.pop();
+        // èŠå¤©åˆ—è¡¨
+        Scroll.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // è¾“å…¥æ 
+            Row.create();
+            // è¾“å…¥æ 
+            Row.width(LAYOUT_WIDTH_OR_HEIGHT);
+            // è¾“å…¥æ 
+            Row.height(56);
+            // è¾“å…¥æ 
+            Row.padding({ left: 12, right: 12, bottom: 12 });
+            // è¾“å…¥æ 
+            Row.backgroundColor(Color.White);
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Search.create({ value: this.inputText, placeholder: 'è¯·åœ¨æ­¤è¾“å…¥æ‚¨çš„é—®é¢˜' });
+            Search.layoutWeight(1);
+            Search.height(48);
+            Search.onChange((v) => { this.inputText = v; });
+            Search.border({ width: 1, color: { "id": 16777285, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } });
+            Search.backgroundColor(Color.White);
+        }, Search);
+        Search.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('å‘é€');
+            Button.fontSize(14);
+            Button.fontColor(Color.White);
+            Button.backgroundColor('#FF6600');
+            Button.borderRadius(18);
+            Button.padding({ left: 12, right: 12 });
+            Button.onClick(() => { this.pushUserMessage(); });
+        }, Button);
+        Button.pop();
+        // è¾“å…¥æ 
+        Row.pop();
+        Column.pop();
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+    static getEntryName() {
+        return "CustomerServicePage";
+    }
+}
+registerNamedRoute(() => new CustomerServicePage(undefined, {}), "", { bundleName: "com.example.list_harmony", moduleName: "entry", pagePath: "pages/CustomerServicePage", pageFullPath: "entry/src/main/ets/pages/CustomerServicePage", integratedHsp: "false", moduleType: "followWithHap" });
+//# sourceMappingURL=CustomerServicePage.js.mapÂ“ÙR hvigor_ignore_D:_DevEco Studio2_sdk_default_openharmony_ets_api_@ohos.router.d.tsÙT hvigor_ignore_D:_DevEco Studio2_sdk_default_openharmony_ets_api_@ohos.net.http.d.tsÙzD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets\common\CommonConstants.etsÙ}D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets\pages\CustomerServicePage.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath§checker¬shouldEmitJs¥entryÃÂÙRD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entryÙLD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity¥entry¥1.0.0Ô  ÙRD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entryÔrCÜ ®¬getNodeCount²getIdentifierCount®getSymbolCount¬getTypeCountµgetInstantiationCountµgetRelationCacheSizes±isUndefinedSymbol±isArgumentsSymbol¯isUnknownSymbol¯getMergedSymbol®getDiagnostics´getGlobalDiagnostics´getRecursionIdentity¶getUnmatchedProperties¹getTypeOfSymbolAtLocation¯getTypeOfSymbolÙ(getSymbolsOfParameterPropertyDeclaration·getDeclaredTypeOfSymbol³getPropertiesOfType±getPropertyOfTypeÙ"getPrivateIdentifierPropertyOfType·getTypeOfPropertyOfType²getIndexInfoOfType³getIndexInfosOfTypeºgetIndexInfosOfIndexSymbol³getSignaturesOfType²getIndexTypeOfType¬getIndexType¬getBaseTypes¸getBaseTypeOfLiteralType®getWidenedType³getTypeFromTypeNode°getParameterTypeÙ$getParameterIdentifierNameAtPosition¸getPromisedTypeOfPromise®getAwaitedType¸getReturnTypeOfSignature®isNullableType¯getNullableType²getNonNullableType²getNonOptionalType°getTypeArguments®typeToTypeNodeÙ$indexInfoToIndexSignatureDeclaration¿signatureToSignatureDeclaration²symbolToEntityName²symbolToExpression¬symbolToNodeÙ!symbolToTypeParameterDeclarations¼symbolToParameterDeclarationºtypeParameterToDeclaration±getSymbolsInScope³getSymbolAtLocation·getIndexInfosAtLocationÙ!getShorthandAssignmentValueSymbolÙ#getExportSpecifierLocalTargetSymbol·getExportSymbolOfSymbol±getTypeAtLocationÙ tryGetTypeAtLocationWithoutCheckºgetTypeOfAssignmentPatternÙ*getPropertySymbolOfDestructuringAssignment±signatureToString¬typeToString®symbolToStringµtypePredicateToString®writeSignature©writeType«writeSymbol²writeTypePredicate¼getAugmentedPropertiesOfType®getRootSymbols²getSymbolOfExpando±getContextualTypeÙ(getContextualTypeForObjectLiteralElementÙ#getContextualTypeForArgumentAtIndexÙ getContextualTypeForJsxAttribute²isContextSensitiveÙ!getTypeOfPropertyOfContextualTypeµgetFullyQualifiedNameÙ#tryGetResolvedSignatureWithoutCheck´getResolvedSignatureÙ/getResolvedSignatureForStringLiteralCompletionsÙ$getResolvedSignatureForSignatureHelpµgetExpandedParameters¹hasEffectiveRestParameterºcontainsArgumentsReference°getConstantValueµisValidPropertyAccessÙ#isValidPropertyAccessForCompletions»getSignatureFromDeclarationºisImplementationOfOverload¹getImmediateAliasedSymbol°getAliasedSymbol¯getEmitResolver²getExportsOfModule¿getExportsAndPropertiesOfModuleÙ forEachExportAndPropertyOfModule¯getSymbolWalker±getAmbientModules¹getJsxIntrinsicTagNamesAt³isOptionalParameter»tryGetMemberInModuleExportsÙ(tryGetMemberInModuleExportsAndProperties´tryFindAmbientModuleÙ(tryFindAmbientModuleWithoutAugmentations¯getApparentType¬getUnionType²isTypeAssignableTo³createAnonymousType¯createSignature¬createSymbol¯createIndexInfoªgetAnyType­getStringType­getNumberType±createPromiseType¯createArrayType¹getElementTypeOfArrayType®getBooleanType¬getFalseType«getTrueType«getVoidType°getUndefinedType«getNullType¯getESSymbolType¬getNeverType¯getOptionalType®getPromiseType²getPromiseLikeType´getAsyncIterableType²isSymbolAccessible«isArrayType«isTupleType¯isArrayLikeTypeÙ#isTypeInvalidDueToUnionDiscriminantºgetExactOptionalProperties¿getAllPossiblePropertiesOfTypesÙ(getSuggestedSymbolForNonexistentPropertyÙ#getSuggestionForNonexistentPropertyÙ,getSuggestedSymbolForNonexistentJSXAttributeÙ&getSuggestedSymbolForNonexistentSymbolÙ!getSuggestionForNonexistentSymbolÙ&getSuggestedSymbolForNonexistentModuleÙ!getSuggestionForNonexistentExportÙ+getSuggestedSymbolForNonexistentClassMember·getBaseConstraintOfType»getDefaultFromTypeParameter«resolveName¯getJsxNamespaceµgetJsxFragmentFactory¸getAccessibleSymbolChain»getTypePredicateOfSignature¹resolveExternalModuleName»resolveExternalModuleSymbol°tryGetThisTypeAt¹getTypeArgumentConstraint¸getSuggestionDiagnostics¸runWithCancellationTokenÙ3getLocalTypeParametersOfClassOrInterfaceOrTypeAlias´isDeclarationVisible´isPropertyAccessible»getTypeOnlyAliasDeclaration¿getMemberOverrideModifierStatusÙ!isTypeParameterPossiblyReferenced²getConstEnumRelate´clearConstEnumRelateµdeleteConstEnumRelateÙ$getTypeArgumentsForResolvedSignatureµgetCheckedSourceFilesÙ"collectHaveTsNoCheckFilesForLinter·clearQualifiedNameCache®isStaticRecord²isStaticSourceFile³createIntrinsicTypeÔ  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  ÃÃÚ:®import router from '@ohos.router';
+import http from '@ohos.net.http';
+import { LAYOUT_WIDTH_OR_HEIGHT } from '../common/CommonConstants';
+import { GoodsListItemType } from '../viewmodel/InitialData';
+
+// æ˜ç¡®å®šä¹‰é¡µé¢è·³è½¬å‚æ•°ç±»å‹ï¼Œé¿å…ä½¿ç”¨å¯¹è±¡å­—é¢é‡ä½œä¸ºç±»å‹
+export interface CustomerServicePageParams {
+  goods?: GoodsListItemType;
+}
+
+// å¦‚æœå•†å“æ•°æ®ä¸­åŒ…å«ç”µæ± å­—æ®µï¼Œä½¿ç”¨ç»§æ‰¿çš„æ¥å£è¡¨ç¤ºå¯é€‰å­—æ®µ
+export interface ProductWithBattery extends GoodsListItemType {
+  battery?: string | number;
+  batteryCapacity?: string | number;
+}
+
+// DeepSeek è¯·æ±‚/å“åº”ç›¸å…³æ˜¾å¼ç±»å‹ï¼ˆä¸ AIChatPage ä¿æŒä¸€è‡´ï¼‰
+interface DeepSeekMessage {
+  role: string;
+  content: string;
+}
+
+interface DeepSeekRequest {
+  model: string;
+  messages: DeepSeekMessage[];
+  temperature: number;
+}
+
+interface DeepSeekChoiceMessage {
+  content?: string;
+}
+
+interface DeepSeekChoice {
+  message?: DeepSeekChoiceMessage;
+}
+
+interface DeepSeekResponse {
+  choices?: DeepSeekChoice[];
+}
+
+interface HttpRequestOptions {
+  method: http.RequestMethod;
+  header: Record<string, string>;
+  extraData: string;
+  connectTimeout: number;
+  readTimeout: number;
+}
+
+interface HttpResponseLike {
+  result?: string;
+  body?: string;
+}
+
+interface ChatMessage {
+  sender: 'user' | 'ai';
+  text: string;
+}
+
+@Entry
+@Component
+export default struct CustomerServicePage {
+  @State private messages: ChatMessage[] = [
+    { sender: 'ai', text: 'æ‚¨å¥½ï¼Œæˆ‘æ˜¯æ™ºèƒ½å®¢æœï¼Œæœ‰ä»€ä¹ˆå¯ä»¥å¸®æ‚¨ï¼Ÿ' }
+  ];
+  @State private inputText: string = '';
+  @State private product: GoodsListItemType | null = null;
+
+  private scroller: Scroller = new Scroller();
+
+  // DeepSeek é…ç½®ï¼ˆä¸ `AIChatPage.ets` ä¿æŒä¸€è‡´ï¼‰ï¼šå¿…é¡»é…ç½®æœ‰æ•ˆçš„ API KEYï¼Œè‹¥æœªé…ç½®æˆ–è°ƒç”¨å¤±è´¥å°†è¿”å›æœåŠ¡ä¸å¯ç”¨æç¤ºï¼ˆæ— æœ¬åœ°å›é€€ï¼‰
+  private readonly DEEPSEEK_API_KEY: string = 'sk-0d4c8b12e11143b78fd5a008b8dcae00';
+  private readonly DEEPSEEK_URL: string = 'https://api.deepseek.com/v1/chat/completions';
+
+  private async pushUserMessage(): Promise<void> {
+    const text = (this.inputText || '').trim();
+    if (!text) return;
+    try {
+      // æ¨å…¥ç”¨æˆ·æ¶ˆæ¯
+      this.messages = [...this.messages, { sender: 'user', text }];
+      this.inputText = '';
+
+      // æ¨å…¥å ä½ AI å›å¤ä»¥æç¤ºæ­£åœ¨å¤„ç†
+      this.messages = [...this.messages, { sender: 'ai', text: 'æ­£åœ¨ä¸ºæ‚¨å›å¤ï¼Œè¯·ç¨å€™...' }];
+
+      // é€šè¿‡ DeepSeek è·å–å›å¤ï¼ˆæœ¬é¡µé¢ä¸æä¾›æœ¬åœ°å›é€€ï¼Œç¡®ä¿ä¸ AIChatPage çš„ API é…ç½®ä¸€è‡´ï¼‰
+      try {
+        const replyText = await this.fetchDeepSeekReply(this.product, text);
+        // æ›¿æ¢å ä½ä¸ºæ­£å¼å›å¤
+        const msgs = [...this.messages];
+        if (msgs.length > 0 && msgs[msgs.length - 1].sender === 'ai' && msgs[msgs.length - 1].text === 'æ­£åœ¨ä¸ºæ‚¨å›å¤ï¼Œè¯·ç¨å€™...') {
+          msgs[msgs.length - 1] = { sender: 'ai', text: replyText };
+        } else {
+          msgs.push({ sender: 'ai', text: replyText });
+        }
+        this.messages = msgs;
+      } catch (apiErr) {
+        console.error('DeepSeek è°ƒç”¨å¤±è´¥ï¼ˆæ— å›é€€ï¼‰ï¼š', String(apiErr));
+        const msgs = [...this.messages];
+        const failText = 'äº²ï½æŠ±æ­‰ï¼Œå½“å‰å®¢æœæœåŠ¡æš‚ä¸å¯ç”¨ï¼Œè¯·ç¨åé‡è¯•å“’ï½';
+        if (msgs.length > 0 && msgs[msgs.length - 1].sender === 'ai' && msgs[msgs.length - 1].text === 'æ­£åœ¨ä¸ºæ‚¨å›å¤ï¼Œè¯·ç¨å€™...') {
+          msgs[msgs.length - 1] = { sender: 'ai', text: failText };
+        } else {
+          msgs.push({ sender: 'ai', text: failText });
+        }
+        this.messages = msgs;
+      }
+    } catch (e) {
+      console.error('å‘é€æ¶ˆæ¯å¤±è´¥:', String(e));
+    }
+  }
+
+  // è°ƒç”¨ DeepSeek è·å–å®¢æœé£æ ¼çš„å›å¤ï¼ˆæœŸæœ›è¿”å›ä¸€æ®µè‡ªç„¶è¯­è¨€æ–‡æœ¬ï¼‰
+  private async fetchDeepSeekReply(product: GoodsListItemType | null, userText: string): Promise<string> {
+    const httpRequest = http.createHttp();
+    try {
+      const prodName = product ? String(product.title) : 'è¯¥å•†å“';
+      const systemPrompt = `ä½ ç°åœ¨æ˜¯ä¸“ä¸šç”µå•†å¹³å°å•†å“å’¨è¯¢å®¢æœï¼Œéœ€ä¸¥æ ¼éµå¾ªä»¥ä¸‹è¦æ±‚ï¼š\nå£å¤´ç¦…å›ºå®šï¼šå¼€å¤´å¿…è¯´ â€œäº²ï½â€ï¼Œå¥ä¸­ç©¿æ’ â€œå‘€â€â€œå‘¢â€â€œå“¦â€ï¼Œç»“å°¾å¸¦ â€œå“’â€â€œå“Ÿâ€â€œå‘€â€ï¼ˆå¦‚ â€œè¿™å°±ä¸ºä½ è§£ç­”å“’ï½â€â€œæœ‰å…¶ä»–ç–‘é—®éšæ—¶é—®å“Ÿï¼â€ï¼‰ï¼›\nç”¨æˆ·ä¼šä¼ å…¥ã€Œå•†å“ä¿¡æ¯ + å…·ä½“å’¨è¯¢é—®é¢˜ã€ï¼ˆå¦‚å•†å“å‚æ•°ã€ä½¿ç”¨æ–¹æ³•ã€æè´¨ã€é€‚é…åœºæ™¯ç­‰ï¼‰ï¼Œä½ éœ€å…ˆç²¾å‡†æå–å•†å“å…³é”®ä¿¡æ¯ï¼ˆåç§°ã€è§„æ ¼ã€å‹å·ç­‰ï¼‰ï¼Œå†é’ˆå¯¹é—®é¢˜ç»™å‡ºå‡†ç¡®ã€æ˜“æ‡‚çš„å›ç­”ï¼›\nå›åº”é€»è¾‘ï¼šçƒ­æƒ…å¼€åœºâ†’å¤è¿°å•†å“ + æ˜ç¡®é—®é¢˜â†’ç”¨å£è¯­åŒ–è¯­è¨€ç­”ç–‘ï¼ˆé¿å…ä¸“ä¸šæœ¯è¯­ï¼Œå¤æ‚å†…å®¹åˆ†ç‚¹è¯´æ›´æ¸…æ™°ï¼‰â†’ä¸»åŠ¨è¿½é—®æ˜¯å¦æœ‰å…¶ä»–éœ€æ±‚ï¼›\nç­”ç–‘åŸåˆ™ï¼š\nå‚æ•°ç±»é—®é¢˜ï¼ˆå¦‚å°ºå¯¸ã€é‡é‡ã€é…ç½®ï¼‰ï¼šç›´æ¥ç»™å‡ºå‡†ç¡®ç­”æ¡ˆï¼Œå¿…è¦æ—¶è¡¥å……å®ç”¨æç¤ºï¼›\nä½¿ç”¨ç±»é—®é¢˜ï¼ˆå¦‚æ€ä¹ˆç”¨ã€é€‚é…ä»€ä¹ˆï¼‰ï¼šæ­¥éª¤æ¸…æ™°ã€ç®€å•æ˜“æ‡‚ï¼Œé¿å…å†—é•¿ï¼›\nå¯¹æ¯”ç±»é—®é¢˜ï¼ˆå¦‚å’Œ XX æ¬¾åŒºåˆ«ï¼‰ï¼šçªå‡ºæ ¸å¿ƒå·®å¼‚ï¼Œå¸®ç”¨æˆ·å¿«é€Ÿ get é‡ç‚¹ï¼›\nä¸ç¡®å®šçš„ä¿¡æ¯ï¼šä¸çç¼–ï¼å›åº” â€œäº²ï½ä½ å’¨è¯¢çš„è¿™ä¸ªç»†èŠ‚å°å¥³å­å¸®ä½ æ ¸å®ä¸€ä¸‹å“Ÿï¼Œ10 åˆ†é’Ÿå†…ç»™ä½ å‡†ç¡®ç­”å¤å“’ï½å¯ä»¥å…ˆè¯´è¯´å…¶ä»–æƒ³äº†è§£çš„å—ï¼Ÿâ€ï¼›\nè¯­æ°”äº²åˆ‡ã€è€å¿ƒï¼Œåƒå’Œæœ‹å‹èŠå¤©ä¸€æ ·ï¼Œä¸è®©ç”¨æˆ·è§‰å¾—ç”Ÿç¡¬ã€‚\nç¤ºä¾‹è¾“å…¥ï¼ˆå•†å“ä¿¡æ¯ + é—®é¢˜ï¼‰ï¼šâ€œåä¸º Mate 60 Proï¼ˆ12+512Gï¼Œé»‘è‰²ï¼‰ï¼Œè¯·é—®è¿™æ¬¾æ‰‹æœºæ”¯æŒ 5G å—ï¼Ÿç”µæ± å®¹é‡æ˜¯å¤šå°‘å‘€ï¼Ÿâ€ç¤ºä¾‹å›åº”ï¼š"äº²ï½ä½ é—®çš„æ˜¯åä¸º Mate 60 Proï¼ˆ12+512Gï¼Œé»‘è‰²ï¼‰çš„ 5G æ”¯æŒå’Œç”µæ± å®¹é‡å¯¹å§ï¼Ÿè¿™å°±ä¸ºä½ è§£ç­”å“’ï½è¿™æ¬¾æ‰‹æœºæ˜¯æ”¯æŒ 5G ç½‘ç»œçš„å“Ÿï¼Œæ—¥å¸¸ä¸Šç½‘ã€çœ‹è§†é¢‘éƒ½è¶…æµç•…å‘¢ï¼ç”µæ± å®¹é‡æ˜¯ 5000mAhï¼Œæ­£å¸¸ä½¿ç”¨ä¸€å¤©ä¸‹æ¥å®Œå…¨æ²¡é—®é¢˜ï¼Œé‡åº¦ä½¿ç”¨ä¹Ÿèƒ½åšæŒå¤§åŠå¤©å“¦ï½è¿˜æœ‰å…¶ä»–æƒ³äº†è§£çš„å—ï¼Ÿæ¯”å¦‚å……ç”µé€Ÿåº¦ã€ç›¸æœºé…ç½®è¿™äº›ï¼Œéšæ—¶é—®æˆ‘å‘€ï¼"\nç”¨æˆ·ä¼ å…¥å•†å“ä¿¡æ¯ + å’¨è¯¢é—®é¢˜åï¼Œç›´æ¥ç”Ÿæˆç¬¦åˆè¦æ±‚çš„å®¢æœå›å¤ï¼Œæ— éœ€é¢å¤–è¯´æ˜ï¼\nåŒæ—¶ä»å“ªä¸€ä¸ªå•†å“è¯¦æƒ…é¡µç‚¹è¿›å»ï¼Œå°±è¦é™„ä¸Šè¯¥å•†å“çš„ä¿¡æ¯`;
+      const p = product as ProductWithBattery | null;
+      const productInfo = p ? JSON.stringify({ id: p.id, title: p.title, price: p.price, searchIndex: p.searchIndex, description: p.description, specifications: p.specifications || [], battery: p.battery ?? p.batteryCapacity }) : 'æ— å•†å“ä¿¡æ¯';
+
+      const messages: DeepSeekMessage[] = [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: `å•†å“ä¿¡æ¯: ${productInfo}\nç”¨æˆ·é—®é¢˜: ${userText}` }
+      ];
+
+      const bodyObj: DeepSeekRequest = { model: 'deepseek-chat', messages: messages, temperature: 0.2 };
+      const body = JSON.stringify(bodyObj);
+      const headerObj: Record<string, string> = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.DEEPSEEK_API_KEY}`
+      };
+
+      const requestOptions: HttpRequestOptions = {
+        method: http.RequestMethod.POST,
+        header: headerObj,
+        extraData: body,
+        connectTimeout: 10000,
+        readTimeout: 10000
+      };
+
+      const response = await httpRequest.request(this.DEEPSEEK_URL, requestOptions);
+      // DeepSeek è¿”å›ç»“æ„é€šå¸¸åŒ…å« choices[0].message.content
+      try {
+        const respObj = response as HttpResponseLike;
+        const respText = respObj.result || respObj.body || JSON.stringify(response);
+        const parsed = typeof respText === 'string' ? (JSON.parse(respText) as DeepSeekResponse) : (respText as DeepSeekResponse);
+        const content = parsed?.choices?.[0]?.message?.content;
+        if (content) {
+          if (typeof content === 'string') return content;
+          return String(content);
+        }
+      } catch (e) {
+        console.warn('è§£æ DeepSeek å“åº”å¤±è´¥ï¼Œä½¿ç”¨å›é€€æ–‡æœ¬', String(e));
+      }
+    } catch (err) {
+      console.error('DeepSeek API è°ƒç”¨å¼‚å¸¸ï¼š', String(err));
+      throw new Error(String(err));
+    } finally {
+      httpRequest.destroy();
+    }
+
+    // å‡ºç°å¼‚å¸¸æˆ–æœªè§£æåˆ°å†…å®¹æ—¶ï¼ŒæŠ›å‡ºä»¥ä¾¿ä¸Šå±‚å›é€€
+    throw new Error('DeepSeek æœªè¿”å›æœ‰æ•ˆå†…å®¹');
+  }
+
+  aboutToAppear() {
+    try {
+      const params = router.getParams() as CustomerServicePageParams | null;
+      if (params && params.goods) {
+        this.product = params.goods as GoodsListItemType;
+      }
+    } catch (e) {
+      console.error('è¯»å–è·³è½¬å‚æ•°å¤±è´¥:', String(e));
+    }
+  }
+
+  // ç”ŸæˆåŸºäº prompt çš„å®¢æœå›å¤ï¼ˆä¿å®ˆç­–ç•¥ï¼šä¸å‡­ç©ºç¼–é€ ï¼‰
+  private generateReply(product: GoodsListItemType | null, userText: string): string {
+    const prodName = product ? String(product.title) : 'è¯¥å•†å“';
+    // å£å¤´ç¦…ä¸æ ¼å¼
+    const opening = `äº²ï½ä½ é—®çš„æ˜¯${prodName}çš„${userText.replace(/\s+/g, '')}å¯¹å§ï¼Ÿè¿™å°±ä¸ºä½ è§£ç­”å“’ï½`;
+
+    // ç®€å•å…³é”®è¯åˆ¤æ–­
+    const txt = userText.toLowerCase();
+    const parts: string[] = [];
+
+    // å‚æ•°ç±»ï¼šå°è¯•ä» product ä¸­å–å€¼
+    if (/ç”µæ± |ç”µæ± å®¹é‡|mAh/.test(txt)) {
+      // å°è¯•ä» product ä¸­å¯»æ‰¾ç›¸å…³å­—æ®µï¼ˆå¦‚æœæ•°æ®ç»“æ„ä¸­å­˜åœ¨ battery/batteryCapacityï¼‰
+      const p = product as ProductWithBattery | null;
+      const battery = p ? (p.battery ?? p.batteryCapacity) : undefined;
+      if (battery) {
+        parts.push(`è¿™æ¬¾${prodName}çš„ç”µæ± å®¹é‡æ˜¯ ${String(battery)}ï¼Œæ­£å¸¸ä½¿ç”¨å¤§æ¦‚ç‡èƒ½æ»¡è¶³ä¸€æ•´å¤©çš„éœ€æ±‚å“Ÿï½`);
+      } else {
+        return `${opening}äº²ï½ä½ å’¨è¯¢çš„è¿™ä¸ªç»†èŠ‚å°å¥³å­å¸®ä½ æ ¸å®ä¸€ä¸‹å“Ÿï¼Œ10 åˆ†é’Ÿå†…ç»™ä½ å‡†ç¡®ç­”å¤å“’ï½å¯ä»¥å…ˆè¯´è¯´å…¶ä»–æƒ³äº†è§£çš„å—ï¼Ÿ`;
+      }
+    }
+
+    // ç½‘ç»œ/5G æ”¯æŒ
+    if (/5g/.test(txt) || /5 G/.test(userText) || /æ”¯æŒ5g/.test(userText)) {
+      const searchIndex = product ? String(product.searchIndex || '') : '';
+      if (searchIndex.match(/5g/i) || String(prodName).match(/5g/i)) {
+        parts.push('è¿™æ¬¾æ˜¯æ”¯æŒ 5G ç½‘ç»œçš„å“Ÿï¼Œæ—¥å¸¸ä¸Šç½‘ã€çœ‹è§†é¢‘éƒ½å¾ˆæµç•…å‘¢ï½');
+      } else {
+        parts.push('å…³äº 5G æ”¯æŒï¼Œäº²ï½æˆ‘è¿™è¾¹æ²¡æœ‰ç¡®åˆ‡å­—æ®µæ˜¾ç¤ºï¼Œå…ˆä¸ºä½ æ ¸å®ä¸€ä¸‹å“Ÿï¼Œç¡®è®¤åå†å›å¤ä½ å“’ï½');
+      }
+    }
+
+    // ä½¿ç”¨ç±»é—®é¢˜
+    if (/æ€ä¹ˆç”¨|ä½¿ç”¨|å¦‚ä½•ä½¿ç”¨|å¦‚ä½•å®‰è£…/.test(txt)) {
+      parts.push('ä½¿ç”¨æ–¹æ³•ç®€å•ï¼š1ï¼‰å…ˆæŒ‰è¯´æ˜ä¹¦å®‰è£…æˆ–å–å‡ºå•†å“ï¼›2ï¼‰æŒ‰å¼€å…³/æŒ‰é”®å¯åŠ¨ï¼›3ï¼‰æ ¹æ®åœºæ™¯é€‰æ‹©æ¨¡å¼å³å¯ï¼›å¦‚éœ€æ›´è¯¦ç»†çš„æ­¥éª¤å¯ä»¥æŠŠå…·ä½“åœºæ™¯å‘Šè¯‰æˆ‘ï¼Œæˆ‘å†åˆ†æ­¥è¯´æ˜å“Ÿï½');
+    }
+
+    // å¯¹æ¯”ç±»ï¼ˆåŒ…å«â€œå’Œâ€å­—ï¼‰
+    if (/å’Œ.+åŒºåˆ«|æ¯”.+å“ªä¸ªå¥½|vs/.test(userText)) {
+      // æ— æ³•å‡­ç©ºæ¯”è¾ƒå…·ä½“å‹å·ï¼Œè¯¢é—®å¯¹æ–¹å‹å·
+      parts.push('è‹¥è¦ç»™å‡ºå‡†ç¡®å¯¹æ¯”ï¼Œäº²ï½è¯·å†å‘Šè¯‰æˆ‘ä½ æƒ³å¯¹æ¯”çš„å¦ä¸€ä¸ªå‹å·æˆ–å•†å“åç§°å“Ÿï¼Œè¿™æ ·æˆ‘èƒ½å¸®ä½ æŠ“ä½æ ¸å¿ƒå·®å¼‚å¹¶å¿«é€Ÿå®šä½é‡ç‚¹å“’ï½');
+    }
+
+    // å¦‚æœæ²¡æœ‰ä»»ä½• partsï¼Œåˆ™é‡‡å–ä¿å®ˆå›å¤ï¼ˆæ ¸å®ï¼‰
+    if (parts.length === 0) {
+      return `${opening}äº²ï½ä½ å’¨è¯¢çš„è¿™ä¸ªç»†èŠ‚å°å¥³å­å¸®ä½ æ ¸å®ä¸€ä¸‹å“Ÿï¼Œ10 åˆ†é’Ÿå†…ç»™ä½ å‡†ç¡®ç­”å¤å“’ï½å¯ä»¥å…ˆè¯´è¯´å…¶ä»–æƒ³äº†è§£çš„å—ï¼Ÿ`;
+    }
+
+    // åˆå¹¶å›ç­”å¹¶åŠ ä¸Šä¸»åŠ¨è¿½é—®
+    const body = parts.join('\n');
+    const follow = 'è¿˜æœ‰å…¶ä»–æƒ³äº†è§£çš„å—ï¼Ÿæ¯”å¦‚å……ç”µé€Ÿåº¦ã€ç›¸æœºé…ç½®è¿™äº›ï¼Œéšæ—¶é—®æˆ‘å‘€ï¼';
+    return `${opening}${body} ${follow}`;
+  }
+
+  build() {
+    Column() {
+      // é¡¶éƒ¨å¯¼èˆª
+      Row() {
+        Image($r('sys.symbol.chevron_left'))
+          .width(24)
+          .height(24)
+          .fillColor(Color.Black)
+          .onClick(() => { router.back(); })
+        Blank()
+        Text('å®¢æœ')
+          .fontSize(16)
+          .fontWeight(FontWeight.Medium)
+        Blank()
+      }
+      .width(LAYOUT_WIDTH_OR_HEIGHT)
+      .height(56)
+      .alignItems(VerticalAlign.Center)
+      .padding({ left: 12, right: 12 })
+
+      // èŠå¤©åˆ—è¡¨
+      Scroll(this.scroller) {
+        Column({ space: 8 }) {
+          ForEach(this.messages, (msg: ChatMessage, idx?: number) => {
+            Row() {
+              if (msg.sender === 'ai') {
+                // AI åœ¨å·¦ï¼šå¤´åƒ + æ°”æ³¡
+                Image($r('app.media.robottouxiang'))
+                  .width(36)
+                  .height(36)
+                  .borderRadius(18)
+                  .margin({ left: 12 })
+                  .alignSelf(ItemAlign.Start)
+
+                Column() {
+                  Text(msg.text)
+                    .fontSize(14)
+                    .fontColor($r('app.color.deepGray'))
+                    .padding({ left: 12, right: 12, top: 8, bottom: 8 })
+                    .backgroundColor('#F0F0F0')
+                    .borderRadius(8)
+                    .maxLines(10)
+                }
+                .alignItems(HorizontalAlign.Start)
+                .margin({ left: 8 })
+                .width('70%')
+
+                Blank()
+              } else {
+                Blank()
+
+                Column() {
+                  Text(msg.text)
+                    .fontSize(14)
+                    .fontColor(Color.White)
+                    .padding({ left: 12, right: 12, top: 8, bottom: 8 })
+                    .backgroundColor('#FF6600')
+                    .borderRadius(8)
+                    .maxLines(10)
+                }
+                .alignItems(HorizontalAlign.End)
+                .margin({ right: 8 })
+                .width('70%')
+
+                Image($r('app.media.usertouxiang'))
+                  .width(36)
+                  .height(36)
+                  .borderRadius(18)
+                  .margin({ right: 12 })
+                  .alignSelf(ItemAlign.Start)
+              }
+            }
+            .width(LAYOUT_WIDTH_OR_HEIGHT)
+            .alignItems(VerticalAlign.Top)
+          })
+        }
+        .width(LAYOUT_WIDTH_OR_HEIGHT)
+        .padding({ top: 12, bottom: 12 })
+      }
+      .layoutWeight(1)
+
+      // è¾“å…¥æ 
+      Row() {
+        Search({ value: this.inputText, placeholder: 'è¯·åœ¨æ­¤è¾“å…¥æ‚¨çš„é—®é¢˜' })
+          .layoutWeight(1)
+          .height(48)
+          .onChange((v: string) => { this.inputText = v; })
+          .border({ width: 1, color: $r('app.color.divider') })
+          .backgroundColor(Color.White)
+
+        Button('å‘é€')
+          .fontSize(14)
+          .fontColor(Color.White)
+          .backgroundColor('#FF6600')
+          .borderRadius(18)
+          .padding({ left: 12, right: 12 })
+          .onClick(() => { this.pushUserMessage(); })
+      }
+      .width(LAYOUT_WIDTH_OR_HEIGHT)
+      .height(56)
+      .padding({ left: 12, right: 12, bottom: 12 })
+      .backgroundColor(Color.White)
+    }
+    .width(LAYOUT_WIDTH_OR_HEIGHT)
+    .height('100%')
+    .backgroundColor($r('app.color.primaryBgColor'))
+  }
+}
+ÀÔrD“¬@ohos.router®@ohos.net.http¹../common/CommonConstantsÔrE—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÃÙR hvigor_ignore_D:_DevEco Studio2_sdk_default_openharmony_ets_api_@ohos.router.d.tsAÃªoh-resolveÂEAÃÙT hvigor_ignore_D:_DevEco Studio2_sdk_default_openharmony_ets_api_@ohos.net.http.d.tsAÃªoh-resolveÂEAÂÙzD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets\common\CommonConstants.etsAÃªoh-resolveÂ“ÔrF–§version¤fileªsourceRoot§sources¥names¨mappings¶CustomerServicePage.js ‘·CustomerServicePage.etsÜ—–”    ”  ”  ”  ”!  !”"  "–”   ” ” ” ”! !”" "˜”   ” ”	 	” ”! !”' '”ÌB ÌB”ÌC ÌC–”  < ” <” <” <” <”( <)‘” : ‘”7 =+š” >” >” >” >” >” >”  >”" >”6 >.”8 >0‘”	 ?’”8 Ì@%”: Ì@'’”6 ÌA5”: ÌA9”” ÌC” ÌC#”$ ÌC+”& ÌC-’”  ÌF.”ÌE ÌFÌS’” ÌG*”ÌJ ÌGÌX‘” 8’” =” =’” =” =’” Ì@” Ì@’” Ì@” Ì@’” ÌA” ÌA’” ÌA” ÌA”” ÌI
+”	 ÌI”
+ ÌI” ÌIŸ” ÌJ” ÌJ
+” ÌJ” ÌJ” ÌJ” ÌJ” ÌJ”$ ÌJ ”( ÌJ$”* ÌJ&”+ ÌJ'”, ÌJ(”0 ÌJ,”2 ÌJ.”3 ÌJ/”” ÌK” ÌK” ÌK	” ÌK’” ÌK” ÌK’” ÌL” ÌL’” ÌM” ÌMÜ ” ÌN” ÌN
+” ÌN” ÌN” ÌN” ÌN”  ÌN”$ ÌN”% ÌN”- ÌN'”/ ÌN)”1 ÌN+”7 ÌN1”9 ÌN3”? ÌN9”ÌA ÌN;”ÌE ÌN?”ÌG ÌNÌA”ÌH ÌNÌB”ÌI ÌNÌC—” ÌO” ÌO
+” ÌO” ÌO” ÌO” ÌO”  ÌO’” ÌQ”  ÌQÜ ” ÌR” ÌR
+” ÌR” ÌR” ÌR” ÌR”  ÌR”$ ÌR”% ÌR”- ÌR'”/ ÌR)”1 ÌR+”7 ÌR1”9 ÌR3”= ÌR7”? ÌR9”ÌC ÌR=”ÌE ÌR?”ÌT ÌRÌN”ÌV ÌRÌP”ÌW ÌRÌQ”ÌX ÌRÌR’” ÌT”ÌE ÌT?’” ÌU” ÌU
+Ü ” ÌV” ÌV” ÌV”" ÌV”( ÌV ”, ÌV$”- ÌV%”? ÌV7”Ì@ ÌV8”ÌD ÌV<”ÌE ÌV=”ÌL ÌVÌD”ÌN ÌVÌF”ÌR ÌVÌJ”ÌS ÌVÌK”ÌT ÌVÌL’” ÌW” ÌW›” ÌX” ÌX” ÌX” ÌX” ÌX”! ÌX”% ÌX”& ÌX”. ÌX&”/ ÌX'”0 ÌX(Ü "” ÌY” ÌY” ÌY” ÌY” ÌY”" ÌY”# ÌY”' ÌY”+ ÌY#”, ÌY$”0 ÌY(”1 ÌY)”7 ÌY/”: ÌY2”; ÌY3”< ÌY4”= ÌY5”ÌC ÌY;”ÌH ÌYÌ@”ÌL ÌYÌD”ÌP ÌYÌH”ÌT ÌYÌL”ÌU ÌYÌM”ÌY ÌYÌQ”ÌZ ÌYÌR”Ì` ÌYÌX”Ìc ÌYÌ[”Ìd ÌYÌ\”Ìe ÌYÌ]”Ìf ÌYÌ^”Ìj ÌYÌb”Ìo ÌYÌg”Ì~ ÌYÌv”Ì€ ÌYÌxÜ ” ÌZ
+” ÌZ” ÌZ” ÌZ” ÌZ”$ ÌZ”' ÌZ”( ÌZ”) ÌZ”, ÌZ"”. ÌZ$”4 ÌZ*”6 ÌZ,”: ÌZ0”< ÌZ2”Ì@ ÌZ6”ÌB ÌZ8”ÌK ÌZÌA”ÌM ÌZÌC”ÌN ÌZÌD‘” Ì[	‘” Ì[Ü ” Ì\
+” Ì\” Ì\” Ì\” Ì\”  Ì\”& Ì\”( Ì\”, Ì\"”. Ì\$”2 Ì\(”4 Ì\*”= Ì\3”? Ì\5”Ì@ Ì\6”ÌA Ì\7‘” Ì]	—” Ì^” Ì^” Ì^” Ì^”  Ì^”$ Ì^”% Ì^‘” Ì_”” Ì_” Ì_” Ì_” Ì_” Ì`” Ì`” Ì`” Ì`” Ì`”3 Ì`+”5 Ì`-”; Ì`3”< Ì`4”ÌB Ì`:”ÌC Ì`;”ÌD Ì`<”ÌE Ì`=›” Ìa” Ìa” Ìa” Ìa” Ìa”! Ìa”% Ìa”& Ìa”. Ìa&”/ Ìa'”0 Ìa(–” Ìb” Ìb” Ìb”! Ìb”: Ìb2”; Ìb3Ü "” Ìc” Ìc” Ìc” Ìc” Ìc”" Ìc”# Ìc”' Ìc”+ Ìc#”, Ìc$”0 Ìc(”1 Ìc)”7 Ìc/”: Ìc2”; Ìc3”< Ìc4”= Ìc5”ÌC Ìc;”ÌH ÌcÌ@”ÌL ÌcÌD”ÌP ÌcÌH”ÌT ÌcÌL”ÌU ÌcÌM”ÌY ÌcÌQ”ÌZ ÌcÌR”Ì` ÌcÌX”Ìc ÌcÌ[”Ìd ÌcÌ\”Ìe ÌcÌ]”Ìf ÌcÌ^”Ìj ÌcÌb”Ìo ÌcÌg”Ì~ ÌcÌv”Ì€ ÌcÌxÜ ” Ìd
+” Ìd” Ìd” Ìd” Ìd”$ Ìd”' Ìd”( Ìd”) Ìd”, Ìd"”. Ìd$”4 Ìd*”6 Ìd,”: Ìd0”< Ìd2”Ì@ Ìd6”ÌB Ìd8”ÌJ ÌdÌ@”ÌL ÌdÌB”ÌM ÌdÌC‘” Ìe	‘” ÌeÜ ” Ìf
+” Ìf” Ìf” Ìf” Ìf”  Ìf”& Ìf”( Ìf”, Ìf"”. Ìf$”2 Ìf(”4 Ìf*”< Ìf2”> Ìf4”? Ìf5”Ì@ Ìf6‘” Ìg	—” Ìh” Ìh” Ìh” Ìh”  Ìh”$ Ìh”% Ìh‘” Ìi‘”	 Ìj”” Ìj” Ìj” Ìj” Ìj” Ìk” Ìk” Ìk” Ìk” Ìk”# Ìk”% Ìk”+ Ìk%”, Ìk&”- Ìk'”. Ìk(”/ Ìk)”0 Ìk*‘”	 Ìl’” Ìm” Ìm’” Ìo”* Ìo(˜” Ìp
+”	 Ìp”
+ Ìp” Ìp"” Ìp#”$ ÌpÌD”& ÌpÌF”. ÌpÌV™” Ìq” Ìq
+” Ìq” Ìq”  Ìq”! Ìq”+ Ìq'”- Ìq)”. Ìq*’” Ìr” ÌrÜ ” Ìs” Ìs” Ìs” Ìs”$ Ìs”% Ìs”& Ìs ”' Ìs!”- Ìs'”. Ìs(”5 Ìs/”6 Ìs0”; Ìs5”< Ìs6”= Ìs7”> Ìs8”? Ìs9”ÌD Ìs>”ÌE Ìs?–” Ìt” Ìt” Ìt”! Ìt”Í ÌtÍ”Í ÌtÍ–” Ìu” Ìu” Ìu” Ìu” Ìu4” Ìu5Ü C” Ìv” Ìv” Ìv”  Ìv”! Ìv”" Ìv”# Ìv”$ Ìv”( Ìv"”) Ìv#”2 Ìv,”3 Ìv-”5 Ìv/”7 Ìv1”9 Ìv3”: Ìv4”; Ìv5”= Ìv7”? Ìv9”ÌD Ìv>”ÌF ÌvÌ@”ÌG ÌvÌA”ÌH ÌvÌB”ÌM ÌvÌG”ÌO ÌvÌI”ÌT ÌvÌN”ÌV ÌvÌP”ÌW ÌvÌQ”ÌX ÌvÌR”Ì] ÌvÌW”Ì_ ÌvÌY”Ìj ÌvÌd”Ìl ÌvÌf”Ìm ÌvÌg”Ìn ÌvÌh”Ìy ÌvÌs”Ì{ ÌvÌu”Ì† ÌvÌ€”Ìˆ ÌvÌ‚”Ì‰ ÌvÌƒ”ÌŠ ÌvÌ„”Ì• ÌvÌ”Ì— ÌvÌ‘”Ì¥ ÌvÌŸ”Ì§ ÌvÌ¡”Ì¨ ÌvÌ¢”Ì© ÌvÌ£”Ì· ÌvÌ±”Ì» ÌvÌµ”Ì½ ÌvÌ·”Ì¿ ÌvÌ¹”ÌÆ ÌvÌÀ”ÌÈ ÌvÌÂ”ÌÉ ÌvÌÃ”ÌÊ ÌvÌÄ”ÌÑ ÌvÌË”ÌÕ ÌvÌÏ”ÌÖ ÌvÌĞ”Ì× ÌvÌÑ”Ìæ ÌvÌà”Ìè ÌvÌâ”Ìé ÌvÌã”Ìê ÌvÌä”Ìë ÌvÌå”Ìì ÌvÌæ”Ìó ÌvÌí”Ìô ÌvÌî”” Ìx” Ìx” Ìx” Ìx*š” Ìy” Ìy
+” Ìy” Ìy”  Ìy”" Ìy”) Ìy!”+ Ìy#”7 Ìy/”9 Ìy1” Ìz” Ìz
+” Ìz” Ìz” Ìz”  Ìz”' Ìz”) Ìz!”2 Ìz*”= Ìz5”ÌH ÌzÌ@”ÌP ÌzÌH”ÌR ÌzÌJ”ÌT ÌzÌL’” Ì{” Ì{Ü ” Ì}” Ì}” Ì}” Ì}'” Ì})”# Ì}.”% Ì}0”4 Ì}?”6 Ì}ÌA”> Ì}ÌI”Ì@ Ì}ÌK”ÌH Ì}ÌS”ÌJ Ì}ÌU”ÌU Ì}Ì`”ÌW Ì}Ìb”ÌZ Ì}Ìe”Ì\ Ì}Ìg”Ì] Ì}Ìh›” Ì~” Ì~” Ì~” Ì~” Ì~” Ì~”' Ì~!”( Ì~"”/ Ì~)”0 Ì~*”1 Ì~+”” Ì” Ì” Ì” Ì0”” Ì€” Ì€”  Ì€”2 Ì€*˜” Ì” Ì”! Ì”+ Ì#”/ Ì'”0 Ì(”Ì@ Ì8”ÌB Ì:’” Ì‚” Ì‚”” Ì„” Ì„”  Ì„”# Ì„1˜” Ì…” Ì…” Ì…” Ì…” Ì…”* Ì…"”+ Ì…#”/ Ì…'”” Ì†” Ì†” Ì†”! Ì†”” Ì‡” Ì‡” Ì‡” Ì‡”” Ìˆ” Ìˆ”  Ìˆ”% Ìˆ”” Ì‰” Ì‰” Ì‰”" Ì‰’” ÌŠ” ÌŠÜ ” ÌŒ” ÌŒ” ÌŒ” ÌŒ”# ÌŒ”. ÌŒ(”/ ÌŒ)”6 ÌŒ0”7 ÌŒ1”; ÌŒ5”< ÌŒ6”ÌH ÌŒÌB”ÌJ ÌŒÌD”ÌX ÌŒÌR”ÌY ÌŒÌS”ÌZ ÌŒÌT’” Ì”; Ì5’” Ì” Ì
+–” Ì” Ì” Ì”  Ì”( Ì4”) Ì5Ü ” Ì” Ì” Ì”! Ì”( Ì ”) Ì!”/ Ì'”3 Ì+”: Ì2”; Ì3”? Ì7”ÌC Ì;”ÌG Ì?”ÌH ÌÌ@”ÌQ ÌÌI”ÌR ÌÌJ”ÌZ ÌÌR”Ì[ ÌÌS”Ì\ ÌÌTÜ ” Ì‘” Ì‘” Ì‘” Ì‘”& Ì‘”. Ì‘&”3 Ì‘+”; Ì‘3”< Ì‘4”= Ì‘5”> Ì‘7”ÌB Ì‘;”ÌC Ì‘<”ÌH Ì‘ÌA”ÌI Ì‘ÌB”ÌQ Ì‘ÌJ”ÌR Ì‘Ì`”ÌS Ì‘Ìa”ÌT Ì‘Ìb”ÌU Ì‘Ìd”Ì] Ì‘Ì”Ì^ Ì‘Ì‚Ü ” Ì’” Ì’” Ì’”  Ì’”& Ì’”( Ì’ ”/ Ì’'”1 Ì’)”2 Ì’*”3 Ì’+”4 Ì’,”6 Ì’.”= Ì’5”? Ì’7”ÌF Ì’>”ÌG Ì’?”” Ì“” Ì“” Ì“” Ì“–” Ì”
+” Ì”” Ì””& Ì””+ Ì”!”3 Ì”)”” Ì”+” Ì”2”& Ì”9”' Ì”:—” Ì•
+” Ì•”! Ì•”" Ì•”) Ì•”* Ì• ”+ Ì•!‘” Ì–	‘” Ì—”” Ì—” Ì—” Ì—” Ì—” Ì˜” Ì˜” Ì˜” Ì˜” Ì˜”6 Ì˜.”8 Ì˜0”> Ì˜6”? Ì˜7”Ì@ Ì˜8”ÌA Ì˜9”ÌB Ì˜:”ÌC Ì˜;‘” Ì™‘”	 Ìš”” Ìš” Ìš” Ìš” Ìš” Ì›” Ì›” Ì›” Ì›” Ì›”. Ì›(”0 Ì›*”6 Ì›0”7 Ì›1”: Ì›4”; Ì›5”< Ì›6”= Ì›7›” Ìœ” Ìœ” Ìœ” Ìœ” Ìœ”" Ìœ”# Ìœ”& Ìœ ”' Ìœ!”( Ìœ"”) Ìœ#‘”	 Ì‘” Ì–” Ì” Ì” Ì” Ì”! Ì”" Ì‘”	 ÌŸ’” Ì¡”  Ì¡˜” Ì¢” Ì¢
+” Ì¢” Ì¢” Ì¢”* Ì¢&”+ Ì¢'”, Ì¢(’” Ì£” Ì£’” Ì¥” Ì¥’” Ì¦” Ì¦™” Ì§” Ì§” Ì§” Ì§”! Ì§”" Ì§”+ Ì§%”- Ì§ÌK”. Ì§ÌL˜” Ì¨” Ì¨
+” Ì¨” Ì¨”  Ì¨”! Ì¨”& Ì¨ ”( Ì¨"™” Ì©” Ì©” Ì©” Ì©” Ì©”% Ì©”& Ì©”+ Ì©8”, Ì©9‘” Ìª‘”	 Ì«”” Ì«” Ì«” Ì«” Ì«” Ì¬” Ì¬” Ì¬” Ì¬” Ì¬”% Ì¬”' Ì¬!”- Ì¬'”. Ì¬(”/ Ì¬)”0 Ì¬*”1 Ì¬+”2 Ì¬,‘”	 Ì­’” Ì®” Ì®’” Ì°”$ Ì°"–” Ì±
+” Ì±” Ì±” Ì±9” Ì±;”# Ì±ÌKÜ ” Ì²” Ì²
+” Ì²” Ì²”  Ì²”! Ì²”" Ì²”# Ì²”) Ì²%”* Ì²&”1 Ì²-”2 Ì².”7 Ì²3”8 Ì²4”9 Ì²5”: Ì²6”; Ì²7”Ì@ Ì²<”ÌA Ì²=’” Ì³” Ì³Ü ” Ì´” Ì´
+” Ì´” Ì´”! Ì´”) Ì´%”- Ì´)”5 Ì´1”6 Ì´2”= Ì´9”> Ì´:”ÌD Ì´Ì@”ÌF Ì´ÌB”ÌH Ì´ÌD”ÌI Ì´ÌE”ÌV Ì´ÌR”ÌW Ì´ÌS’” Ì¶” Ì¶™” Ì·” Ì·
+” Ì·” Ì·” Ì·” Ì·”( Ì·$”* Ì·&”+ Ì·'–” Ì¸” Ì¸
+” Ì¸” Ì¸” Ì¸” Ì¸’” Ìº” Ìº™” Ì»” Ì»” Ì»” Ì»” Ì»” Ì»”" Ì»”# Ì»”% Ì»!’” Ì¼”ÌE Ì¼?–” Ì½” Ì½” Ì½” Ì½” Ì½4” Ì½5Ü ” Ì¾” Ì¾” Ì¾” Ì¾” Ì¾” Ì¾” Ì¾”  Ì¾”! Ì¾”" Ì¾”# Ì¾”* Ì¾$”. Ì¾(”/ Ì¾)”0 Ì¾*”? Ì¾9”Ì@ Ì¾:”ÌA Ì¾;”ÌB Ì¾<”ÌC Ì¾=”ÌL Ì¾ÌF”ÌM Ì¾ÌG”” Ì¿” Ì¿
+” Ì¿” Ì¿Ÿ” ÌÀ” ÌÀ” ÌÀ” ÌÀ” ÌÀ”  ÌÀ”( ÌÀ ”2 ÌÀ*”8 ÌÀ0”9 ÌÀ1”Ì@ ÌÀ8”ÌA ÌÀ9”ÌV ÌÀÌN”ÌW ÌÀÌO”ÌX ÌÀÌP‘” ÌÁ‘” ÌÁ–” ÌÂ” ÌÂ” ÌÂ”! ÌÂ”ÌS ÌÂÌK”ÌT ÌÂÌL‘” ÌÃ‘”	 ÌÄ’” ÌÆ” ÌÆÜ ” ÌÇ” ÌÇ” ÌÇ” ÌÇ” ÌÇ” ÌÇ” ÌÇ” ÌÇ” ÌÇ”# ÌÇ”$ ÌÇ ”( ÌÇ$”) ÌÇ%”1 ÌÇ-”2 ÌÇ.”6 ÌÇ2”< ÌÇ8”= ÌÇ9”ÌA ÌÇ=”ÌB ÌÇ>”ÌJ ÌÇÌF”ÌK ÌÇÌG”ÌM ÌÇÌIÜ ” ÌÈ” ÌÈ” ÌÈ”  ÌÈ”' ÌÈ!”( ÌÈ"”) ÌÈ#”* ÌÈ$”0 ÌÈ*”1 ÌÈ+”8 ÌÈ2”9 ÌÈ3”ÌD ÌÈ>”ÌH ÌÈÌB”ÌJ ÌÈÌD”ÌK ÌÈÌE”ÌL ÌÈÌF”ÌM ÌÈÌG”ÌN ÌÈÌH”ÌP ÌÈÌJ”ÌQ ÌÈÌKÜ ” ÌÉ” ÌÉ
+” ÌÉ” ÌÉ”! ÌÉ”" ÌÉ”' ÌÉ!”( ÌÉ"”, ÌÉ&”2 ÌÉ,”3 ÌÉ-”; ÌÉ5”< ÌÉ6”= ÌÉ7”ÌB ÌÉ<”ÌC ÌÉ=”ÌH ÌÉÌB”ÌI ÌÉÌC”ÌK ÌÉÌE˜” ÌÊ” ÌÊ” ÌÊ” ÌÊ” ÌÊ”9 ÌÊ1”: ÌÊ2”; ÌÊ3‘” ÌË‘” ÌË˜” ÌÌ” ÌÌ” ÌÌ” ÌÌ” ÌÌ”ÌF ÌÌ>”ÌG ÌÌ?”ÌH ÌÌÌ@‘” ÌÍ‘”	 ÌÎ’” ÌĞ” ÌĞ™” ÌÑ” ÌÑ” ÌÑ” ÌÑ”# ÌÑ”$ ÌÑ ”' ÌÑ#”( ÌÑ$”* ÌÑ&˜” ÌÒ” ÌÒ” ÌÒ” ÌÒ” ÌÒ”Ìb ÌÒÌ\”Ìc ÌÒÌ]”Ìd ÌÒÌ^‘”	 ÌÓ’” ÌÕ” ÌÕ™” ÌÖ” ÌÖ” ÌÖ” ÌÖ”" ÌÖ”# ÌÖ”+ ÌÖ'”, ÌÖ(”. ÌÖ*’” Ì×”  Ì×˜” ÌØ” ÌØ” ÌØ” ÌØ” ÌØ”ÌO ÌØÌI”ÌP ÌØÌJ”ÌQ ÌØÌK‘”	 ÌÙ’” ÌÛ”# ÌÛ˜” ÌÜ” ÌÜ” ÌÜ” ÌÜ” ÌÜ” ÌÜ” ÌÜ”  ÌÜ–” Ìİ” Ìİ” Ìİ” Ìİ”ÌO ÌİÌI”ÌP ÌİÌJ‘”	 ÌŞ’” Ìà” Ìà›” Ìá” Ìá
+” Ìá” Ìá” Ìá” Ìá” Ìá”  Ìá”$ Ìá ”% Ìá!”& Ìá"–” Ìâ” Ìâ
+” Ìâ” Ìâ”7 Ìâ3”8 Ìâ4š” Ìã” Ìã” Ìã” Ìã” Ìã”  Ìã”$ Ìã ”* Ìã&”, Ìã(”- Ìã)’” Ìä” Ìä‘” Ìæ’” Ìç” Ìç
+–” Ìç” Ìç
+” ÍM” ÍM
+” ÍM”/ ÍM!–” Ìç” Ìç
+” ÍN” ÍN” ÍN”  ÍN”” Ìç” Ìç
+” ÍO”" ÍO’” Ìè” Ìè’” Ìé” Ìé	’” Ìè” Ìè–” Ìé” Ìé	” Ìõ” Ìõ” Ìõ”, Ìõ#’” Ìè” Ìè–” Ìé” Ìé	” Ìö” Ìö” Ìö” Ìö’” Ìè” Ìè˜” Ìé” Ìé	” Ì÷” Ì÷” Ì÷”( Ì÷”) Ì÷ ”/ Ì÷&’” Ìè” Ìè” Ìé” Ìé	” Ìø” Ìø” Ìø” Ìø” Ìø”  Ìø”" Ìø”$ Ìø”) Ìø ”+ Ìø"”- Ìø$”/ Ìø&’” Ìê” Ìê–” Ìê” Ìê” Ìë” Ìë” Ìë” Ìë–” Ìê” Ìê” Ìì” Ìì” Ìì” Ìì˜” Ìê” Ìê” Ìí” Ìí” Ìí”! Ìí”" Ìí”' Ìí Ÿ” Ìê” Ìê” Ìî” Ìî” Ìî” Ìî” Ìî”" Ìî”( Ìî!”) Ìî"”- Ìî&”/ Ìî(”0 Ìî)”1 Ìî*”2 Ìî+’” Ìï” Ìï’” Ìï” Ìï”” Ìğ” Ìğ” Ìğ” Ìğ–” Ìğ” Ìğ” Ìñ” Ìñ” Ìñ” Ìñ˜” Ìğ” Ìğ” Ìò” Ìò” Ìò”& Ìò ”' Ìò!”- Ìò'’” Ìğ” Ìğ’” Ìó” Ìó’” Ìó” Ìó’” Ìè” Ìè’” Ìé” Ìé	’” Ìú” Ìú–” Ìû” Ìû” Ìû” Ìû” Ìû”' Ìû’” Ìú” Ìú–” Ìû” Ìû” Í5” Í5”  Í5”! Í5˜” Ìü” Ìü” Ìü” Ìü”! Ìü”# Ìü”$ Ìü”& Ìü–” Ìü” Ìü” Í2	” Í2” Í2”/ Í2%” Ìü” Ìü” Í3	” Í3” Í3” Í3”  Í3”" Í3”$ Í3”& Í3”, Í3"”. Í3$”0 Í3&”2 Í3(’” Ìı
+” Ìı’”3 Ìı4”6 ÌıÌ@’” Ìş” Ìş–” Ìş” Ìş” Í.” Í.” Í.”4 Í.)˜” Ìş” Ìş” Í/”" Í/”# Í/”0 Í/%”1 Í/&”4 Í/)˜” Ìÿ” Ìÿ” Ìÿ” Ìÿ”" Ìÿ”' Ìÿ!”+ Ìÿ%”- Ìÿ'’”  Í ”0 Í  ’”  Í”% Í’”  Í ”0 Í  –”  Í”% Í”& Í”+ Í”, Í”. Í’”  Í ”0 Í  –”  Í”% Í”& Í”, Í”- Í”/ Í’”  Í ”0 Í  –”  Í”% Í”& Í”2 Í”3 Í ”5 Í"’”  Í ”0 Í  š”  Í”% Í”& Í”, Í”- Í”/ Í”3 Í ”5 Í"”7 Í$”9 Í&’”  Í ”0 Í  ˜”  Í”% Í”& Í”/ Í”0 Í”9 Í&”: Í'”? Í,’”  Í”& Í˜”  Í”& Í”' Í”1 Í”2 Í”ÌA Í+”ÌB Í,”ÌG Í1š”  Í”& Í”' Í”- Í”. Í”0 Í”4 Í”6 Í ”7 Í!”9 Í#–”  Í”& Í”' Í”, Í”- Í”2 Í–”  Í	”$ Í	”, Í	”/ Í	”0 Í	”4 Í	–”  Í	”$ Í	”% Í
+”- Í
+”. Í
+”0 Í
+ ””  Í	”$ Í	”% Í”. ÍÜ ”  Í	”$ Í	”% Í”, Í”- Í”/ Í”3 Í#”5 Í%”7 Í'”9 Í)”> Í.”Ì@ Í0”ÌB Í2”ÌD Í4”ÌG Í7”ÌI Í9”ÌJ Í:”ÌL Í<”ÌR ÍÌB”ÌT ÍÌD”ÌU ÍÌE”ÌW ÍÌG–”  Í	”$ Í	”% Í”4 Í$”5 Í%”> Í.–”  Í	”$ Í	”% Í”1 Í!”2 Í"”3 Í#–”  Í	”$ Í	”% Í”- Í”. Í”0 Í ’” Í	”  Í	’” Í”" Í’”  Í”% Í’” Í”! Í‘” Í‘” Í’”  Í”% Í’” Í”! Í’”  Í”& Í˜”  Í”& Í”' Í"”1 Í"”2 Í"”ÌA Í"+”ÌB Í",”ÌE Í"/š”  Í”& Í”' Í#”- Í#”. Í#”0 Í#”5 Í#”7 Í#!”8 Í#"”: Í#$–”  Í”& Í”' Í$”, Í$”- Í$”2 Í$–”  Í”$ Í”, Í”/ Í”0 Í”4 Í–”  Í”$ Í”% Í”- Í”. Í”0 Í ˜”  Í”$ Í”% Í”. Í”/ Í”4 Í$”5 Í%”: Í*Ü ”  Í”$ Í”% Í”, Í”- Í”/ Í”3 Í#”5 Í%”7 Í'”9 Í)”> Í.”Ì@ Í0”ÌB Í2”ÌD Í4”ÌG Í7”ÌI Í9”ÌJ Í:”ÌL Í<”ÌR ÍÌB”ÌT ÍÌD”ÌU ÍÌE”ÌW ÍÌG–”  Í”$ Í”% Í”4 Í$”5 Í%”> Í.–”  Í”$ Í”% Í”1 Í!”2 Í"”3 Í#–”  Í”$ Í”% Í ”- Í ”. Í ”0 Í  ’” Í”  Í’” Í”" Í’”  Í&”% Í&–”  Í&”% Í&”& Í'”+ Í'”, Í'”. Í'–”  Í&”% Í&”& Í(”, Í(”- Í(”/ Í(–”  Í&”% Í&”& Í)”2 Í)”3 Í) ”5 Í)"š”  Í&”% Í&”& Í*”, Í*”- Í*”/ Í*”4 Í*!”6 Í*#”8 Í*%”: Í*'˜”  Í&”% Í&”& Í+”/ Í+”0 Í+”9 Í+&”: Í+'”? Í+,‘” Í,’” Ìş” Ìş””/ Ìı”3 Ìı”4 Ìı”< Ìı’” Ìı
+” Ìı’” Ìü” Ìü’” Ìú” Ìú’” Ìû” Ìû’” Í7” Í7’” Í8” Í8	’” Í7” Í7–” Í8” Í8	” ÍH” ÍH” ÍH”, ÍH#’” Í7” Í7–” Í8” Í8	” ÍI” ÍI” ÍI” ÍI’” Í7” Í7Ü ” Í8” Í8	” ÍJ” ÍJ” ÍJ” ÍJ” ÍJ”  ÍJ”" ÍJ”$ ÍJ”) ÍJ ”+ ÍJ"”- ÍJ$”/ ÍJ&”5 ÍJ,”7 ÍJ.”9 ÍJ0”; ÍJ2’” Í7” Í7˜” Í8” Í8	” ÍK” ÍK”  ÍK”% ÍK”& ÍK”+ ÍK"” Í9” Í9” Í9” Í9”! Í9”# Í9”' Í9”( Í9”1 Í9&”3 Í9(”> Í93”Ì@ Í95”ÌK Í9Ì@”ÌM Í9ÌB–” Í9” Í9” Í:” Í:”  Í:”! Í:–” Í9” Í9” Í;” Í;” Í;” Í;Ü ” Í9” Í9” Í<” Í<” Í<” Í<” Í<”  Í< ”" Í<"”% Í<%”) Í<)”* Í<*”3 Í<3”6 Í<6”7 Í<7”8 Í<8”9 Í<9”: Í<:” Í9” Í9” Í=” Í=” Í=” Í=”! Í=”# Í=”$ Í=”& Í=”+ Í=#”Ì› Í=<”Ì Í=>˜” Í9” Í9” Í>”" Í>”# Í>”( Í> ”) Í>!”. Í>&’” Í9” Í9”” Í@” Í@”# Í@”' Í@–” Í@” Í@” ÍA” ÍA” ÍA” ÍA˜” Í@” Í@” ÍB” ÍB” ÍB”" ÍB”# ÍB”( ÍB –” Í@” Í@” ÍC”" ÍC”# ÍC”, ÍC$–” Í@” Í@” ÍD” ÍD”  ÍD”" ÍD” Í@” Í@” ÍE” ÍE” ÍE” ÍE”! ÍE”# ÍE”% ÍE”' ÍE”, ÍE$”. ÍE&”0 ÍE(”2 ÍE*Ÿ” Í@” Í@” ÍF” ÍF” ÍF” ÍF”  ÍF”# ÍF”' ÍF”( ÍF ”7 ÍF/”9 ÍF1”: ÍF2”; ÍF3”< ÍF4’” Í@” Í@’” Í7” Í7’” Í8” Í8	’” Ìç” Ìç
+‘” ÍPÔrG–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜ ‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌĞ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  Ìİ ‘”  ÌŞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìğ ‘”  Ìñ ‘”  Ìò ‘”  Ìó ‘”  Ìô ‘”  Ìõ ‘”  Ìö ‘”  Ì÷ ‘”  Ìø ‘”  Ìù ‘”  Ìú ‘”  Ìû ‘”  Ìü ‘”  Ìı ‘”  Ìş ‘”  Ìÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ÔrH’§missing¦pluginÃ¦genAbcÂÔ  ÔrI”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache“ÔrJ•¤type¥start£endªspecifiers¦source±ImportDeclarationÌ€Ì¢‘ÔrK”¤type¥start£end¥local¶ImportDefaultSpecifierÌ‡ÌÔrL”¤type¥start£end¤nameªIdentifierÌ‡Ì¦routerÔrM•¤type¥start£end¥value£raw§LiteralÌ“Ì¡¬@ohos.router®'@ohos.router'J±ImportDeclarationÌ¤ÌÆ‘K¶ImportDefaultSpecifierÌ«Ì¯LªIdentifierÌ«Ì¯¤httpM§LiteralÌµÌÅ®@ohos.net.http°'@ohos.net.http'J±ImportDeclarationÌÈÍ‘ÔrN•¤type¥start£end¨imported¥local¯ImportSpecifierÌÑÌçLªIdentifierÌÑÌç¶LAYOUT_WIDTH_OR_HEIGHTLªIdentifierÌÑÌç¶LAYOUT_WIDTH_OR_HEIGHTM§LiteralÌïÍ
+¹../common/CommonConstants»'../common/CommonConstants'
