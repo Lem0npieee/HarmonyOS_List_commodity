@@ -204,7 +204,7 @@ interface GoodsSeed {
 
 const goodsSeeds: GoodsSeed[] = [
   {
-    cover: $r('app.media.goodsImg'),
+    cover: $r('app.media.Bingjinlv_1'),
     title: $r('app.string.goods_tea_drink'),
     description: $r('app.string.advertising_language'),
     evaluate: $r('app.string.evaluate'),
@@ -217,7 +217,7 @@ const goodsSeeds: GoodsSeed[] = [
     isHot: true,
     isFreeShipping: true,
     hasCoupon: true,
-    detailImages: [$r('app.media.goodsImg_2'), $r('app.media.goodsImg_3'), $r('app.media.goodsImg_4')],
+    detailImages: [$r('app.media.Bingjinlv_1'), $r('app.media.Bingjinlv_2'), $r('app.media.Bingjinlv_3')],
     originalPrice: 299,
     salesCount: 7,
     rating: 4.8,
@@ -227,7 +227,7 @@ const goodsSeeds: GoodsSeed[] = [
     deliveryInfo: '不支持7天无理由退换'
   },
   {
-    cover: $r('app.media.goodsImg_2'),
+    cover: $r('app.media.Milktea_1'),
     title: $r('app.string.goods_milk_tea'),
     description: $r('app.string.advertising_language'),
     evaluate: $r('app.string.evaluate'),
@@ -240,7 +240,7 @@ const goodsSeeds: GoodsSeed[] = [
     isHot: true,
     isFreeShipping: true,
     hasCoupon: false,
-    detailImages: [$r('app.media.goodsImg'), $r('app.media.goodsImg_3')],
+    detailImages: [$r('app.media.Milktea_2'), $r('app.media.Milktea_3')],
     originalPrice: 350,
     salesCount: 12,
     rating: 4.9,
@@ -251,7 +251,7 @@ const goodsSeeds: GoodsSeed[] = [
   },
   
   {
-    cover: $r('app.media.goodsImg_3'),
+    cover: $r('app.media.goodsImg_Huawei_1'),
     title: $r('app.string.goods_android_phone'),
     description: $r('app.string.advertising_language'),
     evaluate: $r('app.string.evaluate'),
@@ -264,7 +264,7 @@ const goodsSeeds: GoodsSeed[] = [
     isHot: true,
     isFreeShipping: true,
     hasCoupon: true,
-    detailImages: [$r('app.media.goodsImg_4'), $r('app.media.goodsImg_2')],
+    detailImages: [$r('app.media.goodsImg_Huawei_2'), $r('app.media.goodsImg_Huawei_3')],
     originalPrice: 6999,
     salesCount: 3456,
     rating: 4.9,
@@ -274,7 +274,7 @@ const goodsSeeds: GoodsSeed[] = [
     deliveryInfo: '支持7天无理由退换'
   },
   {
-    cover: $r('app.media.goodsImg_4'),
+    cover: $r('app.media.goodsImg_IPhone_1'),
     title: $r('app.string.goods_ios_phone'),
     description: $r('app.string.advertising_language'),
     evaluate: $r('app.string.evaluate'),
@@ -287,7 +287,7 @@ const goodsSeeds: GoodsSeed[] = [
     isHot: true,
     isFreeShipping: false,
     hasCoupon: true,
-    detailImages: [$r('app.media.goodsImg'), $r('app.media.goodsImg_2'), $r('app.media.goodsImg_3')],
+    detailImages: [$r('app.media.goodsImg_IPhone_1'), $r('app.media.goodsImg_IPhone_2'), $r('app.media.goodsImg_IPhone_3')],
     originalPrice: 9999,
     salesCount: 8900,
     rating: 5.0,
@@ -297,7 +297,7 @@ const goodsSeeds: GoodsSeed[] = [
     deliveryInfo: '支持7天无理由退换'
   },
   {
-    cover: $r('app.media.goodsImg'),
+    cover: $r('app.media.coat_1'),
     title: $r('app.string.goods_mens_coat'),
     description: $r('app.string.advertising_language'),
     evaluate: $r('app.string.evaluate'),
@@ -310,7 +310,7 @@ const goodsSeeds: GoodsSeed[] = [
     isHot: false,
     isFreeShipping: true,
     hasCoupon: true,
-    detailImages: [$r('app.media.goodsImg_2'), $r('app.media.goodsImg_3'), $r('app.media.goodsImg_4')],
+    detailImages: [$r('app.media.coat_1'), $r('app.media.coat_2'), $r('app.media.coat_3')],
     originalPrice: 899,
     salesCount: 567,
     rating: 4.7,
@@ -320,7 +320,7 @@ const goodsSeeds: GoodsSeed[] = [
     deliveryInfo: '支持7天无理由退换'
   },
   {
-    cover: $r('app.media.goodsImg_2'),
+    cover: $r('app.media.dress_1'),
     title: $r('app.string.goods_womens_dress'),
     description: $r('app.string.advertising_language'),
     evaluate: $r('app.string.evaluate'),
@@ -333,7 +333,7 @@ const goodsSeeds: GoodsSeed[] = [
     isHot: true,
     isFreeShipping: true,
     hasCoupon: false,
-    detailImages: [$r('app.media.goodsImg'), $r('app.media.goodsImg_3'), $r('app.media.goodsImg_4')],
+    detailImages: [$r('app.media.dress_1'), $r('app.media.dress_2'), $r('app.media.dress_3')],
     originalPrice: 699,
     salesCount: 1234,
     rating: 4.8,
@@ -343,7 +343,7 @@ const goodsSeeds: GoodsSeed[] = [
     deliveryInfo: '支持7天无理由退换'
   },
   {
-    cover: $r('app.media.goodsImg_3'),
+    cover: $r('app.media.goodsImg_ThreeSquirrel_1'),
     title: $r('app.string.goods_snacks'),
     description: $r('app.string.advertising_language'),
     evaluate: $r('app.string.evaluate'),
@@ -356,7 +356,7 @@ const goodsSeeds: GoodsSeed[] = [
     isHot: true,
     isFreeShipping: true,
     hasCoupon: true,
-    detailImages: [$r('app.media.goodsImg'), $r('app.media.goodsImg_2'), $r('app.media.goodsImg_4')],
+    detailImages: [$r('app.media.goodsImg_ThreeSquirrel_2'), $r('app.media.goodsImg_ThreeSquirrel_3')],
     originalPrice: 358,
     salesCount: 5678,
     rating: 4.9,
@@ -366,7 +366,7 @@ const goodsSeeds: GoodsSeed[] = [
     deliveryInfo: '支持7天无理由退换'
   },
   {
-    cover: $r('app.media.goodsImg_4'),
+    cover: $r('app.media.goodsImg_NFC_1'),
     title: $r('app.string.goods_drinks'),
     description: $r('app.string.advertising_language'),
     evaluate: $r('app.string.evaluate'),
@@ -379,7 +379,7 @@ const goodsSeeds: GoodsSeed[] = [
     isHot: false,
     isFreeShipping: false,
     hasCoupon: true,
-    detailImages: [$r('app.media.goodsImg_2'), $r('app.media.goodsImg_3'), $r('app.media.goodsImg')],
+    detailImages: [$r('app.media.goodsImg_NFC_2'), $r('app.media.goodsImg_NFC_3')],
     originalPrice: 450,
     salesCount: 2345,
     rating: 4.8,
@@ -389,7 +389,7 @@ const goodsSeeds: GoodsSeed[] = [
     deliveryInfo: '不支持7天无理由退换'
   },
   {
-    cover: $r('app.media.goodsImg_2'),
+    cover: $r('app.media.goodsImg_Xiaoaiyinxiang_1'),
     title: $r('app.string.goods_smart_speaker'),
     description: $r('app.string.advertising_language'),
     evaluate: $r('app.string.evaluate'),
@@ -402,7 +402,7 @@ const goodsSeeds: GoodsSeed[] = [
     isHot: true,
     isFreeShipping: true,
     hasCoupon: true,
-    detailImages: [$r('app.media.goodsImg'), $r('app.media.goodsImg_3'), $r('app.media.goodsImg_4')],
+    detailImages: [$r('app.media.goodsImg_Xiaoaiyinxiang_2'), $r('app.media.goodsImg_Xiaoaiyinxiang_3'), $r('app.media.goodsImg_Xiaoaiyinxiang_4')],
     originalPrice: 899,
     salesCount: 4567,
     rating: 4.9,
@@ -412,7 +412,7 @@ const goodsSeeds: GoodsSeed[] = [
     deliveryInfo: '支持7天无理由退换'
   },
   {
-    cover: $r('app.media.goodsImg_3'),
+    cover: $r('app.media.goodsImg_Juicer_1'),
     title: $r('app.string.goods_kitchen_appliance'),
     description: $r('app.string.advertising_language'),
     evaluate: $r('app.string.evaluate'),
@@ -425,7 +425,7 @@ const goodsSeeds: GoodsSeed[] = [
     isHot: true,
     isFreeShipping: true,
     hasCoupon: false,
-    detailImages: [$r('app.media.goodsImg_4'), $r('app.media.goodsImg'), $r('app.media.goodsImg_2')],
+    detailImages: [$r('app.media.goodsImg_Juicer_1'), $r('app.media.goodsImg_Juicer_2'), $r('app.media.goodsImg_Juicer_3')],
     originalPrice: 799,
     salesCount: 3456,
     rating: 4.7,
