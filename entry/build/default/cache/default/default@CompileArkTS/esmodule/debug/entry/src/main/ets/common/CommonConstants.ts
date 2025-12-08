@@ -34,7 +34,7 @@ export const ICON_HEIGHT: number = 40;
 // list space
 export const LIST_ITEM_SPACE: number = 16;
 // navigation title
-export const STORE: ResourceStr = { "id": 16777255, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
+export const STORE: ResourceStr = { "id": 16777268, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
 // offset range
 export const MAX_OFFSET_Y: number = 100;
 // refresh time

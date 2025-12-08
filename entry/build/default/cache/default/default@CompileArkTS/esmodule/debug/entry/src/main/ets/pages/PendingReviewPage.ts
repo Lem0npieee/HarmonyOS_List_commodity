@@ -138,7 +138,7 @@ export default class PendingReviewPage extends ViewPU {
             Column.create();
             Column.width(LAYOUT_WIDTH_OR_HEIGHT);
             Column.layoutWeight(1);
-            Column.backgroundColor({ "id": 16777288, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Column.backgroundColor({ "id": 16777304, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
@@ -178,7 +178,7 @@ export default class PendingReviewPage extends ViewPU {
                         Column.alignItems(HorizontalAlign.Center);
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Image.create({ "id": 16777324, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                        Image.create({ "id": 16777318, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                         Image.width(80);
                         Image.height(80);
                         Image.margin({ bottom: 12 });
@@ -186,7 +186,7 @@ export default class PendingReviewPage extends ViewPU {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Text.create('当前没有待评价的商品');
                         Text.fontSize(14);
-                        Text.fontColor({ "id": 16777287, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                        Text.fontColor({ "id": 16777303, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                     }, Text);
                     Text.pop();
                     Column.pop();
@@ -246,7 +246,7 @@ export default class PendingReviewPage extends ViewPU {
                                         Text.create(product.title);
                                         Text.fontSize(16);
                                         Text.fontWeight(FontWeight.Medium);
-                                        Text.fontColor({ "id": 16777284, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                                        Text.fontColor({ "id": 16777300, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                                         Text.maxLines(2);
                                         Text.textAlign(TextAlign.Start);
                                         Text.textOverflow({ overflow: TextOverflow.Ellipsis });
@@ -256,14 +256,14 @@ export default class PendingReviewPage extends ViewPU {
                                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                                         Text.create('¥' + product.price.toFixed(0));
                                         Text.fontSize(18);
-                                        Text.fontColor({ "id": 16777286, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                                        Text.fontColor({ "id": 16777302, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                                         Text.fontWeight(FontWeight.Bold);
                                     }, Text);
                                     Text.pop();
                                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                                         Text.create('状态：待评价');
                                         Text.fontSize(12);
-                                        Text.fontColor({ "id": 16777287, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                                        Text.fontColor({ "id": 16777303, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                                     }, Text);
                                     Text.pop();
                                     Column.pop();
@@ -281,7 +281,7 @@ export default class PendingReviewPage extends ViewPU {
                                     Row.pop();
                                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                                         Divider.create();
-                                        Divider.color({ "id": 16777285, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                                        Divider.color({ "id": 16777301, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                                         Divider.opacity(0.6);
                                         Divider.margin({ top: 12 });
                                     }, Divider);
@@ -376,7 +376,7 @@ export default class PendingReviewPage extends ViewPU {
                         const forEachItemGenFunction = _item => {
                             const star = _item;
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                Image.create(star <= this.currentRating ? { "id": 16777330, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : { "id": 16777329, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                                Image.create(star <= this.currentRating ? { "id": 16777357, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : { "id": 16777353, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                                 Image.width(24);
                                 Image.height(24);
                                 Image.onClick(() => {

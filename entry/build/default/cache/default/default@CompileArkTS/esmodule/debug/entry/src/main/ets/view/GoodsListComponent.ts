@@ -149,9 +149,9 @@ export default class GoodsList extends ViewPU {
             if (this.showLoading) {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create({ "id": 16777243, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                        Text.create({ "id": 16777256, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                         Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
-                        Text.fontColor({ "id": 16777287, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                        Text.fontColor({ "id": 16777303, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                         Text.margin({ top: 8 });
                     }, Text);
                     Text.pop();
@@ -190,15 +190,15 @@ export default class GoodsList extends ViewPU {
             Column.alignItems(HorizontalAlign.Center);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777315, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.create({ "id": 16777324, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.width(120);
             Image.height(120);
             Image.margin({ bottom: 16 });
         }, Image);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create({ "id": 16777233, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.create({ "id": 16777235, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Text.fontSize(commonConst.NORMAL_FONT_SIZE);
-            Text.fontColor({ "id": 16777287, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.fontColor({ "id": 16777303, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Text);
         Text.pop();
         Column.pop();
@@ -240,7 +240,7 @@ export default class GoodsList extends ViewPU {
             Text.create(item.title);
             Text.fontSize(commonConst.NORMAL_FONT_SIZE);
             Text.fontWeight(FontWeight.Medium);
-            Text.fontColor({ "id": 16777284, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.fontColor({ "id": 16777300, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Text.maxLines(2);
             Text.textAlign(TextAlign.Start);
             Text.textOverflow({ overflow: TextOverflow.Ellipsis });
@@ -250,7 +250,7 @@ export default class GoodsList extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(item.description);
             Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
-            Text.fontColor({ "id": 16777287, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.fontColor({ "id": 16777303, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Text.maxLines(2);
             Text.textAlign(TextAlign.Start);
             Text.textOverflow({ overflow: TextOverflow.Ellipsis });
@@ -269,10 +269,10 @@ export default class GoodsList extends ViewPU {
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Text.create(tag);
                     Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
-                    Text.fontColor({ "id": 16777286, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                    Text.fontColor({ "id": 16777302, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                     Text.padding({ left: 8, right: 8, top: 2, bottom: 2 });
                     Text.borderRadius(12);
-                    Text.backgroundColor({ "id": 16777289, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                    Text.backgroundColor({ "id": 16777305, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                 }, Text);
                 Text.pop();
             };
@@ -288,13 +288,13 @@ export default class GoodsList extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(`¥${item.price.toFixed(0)}`);
             Text.fontSize(commonConst.BIGGER_FONT_SIZE);
-            Text.fontColor({ "id": 16777286, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.fontColor({ "id": 16777302, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(item.evaluate);
             Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
-            Text.fontColor({ "id": 16777287, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.fontColor({ "id": 16777303, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Text);
         Text.pop();
         Row.pop();
@@ -302,7 +302,7 @@ export default class GoodsList extends ViewPU {
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Divider.create();
-            Divider.color({ "id": 16777285, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Divider.color({ "id": 16777301, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Divider.opacity(0.6);
             Divider.margin({ top: 12 });
         }, Divider);

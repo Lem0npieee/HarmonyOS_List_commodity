@@ -77,90 +77,90 @@ export interface GoodsListItemType {
     deliveryInfo?: string; // 配送信息
 }
 export const sortOptionMetas: SortOptionMeta[] = [
-    { id: SortOption.Comprehensive, title: { "id": 16777256, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-    { id: SortOption.Newest, title: { "id": 16777257, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-    { id: SortOption.PriceLow, title: { "id": 16777259, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-    { id: SortOption.PriceHigh, title: { "id": 16777258, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
+    { id: SortOption.Comprehensive, title: { "id": 16777269, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+    { id: SortOption.Newest, title: { "id": 16777270, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+    { id: SortOption.PriceLow, title: { "id": 16777272, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+    { id: SortOption.PriceHigh, title: { "id": 16777271, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
 ];
 export const filterOptionMetas: FilterOptionMeta[] = [
-    { id: 'free_shipping', title: { "id": 16777237, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-    { id: 'coupon', title: { "id": 16777236, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-    { id: 'hot', title: { "id": 16777238, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-    { id: 'new', title: { "id": 16777239, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
+    { id: 'free_shipping', title: { "id": 16777239, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+    { id: 'coupon', title: { "id": 16777238, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+    { id: 'hot', title: { "id": 16777240, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+    { id: 'new', title: { "id": 16777241, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
 ];
 export const tabBarMeta: TabMeta[] = [
     {
         id: CategoryType.Featured,
-        title: { "id": 16777254, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        title: { "id": 16777267, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         subCategories: [
-            { id: 'all', title: { "id": 16777262, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-            { id: 'trending', title: { "id": 16777274, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-            { id: 'limited', title: { "id": 16777268, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
+            { id: 'all', title: { "id": 16777275, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+            { id: 'trending', title: { "id": 16777290, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+            { id: 'limited', title: { "id": 16777283, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
         ],
         banner: {
-            primary: { "id": 16777228, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-            secondary: { "id": 16777229, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-            images: [{ "id": 16777291, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777292, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777293, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }]
+            primary: { "id": 16777230, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+            secondary: { "id": 16777231, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+            images: [{ "id": 16777325, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777326, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777327, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777328, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }]
         }
     },
     {
         id: CategoryType.Phone,
-        title: { "id": 16777244, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        title: { "id": 16777257, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         subCategories: [
-            { id: 'all', title: { "id": 16777262, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-            { id: 'android', title: { "id": 16777263, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-            { id: 'ios', title: { "id": 16777265, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-            { id: 'accessories', title: { "id": 16777261, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
+            { id: 'all', title: { "id": 16777275, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+            { id: 'android', title: { "id": 16777276, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+            { id: 'ios', title: { "id": 16777280, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+            { id: 'accessories', title: { "id": 16777274, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
         ],
         banner: {
-            primary: { "id": 16777226, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-            secondary: { "id": 16777227, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-            images: [{ "id": 16777292, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777293, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }]
+            primary: { "id": 16777228, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+            secondary: { "id": 16777229, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+            images: [{ "id": 16777326, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777327, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }]
         }
     },
     {
         id: CategoryType.Clothes,
-        title: { "id": 16777232, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        title: { "id": 16777234, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         subCategories: [
-            { id: 'all', title: { "id": 16777262, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-            { id: 'men', title: { "id": 16777269, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-            { id: 'women', title: { "id": 16777275, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-            { id: 'kids', title: { "id": 16777266, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
+            { id: 'all', title: { "id": 16777275, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+            { id: 'men', title: { "id": 16777284, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+            { id: 'women', title: { "id": 16777291, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+            { id: 'kids', title: { "id": 16777281, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
         ],
         banner: {
             primary: { "id": 16777222, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
             secondary: { "id": 16777223, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-            images: [{ "id": 16777293, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }]
+            images: [{ "id": 16777327, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777328, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }]
         }
     },
     {
         id: CategoryType.Food,
-        title: { "id": 16777300, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        title: { "id": 16777243, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         subCategories: [
-            { id: 'all', title: { "id": 16777262, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-            { id: 'snacks', title: { "id": 16777313, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-            { id: 'drinks', title: { "id": 16777311, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-            { id: 'fresh', title: { "id": 16777312, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
-        ],
-        banner: {
-            primary: { "id": 16777298, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-            secondary: { "id": 16777299, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-            images: [{ "id": 16777291, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }]
-        }
-    },
-    {
-        id: CategoryType.Home,
-        title: { "id": 16777242, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-        subCategories: [
-            { id: 'all', title: { "id": 16777262, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-            { id: 'furniture', title: { "id": 16777264, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-            { id: 'smart', title: { "id": 16777272, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-            { id: 'kitchen', title: { "id": 16777267, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
+            { id: 'all', title: { "id": 16777275, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+            { id: 'snacks', title: { "id": 16777288, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+            { id: 'drinks', title: { "id": 16777277, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+            { id: 'fresh', title: { "id": 16777278, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
         ],
         banner: {
             primary: { "id": 16777224, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
             secondary: { "id": 16777225, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-            images: [{ "id": 16777292, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777293, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }]
+            images: [{ "id": 16777325, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777328, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }]
+        }
+    },
+    {
+        id: CategoryType.Home,
+        title: { "id": 16777255, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        subCategories: [
+            { id: 'all', title: { "id": 16777275, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+            { id: 'furniture', title: { "id": 16777279, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+            { id: 'smart', title: { "id": 16777287, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+            { id: 'kitchen', title: { "id": 16777282, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
+        ],
+        banner: {
+            primary: { "id": 16777226, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+            secondary: { "id": 16777227, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+            images: [{ "id": 16777326, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777327, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }]
         }
     }
 ];
@@ -190,10 +190,10 @@ interface GoodsSeed {
 }
 const goodsSeeds: GoodsSeed[] = [
     {
-        cover: { "id": 16777291, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-        title: { "id": 16777309, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        cover: { "id": 16777307, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        title: { "id": 16777253, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         description: { "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-        evaluate: { "id": 16777235, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        evaluate: { "id": 16777237, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         price: 199,
         category: CategoryType.Featured,
         subCategory: 'trending',
@@ -203,7 +203,7 @@ const goodsSeeds: GoodsSeed[] = [
         isHot: true,
         isFreeShipping: true,
         hasCoupon: true,
-        detailImages: [{ "id": 16777292, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777293, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
+        detailImages: [{ "id": 16777307, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777308, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777309, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
         originalPrice: 299,
         salesCount: 7,
         rating: 4.8,
@@ -213,10 +213,10 @@ const goodsSeeds: GoodsSeed[] = [
         deliveryInfo: '不支持7天无理由退换'
     },
     {
-        cover: { "id": 16777292, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-        title: { "id": 16777306, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        cover: { "id": 16777310, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        title: { "id": 16777250, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         description: { "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-        evaluate: { "id": 16777235, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        evaluate: { "id": 16777237, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         price: 265,
         category: CategoryType.Featured,
         subCategory: 'limited',
@@ -226,7 +226,7 @@ const goodsSeeds: GoodsSeed[] = [
         isHot: true,
         isFreeShipping: true,
         hasCoupon: false,
-        detailImages: [{ "id": 16777291, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777293, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
+        detailImages: [{ "id": 16777311, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777312, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
         originalPrice: 350,
         salesCount: 12,
         rating: 4.9,
@@ -236,10 +236,10 @@ const goodsSeeds: GoodsSeed[] = [
         deliveryInfo: '支持7天无理由退换'
     },
     {
-        cover: { "id": 16777293, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-        title: { "id": 16777301, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        cover: { "id": 16777329, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        title: { "id": 16777245, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         description: { "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-        evaluate: { "id": 16777235, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        evaluate: { "id": 16777237, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         price: 810,
         category: CategoryType.Phone,
         subCategory: 'android',
@@ -249,7 +249,7 @@ const goodsSeeds: GoodsSeed[] = [
         isHot: true,
         isFreeShipping: true,
         hasCoupon: true,
-        detailImages: [{ "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777292, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
+        detailImages: [{ "id": 16777330, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777331, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
         originalPrice: 6999,
         salesCount: 3456,
         rating: 4.9,
@@ -259,10 +259,10 @@ const goodsSeeds: GoodsSeed[] = [
         deliveryInfo: '支持7天无理由退换'
     },
     {
-        cover: { "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-        title: { "id": 16777303, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        cover: { "id": 16777332, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        title: { "id": 16777247, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         description: { "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-        evaluate: { "id": 16777235, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        evaluate: { "id": 16777237, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         price: 999,
         category: CategoryType.Phone,
         subCategory: 'ios',
@@ -272,7 +272,7 @@ const goodsSeeds: GoodsSeed[] = [
         isHot: true,
         isFreeShipping: false,
         hasCoupon: true,
-        detailImages: [{ "id": 16777291, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777292, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777293, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
+        detailImages: [{ "id": 16777332, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777333, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777334, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
         originalPrice: 9999,
         salesCount: 8900,
         rating: 5.0,
@@ -282,10 +282,10 @@ const goodsSeeds: GoodsSeed[] = [
         deliveryInfo: '支持7天无理由退换'
     },
     {
-        cover: { "id": 16777291, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-        title: { "id": 16777305, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        cover: { "id": 16777313, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        title: { "id": 16777249, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         description: { "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-        evaluate: { "id": 16777235, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        evaluate: { "id": 16777237, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         price: 520,
         category: CategoryType.Clothes,
         subCategory: 'men',
@@ -295,7 +295,7 @@ const goodsSeeds: GoodsSeed[] = [
         isHot: false,
         isFreeShipping: true,
         hasCoupon: true,
-        detailImages: [{ "id": 16777292, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777293, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
+        detailImages: [{ "id": 16777313, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777314, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777315, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
         originalPrice: 899,
         salesCount: 567,
         rating: 4.7,
@@ -305,10 +305,10 @@ const goodsSeeds: GoodsSeed[] = [
         deliveryInfo: '支持7天无理由退换'
     },
     {
-        cover: { "id": 16777292, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-        title: { "id": 16777310, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        cover: { "id": 16777321, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        title: { "id": 16777254, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         description: { "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-        evaluate: { "id": 16777235, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        evaluate: { "id": 16777237, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         price: 430,
         category: CategoryType.Clothes,
         subCategory: 'women',
@@ -318,7 +318,7 @@ const goodsSeeds: GoodsSeed[] = [
         isHot: true,
         isFreeShipping: true,
         hasCoupon: false,
-        detailImages: [{ "id": 16777291, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777293, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
+        detailImages: [{ "id": 16777321, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777322, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777323, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
         originalPrice: 699,
         salesCount: 1234,
         rating: 4.8,
@@ -328,10 +328,10 @@ const goodsSeeds: GoodsSeed[] = [
         deliveryInfo: '支持7天无理由退换'
     },
     {
-        cover: { "id": 16777293, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-        title: { "id": 16777308, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        cover: { "id": 16777341, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        title: { "id": 16777252, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         description: { "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-        evaluate: { "id": 16777235, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        evaluate: { "id": 16777237, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         price: 260,
         category: CategoryType.Food,
         subCategory: 'snacks',
@@ -341,7 +341,7 @@ const goodsSeeds: GoodsSeed[] = [
         isHot: true,
         isFreeShipping: true,
         hasCoupon: true,
-        detailImages: [{ "id": 16777291, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777292, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
+        detailImages: [{ "id": 16777342, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777343, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
         originalPrice: 358,
         salesCount: 5678,
         rating: 4.9,
@@ -351,10 +351,10 @@ const goodsSeeds: GoodsSeed[] = [
         deliveryInfo: '支持7天无理由退换'
     },
     {
-        cover: { "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-        title: { "id": 16777302, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        cover: { "id": 16777338, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        title: { "id": 16777246, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         description: { "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-        evaluate: { "id": 16777235, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        evaluate: { "id": 16777237, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         price: 320,
         category: CategoryType.Food,
         subCategory: 'drinks',
@@ -364,7 +364,7 @@ const goodsSeeds: GoodsSeed[] = [
         isHot: false,
         isFreeShipping: false,
         hasCoupon: true,
-        detailImages: [{ "id": 16777292, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777293, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777291, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
+        detailImages: [{ "id": 16777339, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777340, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
         originalPrice: 450,
         salesCount: 2345,
         rating: 4.8,
@@ -374,10 +374,10 @@ const goodsSeeds: GoodsSeed[] = [
         deliveryInfo: '不支持7天无理由退换'
     },
     {
-        cover: { "id": 16777292, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-        title: { "id": 16777307, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        cover: { "id": 16777344, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        title: { "id": 16777251, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         description: { "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-        evaluate: { "id": 16777235, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        evaluate: { "id": 16777237, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         price: 680,
         category: CategoryType.Home,
         subCategory: 'smart',
@@ -387,7 +387,7 @@ const goodsSeeds: GoodsSeed[] = [
         isHot: true,
         isFreeShipping: true,
         hasCoupon: true,
-        detailImages: [{ "id": 16777291, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777293, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
+        detailImages: [{ "id": 16777345, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777346, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777347, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
         originalPrice: 899,
         salesCount: 4567,
         rating: 4.9,
@@ -397,10 +397,10 @@ const goodsSeeds: GoodsSeed[] = [
         deliveryInfo: '支持7天无理由退换'
     },
     {
-        cover: { "id": 16777293, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-        title: { "id": 16777304, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        cover: { "id": 16777335, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        title: { "id": 16777248, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         description: { "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-        evaluate: { "id": 16777235, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        evaluate: { "id": 16777237, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         price: 450,
         category: CategoryType.Home,
         subCategory: 'kitchen',
@@ -410,7 +410,7 @@ const goodsSeeds: GoodsSeed[] = [
         isHot: true,
         isFreeShipping: true,
         hasCoupon: false,
-        detailImages: [{ "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777291, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777292, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
+        detailImages: [{ "id": 16777335, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777336, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777337, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
         originalPrice: 799,
         salesCount: 3456,
         rating: 4.7,
@@ -420,10 +420,10 @@ const goodsSeeds: GoodsSeed[] = [
         deliveryInfo: '支持7天无理由退换'
     }
 ];
-const TAG_HOT: Resource = { "id": 16777278, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
-const TAG_NEW: Resource = { "id": 16777279, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
-const TAG_FREE: Resource = { "id": 16777277, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
-const TAG_COUPON: Resource = { "id": 16777276, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
+const TAG_HOT: Resource = { "id": 16777294, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
+const TAG_NEW: Resource = { "id": 16777295, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
+const TAG_FREE: Resource = { "id": 16777293, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
+const TAG_COUPON: Resource = { "id": 16777292, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
 const WATERFALL_HEIGHTS: number[] = [180, 210, 240, 200, 230];
 const buildTags = (seed: GoodsSeed, dynamicHot: boolean, dynamicNew: boolean, dynamicCoupon: boolean): Resource[] => {
     const tags: Resource[] = [];

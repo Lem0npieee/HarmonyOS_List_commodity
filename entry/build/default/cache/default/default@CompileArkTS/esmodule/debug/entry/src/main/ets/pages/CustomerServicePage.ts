@@ -288,7 +288,7 @@ export default class CustomerServicePage extends ViewPU {
             Column.create();
             Column.width(LAYOUT_WIDTH_OR_HEIGHT);
             Column.height('100%');
-            Column.backgroundColor({ "id": 16777288, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Column.backgroundColor({ "id": 16777304, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 顶部导航
@@ -351,7 +351,7 @@ export default class CustomerServicePage extends ViewPU {
                         this.ifElseBranchUpdateFunction(0, () => {
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
                                 // AI 在左：头像 + 气泡
-                                Image.create({ "id": 16777327, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                                Image.create({ "id": 16777355, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                                 // AI 在左：头像 + 气泡
                                 Image.width(36);
                                 // AI 在左：头像 + 气泡
@@ -372,7 +372,7 @@ export default class CustomerServicePage extends ViewPU {
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
                                 Text.create(msg.text);
                                 Text.fontSize(14);
-                                Text.fontColor({ "id": 16777284, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                                Text.fontColor({ "id": 16777300, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                                 Text.padding({ left: 12, right: 12, top: 8, bottom: 8 });
                                 Text.backgroundColor('#F0F0F0');
                                 Text.borderRadius(8);
@@ -410,7 +410,7 @@ export default class CustomerServicePage extends ViewPU {
                             Text.pop();
                             Column.pop();
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                Image.create({ "id": 16777328, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                                Image.create({ "id": 16777359, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                                 Image.width(36);
                                 Image.height(36);
                                 Image.borderRadius(18);
@@ -446,7 +446,7 @@ export default class CustomerServicePage extends ViewPU {
             Search.layoutWeight(1);
             Search.height(48);
             Search.onChange((v: string) => { this.inputText = v; });
-            Search.border({ width: 1, color: { "id": 16777285, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } });
+            Search.border({ width: 1, color: { "id": 16777301, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } });
             Search.backgroundColor(Color.White);
         }, Search);
         Search.pop();

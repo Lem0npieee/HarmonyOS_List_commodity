@@ -14,8 +14,8 @@ export default class BannerComponent extends ViewPU {
             this.paramsGenerator_ = paramsLambda;
         }
         this.banner = {
-            primary: { "id": 16777228, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-            secondary: { "id": 16777229, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+            primary: { "id": 16777230, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+            secondary: { "id": 16777231, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
             images: []
         };
         this.controller = new SwiperController();

@@ -156,7 +156,7 @@ export default class AIChatPage extends ViewPU {
             Column.create();
             Column.width('100%');
             Column.height('100%');
-            Column.backgroundColor({ "id": 16777288, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Column.backgroundColor({ "id": 16777304, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 顶部导航（固定，不随消息滚动）
@@ -187,7 +187,7 @@ export default class AIChatPage extends ViewPU {
             Text.create('AI 对话搜索');
             Text.fontSize(18);
             Text.fontWeight(FontWeight.Medium);
-            Text.fontColor({ "id": 16777284, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.fontColor({ "id": 16777300, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Text);
         Text.pop();
         Row.pop();
@@ -237,10 +237,10 @@ export default class AIChatPage extends ViewPU {
                             Blank.pop();
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
                                 Text.create(msg.content);
-                                Text.backgroundColor({ "id": 16777289, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                                Text.backgroundColor({ "id": 16777305, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                                 Text.padding({ left: 12, right: 12, top: 8, bottom: 8 });
                                 Text.borderRadius(12);
-                                Text.fontColor({ "id": 16777284, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                                Text.fontColor({ "id": 16777300, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                                 Text.maxLines(10);
                             }, Text);
                             Text.pop();
@@ -264,7 +264,7 @@ export default class AIChatPage extends ViewPU {
                                 Text.backgroundColor(Color.White);
                                 Text.padding({ left: 12, right: 12, top: 8, bottom: 8 });
                                 Text.borderRadius(12);
-                                Text.fontColor({ "id": 16777284, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                                Text.fontColor({ "id": 16777300, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                                 Text.maxLines(10);
                             }, Text);
                             Text.pop();
@@ -316,7 +316,7 @@ export default class AIChatPage extends ViewPU {
                                                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                                                             Text.create(item.title);
                                                             Text.fontSize(commonConst.NORMAL_FONT_SIZE);
-                                                            Text.fontColor({ "id": 16777284, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                                                            Text.fontColor({ "id": 16777300, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                                                             Text.maxLines(2);
                                                             Text.textOverflow({ overflow: TextOverflow.Ellipsis });
                                                             Text.margin({ top: 6 });
@@ -325,7 +325,7 @@ export default class AIChatPage extends ViewPU {
                                                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                                                             Text.create('¥' + item.price.toFixed(2));
                                                             Text.fontSize(commonConst.BIGGER_FONT_SIZE);
-                                                            Text.fontColor({ "id": 16777286, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                                                            Text.fontColor({ "id": 16777302, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                                                             Text.fontWeight(FontWeight.Medium);
                                                             Text.margin({ top: 4 });
                                                         }, Text);
@@ -371,11 +371,11 @@ export default class AIChatPage extends ViewPU {
             Row.padding({ left: 12, right: 12, top: 8, bottom: 12 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Search.create({ value: this.inputText, placeholder: { "id": 16777253, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } });
+            Search.create({ value: this.inputText, placeholder: { "id": 16777266, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } });
             Search.layoutWeight(1);
             Search.height(48);
             Search.onChange((v: string) => { this.inputText = v; });
-            Search.border({ width: 1, color: { "id": 16777285, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } });
+            Search.border({ width: 1, color: { "id": 16777301, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } });
             Search.backgroundColor(Color.White);
         }, Search);
         Search.pop();

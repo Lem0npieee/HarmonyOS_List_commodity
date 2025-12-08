@@ -38,7 +38,7 @@ export default class SelectedComponent extends ViewPU {
         this.onSubCategoryChange = () => { };
         this.onSortChange = () => { };
         this.onFilterToggle = () => { };
-        this.searchPlaceholder = { "id": 16777253, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
+        this.searchPlaceholder = { "id": 16777266, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
         this.subCategoryScroller = new Scroller();
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
@@ -170,7 +170,7 @@ export default class SelectedComponent extends ViewPU {
         If.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Divider.create();
-            Divider.color({ "id": 16777285, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Divider.color({ "id": 16777301, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Divider.height(1);
         }, Divider);
         Column.pop();
@@ -184,7 +184,7 @@ export default class SelectedComponent extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Search.create({ value: this.searchValue, placeholder: this.searchPlaceholder });
             Search.searchButton('搜索');
-            Search.border({ width: 1, color: { "id": 16777285, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } });
+            Search.border({ width: 1, color: { "id": 16777301, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } });
             Search.height(40);
             Search.layoutWeight(1);
             Search.backgroundColor(Color.White);
@@ -204,7 +204,7 @@ export default class SelectedComponent extends ViewPU {
             Button.margin({ left: 8 });
             Button.height(40);
             Button.padding({ left: 12, right: 12 });
-            Button.backgroundColor({ "id": 16777282, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Button.backgroundColor({ "id": 16777298, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Button.fontColor(Color.White);
             Button.borderRadius(8);
             Button.onClick(() => {
@@ -225,7 +225,7 @@ export default class SelectedComponent extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('子分类');
             Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
-            Text.fontColor({ "id": 16777284, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.fontColor({ "id": 16777300, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -244,8 +244,8 @@ export default class SelectedComponent extends ViewPU {
                     Text.create(sub.title);
                     Text.padding({ left: 12, right: 12, top: 6, bottom: 6 });
                     Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
-                    Text.backgroundColor(this.currentSubCategory === sub.id ? { "id": 16777282, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : { "id": 16777289, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-                    Text.fontColor(this.currentSubCategory === sub.id ? Color.White : { "id": 16777284, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                    Text.backgroundColor(this.currentSubCategory === sub.id ? { "id": 16777298, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : { "id": 16777305, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                    Text.fontColor(this.currentSubCategory === sub.id ? Color.White : { "id": 16777300, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                     Text.borderRadius(16);
                     Text.onClick(() => {
                         this.currentSubCategory = sub.id;
@@ -269,9 +269,9 @@ export default class SelectedComponent extends ViewPU {
             Row.margin({ top: 6, bottom: 6 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create({ "id": 16777260, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.create({ "id": 16777273, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
-            Text.fontColor({ "id": 16777284, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.fontColor({ "id": 16777300, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -282,12 +282,12 @@ export default class SelectedComponent extends ViewPU {
                     Text.create(option.title);
                     Text.padding({ left: 12, right: 12, top: 6, bottom: 6 });
                     Text.borderRadius(16);
-                    Text.backgroundColor(this.sortOption === option.id ? { "id": 16777282, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : Color.Transparent);
+                    Text.backgroundColor(this.sortOption === option.id ? { "id": 16777298, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : Color.Transparent);
                     Text.border({
                         width: 1,
-                        color: this.sortOption === option.id ? { "id": 16777282, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : { "id": 16777285, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }
+                        color: this.sortOption === option.id ? { "id": 16777298, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : { "id": 16777301, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }
                     });
-                    Text.fontColor(this.sortOption === option.id ? Color.White : { "id": 16777284, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                    Text.fontColor(this.sortOption === option.id ? Color.White : { "id": 16777300, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                     Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
                     Text.onClick(() => {
                         this.sortOption = option.id;
@@ -309,9 +309,9 @@ export default class SelectedComponent extends ViewPU {
             Row.margin({ top: 6, bottom: 6 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create({ "id": 16777240, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.create({ "id": 16777242, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
-            Text.fontColor({ "id": 16777284, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.fontColor({ "id": 16777300, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -327,10 +327,10 @@ export default class SelectedComponent extends ViewPU {
                     Text.borderRadius(16);
                     Text.border({
                         width: 1,
-                        color: this.activeFilters.indexOf(filter.id) >= 0 ? { "id": 16777282, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : { "id": 16777285, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }
+                        color: this.activeFilters.indexOf(filter.id) >= 0 ? { "id": 16777298, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : { "id": 16777301, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }
                     });
-                    Text.backgroundColor(this.activeFilters.indexOf(filter.id) >= 0 ? { "id": 16777289, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : Color.Transparent);
-                    Text.fontColor(this.activeFilters.indexOf(filter.id) >= 0 ? { "id": 16777286, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : { "id": 16777284, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                    Text.backgroundColor(this.activeFilters.indexOf(filter.id) >= 0 ? { "id": 16777305, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : Color.Transparent);
+                    Text.fontColor(this.activeFilters.indexOf(filter.id) >= 0 ? { "id": 16777302, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : { "id": 16777300, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                     Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
                     Text.margin({ right: 8, bottom: 8 });
                     Text.onClick(() => {

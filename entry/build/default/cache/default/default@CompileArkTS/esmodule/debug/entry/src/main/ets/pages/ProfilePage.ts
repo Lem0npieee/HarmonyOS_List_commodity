@@ -120,7 +120,7 @@ export default class ProfilePage extends ViewPU {
             Column.width(LAYOUT_WIDTH_OR_HEIGHT);
             Column.layoutWeight(1);
             Column.padding({ top: AppStorage.get<number>('statusBarHeight') });
-            Column.backgroundColor({ "id": 16777288, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Column.backgroundColor({ "id": 16777304, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 顶部用户信息卡
@@ -135,7 +135,7 @@ export default class ProfilePage extends ViewPU {
             Row.alignItems(VerticalAlign.Top);
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777291, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.create({ "id": 16777325, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.width(64);
             Image.height(64);
             Image.borderRadius(32);
@@ -153,7 +153,7 @@ export default class ProfilePage extends ViewPU {
             Text.create('tbNick_04ies');
             Text.fontSize(18);
             Text.fontWeight(FontWeight.Medium);
-            Text.fontColor({ "id": 16777284, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.fontColor({ "id": 16777300, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -173,19 +173,19 @@ export default class ProfilePage extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('关注店铺');
             Text.fontSize(12);
-            Text.fontColor({ "id": 16777287, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.fontColor({ "id": 16777303, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('地址');
             Text.fontSize(12);
-            Text.fontColor({ "id": 16777287, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.fontColor({ "id": 16777303, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('客服');
             Text.fontSize(12);
-            Text.fontColor({ "id": 16777287, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.fontColor({ "id": 16777303, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Text);
         Text.pop();
         Row.pop();
@@ -214,7 +214,7 @@ export default class ProfilePage extends ViewPU {
             Column.layoutWeight(1);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777323, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.create({ "id": 16777317, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.width(36);
             Image.height(36);
         }, Image);
@@ -233,7 +233,7 @@ export default class ProfilePage extends ViewPU {
             Stack.create();
         }, Stack);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777322, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.create({ "id": 16777316, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.width(36);
             Image.height(36);
         }, Image);
@@ -286,7 +286,7 @@ export default class ProfilePage extends ViewPU {
             Stack.create();
         }, Stack);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777325, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.create({ "id": 16777319, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.width(36);
             Image.height(36);
         }, Image);
@@ -338,7 +338,7 @@ export default class ProfilePage extends ViewPU {
             Stack.create();
         }, Stack);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777324, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.create({ "id": 16777318, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.width(36);
             Image.height(36);
         }, Image);
@@ -379,7 +379,7 @@ export default class ProfilePage extends ViewPU {
             Column.layoutWeight(1);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777326, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.create({ "id": 16777358, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.width(36);
             Image.height(36);
         }, Image);
@@ -498,7 +498,7 @@ export default class ProfilePage extends ViewPU {
                             Text.create(entry.product.title);
                             Text.fontSize(16);
                             Text.fontWeight(FontWeight.Medium);
-                            Text.fontColor({ "id": 16777284, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                            Text.fontColor({ "id": 16777300, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                             Text.maxLines(2);
                             Text.textAlign(TextAlign.Start);
                             Text.textOverflow({ overflow: TextOverflow.Ellipsis });
@@ -508,7 +508,7 @@ export default class ProfilePage extends ViewPU {
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             Text.create(`¥${entry.product.price.toFixed(0)}`);
                             Text.fontSize(18);
-                            Text.fontColor({ "id": 16777286, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                            Text.fontColor({ "id": 16777302, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                             Text.fontWeight(FontWeight.Bold);
                         }, Text);
                         Text.pop();
@@ -516,7 +516,7 @@ export default class ProfilePage extends ViewPU {
                         Row.pop();
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             Divider.create();
-                            Divider.color({ "id": 16777285, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                            Divider.color({ "id": 16777301, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                             Divider.opacity(0.6);
                             Divider.margin({ top: 12 });
                         }, Divider);

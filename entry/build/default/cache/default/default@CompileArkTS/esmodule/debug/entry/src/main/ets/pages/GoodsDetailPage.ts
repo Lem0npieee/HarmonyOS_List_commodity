@@ -837,7 +837,7 @@ class GoodsDetailPage extends ViewPU {
             Row.create();
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777291, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.create({ "id": 16777325, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.width(16);
             Image.height(16);
             Image.borderRadius(8);
@@ -1028,7 +1028,7 @@ class GoodsDetailPage extends ViewPU {
             Row.margin({ bottom: 8 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777291, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.create({ "id": 16777325, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.width(40);
             Image.height(40);
             Image.borderRadius(20);
@@ -1203,7 +1203,7 @@ class GoodsDetailPage extends ViewPU {
                     Row.create();
                 }, Row);
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
-                    Image.create({ "id": 16777291, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                    Image.create({ "id": 16777325, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                     Image.width(32);
                     Image.height(32);
                     Image.borderRadius(16);
@@ -1227,7 +1227,7 @@ class GoodsDetailPage extends ViewPU {
                     const forEachItemGenFunction = _item => {
                         const star = _item;
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
-                            Image.create(star <= review.rating ? { "id": 16777330, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : { "id": 16777329, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                            Image.create(star <= review.rating ? { "id": 16777357, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : { "id": 16777353, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                             Image.width(12);
                             Image.height(12);
                             Image.margin({ right: 2 });
@@ -1351,7 +1351,7 @@ class GoodsDetailPage extends ViewPU {
                     Row.width('100%');
                 }, Row);
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
-                    Image.create({ "id": 16777291, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                    Image.create({ "id": 16777325, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                     Image.width(24);
                     Image.height(24);
                     Image.borderRadius(12);
@@ -1523,7 +1523,7 @@ class GoodsDetailPage extends ViewPU {
             Column.justifyContent(FlexAlign.Center);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777314, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.create({ "id": 16777320, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.width(22);
             Image.height(22);
             Image.fillColor(Color.Black);
@@ -1558,7 +1558,7 @@ class GoodsDetailPage extends ViewPU {
             });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create(this.isFavorited ? { "id": 16777318, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : { "id": 16777317, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.create(this.isFavorited ? { "id": 16777360, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : { "id": 16777356, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.width(22);
             Image.height(22);
             Image.fillColor(this.isFavorited ? '#FF6600' : Color.Black);
@@ -1594,7 +1594,7 @@ class GoodsDetailPage extends ViewPU {
             });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777316, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.create({ "id": 16777351, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.width(22);
             Image.height(22);
             Image.fillColor(Color.Black);

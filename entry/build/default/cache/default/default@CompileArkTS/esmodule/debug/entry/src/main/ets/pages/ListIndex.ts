@@ -45,7 +45,7 @@ class ListIndex extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Stack.create();
             Stack.height(LAYOUT_WIDTH_OR_HEIGHT);
-            Stack.backgroundColor({ "id": 16777288, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Stack.backgroundColor({ "id": 16777304, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Stack.padding({
                 top: AppStorage.get<number>('statusBarHeight')
             });
@@ -144,9 +144,9 @@ class ListIndex extends ViewPU {
             // 底部导航栏： 首页 | 购物车 | 我的（在当前页面内切换）
             Row.height(64);
             // 底部导航栏： 首页 | 购物车 | 我的（在当前页面内切换）
-            Row.backgroundColor({ "id": 16777288, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Row.backgroundColor({ "id": 16777304, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             // 底部导航栏： 首页 | 购物车 | 我的（在当前页面内切换）
-            Row.border({ width: 1, color: { "id": 16777285, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } });
+            Row.border({ width: 1, color: { "id": 16777301, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 首页
@@ -163,14 +163,14 @@ class ListIndex extends ViewPU {
             });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777320, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.create({ "id": 16777349, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.width(28);
             Image.height(28);
         }, Image);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('首页');
             Text.fontSize(12);
-            Text.fontColor(this.selectedBottomIndex === 0 ? Color.Black : { "id": 16777287, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.fontColor(this.selectedBottomIndex === 0 ? Color.Black : { "id": 16777303, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Text);
         Text.pop();
         // 首页
@@ -190,14 +190,14 @@ class ListIndex extends ViewPU {
             });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777319, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.create({ "id": 16777348, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.width(28);
             Image.height(28);
         }, Image);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('购物车');
             Text.fontSize(12);
-            Text.fontColor(this.selectedBottomIndex === 1 ? Color.Black : { "id": 16777287, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.fontColor(this.selectedBottomIndex === 1 ? Color.Black : { "id": 16777303, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Text);
         Text.pop();
         // 购物车
@@ -217,14 +217,14 @@ class ListIndex extends ViewPU {
             });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777321, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.create({ "id": 16777352, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.width(28);
             Image.height(28);
         }, Image);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('我的');
             Text.fontSize(12);
-            Text.fontColor(this.selectedBottomIndex === 2 ? Color.Black : { "id": 16777287, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.fontColor(this.selectedBottomIndex === 2 ? Color.Black : { "id": 16777303, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Text);
         Text.pop();
         // 我的

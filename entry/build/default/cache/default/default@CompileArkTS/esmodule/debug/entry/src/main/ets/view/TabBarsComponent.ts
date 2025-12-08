@@ -39,7 +39,7 @@ export default class TabBar extends ViewPU {
         this.dataSourceCache = new Map();
         this.__tabsIndex = new ObservedPropertySimplePU(0, this, "tabsIndex");
         this.__refreshStatus = new ObservedPropertySimplePU(false, this, "refreshStatus");
-        this.__refreshText = new ObservedPropertyObjectPU({ "id": 16777251, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, this, "refreshText");
+        this.__refreshText = new ObservedPropertyObjectPU({ "id": 16777264, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, this, "refreshText");
         this.__tabStates = new ObservedPropertyObjectPU([], this, "tabStates");
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
@@ -240,9 +240,9 @@ export default class TabBar extends ViewPU {
                     }, { name: "GoodsList" });
                 }
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
-                    Text.create({ "id": 16777280, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                    Text.create({ "id": 16777296, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                     Text.fontSize(NORMAL_FONT_SIZE);
-                    Text.fontColor({ "id": 16777287, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                    Text.fontColor({ "id": 16777303, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
                     Text.margin({ top: 12, bottom: 12 });
                 }, Text);
                 Text.pop();
@@ -265,7 +265,7 @@ export default class TabBar extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(tab.title);
             Text.fontSize(this.tabsIndex === index ? BIGGER_FONT_SIZE : NORMAL_FONT_SIZE);
-            Text.fontColor(this.tabsIndex === index ? Color.Black : { "id": 16777287, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.fontColor(this.tabsIndex === index ? Color.Black : { "id": 16777303, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Text.maxLines(MAX_LINES_TEXT);
             Text.minFontSize(NORMAL_FONT_SIZE);
             Text.maxFontSize(BIGGER_FONT_SIZE);
@@ -455,22 +455,22 @@ export default class TabBar extends ViewPU {
         }
         this.isRefreshing = true;
         this.refreshStatus = true;
-        this.refreshText = { "id": 16777251, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
+        this.refreshText = { "id": 16777264, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
         const onWait = setTimeout(() => {
-            this.refreshText = { "id": 16777252, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
+            this.refreshText = { "id": 16777265, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
         }, REFRESH_TIME);
         try {
             await this.getDataSourceByIndex(tabIndex).refresh();
-            this.refreshText = { "id": 16777249, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
+            this.refreshText = { "id": 16777262, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
         }
         catch (err) {
-            this.refreshText = { "id": 16777250, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
+            this.refreshText = { "id": 16777263, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
         }
         finally {
             clearTimeout(onWait);
             setTimeout(() => {
                 this.refreshStatus = false;
-                this.refreshText = { "id": 16777251, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
+                this.refreshText = { "id": 16777264, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
                 this.isRefreshing = false;
                 this.canTriggerRefresh = false;
             }, 300);
