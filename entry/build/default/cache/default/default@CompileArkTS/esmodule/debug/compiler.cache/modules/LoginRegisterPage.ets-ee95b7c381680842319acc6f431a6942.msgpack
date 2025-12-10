@@ -1,0 +1,496 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚ,Èif (!("finalizeConstruction" in ViewPU.prototype)) {
+    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
+}
+import router from '@ohos.router';
+import prompt from '@system.prompt';
+import AuthStore from '../common/AuthStore';
+const ORANGE = '#FF7A00';
+class LoginRegisterPage extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.__mode = new ObservedPropertySimplePU('login', this, "mode");
+        this.__username = new ObservedPropertySimplePU('', this, "username");
+        this.__phone = new ObservedPropertySimplePU('', this, "phone");
+        this.__password = new ObservedPropertySimplePU('', this, "password");
+        this.__busy = new ObservedPropertySimplePU(false, this, "busy");
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        if (params.mode !== undefined) {
+            this.mode = params.mode;
+        }
+        if (params.username !== undefined) {
+            this.username = params.username;
+        }
+        if (params.phone !== undefined) {
+            this.phone = params.phone;
+        }
+        if (params.password !== undefined) {
+            this.password = params.password;
+        }
+        if (params.busy !== undefined) {
+            this.busy = params.busy;
+        }
+    }
+    updateStateVars(params) {
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__mode.purgeDependencyOnElmtId(rmElmtId);
+        this.__username.purgeDependencyOnElmtId(rmElmtId);
+        this.__phone.purgeDependencyOnElmtId(rmElmtId);
+        this.__password.purgeDependencyOnElmtId(rmElmtId);
+        this.__busy.purgeDependencyOnElmtId(rmElmtId);
+    }
+    aboutToBeDeleted() {
+        this.__mode.aboutToBeDeleted();
+        this.__username.aboutToBeDeleted();
+        this.__phone.aboutToBeDeleted();
+        this.__password.aboutToBeDeleted();
+        this.__busy.aboutToBeDeleted();
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    get mode() {
+        return this.__mode.get();
+    }
+    set mode(newValue) {
+        this.__mode.set(newValue);
+    }
+    get username() {
+        return this.__username.get();
+    }
+    set username(newValue) {
+        this.__username.set(newValue);
+    }
+    get phone() {
+        return this.__phone.get();
+    }
+    set phone(newValue) {
+        this.__phone.set(newValue);
+    }
+    get password() {
+        return this.__password.get();
+    }
+    set password(newValue) {
+        this.__password.set(newValue);
+    }
+    get busy() {
+        return this.__busy.get();
+    }
+    set busy(newValue) {
+        this.__busy.set(newValue);
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Navigation.create(new NavPathStack(), { moduleName: "entry", pagePath: "entry/src/main/ets/pages/LoginRegisterPage", isUserCreateStack: false });
+            Navigation.title(this.mode === 'login' ? 'ç™»å½•' : 'æ³¨å†Œ');
+            Navigation.hideBackButton(false);
+            Navigation.backgroundColor('#FFFFFF');
+        }, Navigation);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create({ space: 16 });
+            Column.padding({ left: 20, right: 20, top: 12, bottom: 20 });
+            Column.backgroundColor('#F7F7F7');
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // é¡¶éƒ¨åˆ‡æ¢æç¤º
+            Column.create({ space: 6 });
+            // é¡¶éƒ¨åˆ‡æ¢æç¤º
+            Column.width('100%');
+            // é¡¶éƒ¨åˆ‡æ¢æç¤º
+            Column.padding({ top: 12 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.mode === 'login' ? 'æ¬¢è¿ç™»å½•' : 'æ¬¢è¿æ³¨å†Œ');
+            Text.fontSize(24);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor(Color.Black);
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.mode === 'login' ? 'è¾“å…¥æ‰‹æœºå·å’Œå¯†ç ç™»å½•æ‚¨çš„è´¦å·' : 'åˆ›å»ºä¸€ä¸ªæ–°è´¦å·ä»¥ä¾¿è´­ç‰©å’Œæ”¶è—');
+            Text.fontSize(14);
+            Text.fontColor('#666666');
+        }, Text);
+        Text.pop();
+        // é¡¶éƒ¨åˆ‡æ¢æç¤º
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // è¡¨å•åŒºåŸŸ
+            Column.create({ space: 12 });
+            // è¡¨å•åŒºåŸŸ
+            Column.width('100%');
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            if (this.mode === 'register') {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('ç”¨æˆ·å');
+                        Text.fontSize(14);
+                        Text.fontColor('#444444');
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        TextInput.create({
+                            placeholder: 'è¯·è¾“å…¥ç”¨æˆ·å',
+                            text: this.username
+                        });
+                        TextInput.height(44);
+                        TextInput.fontSize(16);
+                        TextInput.padding({ left: 12, right: 12 });
+                        TextInput.border({ width: 1, color: '#EEEEEE' });
+                        TextInput.borderRadius(10);
+                        TextInput.backgroundColor(Color.White);
+                        TextInput.onChange((value) => {
+                            this.username = value;
+                        });
+                    }, TextInput);
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('æ‰‹æœºå·');
+            Text.fontSize(14);
+            Text.fontColor('#444444');
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            TextInput.create({
+                placeholder: 'è¯·è¾“å…¥æ‰‹æœºå·',
+                text: this.phone
+            });
+            TextInput.height(44);
+            TextInput.fontSize(16);
+            TextInput.padding({ left: 12, right: 12 });
+            TextInput.border({ width: 1, color: '#EEEEEE' });
+            TextInput.borderRadius(10);
+            TextInput.backgroundColor(Color.White);
+            TextInput.type(InputType.Number);
+            TextInput.onChange((value) => {
+                this.phone = value;
+            });
+        }, TextInput);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('å¯†ç ');
+            Text.fontSize(14);
+            Text.fontColor('#444444');
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            TextInput.create({
+                placeholder: 'è¯·è¾“å…¥å¯†ç ',
+                text: this.password
+            });
+            TextInput.height(44);
+            TextInput.fontSize(16);
+            TextInput.padding({ left: 12, right: 12 });
+            TextInput.border({ width: 1, color: '#EEEEEE' });
+            TextInput.borderRadius(10);
+            TextInput.backgroundColor(Color.White);
+            TextInput.type(InputType.Password);
+            TextInput.onChange((value) => {
+                this.password = value;
+            });
+        }, TextInput);
+        // è¡¨å•åŒºåŸŸ
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // ä¸»æŒ‰é’®
+            Button.createWithLabel(this.mode === 'login' ? 'ç™»å½•' : 'æ³¨å†Œå¹¶ç™»å½•');
+            // ä¸»æŒ‰é’®
+            Button.height(48);
+            // ä¸»æŒ‰é’®
+            Button.width('100%');
+            // ä¸»æŒ‰é’®
+            Button.fontSize(16);
+            // ä¸»æŒ‰é’®
+            Button.fontColor(Color.White);
+            // ä¸»æŒ‰é’®
+            Button.backgroundColor(ORANGE);
+            // ä¸»æŒ‰é’®
+            Button.borderRadius(12);
+            // ä¸»æŒ‰é’®
+            Button.enabled(!this.busy);
+            // ä¸»æŒ‰é’®
+            Button.onClick(() => this.submit());
+        }, Button);
+        // ä¸»æŒ‰é’®
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // åˆ‡æ¢é“¾æ¥
+            Text.create(this.mode === 'login' ? 'è¿˜æ²¡æœ‰è´¦å·ï¼Ÿç‚¹æ­¤æ³¨å†Œ' : 'å·²æœ‰è´¦å·ï¼Ÿç‚¹æ­¤ç™»å½•');
+            // åˆ‡æ¢é“¾æ¥
+            Text.fontSize(14);
+            // åˆ‡æ¢é“¾æ¥
+            Text.fontColor(ORANGE);
+            // åˆ‡æ¢é“¾æ¥
+            Text.textAlign(TextAlign.Center);
+            // åˆ‡æ¢é“¾æ¥
+            Text.width('100%');
+            // åˆ‡æ¢é“¾æ¥
+            Text.onClick(() => this.toggleMode());
+        }, Text);
+        // åˆ‡æ¢é“¾æ¥
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+        }, Blank);
+        Blank.pop();
+        Column.pop();
+        Navigation.pop();
+    }
+    toggleMode() {
+        this.mode = this.mode === 'login' ? 'register' : 'login';
+        this.password = '';
+    }
+    async submit() {
+        if (this.busy) {
+            return;
+        }
+        this.busy = true;
+        try {
+            if (this.mode === 'register') {
+                const result = await AuthStore.register(this.username, this.phone, this.password);
+                prompt.showToast({ message: result.message, duration: 1500 });
+                if (result.ok) {
+                    router.back();
+                }
+            }
+            else {
+                const result = await AuthStore.login(this.phone, this.password);
+                prompt.showToast({ message: result.message, duration: 1500 });
+                if (result.ok) {
+                    router.back();
+                }
+            }
+        }
+        catch (err) {
+            prompt.showToast({ message: 'æ“ä½œå¤±è´¥ï¼Œè¯·ç¨åé‡è¯•', duration: 1500 });
+            console.error('ç™»å½•/æ³¨å†Œå¤±è´¥:', String(err));
+        }
+        finally {
+            this.busy = false;
+        }
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+    static getEntryName() {
+        return "LoginRegisterPage";
+    }
+}
+registerNamedRoute(() => new LoginRegisterPage(undefined, {}), "", { bundleName: "com.example.list_harmony", moduleName: "entry", pagePath: "pages/LoginRegisterPage", pageFullPath: "entry/src/main/ets/pages/LoginRegisterPage", integratedHsp: "false", moduleType: "followWithHap" });
+//# sourceMappingURL=LoginRegisterPage.js.mapÂ“ÙR hvigor_ignore_D:_DevEco Studio2_sdk_default_openharmony_ets_api_@ohos.router.d.tsÙT hvigor_ignore_D:_DevEco Studio2_sdk_default_openharmony_ets_api_@system.prompt.d.tsÙtD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets\common\AuthStore.etsÙ{D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets\pages\LoginRegisterPage.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath§checker¬shouldEmitJs¥entryÃÂÙRD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entryÙLD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity¥entry¥1.0.0Ô  ÙRD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entryÔrCÜ ®¬getNodeCount²getIdentifierCount®getSymbolCount¬getTypeCountµgetInstantiationCountµgetRelationCacheSizes±isUndefinedSymbol±isArgumentsSymbol¯isUnknownSymbol¯getMergedSymbol®getDiagnostics´getGlobalDiagnostics´getRecursionIdentity¶getUnmatchedProperties¹getTypeOfSymbolAtLocation¯getTypeOfSymbolÙ(getSymbolsOfParameterPropertyDeclaration·getDeclaredTypeOfSymbol³getPropertiesOfType±getPropertyOfTypeÙ"getPrivateIdentifierPropertyOfType·getTypeOfPropertyOfType²getIndexInfoOfType³getIndexInfosOfTypeºgetIndexInfosOfIndexSymbol³getSignaturesOfType²getIndexTypeOfType¬getIndexType¬getBaseTypes¸getBaseTypeOfLiteralType®getWidenedType³getTypeFromTypeNode°getParameterTypeÙ$getParameterIdentifierNameAtPosition¸getPromisedTypeOfPromise®getAwaitedType¸getReturnTypeOfSignature®isNullableType¯getNullableType²getNonNullableType²getNonOptionalType°getTypeArguments®typeToTypeNodeÙ$indexInfoToIndexSignatureDeclaration¿signatureToSignatureDeclaration²symbolToEntityName²symbolToExpression¬symbolToNodeÙ!symbolToTypeParameterDeclarations¼symbolToParameterDeclarationºtypeParameterToDeclaration±getSymbolsInScope³getSymbolAtLocation·getIndexInfosAtLocationÙ!getShorthandAssignmentValueSymbolÙ#getExportSpecifierLocalTargetSymbol·getExportSymbolOfSymbol±getTypeAtLocationÙ tryGetTypeAtLocationWithoutCheckºgetTypeOfAssignmentPatternÙ*getPropertySymbolOfDestructuringAssignment±signatureToString¬typeToString®symbolToStringµtypePredicateToString®writeSignature©writeType«writeSymbol²writeTypePredicate¼getAugmentedPropertiesOfType®getRootSymbols²getSymbolOfExpando±getContextualTypeÙ(getContextualTypeForObjectLiteralElementÙ#getContextualTypeForArgumentAtIndexÙ getContextualTypeForJsxAttribute²isContextSensitiveÙ!getTypeOfPropertyOfContextualTypeµgetFullyQualifiedNameÙ#tryGetResolvedSignatureWithoutCheck´getResolvedSignatureÙ/getResolvedSignatureForStringLiteralCompletionsÙ$getResolvedSignatureForSignatureHelpµgetExpandedParameters¹hasEffectiveRestParameterºcontainsArgumentsReference°getConstantValueµisValidPropertyAccessÙ#isValidPropertyAccessForCompletions»getSignatureFromDeclarationºisImplementationOfOverload¹getImmediateAliasedSymbol°getAliasedSymbol¯getEmitResolver²getExportsOfModule¿getExportsAndPropertiesOfModuleÙ forEachExportAndPropertyOfModule¯getSymbolWalker±getAmbientModules¹getJsxIntrinsicTagNamesAt³isOptionalParameter»tryGetMemberInModuleExportsÙ(tryGetMemberInModuleExportsAndProperties´tryFindAmbientModuleÙ(tryFindAmbientModuleWithoutAugmentations¯getApparentType¬getUnionType²isTypeAssignableTo³createAnonymousType¯createSignature¬createSymbol¯createIndexInfoªgetAnyType­getStringType­getNumberType±createPromiseType¯createArrayType¹getElementTypeOfArrayType®getBooleanType¬getFalseType«getTrueType«getVoidType°getUndefinedType«getNullType¯getESSymbolType¬getNeverType¯getOptionalType®getPromiseType²getPromiseLikeType´getAsyncIterableType²isSymbolAccessible«isArrayType«isTupleType¯isArrayLikeTypeÙ#isTypeInvalidDueToUnionDiscriminantºgetExactOptionalProperties¿getAllPossiblePropertiesOfTypesÙ(getSuggestedSymbolForNonexistentPropertyÙ#getSuggestionForNonexistentPropertyÙ,getSuggestedSymbolForNonexistentJSXAttributeÙ&getSuggestedSymbolForNonexistentSymbolÙ!getSuggestionForNonexistentSymbolÙ&getSuggestedSymbolForNonexistentModuleÙ!getSuggestionForNonexistentExportÙ+getSuggestedSymbolForNonexistentClassMember·getBaseConstraintOfType»getDefaultFromTypeParameter«resolveName¯getJsxNamespaceµgetJsxFragmentFactory¸getAccessibleSymbolChain»getTypePredicateOfSignature¹resolveExternalModuleName»resolveExternalModuleSymbol°tryGetThisTypeAt¹getTypeArgumentConstraint¸getSuggestionDiagnostics¸runWithCancellationTokenÙ3getLocalTypeParametersOfClassOrInterfaceOrTypeAlias´isDeclarationVisible´isPropertyAccessible»getTypeOnlyAliasDeclaration¿getMemberOverrideModifierStatusÙ!isTypeParameterPossiblyReferenced²getConstEnumRelate´clearConstEnumRelateµdeleteConstEnumRelateÙ$getTypeArgumentsForResolvedSignatureµgetCheckedSourceFilesÙ"collectHaveTsNoCheckFilesForLinter·clearQualifiedNameCache®isStaticRecord²isStaticSourceFile³createIntrinsicTypeÔ  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  ÃÃÚhimport router from '@ohos.router';
+import prompt from '@system.prompt';
+import AuthStore from '../common/AuthStore';
+
+const ORANGE: string = '#FF7A00';
+
+@Entry
+@Component
+struct LoginRegisterPage {
+  @State private mode: 'login' | 'register' = 'login';
+  @State private username: string = '';
+  @State private phone: string = '';
+  @State private password: string = '';
+  @State private busy: boolean = false;
+
+  build() {
+    Navigation() {
+      Column({ space: 16 }) {
+        // é¡¶éƒ¨åˆ‡æ¢æç¤º
+        Column({ space: 6 }) {
+          Text(this.mode === 'login' ? 'æ¬¢è¿ç™»å½•' : 'æ¬¢è¿æ³¨å†Œ')
+            .fontSize(24)
+            .fontWeight(FontWeight.Bold)
+            .fontColor(Color.Black)
+          Text(this.mode === 'login' ? 'è¾“å…¥æ‰‹æœºå·å’Œå¯†ç ç™»å½•æ‚¨çš„è´¦å·' : 'åˆ›å»ºä¸€ä¸ªæ–°è´¦å·ä»¥ä¾¿è´­ç‰©å’Œæ”¶è—')
+            .fontSize(14)
+            .fontColor('#666666')
+        }
+        .width('100%')
+        .padding({ top: 12 })
+
+        // è¡¨å•åŒºåŸŸ
+        Column({ space: 12 }) {
+          if (this.mode === 'register') {
+            Text('ç”¨æˆ·å')
+              .fontSize(14)
+              .fontColor('#444444')
+            TextInput({
+              placeholder: 'è¯·è¾“å…¥ç”¨æˆ·å',
+              text: this.username
+            })
+              .height(44)
+              .fontSize(16)
+              .padding({ left: 12, right: 12 })
+              .border({ width: 1, color: '#EEEEEE' })
+              .borderRadius(10)
+              .backgroundColor(Color.White)
+              .onChange((value: string) => {
+                this.username = value;
+              })
+          }
+
+          Text('æ‰‹æœºå·')
+            .fontSize(14)
+            .fontColor('#444444')
+          TextInput({
+            placeholder: 'è¯·è¾“å…¥æ‰‹æœºå·',
+            text: this.phone
+          })
+            .height(44)
+            .fontSize(16)
+            .padding({ left: 12, right: 12 })
+            .border({ width: 1, color: '#EEEEEE' })
+            .borderRadius(10)
+            .backgroundColor(Color.White)
+            .type(InputType.Number)
+            .onChange((value: string) => {
+              this.phone = value;
+            })
+
+          Text('å¯†ç ')
+            .fontSize(14)
+            .fontColor('#444444')
+          TextInput({
+            placeholder: 'è¯·è¾“å…¥å¯†ç ',
+            text: this.password
+          })
+            .height(44)
+            .fontSize(16)
+            .padding({ left: 12, right: 12 })
+            .border({ width: 1, color: '#EEEEEE' })
+            .borderRadius(10)
+            .backgroundColor(Color.White)
+            .type(InputType.Password)
+            .onChange((value: string) => {
+              this.password = value;
+            })
+        }
+        .width('100%')
+
+        // ä¸»æŒ‰é’®
+        Button(this.mode === 'login' ? 'ç™»å½•' : 'æ³¨å†Œå¹¶ç™»å½•')
+          .height(48)
+          .width('100%')
+          .fontSize(16)
+          .fontColor(Color.White)
+          .backgroundColor(ORANGE)
+          .borderRadius(12)
+          .enabled(!this.busy)
+          .onClick(() => this.submit())
+
+        // åˆ‡æ¢é“¾æ¥
+        Text(this.mode === 'login' ? 'è¿˜æ²¡æœ‰è´¦å·ï¼Ÿç‚¹æ­¤æ³¨å†Œ' : 'å·²æœ‰è´¦å·ï¼Ÿç‚¹æ­¤ç™»å½•')
+          .fontSize(14)
+          .fontColor(ORANGE)
+          .textAlign(TextAlign.Center)
+          .width('100%')
+          .onClick(() => this.toggleMode())
+
+        Blank()
+      }
+      .padding({ left: 20, right: 20, top: 12, bottom: 20 })
+      .backgroundColor('#F7F7F7')
+    }
+    .title(this.mode === 'login' ? 'ç™»å½•' : 'æ³¨å†Œ')
+    .hideBackButton(false)
+    .backgroundColor('#FFFFFF')
+  }
+
+  private toggleMode(): void {
+    this.mode = this.mode === 'login' ? 'register' : 'login';
+    this.password = '';
+  }
+
+  private async submit(): Promise<void> {
+    if (this.busy) {
+      return;
+    }
+    this.busy = true;
+    try {
+      if (this.mode === 'register') {
+        const result = await AuthStore.register(this.username, this.phone, this.password);
+        prompt.showToast({ message: result.message, duration: 1500 });
+        if (result.ok) {
+          router.back();
+        }
+      } else {
+        const result = await AuthStore.login(this.phone, this.password);
+        prompt.showToast({ message: result.message, duration: 1500 });
+        if (result.ok) {
+          router.back();
+        }
+      }
+    } catch (err) {
+      prompt.showToast({ message: 'æ“ä½œå¤±è´¥ï¼Œè¯·ç¨åé‡è¯•', duration: 1500 });
+      console.error('ç™»å½•/æ³¨å†Œå¤±è´¥:', String(err));
+    } finally {
+      this.busy = false;
+    }
+  }
+}
+ÀÔrD“¬@ohos.router®@system.prompt³../common/AuthStoreÔrE—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÃÙR hvigor_ignore_D:_DevEco Studio2_sdk_default_openharmony_ets_api_@ohos.router.d.tsAÃªoh-resolveÂEAÃÙT hvigor_ignore_D:_DevEco Studio2_sdk_default_openharmony_ets_api_@system.prompt.d.tsAÃªoh-resolveÂEAÂÙtD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets\common\AuthStore.etsAÃªoh-resolveÂ“ÔrF–§version¤fileªsourceRoot§sources¥names¨mappings´LoginRegisterPage.js ‘µLoginRegisterPage.etsÜ–”    ”  ”  ”  ”!  !”"  "–”   ” ” ” ”# #”$ $–”   ” ” ” ”+ +”, ,–”   ” ” ” ”  ” !’” ” ‘”  ’”3 	.”: 	5’”7 
+$”9 
+&’”4 !”6 #’”7 $”9 &’”3 !”8 &‘” !’” 	” 	’” 	” 	’” 
+” 
+’” 
+” 
+’” ” ’” ” ’” ” ’” ” ’” ” ’” ” ‘” ’” ” Ü ” ” ” Ìr” Ìr
+” Ìr”! Ìr”" Ìr”& Ìr”+ Ìr”2 Ìr ”3 Ìr!”4 Ìr"”5 Ìr#”9 Ìr'”: Ìr(”; Ìr)”< Ìr*”Ì@ Ìr.–” ” ” Ìs”% Ìs”& Ìs”+ Ìs–” ” ” Ìt”& Ìt”' Ìt”0 Ìt˜” ” ” ” ”! ”# ”% ”' Ü ” ” ” Ìo” Ìo” Ìo” Ìo”! Ìo”# Ìo”% Ìo”' Ìo”, Ìo ”. Ìo"”0 Ìo$”2 Ìo&”5 Ìo)”7 Ìo+”9 Ìo-”; Ìo/”ÌA Ìo5”ÌC Ìo7”ÌE Ìo9”ÌG Ìo;–” ” ” Ìp”" Ìp”# Ìp”, Ìp ’” ” ˜” ” ” ” ”! ”# ”$ ”& ’” ” –” ” ” 	” ” ” ’” ” š” ” ” 	” ” ” ”  ”" ”$ ”& Ü ” 
+” ” ” ” ”! ”& ”- $”. %”/ &”0 '”6 -”7 .”8 /”9 0”? 6–” 
+” ” ” ” ” ˜” 
+” ” ” ” ”& "”' #”+ '˜” 
+” ” ” ” ”  ”! ”& "’” 
+” Ü ” 
+” ” ” ” ”! ”& ”- $”. %”/ &”0 '”Ì@ 7”ÌA 8”ÌB 9”ÌC :”ÌS ÌJ–” 
+” ” ” ” ” –” 
+” ” ” ” ”$  ’” 
+” ’” ” ’” ” ’” ” ˜”  ”  ”  ”  ”!  ”#  ”%  ”'  ’” ” –”  ”  ” ÌX	” ÌX” ÌX” ÌX˜” !
+” !” !” !” !” !”( !&”* !(”” "” "”$ "”) "–” "” "” #”% #”& #”( #–” "” "” $”& $”' $”0 $"’” "” "“” %”! %”) %”” &”' &”) &”1 &#–” '”  '”" '”& '”' '”/ '!‘” (–” %”! %”" )”( )”) )”+ )–” %”! %”" *”* *”+ *”- *” %”! %”" +”) +”* +”, +”0 +”2 +”4 +!”6 +#”; +(”= +*”? +,”ÌA +.” %”! %”" ,”( ,”) ,”+ ,”0 ,”2 ,”3 , ”5 ,"”: ,'”< ,)”ÌE ,2”ÌG ,4–” %”! %”" -”. -”/ -”1 -˜” %”! %”" .”1 .”2 .”7 .$”8 .%”= .*™” %”! %”" /”* /”+ /”, /”1 /&”3 /(”5 /*—” 0”  0”! 0”) 0”, 0 ”1 0%”2 0&’” 1” 1‘” 2‘” 2”” 4
+” 4” 4” 4–” 4
+” 4” 5” 5” 5” 5–” 4
+” 4” 6” 6” 6”$ 6 ’” 4
+” 4“” 7
+” 7” 7”” 8” 8” 8”% 8!–” 9” 9” 9” 9” 9”  9‘” :–” 7
+” 7” ;” ;” ;” ;–” 7
+” 7” <” <” <”! <” 7
+” 7” =” =” =”  =”$ =”& =”( =”* =!”/ =&”1 =(”3 =*”5 =,” 7
+” 7” >” >” >” >”$ >”& >”' >”) > ”. >%”0 >'”9 >0”; >2–” 7
+” 7” ?”" ?”# ?”% ?˜” 7
+” 7” Ì@”% Ì@”& Ì@”+ Ì@"”, Ì@#”1 Ì@(˜” 7
+” 7” ÌA” ÌA” ÌA”$ ÌA”% ÌA”+ ÌA"™” 7
+” 7” ÌB” ÌB” ÌB”  ÌB”% ÌB$”' ÌB&”) ÌB(—” ÌC” ÌC” ÌC” ÌC” ÌC”" ÌC ”# ÌC!’” ÌD” ÌD”” ÌF
+” ÌF” ÌF” ÌF–” ÌF
+” ÌF” ÌG” ÌG” ÌG” ÌG–” ÌF
+” ÌF” ÌH” ÌH” ÌH”$ ÌH ’” ÌF
+” ÌF“” ÌI
+” ÌI” ÌI”” ÌJ” ÌJ” ÌJ”$ ÌJ –” ÌK” ÌK” ÌK” ÌK” ÌK”# ÌK‘” ÌL–” ÌI
+” ÌI” ÌM” ÌM” ÌM” ÌM–” ÌI
+” ÌI” ÌN” ÌN” ÌN”! ÌN” ÌI
+” ÌI” ÌO” ÌO” ÌO”  ÌO”$ ÌO”& ÌO”( ÌO”* ÌO!”/ ÌO&”1 ÌO(”3 ÌO*”5 ÌO,” ÌI
+” ÌI” ÌP” ÌP” ÌP” ÌP”$ ÌP”& ÌP”' ÌP”) ÌP ”. ÌP%”0 ÌP'”9 ÌP0”; ÌP2–” ÌI
+” ÌI” ÌQ”" ÌQ”# ÌQ”% ÌQ˜” ÌI
+” ÌI” ÌR”% ÌR”& ÌR”+ ÌR"”, ÌR#”1 ÌR(˜” ÌI
+” ÌI” ÌS” ÌS” ÌS”$ ÌS”% ÌS”- ÌS$™” ÌI
+” ÌI” ÌT” ÌT” ÌT”  ÌT”% ÌT$”' ÌT&”) ÌT(—” ÌU” ÌU” ÌU” ÌU”  ÌU”% ÌU#”& ÌU$’” ÌV” ÌV’” ” ’”  ”  ’” ÌZ” ÌZÜ ” Ì[” Ì[”# Ì[”' Ì[”( Ì[”, Ì[”1 Ì[”8 Ì[$”9 Ì[%”: Ì[&”; Ì['”? Ì[+”Ì@ Ì[,”ÌA Ì[-”ÌB Ì[.”ÌI Ì[5’” ÌZ” ÌZ–” Ì[” Ì[” Ì\” Ì\” Ì\” Ì\’” ÌZ” ÌZ–” Ì[” Ì[” Ì]” Ì]” Ì]” Ì]’” ÌZ” ÌZ–” Ì[” Ì[” Ì^” Ì^” Ì^” Ì^’” ÌZ” ÌZ˜” Ì[” Ì[” Ì_” Ì_” Ì_”" Ì_”# Ì_”( Ì_ ’” ÌZ” ÌZ–” Ì[” Ì[” Ì`”" Ì`”# Ì`”) Ì`!’” ÌZ” ÌZ–” Ì[” Ì[” Ìa” Ìa”  Ìa”" Ìa’” ÌZ” ÌZ™” Ì[” Ì[” Ìb” Ìb” Ìb” Ìb”  Ìb”! Ìb”% Ìb’” ÌZ” ÌZœ” Ì[” Ì[” Ìc” Ìc” Ìc” Ìc”  Ìc”! Ìc”% Ìc”& Ìc”, Ìc$”. Ìc&’” ÌZ” ÌZ’” Ì[” Ì[’” Ìe” ÌeÜ ” Ìf” Ìf” Ìf” Ìf” Ìf”! Ìf”& Ìf”- Ìf"”. Ìf#”/ Ìf$”0 Ìf%”< Ìf1”= Ìf2”> Ìf3”? Ìf4”ÌJ Ìf?’” Ìe” Ìe–” Ìf” Ìf” Ìg” Ìg” Ìg” Ìg’” Ìe” Ìe–” Ìf” Ìf” Ìh” Ìh” Ìh”! Ìh’” Ìe” Ìe˜” Ìf” Ìf” Ìi” Ìi” Ìi”$ Ìi”% Ìi”+ Ìi%’” Ìe” Ìe–” Ìf” Ìf” Ìj” Ìj” Ìj” Ìj’” Ìe” Ìeœ” Ìf” Ìf” Ìk” Ìk” Ìk” Ìk” Ìk” Ìk”# Ìk”$ Ìk”. Ìk(”0 Ìk*’” Ìe” Ìe’” Ìf” Ìf’” Ìm” Ìm’” Ìm” Ìm’” ” ’” ” ‘” Ìu’” Ìw
+” ÌwÜ ” Ìx” Ìx” Ìx	” Ìx” Ìx” Ìx” Ìx” Ìx”" Ìx”) Ìx%”* Ìx&”+ Ìx'”, Ìx(”6 Ìx2”7 Ìx3”8 Ìx4”9 Ìx5”Ì@ Ìx<”ÌA Ìx=—” Ìy” Ìy” Ìy	” Ìy” Ìy” Ìy” Ìy’” Ìz” Ìz”” Ì|
+”	 Ì|”
+ Ì|” Ì|–” Ì}” Ì}” Ì}” Ì}” Ì}” Ì}’” Ì~” Ì~‘”	 Ì—” Ì€” Ì€” Ì€	” Ì€” Ì€” Ì€” Ì€’” Ì” Ì˜” Ì‚” Ì‚
+” Ì‚” Ì‚” Ì‚” Ì‚”( Ì‚"”* Ì‚$Ü ” Ìƒ” Ìƒ” Ìƒ” Ìƒ”% Ìƒ”. Ìƒ&”/ Ìƒ'”7 Ìƒ/”8 Ìƒ0”< Ìƒ4”= Ìƒ5”ÌE Ìƒ=”ÌG Ìƒ?”ÌK ÌƒÌC”ÌL ÌƒÌD”ÌQ ÌƒÌI”ÌS ÌƒÌK”ÌW ÌƒÌO”ÌX ÌƒÌP”Ì` ÌƒÌX”Ìa ÌƒÌY”Ìb ÌƒÌZÜ ” Ì„” Ì„” Ì„”  Ì„”! Ì„”# Ì„”* Ì„"”, Ì„$”2 Ì„*”3 Ì„+”: Ì„2”< Ì„4”ÌD Ì„<”ÌF Ì„>”ÌJ Ì„ÌB”ÌL Ì„ÌD”ÌM Ì„ÌE”ÌN Ì„ÌF–” Ì…” Ì…” Ì…” Ì…” Ì…” Ì…–” Ì†
+” Ì†” Ì†” Ì†”! Ì†”" Ì†‘” Ì‡	‘” Ìˆ‘” ÌˆÜ ” Ì‰” Ì‰” Ì‰” Ì‰”% Ì‰”. Ì‰&”/ Ì‰'”4 Ì‰,”5 Ì‰-”9 Ì‰1”: Ì‰2”? Ì‰7”ÌA Ì‰9”ÌE Ì‰=”ÌF Ì‰>”ÌN Ì‰ÌF”ÌO Ì‰ÌG”ÌP Ì‰ÌHÜ ” ÌŠ” ÌŠ” ÌŠ”  ÌŠ”! ÌŠ”# ÌŠ”* ÌŠ"”, ÌŠ$”2 ÌŠ*”3 ÌŠ+”: ÌŠ2”< ÌŠ4”ÌD ÌŠ<”ÌF ÌŠ>”ÌJ ÌŠÌB”ÌL ÌŠÌD”ÌM ÌŠÌE”ÌN ÌŠÌF–” Ì‹” Ì‹” Ì‹” Ì‹” Ì‹” Ì‹–” ÌŒ
+” ÌŒ” ÌŒ” ÌŒ”! ÌŒ”" ÌŒ‘” Ì	‘” Ì‘”	 Ì”” Ì” Ì” Ì” ÌÜ ” Ì” Ì” Ì” Ì” Ì” Ì”& Ì ”( Ì"”4 Ì.”6 Ì0”> Ì8”Ì@ Ì:”ÌD Ì>”ÌF ÌÌ@”ÌG ÌÌA”ÌH ÌÌB” Ì‘” Ì‘” Ì‘” Ì‘” Ì‘”$ Ì‘”& Ì‘ ”, Ì‘&”- Ì‘'”0 Ì‘*”1 Ì‘+”2 Ì‘,”3 Ì‘-‘”	 Ì’‘” Ì’—” Ì“” Ì“
+” Ì“” Ì“” Ì“” Ì“” Ì“‘”	 Ì”’” Ì•” Ì•ÔrG–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜ%‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌĞ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  Ìİ ‘”  ÌŞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìğ ‘”  Ìñ ‘”  Ìò ‘”  Ìó ‘”  Ìô ‘”  Ìõ ‘”  Ìö ‘”  Ì÷ ‘”  Ìø ‘”  Ìù ‘”  Ìú ‘”  Ìû ‘”  Ìü ‘”  Ìı ‘”  Ìş ‘”  Ìÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ÔrH’§missing¦pluginÃ¦genAbcÂÔ  ÔrI”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache“ÔrJ•¤type¥start£endªspecifiers¦source±ImportDeclarationÌ€Ì¢‘ÔrK”¤type¥start£end¥local¶ImportDefaultSpecifierÌ‡ÌÔrL”¤type¥start£end¤nameªIdentifierÌ‡Ì¦routerÔrM•¤type¥start£end¥value£raw§LiteralÌ“Ì¡¬@ohos.router®'@ohos.router'J±ImportDeclarationÌ¤ÌÈ‘K¶ImportDefaultSpecifierÌ«Ì±LªIdentifierÌ«Ì±¦promptM§LiteralÌ·ÌÇ®@system.prompt°'@system.prompt'J±ImportDeclarationÌÊÌö‘K¶ImportDefaultSpecifierÌÑÌÚLªIdentifierÌÑÌÚ©AuthStoreM§LiteralÌàÌõ³../common/AuthStoreµ'../common/AuthStore'

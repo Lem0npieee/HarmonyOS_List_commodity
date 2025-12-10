@@ -7,15 +7,19 @@ interface ProfilePage_Params {
     pendingShipCount?: number;
     pendingReceiveCount?: number;
     pendingReviewCount?: number;
+    loggedIn?: boolean;
+    username?: string;
     orderListener?: () => void;
     favoritesListener?: () => void;
     reviewListener?: () => void;
+    authListener?: () => void;
 }
 import { LAYOUT_WIDTH_OR_HEIGHT } from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
 import FavoritesStore from "@bundle:com.example.list_harmony/entry/ets/common/FavoritesStore";
 import type { FavoriteItem } from "@bundle:com.example.list_harmony/entry/ets/common/FavoritesStore";
 import OrderStore from "@bundle:com.example.list_harmony/entry/ets/common/OrderStore";
 import ReviewStore from "@bundle:com.example.list_harmony/entry/ets/common/ReviewStore";
+import AuthStore from "@bundle:com.example.list_harmony/entry/ets/common/AuthStore";
 import router from "@ohos:router";
 import prompt from "@ohos:prompt";
 export default class ProfilePage extends ViewPU {
@@ -29,9 +33,12 @@ export default class ProfilePage extends ViewPU {
         this.__pendingShipCount = new ObservedPropertySimplePU(OrderStore.getPendingShipCount(), this, "pendingShipCount");
         this.__pendingReceiveCount = new ObservedPropertySimplePU(OrderStore.getPendingReceiveCount(), this, "pendingReceiveCount");
         this.__pendingReviewCount = new ObservedPropertySimplePU(ReviewStore.getPendingReviewCount(), this, "pendingReviewCount");
+        this.__loggedIn = new ObservedPropertySimplePU(AuthStore.isLoggedIn(), this, "loggedIn");
+        this.__username = new ObservedPropertySimplePU(AuthStore.getCurrentUserName() || '未登录', this, "username");
         this.orderListener = undefined;
         this.favoritesListener = undefined;
         this.reviewListener = undefined;
+        this.authListener = undefined;
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
     }
@@ -51,6 +58,12 @@ export default class ProfilePage extends ViewPU {
         if (params.pendingReviewCount !== undefined) {
             this.pendingReviewCount = params.pendingReviewCount;
         }
+        if (params.loggedIn !== undefined) {
+            this.loggedIn = params.loggedIn;
+        }
+        if (params.username !== undefined) {
+            this.username = params.username;
+        }
         if (params.orderListener !== undefined) {
             this.orderListener = params.orderListener;
         }
@@ -60,6 +73,9 @@ export default class ProfilePage extends ViewPU {
         if (params.reviewListener !== undefined) {
             this.reviewListener = params.reviewListener;
         }
+        if (params.authListener !== undefined) {
+            this.authListener = params.authListener;
+        }
     }
     updateStateVars(params: ProfilePage_Params) {
     }
@@ -68,12 +84,16 @@ export default class ProfilePage extends ViewPU {
         this.__pendingShipCount.purgeDependencyOnElmtId(rmElmtId);
         this.__pendingReceiveCount.purgeDependencyOnElmtId(rmElmtId);
         this.__pendingReviewCount.purgeDependencyOnElmtId(rmElmtId);
+        this.__loggedIn.purgeDependencyOnElmtId(rmElmtId);
+        this.__username.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
         this.__favorites.aboutToBeDeleted();
         this.__pendingShipCount.aboutToBeDeleted();
         this.__pendingReceiveCount.aboutToBeDeleted();
         this.__pendingReviewCount.aboutToBeDeleted();
+        this.__loggedIn.aboutToBeDeleted();
+        this.__username.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
     }
@@ -106,13 +126,29 @@ export default class ProfilePage extends ViewPU {
     set pendingReviewCount(newValue: number) {
         this.__pendingReviewCount.set(newValue);
     }
+    private __loggedIn: ObservedPropertySimplePU<boolean>;
+    get loggedIn() {
+        return this.__loggedIn.get();
+    }
+    set loggedIn(newValue: boolean) {
+        this.__loggedIn.set(newValue);
+    }
+    private __username: ObservedPropertySimplePU<string>;
+    get username() {
+        return this.__username.get();
+    }
+    set username(newValue: string) {
+        this.__username.set(newValue);
+    }
     private orderListener: () => void;
     private favoritesListener: () => void;
     private reviewListener: () => void;
+    private authListener: () => void;
     onDestroy() {
         FavoritesStore.unsubscribe(this.favoritesListener);
         OrderStore.unsubscribe(this.orderListener);
         ReviewStore.unsubscribe(this.reviewListener);
+        AuthStore.unsubscribe(this.authListener);
     }
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -124,89 +160,129 @@ export default class ProfilePage extends ViewPU {
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 顶部用户信息卡
-            Row.create();
+            Column.create({ space: 20 });
             // 顶部用户信息卡
-            Row.width(LAYOUT_WIDTH_OR_HEIGHT);
+            Column.width(LAYOUT_WIDTH_OR_HEIGHT);
             // 顶部用户信息卡
-            Row.height(120);
+            Column.backgroundColor(Color.White);
             // 顶部用户信息卡
-            Row.backgroundColor(Color.White);
+            Column.padding({ left: 20, right: 20, top: 20, bottom: 20 });
             // 顶部用户信息卡
-            Row.alignItems(VerticalAlign.Top);
-        }, Row);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777325, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Image.width(64);
-            Image.height(64);
-            Image.borderRadius(32);
-            Image.margin({ left: 16 });
-        }, Image);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.margin({ left: 12 });
+            Column.borderRadius(24);
+            // 顶部用户信息卡
+            Column.margin({ left: 12, right: 12, top: 8 });
+            // 顶部用户信息卡
+            Column.shadow({ color: '#1F000000', radius: 12, offsetY: 4 });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Row.create();
+            Row.create({ space: 16 });
             Row.alignItems(VerticalAlign.Center);
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('tbNick_04ies');
-            Text.fontSize(18);
-            Text.fontWeight(FontWeight.Medium);
-            Text.fontColor({ "id": 16777300, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-        }, Text);
-        Text.pop();
+            Image.create({ "id": 16777325, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.width(68);
+            Image.height(68);
+            Image.borderRadius(34);
+        }, Image);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('黄金会员');
-            Text.fontSize(12);
-            Text.fontColor('#FFB800');
-            Text.backgroundColor('#FFF6E0');
-            Text.borderRadius(8);
-            Text.padding({ left: 6, right: 6 });
-            Text.margin({ left: 8 });
-        }, Text);
-        Text.pop();
-        Row.pop();
+            Column.create({ space: 6 });
+            Column.layoutWeight(1);
+        }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Row.create({ space: 12 });
+            Row.create({ space: 8 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('关注店铺');
-            Text.fontSize(12);
-            Text.fontColor({ "id": 16777303, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.create(this.username);
+            Text.fontSize(20);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor(Color.Black);
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('地址');
-            Text.fontSize(12);
-            Text.fontColor({ "id": 16777303, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-        }, Text);
-        Text.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('客服');
-            Text.fontSize(12);
-            Text.fontColor({ "id": 16777303, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-        }, Text);
-        Text.pop();
+            If.create();
+            if (this.loggedIn) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('黄金会员');
+                        Text.fontSize(12);
+                        Text.fontColor('#B35C00');
+                        Text.backgroundColor('#FFE4C4');
+                        Text.borderRadius(8);
+                        Text.padding({ left: 8, right: 8, top: 2, bottom: 2 });
+                    }, Text);
+                    Text.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
         Row.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.loggedIn ? '欢迎回来，祝您购物愉快' : '登录后可同步收藏与订单进度');
+            Text.fontSize(13);
+            Text.fontColor('#5F5F5F');
+        }, Text);
+        Text.pop();
         Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Blank.create();
-        }, Blank);
-        Blank.pop();
-        // 顶部用户信息卡
+            If.create();
+            if (this.loggedIn) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Button.createWithLabel('退出登录');
+                        Button.height(34);
+                        Button.backgroundColor('#FF7A00');
+                        Button.fontColor(Color.White);
+                        Button.padding({ left: 12, right: 12 });
+                        Button.borderRadius(16);
+                        Button.onClick(() => this.handleLogout());
+                    }, Button);
+                    Button.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Button.createWithLabel('登录/注册');
+                        Button.height(34);
+                        Button.backgroundColor('#FF7A00');
+                        Button.fontColor(Color.White);
+                        Button.padding({ left: 12, right: 12 });
+                        Button.borderRadius(16);
+                        Button.onClick(() => this.gotoLogin());
+                    }, Button);
+                    Button.pop();
+                });
+            }
+        }, If);
+        If.pop();
         Row.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.justifyContent(FlexAlign.SpaceBetween);
+        }, Row);
+        this.renderUserStat.bind(this)('收藏', `${this.favorites.length}`);
+        this.renderUserStat.bind(this)('待收货', `${this.pendingReceiveCount}`);
+        this.renderUserStat.bind(this)('待评价', `${this.pendingReviewCount}`);
+        Row.pop();
+        // 顶部用户信息卡
+        Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 订单快捷入口（待付款/待发货/待收货/待评价/退款）
             Row.create();
             // 订单快捷入口（待付款/待发货/待收货/待评价/退款）
             Row.width(LAYOUT_WIDTH_OR_HEIGHT);
             // 订单快捷入口（待付款/待发货/待收货/待评价/退款）
-            Row.height(96);
+            Row.height(100);
             // 订单快捷入口（待付款/待发货/待收货/待评价/退款）
             Row.padding({ left: 8, right: 8 });
             // 订单快捷入口（待付款/待发货/待收货/待评价/退款）
             Row.backgroundColor(Color.White);
+            // 订单快捷入口（待付款/待发货/待收货/待评价/退款）
+            Row.margin({ top: 12 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
@@ -399,7 +475,7 @@ export default class ProfilePage extends ViewPU {
             Text.create('我的收藏');
             Text.fontSize(20);
             Text.fontWeight(FontWeight.Bold);
-            Text.padding({ left: 12, top: 12 });
+            Text.padding({ left: 16, top: 16, bottom: 8 });
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -532,6 +608,50 @@ export default class ProfilePage extends ViewPU {
         ForEach.pop();
         // 收藏列表（复用购物车样式）
         List.pop();
+        Column.pop();
+    }
+    private async handleLogout(): Promise<void> {
+        try {
+            await AuthStore.logout();
+            prompt.showToast({ message: '已退出登录', duration: 1200 });
+            router.pushUrl({ url: 'pages/LoginRegisterPage' });
+        }
+        catch (err) {
+            console.error('退出登录失败:', String(err));
+            prompt.showToast({ message: '退出失败，请稍后重试', duration: 1200 });
+        }
+    }
+    private gotoLogin(): void {
+        try {
+            router.pushUrl({ url: 'pages/LoginRegisterPage' });
+        }
+        catch (err) {
+            console.error('跳转登录失败:', String(err));
+        }
+    }
+    private renderUserStat(label: string, value: string, parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create({ space: 4 });
+            Column.width('30%');
+            Column.padding({ top: 4, bottom: 4 });
+            Column.backgroundColor('#FFF8F1');
+            Column.borderRadius(12);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(value);
+            Text.fontSize(20);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#1F1F1F');
+            Text.textAlign(TextAlign.Center);
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(label);
+            Text.fontSize(12);
+            Text.fontColor('#7A7A7A');
+            Text.textAlign(TextAlign.Center);
+        }, Text);
+        Text.pop();
         Column.pop();
     }
     rerender() {

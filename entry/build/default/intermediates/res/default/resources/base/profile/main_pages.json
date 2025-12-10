@@ -6,6 +6,7 @@
     "pages/CarePage",
     "pages/CustomerServicePage",
     "pages/ConfirmReceiptPage",
-    "pages/PendingReviewPage"
+    "pages/PendingReviewPage",
+    "pages/LoginRegisterPage"
   ]
 }

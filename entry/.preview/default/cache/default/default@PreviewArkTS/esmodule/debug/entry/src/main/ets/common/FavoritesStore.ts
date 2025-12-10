@@ -1,78 +1,51 @@
-import type { GoodsListItemType } from '../viewmodel/InitialData';
-import StorageUtil from "@bundle:com.example.list_harmony/entry/ets/common/StorageUtil";
+import type dataPreferences from "@ohos:data.preferences";
+import { goodsPool } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
+import type { GoodsListItemType } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
+type Preferences = dataPreferences.Preferences;
+interface StoredFavoriteEntry {
+    id: number;
+}
 export interface FavoriteItem {
     product: GoodsListItemType;
 }
 export default class FavoritesStore {
     private static favorites: FavoriteItem[] = [];
-    private static readonly STORAGE_KEY: string = 'app.favorites';
     private static listeners: Array<() => void> = [];
-    // 异步初始化：在应用入口处调用 FavoritesStore.init() 恢复持久化数据
-    static async init(): Promise<void> {
-        try {
-            const raw = await StorageUtil.getString(FavoritesStore.STORAGE_KEY);
-            if (raw) {
-                const parsed = JSON.parse(raw) as FavoriteItem[];
-                if (Array.isArray(parsed))
-                    FavoritesStore.favorites = parsed;
-            }
+    private static preferences: Preferences | null = null;
+    private static readonly FAVORITES_KEY: string = 'favorite_items';
+    private static initialized: boolean = false;
+    static async init(preferences: Preferences): Promise<void> {
+        if (FavoritesStore.initialized) {
+            return;
         }
-        catch (e) {
-            console.error('FavoritesStore loadFromStorage failed:', String(e));
-        }
+        FavoritesStore.preferences = preferences;
+        await FavoritesStore.restoreFromStorage();
+        FavoritesStore.initialized = true;
     }
     static add(product: GoodsListItemType): void {
         const idx: number = FavoritesStore.favorites.findIndex((f: FavoriteItem) => f.product.id === product.id);
         if (idx < 0) {
             FavoritesStore.favorites.push({ product });
-            try {
-                const json = JSON.stringify(FavoritesStore.favorites);
-                StorageUtil.putString(FavoritesStore.STORAGE_KEY, json);
-                console.info(`[FavoritesStore] persisted key=${FavoritesStore.STORAGE_KEY} value=${json}`);
-            }
-            catch (e) {
-                console.error('FavoritesStore persist failed:', String(e));
-            }
+            FavoritesStore.persist();
             FavoritesStore.notifyListeners();
         }
     }
     static remove(productId: number): void {
         FavoritesStore.favorites = FavoritesStore.favorites.filter((f: FavoriteItem) => f.product.id !== productId);
-        try {
-            const json = JSON.stringify(FavoritesStore.favorites);
-            StorageUtil.putString(FavoritesStore.STORAGE_KEY, json);
-            console.info(`[FavoritesStore] persisted key=${FavoritesStore.STORAGE_KEY} value=${json}`);
-        }
-        catch (e) {
-            console.error('FavoritesStore persist failed:', String(e));
-        }
+        FavoritesStore.persist();
         FavoritesStore.notifyListeners();
     }
     static toggle(product: GoodsListItemType): boolean {
         const idx: number = FavoritesStore.favorites.findIndex((f: FavoriteItem) => f.product.id === product.id);
         if (idx >= 0) {
             FavoritesStore.favorites.splice(idx, 1);
-            try {
-                const json = JSON.stringify(FavoritesStore.favorites);
-                StorageUtil.putString(FavoritesStore.STORAGE_KEY, json);
-                console.info(`[FavoritesStore] persisted key=${FavoritesStore.STORAGE_KEY} value=${json}`);
-            }
-            catch (e) {
-                console.error('FavoritesStore persist failed:', String(e));
-            }
+            FavoritesStore.persist();
             FavoritesStore.notifyListeners();
             return false;
         }
         else {
             FavoritesStore.favorites.push({ product });
-            try {
-                const json = JSON.stringify(FavoritesStore.favorites);
-                StorageUtil.putString(FavoritesStore.STORAGE_KEY, json);
-                console.info(`[FavoritesStore] persisted key=${FavoritesStore.STORAGE_KEY} value=${json}`);
-            }
-            catch (e) {
-                console.error('FavoritesStore persist failed:', String(e));
-            }
+            FavoritesStore.persist();
             FavoritesStore.notifyListeners();
             return true;
         }
@@ -85,13 +58,7 @@ export default class FavoritesStore {
     }
     static clear(): void {
         FavoritesStore.favorites = [];
-        try {
-            StorageUtil.remove(FavoritesStore.STORAGE_KEY);
-            console.info(`[FavoritesStore] cleared key=${FavoritesStore.STORAGE_KEY}`);
-        }
-        catch (e) {
-            console.error('FavoritesStore clear persist failed:', String(e));
-        }
+        FavoritesStore.persist();
         FavoritesStore.notifyListeners();
     }
     static subscribe(cb: () => void): void {
@@ -118,5 +85,44 @@ export default class FavoritesStore {
         catch (err) {
             console.error('Notify listeners failed:', String(err));
         }
+    }
+    private static async restoreFromStorage(): Promise<void> {
+        if (!FavoritesStore.preferences) {
+            return;
+        }
+        try {
+            const storedValue = await FavoritesStore.preferences.get(FavoritesStore.FAVORITES_KEY, '[]');
+            const raw: string = typeof storedValue === 'string' ? storedValue : JSON.stringify(storedValue);
+            const parsed = JSON.parse(raw) as StoredFavoriteEntry[];
+            const mapped = parsed.map((entry: StoredFavoriteEntry) => {
+                const product = FavoritesStore.resolveProductById(entry.id);
+                if (!product)
+                    return null;
+                const fav: FavoriteItem = { product };
+                return fav;
+            });
+            const restored = mapped.filter((item) => item !== null) as FavoriteItem[];
+            FavoritesStore.favorites = restored;
+            FavoritesStore.notifyListeners();
+        }
+        catch (e) {
+            console.error('FavoritesStore restore failed:', String(e));
+        }
+    }
+    private static persist(): void {
+        if (!FavoritesStore.preferences) {
+            return;
+        }
+        const payload: StoredFavoriteEntry[] = FavoritesStore.favorites.map((item: FavoriteItem) => {
+            const entry: StoredFavoriteEntry = { id: item.product.id };
+            return entry;
+        });
+        FavoritesStore.preferences.put(FavoritesStore.FAVORITES_KEY, JSON.stringify(payload))
+            .then(() => FavoritesStore.preferences?.flush())
+            .catch((err: Error) => console.error('FavoritesStore persist failed:', String(err)));
+    }
+    private static resolveProductById(id: number): GoodsListItemType | null {
+        const product = goodsPool.find((item: GoodsListItemType) => item.id === id);
+        return product ?? null;
     }
 }

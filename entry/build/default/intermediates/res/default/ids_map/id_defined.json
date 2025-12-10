@@ -583,5 +583,9 @@
 			"type":	"profile",
 			"name":	"main_pages",
 			"id":	"0x01000091"
+		}, {
+			"type":	"media",
+			"name":	"logo",
+			"id":	"0x01000092"
 		}]
 }

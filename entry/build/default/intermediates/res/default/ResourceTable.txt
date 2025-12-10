@@ -134,6 +134,7 @@ media gouwuche 0x01000084
 media home 0x01000085
 media icon 0x01000086
 media kefu 0x01000087
+media logo 0x01000092
 media me 0x01000088
 media no_star 0x01000089
 media refreshing 0x0100008a

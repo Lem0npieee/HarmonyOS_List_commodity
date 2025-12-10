@@ -8,10 +8,13 @@ interface GoodsDetailPage_Params {
     showAllReviews?: boolean;
     showAllQA?: boolean;
     displayedReviews?: ReviewItem[];
+    userReviews?: ReviewItem[];
     displayedQA?: QAItem[];
     recommendedGoods?: GoodsListItemType[];
     isFavorited?: boolean;
     scroller?: Scroller;
+    reviewListener?: () => void;
+    systemReviewsSnapshot?: ReviewItem[];
 }
 import router from "@ohos:router";
 import { CategoryType, goodsPool } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
@@ -22,6 +25,8 @@ import OrderStore from "@bundle:com.example.list_harmony/entry/ets/common/OrderS
 import NotificationStore from "@bundle:com.example.list_harmony/entry/ets/common/NotificationStore";
 import type { NotificationPayload } from "@bundle:com.example.list_harmony/entry/ets/common/NotificationStore";
 import { LAYOUT_WIDTH_OR_HEIGHT, STORE } from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
+import ReviewStore from "@bundle:com.example.list_harmony/entry/ets/common/ReviewStore";
+import type { StoredReviewRecord } from "@bundle:com.example.list_harmony/entry/ets/common/ReviewStore";
 import prompt from "@ohos:prompt";
 // 定义接口
 interface ReviewItem {
@@ -54,7 +59,7 @@ const REVIEWS_BY_CATEGORY: ReviewCategory = {
     phone: [
         { user: 'a**m', level: '钻石会员', rating: 5, content: '手机性能非常好,拍照效果惊艳,续航给力,值得购买!', spec: '[256GB 蓝色]' },
         { user: 'z**8', level: '黄金会员', rating: 5, content: '系统流畅,屏幕显示细腻,信号稳定,很满意!', spec: '[512GB 黑色]' },
-        { user: 'w**3', level: '银牌会员', rating: 4, content: '整体不错,就是价格有点贵,但品质确实好', spec: '[128GB 白色]' },
+        { user: 'w**3', level: '银牌会员', rating: 3, content: '整体不错,就是价格有点贵,但品质确实好', spec: '[128GB 白色]' },
         { user: 'l**n', level: '钻石会员', rating: 5, content: '5G网速飞快,玩游戏很流畅,散热也做得不错', spec: '[256GB 蓝色]' },
         { user: 'j**7', level: '黄金会员', rating: 5, content: '外观漂亮,手感舒适,拍照功能强大', spec: '[512GB 金色]' },
         { user: 'h**2', level: '银牌会员', rating: 4, content: '音质很好,屏幕亮度高,总体满意', spec: '[256GB 黑色]' },
@@ -68,7 +73,7 @@ const REVIEWS_BY_CATEGORY: ReviewCategory = {
     clothes: [
         { user: 'x**y', level: '钻石会员', rating: 5, content: '面料舒适,做工精细,版型很好看,非常满意!', spec: '[L码 蓝色]' },
         { user: 'b**c', level: '黄金会员', rating: 5, content: '颜色正,质量不错,穿着很舒服', spec: '[M码 黑色]' },
-        { user: 'n**f', level: '银牌会员', rating: 4, content: '款式好看,就是有点薄,秋天穿刚好', spec: '[XL码 灰色]' },
+        { user: 'n**f', level: '银牌会员', rating: 3, content: '款式好看,就是有点薄,秋天穿刚好', spec: '[XL码 灰色]' },
         { user: 'd**g', level: '钻石会员', rating: 5, content: '尺码标准,颜色漂亮,很有质感', spec: '[L码 白色]' },
         { user: 'e**h', level: '黄金会员', rating: 5, content: '洗过不缩水,不掉色,值得购买', spec: '[M码 蓝色]' },
         { user: 'f**i', level: '银牌会员', rating: 4, content: '性价比高,适合日常穿着', spec: '[XL码 黑色]' },
@@ -85,7 +90,7 @@ const REVIEWS_BY_CATEGORY: ReviewCategory = {
         { user: 'v**w', level: '银牌会员', rating: 4, content: '口味不错,就是有点甜,总体满意', spec: '[礼盒装]' },
         { user: 'i**j', level: '黄金会员', rating: 5, content: '新鲜度高,保质期长,很放心', spec: '[经典装]' },
         { user: 'k**l', level: '钻石会员', rating: 5, content: '孩子很喜欢吃,健康美味', spec: '[豪华装]' },
-        { user: 'm**n', level: '银牌会员', rating: 4, content: '性价比高,适合囤货', spec: '[经典装]' },
+        { user: 'm**n', level: '银牌会员', rating: 3, content: '性价比高,适合囤货', spec: '[经典装]' },
         { user: 'o**p', level: '黄金会员', rating: 5, content: '包装完整,没有破损,很满意', spec: '[礼盒装]' },
         { user: 'q**r', level: '钻石会员', rating: 5, content: '送人很体面,自己吃也不错', spec: '[豪华装]' },
         { user: 's**t', level: '银牌会员', rating: 4, content: '味道纯正,分量实在', spec: '[经典装]' },
@@ -96,7 +101,7 @@ const REVIEWS_BY_CATEGORY: ReviewCategory = {
     home: [
         { user: 'g**h', level: '钻石会员', rating: 5, content: '功能强大,使用方便,物有所值,推荐!', spec: '[白色]' },
         { user: 'a**b', level: '黄金会员', rating: 5, content: '质量好,噪音小,效果明显', spec: '[黑色]' },
-        { user: 'c**d', level: '银牌会员', rating: 4, content: '性价比不错,功能齐全', spec: '[灰色]' },
+        { user: 'c**d', level: '银牌会员', rating: 3, content: '性价比不错,功能齐全', spec: '[灰色]' },
         { user: 'e**f', level: '钻石会员', rating: 5, content: '设计人性化,操作简单', spec: '[白色]' },
         { user: 'g**h', level: '黄金会员', rating: 5, content: '省电省心,效果很好', spec: '[黑色]' },
         { user: 'i**j', level: '银牌会员', rating: 4, content: '外观漂亮,做工精细', spec: '[灰色]' },
@@ -151,10 +156,13 @@ class GoodsDetailPage extends ViewPU {
         this.__showAllReviews = new ObservedPropertySimplePU(false, this, "showAllReviews");
         this.__showAllQA = new ObservedPropertySimplePU(false, this, "showAllQA");
         this.__displayedReviews = new ObservedPropertyObjectPU([], this, "displayedReviews");
+        this.__userReviews = new ObservedPropertyObjectPU([], this, "userReviews");
         this.__displayedQA = new ObservedPropertyObjectPU([], this, "displayedQA");
         this.__recommendedGoods = new ObservedPropertyObjectPU([], this, "recommendedGoods");
         this.__isFavorited = new ObservedPropertySimplePU(false, this, "isFavorited");
         this.scroller = new Scroller();
+        this.reviewListener = undefined;
+        this.systemReviewsSnapshot = [];
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
     }
@@ -177,6 +185,9 @@ class GoodsDetailPage extends ViewPU {
         if (params.displayedReviews !== undefined) {
             this.displayedReviews = params.displayedReviews;
         }
+        if (params.userReviews !== undefined) {
+            this.userReviews = params.userReviews;
+        }
         if (params.displayedQA !== undefined) {
             this.displayedQA = params.displayedQA;
         }
@@ -189,6 +200,12 @@ class GoodsDetailPage extends ViewPU {
         if (params.scroller !== undefined) {
             this.scroller = params.scroller;
         }
+        if (params.reviewListener !== undefined) {
+            this.reviewListener = params.reviewListener;
+        }
+        if (params.systemReviewsSnapshot !== undefined) {
+            this.systemReviewsSnapshot = params.systemReviewsSnapshot;
+        }
     }
     updateStateVars(params: GoodsDetailPage_Params) {
     }
@@ -199,6 +216,7 @@ class GoodsDetailPage extends ViewPU {
         this.__showAllReviews.purgeDependencyOnElmtId(rmElmtId);
         this.__showAllQA.purgeDependencyOnElmtId(rmElmtId);
         this.__displayedReviews.purgeDependencyOnElmtId(rmElmtId);
+        this.__userReviews.purgeDependencyOnElmtId(rmElmtId);
         this.__displayedQA.purgeDependencyOnElmtId(rmElmtId);
         this.__recommendedGoods.purgeDependencyOnElmtId(rmElmtId);
         this.__isFavorited.purgeDependencyOnElmtId(rmElmtId);
@@ -210,6 +228,7 @@ class GoodsDetailPage extends ViewPU {
         this.__showAllReviews.aboutToBeDeleted();
         this.__showAllQA.aboutToBeDeleted();
         this.__displayedReviews.aboutToBeDeleted();
+        this.__userReviews.aboutToBeDeleted();
         this.__displayedQA.aboutToBeDeleted();
         this.__recommendedGoods.aboutToBeDeleted();
         this.__isFavorited.aboutToBeDeleted();
@@ -258,6 +277,13 @@ class GoodsDetailPage extends ViewPU {
     set displayedReviews(newValue: ReviewItem[]) {
         this.__displayedReviews.set(newValue);
     }
+    private __userReviews: ObservedPropertyObjectPU<ReviewItem[]>;
+    get userReviews() {
+        return this.__userReviews.get();
+    }
+    set userReviews(newValue: ReviewItem[]) {
+        this.__userReviews.set(newValue);
+    }
     private __displayedQA: ObservedPropertyObjectPU<QAItem[]>;
     get displayedQA() {
         return this.__displayedQA.get();
@@ -280,11 +306,17 @@ class GoodsDetailPage extends ViewPU {
         this.__isFavorited.set(newValue);
     }
     private scroller: Scroller;
+    private reviewListener?: () => void;
+    private systemReviewsSnapshot: ReviewItem[];
     aboutToAppear() {
         try {
             const params = router.getParams() as Record<string, Object>;
             if (params && params.goods) {
                 this.goods = params.goods as GoodsListItemType;
+                this.showAllReviews = false;
+                this.systemReviewsSnapshot = [];
+                this.userReviews = [];
+                this.displayedReviews = [];
                 // 同步收藏状态，确保返回详情页时能正确显示
                 try {
                     if (this.goods) {
@@ -300,10 +332,23 @@ class GoodsDetailPage extends ViewPU {
                 this.initializeQA();
                 // 初始化推荐商品
                 this.initializeRecommendedGoods();
+                this.refreshUserReviews();
+                if (!this.reviewListener) {
+                    this.reviewListener = () => {
+                        this.refreshUserReviews();
+                    };
+                    ReviewStore.subscribe(this.reviewListener);
+                }
             }
         }
         catch (err) {
             console.error('获取参数失败:', err);
+        }
+    }
+    aboutToDisappear() {
+        if (this.reviewListener) {
+            ReviewStore.unsubscribe(this.reviewListener);
+            this.reviewListener = undefined;
         }
     }
     // 初始化评价数据
@@ -331,7 +376,14 @@ class GoodsDetailPage extends ViewPU {
         }
         // 随机打乱并取第一条作为默认显示
         const shuffled = this.shuffleArray([...reviewPool]);
-        this.displayedReviews = [shuffled[0]];
+        if (shuffled.length > 0) {
+            this.systemReviewsSnapshot = [shuffled[0]];
+            this.displayedReviews = this.mergeReviews(this.systemReviewsSnapshot);
+        }
+        else {
+            this.systemReviewsSnapshot = [];
+            this.displayedReviews = this.mergeReviews(this.systemReviewsSnapshot);
+        }
     }
     // 初始化问大家数据
     private initializeQA() {
@@ -371,6 +423,26 @@ class GoodsDetailPage extends ViewPU {
         const shuffled = this.shuffleArray(sameCategory);
         this.recommendedGoods = shuffled.slice(0, 6);
     }
+    private refreshUserReviews() {
+        if (!this.goods) {
+            this.userReviews = [];
+            this.displayedReviews = this.mergeReviews(this.systemReviewsSnapshot);
+            return;
+        }
+        const stored = ReviewStore.getReviewsForGoods(this.goods.id).map((record: StoredReviewRecord): ReviewItem => ({
+            user: record.user,
+            level: record.level,
+            rating: record.rating,
+            content: record.content,
+            spec: record.spec
+        }));
+        this.userReviews = stored;
+        this.displayedReviews = this.mergeReviews(this.systemReviewsSnapshot);
+    }
+    private mergeReviews(base: ReviewItem[]): ReviewItem[] {
+        const baseList = base ? [...base] : [];
+        return [...this.userReviews, ...baseList];
+    }
     // 数组随机打乱
     private shuffleArray<T>(array: T[]): T[] {
         const result = [...array];
@@ -404,8 +476,13 @@ class GoodsDetailPage extends ViewPU {
             default:
                 reviewPool = REVIEWS_BY_CATEGORY.food;
         }
-        // 保留第一条,随机显示另外4条
-        const firstReview = this.displayedReviews[0];
+        let firstReview = this.systemReviewsSnapshot[0];
+        if (!firstReview && reviewPool.length > 0) {
+            firstReview = reviewPool[0];
+        }
+        if (!firstReview) {
+            return;
+        }
         const otherReviews: ReviewItem[] = [];
         for (let i = 0; i < reviewPool.length; i++) {
             if (reviewPool[i] !== firstReview) {
@@ -413,7 +490,8 @@ class GoodsDetailPage extends ViewPU {
             }
         }
         const shuffled = this.shuffleArray(otherReviews);
-        this.displayedReviews = [firstReview, ...shuffled.slice(0, 4)];
+        this.systemReviewsSnapshot = [firstReview, ...shuffled.slice(0, 4)];
+        this.displayedReviews = this.mergeReviews(this.systemReviewsSnapshot);
         this.showAllReviews = true;
     }
     // 展开问大家
@@ -453,7 +531,7 @@ class GoodsDetailPage extends ViewPU {
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
-            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(340:5)", "entry");
+            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(396:5)", "entry");
             Column.width('100%');
             Column.height('100%');
             Column.backgroundColor('#F5F5F5');
@@ -461,7 +539,7 @@ class GoodsDetailPage extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 顶部导航栏（与 ListIndex 的结构一致，防止 Navigation 占满整个页面）
             Row.create();
-            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(342:7)", "entry");
+            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(398:7)", "entry");
             // 顶部导航栏（与 ListIndex 的结构一致，防止 Navigation 占满整个页面）
             Row.height(56);
             // 顶部导航栏（与 ListIndex 的结构一致，防止 Navigation 占满整个页面）
@@ -469,27 +547,27 @@ class GoodsDetailPage extends ViewPU {
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Navigation.create(new NavPathStack(), { moduleName: "entry", pagePath: "entry/src/main/ets/pages/GoodsDetailPage", isUserCreateStack: false });
-            Navigation.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(343:9)", "entry");
+            Navigation.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(399:9)", "entry");
             Navigation.size({ width: LAYOUT_WIDTH_OR_HEIGHT, height: LAYOUT_WIDTH_OR_HEIGHT });
             Navigation.title(STORE);
             Navigation.titleMode(NavigationTitleMode.Mini);
         }, Navigation);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
-            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(344:11)", "entry");
+            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(400:11)", "entry");
             Column.width(LAYOUT_WIDTH_OR_HEIGHT);
             Column.justifyContent(FlexAlign.Center);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
-            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(345:13)", "entry");
+            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(401:13)", "entry");
             Row.width('100%');
             Row.height(56);
             Row.padding({ left: 16, right: 16 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 125832663, "type": 40000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(346:15)", "entry");
+            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(402:15)", "entry");
             Image.width(24);
             Image.height(24);
             Image.fillColor(Color.Black);
@@ -499,12 +577,12 @@ class GoodsDetailPage extends ViewPU {
         }, Image);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Blank.create();
-            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(354:15)", "entry");
+            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(410:15)", "entry");
         }, Blank);
         Blank.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 125833751, "type": 40000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(356:15)", "entry");
+            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(412:15)", "entry");
             Image.width(24);
             Image.height(24);
             Image.fillColor(Color.Black);
@@ -520,13 +598,13 @@ class GoodsDetailPage extends ViewPU {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Scroll.create(this.scroller);
-                        Scroll.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(376:9)", "entry");
+                        Scroll.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(432:9)", "entry");
                         Scroll.scrollBar(BarState.Off);
                         Scroll.layoutWeight(1);
                     }, Scroll);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Column.create();
-                        Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(377:11)", "entry");
+                        Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(433:11)", "entry");
                     }, Column);
                     // 商品图片轮播
                     this.buildImageSwiper.bind(this)();
@@ -561,7 +639,7 @@ class GoodsDetailPage extends ViewPU {
     buildNavBar(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
-            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(417:5)", "entry");
+            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(473:5)", "entry");
             Row.width('100%');
             Row.height(56);
             Row.padding({ left: 16, right: 16 });
@@ -569,7 +647,7 @@ class GoodsDetailPage extends ViewPU {
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 125832663, "type": 40000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(418:7)", "entry");
+            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(474:7)", "entry");
             Image.width(24);
             Image.height(24);
             Image.fillColor(Color.Black);
@@ -579,12 +657,12 @@ class GoodsDetailPage extends ViewPU {
         }, Image);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Blank.create();
-            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(426:7)", "entry");
+            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(482:7)", "entry");
         }, Blank);
         Blank.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 125833751, "type": 40000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(428:7)", "entry");
+            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(484:7)", "entry");
             Image.width(24);
             Image.height(24);
             Image.fillColor(Color.Black);
@@ -594,7 +672,7 @@ class GoodsDetailPage extends ViewPU {
     buildImageSwiper(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Swiper.create();
-            Swiper.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(441:5)", "entry");
+            Swiper.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(497:5)", "entry");
             Swiper.width('100%');
             Swiper.height(375);
             Swiper.backgroundColor(Color.White);
@@ -605,7 +683,7 @@ class GoodsDetailPage extends ViewPU {
         }, Swiper);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create(this.goods?.cover);
-            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(442:7)", "entry");
+            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(498:7)", "entry");
             Image.width('100%');
             Image.height(375);
             Image.objectFit(ImageFit.Cover);
@@ -620,7 +698,7 @@ class GoodsDetailPage extends ViewPU {
                             const img = _item;
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
                                 Image.create(img);
-                                Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(449:11)", "entry");
+                                Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(505:11)", "entry");
                                 Image.width('100%');
                                 Image.height(375);
                                 Image.objectFit(ImageFit.Cover);
@@ -642,7 +720,7 @@ class GoodsDetailPage extends ViewPU {
     buildBasicInfo(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
-            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(467:5)", "entry");
+            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(523:5)", "entry");
             Column.width('100%');
             Column.padding(16);
             Column.backgroundColor(Color.White);
@@ -652,7 +730,7 @@ class GoodsDetailPage extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 价格区域
             Row.create();
-            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(469:7)", "entry");
+            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(525:7)", "entry");
             // 价格区域
             Row.width('100%');
             // 价格区域
@@ -660,7 +738,7 @@ class GoodsDetailPage extends ViewPU {
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('¥');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(470:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(526:9)", "entry");
             Text.fontSize(16);
             Text.fontColor('#FF0000');
             Text.fontWeight(FontWeight.Bold);
@@ -668,7 +746,7 @@ class GoodsDetailPage extends ViewPU {
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(this.goods?.price.toFixed(2));
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(474:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(530:9)", "entry");
             Text.fontSize(28);
             Text.fontColor('#FF0000');
             Text.fontWeight(FontWeight.Bold);
@@ -680,7 +758,7 @@ class GoodsDetailPage extends ViewPU {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Text.create('¥' + this.goods.originalPrice.toFixed(2));
-                        Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(480:11)", "entry");
+                        Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(536:11)", "entry");
                         Text.fontSize(14);
                         Text.fontColor('#999999');
                         Text.decoration({ type: TextDecorationType.LineThrough });
@@ -697,12 +775,12 @@ class GoodsDetailPage extends ViewPU {
         If.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Blank.create();
-            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(487:9)", "entry");
+            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(543:9)", "entry");
         }, Blank);
         Blank.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('已售 ' + (this.goods?.salesCount ?? 7) + '+');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(489:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(545:9)", "entry");
             Text.fontSize(12);
             Text.fontColor('#666666');
         }, Text);
@@ -712,7 +790,7 @@ class GoodsDetailPage extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 商品标题（左对齐，自动换行）
             Text.create(this.goods?.title);
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(497:7)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(553:7)", "entry");
             // 商品标题（左对齐，自动换行）
             Text.fontSize(16);
             // 商品标题（左对齐，自动换行）
@@ -735,7 +813,7 @@ class GoodsDetailPage extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 标签（紧跟名称后面）
             Row.create({ space: 8 });
-            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(508:7)", "entry");
+            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(564:7)", "entry");
             // 标签（紧跟名称后面）
             Row.width('100%');
             // 标签（紧跟名称后面）
@@ -751,7 +829,7 @@ class GoodsDetailPage extends ViewPU {
                             const tag = _item;
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
                                 Text.create(tag);
-                                Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(511:13)", "entry");
+                                Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(567:13)", "entry");
                                 Text.fontSize(11);
                                 Text.fontColor('#FF6B00');
                                 Text.padding({ left: 6, right: 6, top: 3, bottom: 3 });
@@ -777,7 +855,7 @@ class GoodsDetailPage extends ViewPU {
     buildPromotionInfo(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create({ space: 12 });
-            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(531:5)", "entry");
+            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(587:5)", "entry");
             Column.width('100%');
             Column.padding(16);
             Column.backgroundColor(Color.White);
@@ -785,18 +863,18 @@ class GoodsDetailPage extends ViewPU {
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
-            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(532:7)", "entry");
+            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(588:7)", "entry");
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 16777282, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(533:9)", "entry");
+            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(589:9)", "entry");
             Image.width(16);
             Image.height(16);
             Image.borderRadius(8);
         }, Image);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('点击成为会员，领券下单更优惠');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(537:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(593:9)", "entry");
             Text.fontSize(13);
             Text.fontColor('#333333');
             Text.margin({ left: 8 });
@@ -804,12 +882,12 @@ class GoodsDetailPage extends ViewPU {
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Blank.create();
-            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(541:9)", "entry");
+            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(597:9)", "entry");
         }, Blank);
         Blank.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 125832664, "type": 40000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(542:9)", "entry");
+            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(598:9)", "entry");
             Image.width(16);
             Image.height(16);
             Image.fillColor('#999999');
@@ -817,11 +895,11 @@ class GoodsDetailPage extends ViewPU {
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
-            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(548:7)", "entry");
+            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(604:7)", "entry");
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('承诺');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(549:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(605:9)", "entry");
             Text.fontSize(12);
             Text.fontColor('#999999');
             Text.width(50);
@@ -829,7 +907,7 @@ class GoodsDetailPage extends ViewPU {
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('· 24小时闪电发货  · 使用24小时内可退');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(553:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(609:9)", "entry");
             Text.fontSize(12);
             Text.fontColor('#333333');
         }, Text);
@@ -840,7 +918,7 @@ class GoodsDetailPage extends ViewPU {
     buildDeliveryInfo(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create({ space: 12 });
-            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(566:5)", "entry");
+            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(622:5)", "entry");
             Column.width('100%');
             Column.padding(16);
             Column.backgroundColor(Color.White);
@@ -848,11 +926,11 @@ class GoodsDetailPage extends ViewPU {
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
-            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(567:7)", "entry");
+            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(623:7)", "entry");
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('配送');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(568:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(624:9)", "entry");
             Text.fontSize(14);
             Text.fontColor('#333333');
             Text.width(60);
@@ -860,19 +938,19 @@ class GoodsDetailPage extends ViewPU {
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(this.goods?.deliveryInfo ?? '不支持7天无理由退换');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(572:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(628:9)", "entry");
             Text.fontSize(14);
             Text.fontColor('#666666');
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Blank.create();
-            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(575:9)", "entry");
+            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(631:9)", "entry");
         }, Blank);
         Blank.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 125832664, "type": 40000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(576:9)", "entry");
+            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(632:9)", "entry");
             Image.width(16);
             Image.height(16);
             Image.fillColor('#999999');
@@ -880,11 +958,11 @@ class GoodsDetailPage extends ViewPU {
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
-            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(582:7)", "entry");
+            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(638:7)", "entry");
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('送至');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(583:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(639:9)", "entry");
             Text.fontSize(14);
             Text.fontColor('#333333');
             Text.width(60);
@@ -892,19 +970,19 @@ class GoodsDetailPage extends ViewPU {
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('广东 广州 · 免运费');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(587:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(643:9)", "entry");
             Text.fontSize(14);
             Text.fontColor('#666666');
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Blank.create();
-            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(590:9)", "entry");
+            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(646:9)", "entry");
         }, Blank);
         Blank.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 125832664, "type": 40000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(591:9)", "entry");
+            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(647:9)", "entry");
             Image.width(16);
             Image.height(16);
             Image.fillColor('#999999');
@@ -915,7 +993,7 @@ class GoodsDetailPage extends ViewPU {
     buildSpecifications(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
-            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(605:5)", "entry");
+            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(661:5)", "entry");
             Row.width('100%');
             Row.padding(16);
             Row.backgroundColor(Color.White);
@@ -923,7 +1001,7 @@ class GoodsDetailPage extends ViewPU {
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('麦当劳');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(606:7)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(662:7)", "entry");
             Text.fontSize(14);
             Text.fontColor('#333333');
             Text.width(60);
@@ -931,7 +1009,7 @@ class GoodsDetailPage extends ViewPU {
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create({ space: 8 });
-            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(611:7)", "entry");
+            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(667:7)", "entry");
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
@@ -943,7 +1021,7 @@ class GoodsDetailPage extends ViewPU {
                             const spec = _item;
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
                                 Text.create(spec);
-                                Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(614:13)", "entry");
+                                Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(670:13)", "entry");
                                 Text.fontSize(13);
                                 Text.fontColor(this.selectedSpec === index ? '#FF0000' : '#333333');
                                 Text.padding({ left: 12, right: 12, top: 6, bottom: 6 });
@@ -968,7 +1046,7 @@ class GoodsDetailPage extends ViewPU {
                 this.ifElseBranchUpdateFunction(1, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Text.create('小薯  无有效期  镇江');
-                        Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(629:11)", "entry");
+                        Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(685:11)", "entry");
                         Text.fontSize(13);
                         Text.fontColor('#333333');
                         Text.padding({ left: 12, right: 12, top: 6, bottom: 6 });
@@ -983,12 +1061,12 @@ class GoodsDetailPage extends ViewPU {
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Blank.create();
-            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(638:7)", "entry");
+            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(694:7)", "entry");
         }, Blank);
         Blank.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 125832664, "type": 40000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(640:7)", "entry");
+            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(696:7)", "entry");
             Image.width(16);
             Image.height(16);
             Image.fillColor('#999999');
@@ -998,7 +1076,7 @@ class GoodsDetailPage extends ViewPU {
     buildShopInfo(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
-            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(653:5)", "entry");
+            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(709:5)", "entry");
             Row.width('100%');
             Row.padding(16);
             Row.backgroundColor(Color.White);
@@ -1006,24 +1084,24 @@ class GoodsDetailPage extends ViewPU {
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 16777282, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(654:7)", "entry");
+            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(710:7)", "entry");
             Image.width(40);
             Image.height(40);
             Image.borderRadius(20);
         }, Image);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create({ space: 4 });
-            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(659:7)", "entry");
+            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(715:7)", "entry");
             Column.alignItems(HorizontalAlign.Start);
             Column.margin({ left: 12 });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
-            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(660:9)", "entry");
+            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(716:9)", "entry");
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(this.goods?.shopName ?? '猫小弟');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(661:11)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(717:11)", "entry");
             Text.fontSize(14);
             Text.fontColor('#333333');
             Text.fontWeight(FontWeight.Medium);
@@ -1035,7 +1113,7 @@ class GoodsDetailPage extends ViewPU {
                 const star = _item;
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Image.create({ "id": 125831521, "type": 40000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-                    Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(667:13)", "entry");
+                    Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(723:13)", "entry");
                     Image.width(12);
                     Image.height(12);
                     Image.fillColor('#FFB800');
@@ -1047,7 +1125,7 @@ class GoodsDetailPage extends ViewPU {
         ForEach.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('4.4');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(674:11)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(730:11)", "entry");
             Text.fontSize(12);
             Text.fontColor('#666666');
             Text.margin({ left: 4 });
@@ -1055,7 +1133,7 @@ class GoodsDetailPage extends ViewPU {
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('424位');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(679:11)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(735:11)", "entry");
             Text.fontSize(12);
             Text.fontColor('#999999');
             Text.margin({ left: 4 });
@@ -1064,7 +1142,7 @@ class GoodsDetailPage extends ViewPU {
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('店铺宝贝27项好评');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(685:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(741:9)", "entry");
             Text.fontSize(12);
             Text.fontColor('#666666');
         }, Text);
@@ -1072,12 +1150,12 @@ class GoodsDetailPage extends ViewPU {
         Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Blank.create();
-            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(692:7)", "entry");
+            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(748:7)", "entry");
         }, Blank);
         Blank.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Button.createWithLabel('关注');
-            Button.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(694:7)", "entry");
+            Button.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(750:7)", "entry");
             Button.fontSize(13);
             Button.fontColor('#FF6600');
             Button.backgroundColor(Color.Transparent);
@@ -1090,7 +1168,7 @@ class GoodsDetailPage extends ViewPU {
     buildReviews(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create({ space: 12 });
-            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(709:5)", "entry");
+            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(765:5)", "entry");
             Column.width('100%');
             Column.padding(16);
             Column.backgroundColor(Color.White);
@@ -1099,11 +1177,11 @@ class GoodsDetailPage extends ViewPU {
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
-            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(710:7)", "entry");
+            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(766:7)", "entry");
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('评价 · 5万+');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(711:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(767:9)", "entry");
             Text.fontSize(16);
             Text.fontColor('#333333');
             Text.fontWeight(FontWeight.Medium);
@@ -1111,12 +1189,12 @@ class GoodsDetailPage extends ViewPU {
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Blank.create();
-            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(716:9)", "entry");
+            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(772:9)", "entry");
         }, Blank);
         Blank.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(this.showAllReviews ? '收起' : '查看全部');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(718:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(774:9)", "entry");
             Text.fontSize(13);
             Text.fontColor('#999999');
             Text.onClick(() => {
@@ -1125,14 +1203,20 @@ class GoodsDetailPage extends ViewPU {
                 }
                 else {
                     this.showAllReviews = false;
-                    this.displayedReviews = [this.displayedReviews[0]];
+                    if (this.systemReviewsSnapshot.length > 0) {
+                        this.systemReviewsSnapshot = [this.systemReviewsSnapshot[0]];
+                    }
+                    else {
+                        this.systemReviewsSnapshot = [];
+                    }
+                    this.displayedReviews = this.mergeReviews(this.systemReviewsSnapshot);
                 }
             });
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 125832664, "type": 40000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(729:9)", "entry");
+            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(790:9)", "entry");
             Image.width(16);
             Image.height(16);
             Image.fillColor(Color.Black);
@@ -1141,11 +1225,11 @@ class GoodsDetailPage extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 评价筛选
             Row.create({ space: 12 });
-            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(736:7)", "entry");
+            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(797:7)", "entry");
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('用户评价好 28');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(737:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(798:9)", "entry");
             Text.fontSize(13);
             Text.fontColor('#333333');
             Text.padding({ left: 12, right: 12, top: 6, bottom: 6 });
@@ -1155,7 +1239,7 @@ class GoodsDetailPage extends ViewPU {
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('速度快 20');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(744:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(805:9)", "entry");
             Text.fontSize(13);
             Text.fontColor('#333333');
             Text.padding({ left: 12, right: 12, top: 6, bottom: 6 });
@@ -1165,7 +1249,7 @@ class GoodsDetailPage extends ViewPU {
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('价格实惠 9');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(751:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(812:9)", "entry");
             Text.fontSize(13);
             Text.fontColor('#333333');
             Text.padding({ left: 12, right: 12, top: 6, bottom: 6 });
@@ -1177,7 +1261,7 @@ class GoodsDetailPage extends ViewPU {
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Divider.create();
-            Divider.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(759:7)", "entry");
+            Divider.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(820:7)", "entry");
             Divider.color('#E5E5E5');
             Divider.margin({ top: 8, bottom: 8 });
         }, Divider);
@@ -1188,48 +1272,48 @@ class GoodsDetailPage extends ViewPU {
                 const review = _item;
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Column.create({ space: 8 });
-                    Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(763:9)", "entry");
+                    Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(824:9)", "entry");
                     Column.alignItems(HorizontalAlign.Start);
                     Column.width('100%');
                 }, Column);
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Row.create();
-                    Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(764:11)", "entry");
+                    Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(825:11)", "entry");
                 }, Row);
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Image.create({ "id": 16777282, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-                    Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(765:13)", "entry");
+                    Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(826:13)", "entry");
                     Image.width(32);
                     Image.height(32);
                     Image.borderRadius(16);
                 }, Image);
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Column.create({ space: 2 });
-                    Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(770:13)", "entry");
+                    Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(831:13)", "entry");
                     Column.alignItems(HorizontalAlign.Start);
                     Column.margin({ left: 8 });
                 }, Column);
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Text.create(review.user + ' ' + review.level);
-                    Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(771:15)", "entry");
+                    Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(832:15)", "entry");
                     Text.fontSize(13);
                     Text.fontColor('#333333');
                 }, Text);
                 Text.pop();
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Row.create();
-                    Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(775:15)", "entry");
+                    Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(836:15)", "entry");
                 }, Row);
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     ForEach.create();
                     const forEachItemGenFunction = _item => {
                         const star = _item;
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
-                            Image.create({ "id": 125831521, "type": 40000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-                            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(777:19)", "entry");
+                            Image.create(star <= review.rating ? { "id": 16777353, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : { "id": 16777351, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(838:19)", "entry");
                             Image.width(12);
                             Image.height(12);
-                            Image.fillColor(star <= review.rating ? '#FFB800' : '#E0E0E0');
+                            Image.margin({ right: 2 });
                         }, Image);
                     };
                     this.forEachUpdateFunction(elmtId, [1, 2, 3, 4, 5], forEachItemGenFunction);
@@ -1237,7 +1321,7 @@ class GoodsDetailPage extends ViewPU {
                 ForEach.pop();
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Text.create(review.spec);
-                    Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(783:17)", "entry");
+                    Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(844:17)", "entry");
                     Text.fontSize(11);
                     Text.fontColor('#999999');
                     Text.margin({ left: 8 });
@@ -1248,7 +1332,7 @@ class GoodsDetailPage extends ViewPU {
                 Row.pop();
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Text.create(review.content);
-                    Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(793:11)", "entry");
+                    Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(854:11)", "entry");
                     Text.fontSize(13);
                     Text.fontColor('#333333');
                     Text.lineHeight(20);
@@ -1257,7 +1341,7 @@ class GoodsDetailPage extends ViewPU {
                 Text.pop();
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Image.create(this.goods?.cover);
-                    Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(799:11)", "entry");
+                    Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(860:11)", "entry");
                     Image.width(80);
                     Image.height(80);
                     Image.borderRadius(4);
@@ -1269,7 +1353,7 @@ class GoodsDetailPage extends ViewPU {
                         this.ifElseBranchUpdateFunction(0, () => {
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
                                 Divider.create();
-                                Divider.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(806:13)", "entry");
+                                Divider.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(867:13)", "entry");
                                 Divider.color('#F0F0F0');
                                 Divider.margin({ top: 12, bottom: 4 });
                             }, Divider);
@@ -1292,7 +1376,7 @@ class GoodsDetailPage extends ViewPU {
     buildDetailImages(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
-            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(822:5)", "entry");
+            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(883:5)", "entry");
             Column.width('100%');
             Column.padding(16);
             Column.backgroundColor(Color.White);
@@ -1301,7 +1385,7 @@ class GoodsDetailPage extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 问大家部分
             Row.create();
-            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(824:7)", "entry");
+            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(885:7)", "entry");
             // 问大家部分
             Row.width('100%');
             // 问大家部分
@@ -1309,7 +1393,7 @@ class GoodsDetailPage extends ViewPU {
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('问大家 · ' + (this.displayedQA.length > 1 ? this.displayedQA.length : '2'));
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(825:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(886:9)", "entry");
             Text.fontSize(16);
             Text.fontColor('#333333');
             Text.fontWeight(FontWeight.Medium);
@@ -1317,12 +1401,12 @@ class GoodsDetailPage extends ViewPU {
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Blank.create();
-            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(830:9)", "entry");
+            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(891:9)", "entry");
         }, Blank);
         Blank.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(this.showAllQA ? '收起' : '查看更多');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(832:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(893:9)", "entry");
             Text.fontSize(13);
             Text.fontColor('#999999');
             Text.onClick(() => {
@@ -1338,7 +1422,7 @@ class GoodsDetailPage extends ViewPU {
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 125832664, "type": 40000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(843:9)", "entry");
+            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(904:9)", "entry");
             Image.width(16);
             Image.height(16);
             Image.fillColor(Color.Black);
@@ -1352,25 +1436,25 @@ class GoodsDetailPage extends ViewPU {
                 const qa = _item;
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Column.create({ space: 8 });
-                    Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(853:9)", "entry");
+                    Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(914:9)", "entry");
                     Column.alignItems(HorizontalAlign.Start);
                     Column.width('100%');
                 }, Column);
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Row.create();
-                    Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(854:11)", "entry");
+                    Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(915:11)", "entry");
                     Row.width('100%');
                 }, Row);
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Image.create({ "id": 16777282, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-                    Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(855:13)", "entry");
+                    Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(916:13)", "entry");
                     Image.width(24);
                     Image.height(24);
                     Image.borderRadius(12);
                 }, Image);
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Text.create(qa.user);
-                    Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(860:13)", "entry");
+                    Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(921:13)", "entry");
                     Text.fontSize(13);
                     Text.fontColor('#333333');
                     Text.margin({ left: 8 });
@@ -1378,12 +1462,12 @@ class GoodsDetailPage extends ViewPU {
                 Text.pop();
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Blank.create();
-                    Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(865:13)", "entry");
+                    Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(926:13)", "entry");
                 }, Blank);
                 Blank.pop();
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Text.create(qa.answerCount + '个回答');
-                    Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(867:13)", "entry");
+                    Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(928:13)", "entry");
                     Text.fontSize(11);
                     Text.fontColor('#999999');
                 }, Text);
@@ -1391,7 +1475,7 @@ class GoodsDetailPage extends ViewPU {
                 Row.pop();
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Text.create('问: ' + qa.question);
-                    Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(873:11)", "entry");
+                    Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(934:11)", "entry");
                     Text.fontSize(14);
                     Text.fontColor('#333333');
                     Text.fontWeight(FontWeight.Medium);
@@ -1400,7 +1484,7 @@ class GoodsDetailPage extends ViewPU {
                 Text.pop();
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Text.create('答: ' + qa.answer);
-                    Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(879:11)", "entry");
+                    Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(940:11)", "entry");
                     Text.fontSize(13);
                     Text.fontColor('#666666');
                     Text.lineHeight(20);
@@ -1413,7 +1497,7 @@ class GoodsDetailPage extends ViewPU {
                         this.ifElseBranchUpdateFunction(0, () => {
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
                                 Divider.create();
-                                Divider.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(886:13)", "entry");
+                                Divider.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(947:13)", "entry");
                                 Divider.color('#F0F0F0');
                                 Divider.margin({ top: 12, bottom: 12 });
                             }, Divider);
@@ -1433,14 +1517,14 @@ class GoodsDetailPage extends ViewPU {
         ForEach.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Divider.create();
-            Divider.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(893:7)", "entry");
+            Divider.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(954:7)", "entry");
             Divider.color('#E5E5E5');
             Divider.margin({ top: 16, bottom: 16 });
         }, Divider);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 店铺推荐
             Text.create('店铺推荐');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(896:7)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(957:7)", "entry");
             // 店铺推荐
             Text.fontSize(16);
             // 店铺推荐
@@ -1457,7 +1541,7 @@ class GoodsDetailPage extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 推荐商品网格
             Grid.create();
-            Grid.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(904:7)", "entry");
+            Grid.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(965:7)", "entry");
             // 推荐商品网格
             Grid.columnsTemplate('1fr 1fr');
             // 推荐商品网格
@@ -1474,13 +1558,13 @@ class GoodsDetailPage extends ViewPU {
                 {
                     const itemCreation2 = (elmtId, isInitialRender) => {
                         GridItem.create(() => { }, false);
-                        GridItem.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(906:11)", "entry");
+                        GridItem.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(967:11)", "entry");
                     };
                     const observedDeepRender = () => {
                         this.observeComponentCreation2(itemCreation2, GridItem);
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             Column.create();
-                            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(907:13)", "entry");
+                            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(968:13)", "entry");
                             Column.onClick(() => {
                                 // 跳转到该商品详情页
                                 router.pushUrl({
@@ -1493,14 +1577,14 @@ class GoodsDetailPage extends ViewPU {
                         }, Column);
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             Image.create(item.cover);
-                            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(908:15)", "entry");
+                            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(969:15)", "entry");
                             Image.width('100%');
                             Image.aspectRatio(1);
                             Image.borderRadius(8);
                         }, Image);
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             Text.create(item.title);
-                            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(913:15)", "entry");
+                            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(974:15)", "entry");
                             Text.fontSize(12);
                             Text.fontColor('#333333');
                             Text.maxLines(2);
@@ -1510,7 +1594,7 @@ class GoodsDetailPage extends ViewPU {
                         Text.pop();
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             Text.create('¥' + item.price.toFixed(2));
-                            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(920:15)", "entry");
+                            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(981:15)", "entry");
                             Text.fontSize(14);
                             Text.fontColor('#FF0000');
                             Text.fontWeight(FontWeight.Bold);
@@ -1533,7 +1617,7 @@ class GoodsDetailPage extends ViewPU {
     buildBottomBar(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
-            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(951:5)", "entry");
+            Row.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(1012:5)", "entry");
             Row.width('100%');
             Row.height(60);
             Row.padding({ left: 12, right: 12, top: 8, bottom: 8 });
@@ -1544,7 +1628,7 @@ class GoodsDetailPage extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 店铺
             Column.create({ space: 2 });
-            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(953:7)", "entry");
+            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(1014:7)", "entry");
             // 店铺
             Column.width(50);
             // 店铺
@@ -1552,14 +1636,14 @@ class GoodsDetailPage extends ViewPU {
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 16777317, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(954:9)", "entry");
+            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(1015:9)", "entry");
             Image.width(22);
             Image.height(22);
             Image.fillColor(Color.Black);
         }, Image);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('店铺');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(958:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(1019:9)", "entry");
             Text.fontSize(10);
             Text.fontColor('#666666');
         }, Text);
@@ -1569,7 +1653,7 @@ class GoodsDetailPage extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 收藏
             Column.create({ space: 2 });
-            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(966:7)", "entry");
+            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(1027:7)", "entry");
             // 收藏
             Column.width(50);
             // 收藏
@@ -1590,14 +1674,14 @@ class GoodsDetailPage extends ViewPU {
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create(this.isFavorited ? { "id": 16777318, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : { "id": 16777315, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(967:9)", "entry");
+            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(1028:9)", "entry");
             Image.width(22);
             Image.height(22);
             Image.fillColor(this.isFavorited ? '#FF6600' : Color.Black);
         }, Image);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('收藏');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(971:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(1032:9)", "entry");
             Text.fontSize(10);
             Text.fontColor('#666666');
         }, Text);
@@ -1607,7 +1691,7 @@ class GoodsDetailPage extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 客服
             Column.create({ space: 2 });
-            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(989:7)", "entry");
+            Column.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(1050:7)", "entry");
             // 客服
             Column.width(50);
             // 客服
@@ -1629,14 +1713,14 @@ class GoodsDetailPage extends ViewPU {
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 16777316, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(990:9)", "entry");
+            Image.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(1051:9)", "entry");
             Image.width(22);
             Image.height(22);
             Image.fillColor(Color.Black);
         }, Image);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('客服');
-            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(994:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(1055:9)", "entry");
             Text.fontSize(10);
             Text.fontColor('#666666');
         }, Text);
@@ -1645,13 +1729,13 @@ class GoodsDetailPage extends ViewPU {
         Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Blank.create();
-            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(1012:7)", "entry");
+            Blank.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(1073:7)", "entry");
         }, Blank);
         Blank.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 加入购物车
             Button.createWithLabel('加入购物车');
-            Button.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(1015:7)", "entry");
+            Button.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(1076:7)", "entry");
             // 加入购物车
             Button.fontSize(13);
             // 加入购物车
@@ -1682,7 +1766,7 @@ class GoodsDetailPage extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 立即购买
             Button.createWithLabel('立即购买');
-            Button.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(1034:7)", "entry");
+            Button.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(1095:7)", "entry");
             // 立即购买
             Button.fontSize(13);
             // 立即购买

@@ -1,591 +1,0 @@
-Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚ>Sif (!("finalizeConstruction" in ViewPU.prototype)) {
-    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
-}
-/*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
- * Licensed under the Apache License,Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-import router from '@ohos.router';
-import * as commonConst from '../common/CommonConstants';
-import { CategoryType } from '../viewmodel/InitialData';
-import { ListDataSource } from '../viewmodel/ListDataSource';
-class GoodsListEmptyListener {
-    constructor(goodsList) {
-        this.goodsList = goodsList;
-    }
-    onEmptyChanged(empty) {
-        this.goodsList.setEmptyState(empty);
-    }
-}
-export default class GoodsList extends ViewPU {
-    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
-        super(parent, __localStorage, elmtId, extraInfo);
-        if (typeof paramsLambda === "function") {
-            this.paramsGenerator_ = paramsLambda;
-        }
-        this.dataSource = new ListDataSource(CategoryType.Featured);
-        this.onLoadMore = undefined;
-        this.__isEmpty = new ObservedPropertySimplePU(false, this, "isEmpty");
-        this.__showLoading = new ObservedPropertySimplePU(false, this, "showLoading");
-        this.emptyListener = new GoodsListEmptyListener(this);
-        this.setInitiallyProvidedValue(params);
-        this.finalizeConstruction();
-    }
-    setInitiallyProvidedValue(params) {
-        if (params.dataSource !== undefined) {
-            this.dataSource = params.dataSource;
-        }
-        if (params.onLoadMore !== undefined) {
-            this.onLoadMore = params.onLoadMore;
-        }
-        if (params.isEmpty !== undefined) {
-            this.isEmpty = params.isEmpty;
-        }
-        if (params.showLoading !== undefined) {
-            this.showLoading = params.showLoading;
-        }
-        if (params.emptyListener !== undefined) {
-            this.emptyListener = params.emptyListener;
-        }
-    }
-    updateStateVars(params) {
-    }
-    purgeVariableDependenciesOnElmtId(rmElmtId) {
-        this.__isEmpty.purgeDependencyOnElmtId(rmElmtId);
-        this.__showLoading.purgeDependencyOnElmtId(rmElmtId);
-    }
-    aboutToBeDeleted() {
-        this.__isEmpty.aboutToBeDeleted();
-        this.__showLoading.aboutToBeDeleted();
-        SubscriberManager.Get().delete(this.id__());
-        this.aboutToBeDeletedInternal();
-    }
-    get isEmpty() {
-        return this.__isEmpty.get();
-    }
-    set isEmpty(newValue) {
-        this.__isEmpty.set(newValue);
-    }
-    get showLoading() {
-        return this.__showLoading.get();
-    }
-    set showLoading(newValue) {
-        this.__showLoading.set(newValue);
-    }
-    setEmptyState(empty) {
-        this.isEmpty = empty;
-    }
-    aboutToAppear() {
-        this.dataSource.registerEmptyListener(this.emptyListener);
-    }
-    aboutToDisappear() {
-        this.dataSource.unregisterEmptyListener(this.emptyListener);
-    }
-    initialRender() {
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(52:5)", "entry");
-            Column.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
-            Column.justifyContent(FlexAlign.Start);
-        }, Column);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            If.create();
-            if (this.isEmpty) {
-                this.ifElseBranchUpdateFunction(0, () => {
-                    this.renderEmptyState.bind(this)();
-                });
-            }
-            else {
-                this.ifElseBranchUpdateFunction(1, () => {
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        List.create({ space: 0 });
-                        List.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(56:9)", "entry");
-                        List.edgeEffect(EdgeEffect.Spring);
-                        List.width(commonConst.GOODS_LIST_WIDTH);
-                        List.listDirection(Axis.Vertical);
-                        List.chainAnimation(false);
-                    }, List);
-                    {
-                        const __lazyForEachItemGenFunction = (_item, index) => {
-                            const item = _item;
-                            {
-                                const itemCreation2 = (elmtId, isInitialRender) => {
-                                    ListItem.create(() => { }, false);
-                                    ListItem.margin({ left: 4, right: 4 });
-                                    ListItem.onAppear(() => {
-                                        if (index !== undefined && this.shouldLoadMore(index)) {
-                                            this.triggerLoadMore();
-                                        }
-                                    });
-                                    ListItem.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(58:13)", "entry");
-                                };
-                                const observedDeepRender = () => {
-                                    this.observeComponentCreation2(itemCreation2, ListItem);
-                                    this.listRow.bind(this)(item, index ?? 0);
-                                    ListItem.pop();
-                                };
-                                observedDeepRender();
-                            }
-                        };
-                        const __lazyForEachItemIdFunc = (item) => `${item.id}`;
-                        LazyForEach.create("1", this, this.dataSource, __lazyForEachItemGenFunction, __lazyForEachItemIdFunc);
-                        LazyForEach.pop();
-                    }
-                    List.pop();
-                });
-            }
-        }, If);
-        If.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            If.create();
-            if (this.showLoading) {
-                this.ifElseBranchUpdateFunction(0, () => {
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create({ "id": 16777243, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-                        Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(76:9)", "entry");
-                        Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
-                        Text.fontColor({ "id": 16777288, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-                        Text.margin({ top: 8 });
-                    }, Text);
-                    Text.pop();
-                });
-            }
-            else {
-                this.ifElseBranchUpdateFunction(1, () => {
-                });
-            }
-        }, If);
-        If.pop();
-        Column.pop();
-    }
-    shouldLoadMore(index) {
-        const remaining = this.dataSource.totalCount() - index - 1;
-        return remaining <= 6;
-    }
-    triggerLoadMore() {
-        if (this.showLoading) {
-            return;
-        }
-        this.showLoading = true;
-        if (this.onLoadMore !== undefined) {
-            this.onLoadMore();
-        }
-        setTimeout(() => {
-            this.showLoading = false;
-        }, 500);
-    }
-    renderEmptyState(parent = null) {
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(106:5)", "entry");
-            Column.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
-            Column.height(200);
-            Column.justifyContent(FlexAlign.Center);
-            Column.alignItems(HorizontalAlign.Center);
-        }, Column);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777314, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Image.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(107:7)", "entry");
-            Image.width(120);
-            Image.height(120);
-            Image.margin({ bottom: 16 });
-        }, Image);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create({ "id": 16777233, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(111:7)", "entry");
-            Text.fontSize(commonConst.NORMAL_FONT_SIZE);
-            Text.fontColor({ "id": 16777288, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-        }, Text);
-        Text.pop();
-        Column.pop();
-    }
-    listRow(item, index, parent = null) {
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(123:5)", "entry");
-            Column.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
-            Column.margin({ left: 4, right: 4 });
-        }, Column);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Row.create({ space: 8 });
-            Row.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(124:7)", "entry");
-            Row.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
-            Row.alignItems(VerticalAlign.Center);
-            Row.padding({ top: 12, bottom: 12 });
-            Row.onClick(() => {
-                router.pushUrl({
-                    url: 'pages/GoodsDetailPage',
-                    params: { goods: item }
-                }).catch((err) => {
-                    console.error('è·³è½¬å¤±è´¥:', err.message);
-                });
-            });
-        }, Row);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create(item.cover);
-            Image.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(125:9)", "entry");
-            Image.width(112);
-            Image.height(112);
-            Image.borderRadius(16);
-            Image.objectFit(ImageFit.Cover);
-            Image.draggable(false);
-        }, Image);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(131:9)", "entry");
-            Column.alignItems(HorizontalAlign.Start);
-            Column.layoutWeight(1);
-        }, Column);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(item.title);
-            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(132:11)", "entry");
-            Text.fontSize(commonConst.NORMAL_FONT_SIZE);
-            Text.fontWeight(FontWeight.Medium);
-            Text.fontColor({ "id": 16777285, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Text.maxLines(2);
-            Text.textAlign(TextAlign.Start);
-            Text.textOverflow({ overflow: TextOverflow.Ellipsis });
-            Text.width('100%');
-        }, Text);
-        Text.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(item.description);
-            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(140:11)", "entry");
-            Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
-            Text.fontColor({ "id": 16777288, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Text.maxLines(2);
-            Text.textAlign(TextAlign.Start);
-            Text.textOverflow({ overflow: TextOverflow.Ellipsis });
-            Text.width('100%');
-            Text.margin({ top: 4, bottom: 4 });
-        }, Text);
-        Text.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Row.create({ space: 6 });
-            Row.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(148:11)", "entry");
-            Row.margin({ bottom: 6 });
-        }, Row);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            ForEach.create();
-            const forEachItemGenFunction = (_item, tagIndex) => {
-                const tag = _item;
-                this.observeComponentCreation2((elmtId, isInitialRender) => {
-                    Text.create(tag);
-                    Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(150:15)", "entry");
-                    Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
-                    Text.fontColor({ "id": 16777287, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-                    Text.padding({ left: 8, right: 8, top: 2, bottom: 2 });
-                    Text.borderRadius(12);
-                    Text.backgroundColor({ "id": 16777290, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-                }, Text);
-                Text.pop();
-            };
-            this.forEachUpdateFunction(elmtId, item.tags, forEachItemGenFunction, (tag, tagIndex) => `${tagIndex ?? 0}`, true, true);
-        }, ForEach);
-        ForEach.pop();
-        Row.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Row.create({ space: 8 });
-            Row.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(159:11)", "entry");
-            Row.alignItems(VerticalAlign.Center);
-            Row.justifyContent(FlexAlign.Start);
-        }, Row);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(`Â¥${item.price.toFixed(0)}`);
-            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(160:13)", "entry");
-            Text.fontSize(commonConst.BIGGER_FONT_SIZE);
-            Text.fontColor({ "id": 16777287, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-        }, Text);
-        Text.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(item.evaluate);
-            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(163:13)", "entry");
-            Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
-            Text.fontColor({ "id": 16777288, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-        }, Text);
-        Text.pop();
-        Row.pop();
-        Column.pop();
-        Row.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Divider.create();
-            Divider.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(185:7)", "entry");
-            Divider.color({ "id": 16777286, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Divider.opacity(0.6);
-            Divider.margin({ top: 12 });
-        }, Divider);
-        Column.pop();
-    }
-    rerender() {
-        this.updateDirtyElements();
-    }
-}
-//# sourceMappingURL=GoodsListComponent.js.mapÂ”ÙR hvigor_ignore_D:_DevEco Studio2_sdk_default_openharmony_ets_api_@ohos.router.d.tsÙzD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets\common\CommonConstants.etsÙyD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets\viewmodel\InitialData.etsÙ|D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets\viewmodel\ListDataSource.etsÙ{D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets\view\GoodsListComponent.etsÔrBœªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo¯hostModulesInfo°belongModulePath§checker¬shouldEmitJs¥entryÃÂÙRD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entryÙLD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity¥entry¥1.0.0Ô  ‘ÔrC’²hostDependencyName®hostModuleName´./GoodsListComponent¥entryÙRD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entryÔrDÜ ®¬getNodeCount²getIdentifierCount®getSymbolCount¬getTypeCountµgetInstantiationCountµgetRelationCacheSizes±isUndefinedSymbol±isArgumentsSymbol¯isUnknownSymbol¯getMergedSymbol®getDiagnostics´getGlobalDiagnostics´getRecursionIdentity¶getUnmatchedProperties¹getTypeOfSymbolAtLocation¯getTypeOfSymbolÙ(getSymbolsOfParameterPropertyDeclaration·getDeclaredTypeOfSymbol³getPropertiesOfType±getPropertyOfTypeÙ"getPrivateIdentifierPropertyOfType·getTypeOfPropertyOfType²getIndexInfoOfType³getIndexInfosOfTypeºgetIndexInfosOfIndexSymbol³getSignaturesOfType²getIndexTypeOfType¬getIndexType¬getBaseTypes¸getBaseTypeOfLiteralType®getWidenedType³getTypeFromTypeNode°getParameterTypeÙ$getParameterIdentifierNameAtPosition¸getPromisedTypeOfPromise®getAwaitedType¸getReturnTypeOfSignature®isNullableType¯getNullableType²getNonNullableType²getNonOptionalType°getTypeArguments®typeToTypeNodeÙ$indexInfoToIndexSignatureDeclaration¿signatureToSignatureDeclaration²symbolToEntityName²symbolToExpression¬symbolToNodeÙ!symbolToTypeParameterDeclarations¼symbolToParameterDeclarationºtypeParameterToDeclaration±getSymbolsInScope³getSymbolAtLocation·getIndexInfosAtLocationÙ!getShorthandAssignmentValueSymbolÙ#getExportSpecifierLocalTargetSymbol·getExportSymbolOfSymbol±getTypeAtLocationÙ tryGetTypeAtLocationWithoutCheckºgetTypeOfAssignmentPatternÙ*getPropertySymbolOfDestructuringAssignment±signatureToString¬typeToString®symbolToStringµtypePredicateToString®writeSignature©writeType«writeSymbol²writeTypePredicate¼getAugmentedPropertiesOfType®getRootSymbols²getSymbolOfExpando±getContextualTypeÙ(getContextualTypeForObjectLiteralElementÙ#getContextualTypeForArgumentAtIndexÙ getContextualTypeForJsxAttribute²isContextSensitiveÙ!getTypeOfPropertyOfContextualTypeµgetFullyQualifiedNameÙ#tryGetResolvedSignatureWithoutCheck´getResolvedSignatureÙ/getResolvedSignatureForStringLiteralCompletionsÙ$getResolvedSignatureForSignatureHelpµgetExpandedParameters¹hasEffectiveRestParameterºcontainsArgumentsReference°getConstantValueµisValidPropertyAccessÙ#isValidPropertyAccessForCompletions»getSignatureFromDeclarationºisImplementationOfOverload¹getImmediateAliasedSymbol°getAliasedSymbol¯getEmitResolver²getExportsOfModule¿getExportsAndPropertiesOfModuleÙ forEachExportAndPropertyOfModule¯getSymbolWalker±getAmbientModules¹getJsxIntrinsicTagNamesAt³isOptionalParameter»tryGetMemberInModuleExportsÙ(tryGetMemberInModuleExportsAndProperties´tryFindAmbientModuleÙ(tryFindAmbientModuleWithoutAugmentations¯getApparentType¬getUnionType²isTypeAssignableTo³createAnonymousType¯createSignature¬createSymbol¯createIndexInfoªgetAnyType­getStringType­getNumberType±createPromiseType¯createArrayType¹getElementTypeOfArrayType®getBooleanType¬getFalseType«getTrueType«getVoidType°getUndefinedType«getNullType¯getESSymbolType¬getNeverType¯getOptionalType®getPromiseType²getPromiseLikeType´getAsyncIterableType²isSymbolAccessible«isArrayType«isTupleType¯isArrayLikeTypeÙ#isTypeInvalidDueToUnionDiscriminantºgetExactOptionalProperties¿getAllPossiblePropertiesOfTypesÙ(getSuggestedSymbolForNonexistentPropertyÙ#getSuggestionForNonexistentPropertyÙ,getSuggestedSymbolForNonexistentJSXAttributeÙ&getSuggestedSymbolForNonexistentSymbolÙ!getSuggestionForNonexistentSymbolÙ&getSuggestedSymbolForNonexistentModuleÙ!getSuggestionForNonexistentExportÙ+getSuggestedSymbolForNonexistentClassMember·getBaseConstraintOfType»getDefaultFromTypeParameter«resolveName¯getJsxNamespaceµgetJsxFragmentFactory¸getAccessibleSymbolChain»getTypePredicateOfSignature¹resolveExternalModuleName»resolveExternalModuleSymbol°tryGetThisTypeAt¹getTypeArgumentConstraint¸getSuggestionDiagnostics¸runWithCancellationTokenÙ3getLocalTypeParametersOfClassOrInterfaceOrTypeAlias´isDeclarationVisible´isPropertyAccessible»getTypeOnlyAliasDeclaration¿getMemberOverrideModifierStatusÙ!isTypeParameterPossiblyReferenced²getConstEnumRelate´clearConstEnumRelateµdeleteConstEnumRelateÙ$getTypeArgumentsForResolvedSignatureµgetCheckedSourceFilesÙ"collectHaveTsNoCheckFilesForLinter·clearQualifiedNameCache®isStaticRecord²isStaticSourceFile³createIntrinsicTypeÔ  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  ÃÃÚ/*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
- * Licensed under the Apache License,Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-import router from '@ohos.router';
-import * as commonConst from '../common/CommonConstants';
-import { GoodsListItemType, CategoryType } from '../viewmodel/InitialData';
-import { ListDataSource, EmptyListener } from '../viewmodel/ListDataSource';
-
-class GoodsListEmptyListener implements EmptyListener {
-  private goodsList: GoodsList;
-
-  constructor(goodsList: GoodsList) {
-    this.goodsList = goodsList;
-  }
-
-  onEmptyChanged(empty: boolean): void {
-    this.goodsList.setEmptyState(empty);
-  }
-}
-@Component
-export default struct GoodsList {
-  dataSource: ListDataSource = new ListDataSource(CategoryType.Featured);
-  onLoadMore?: () => void;
-  @State private isEmpty: boolean = false;
-  @State private showLoading: boolean = false;
-  private emptyListener: GoodsListEmptyListener = new GoodsListEmptyListener(this);
-
-  setEmptyState(empty: boolean): void {
-    this.isEmpty = empty;
-  }
-
-  aboutToAppear() {
-    this.dataSource.registerEmptyListener(this.emptyListener);
-  }
-
-  aboutToDisappear() {
-    this.dataSource.unregisterEmptyListener(this.emptyListener);
-  }
-
-  build() {
-    Column() {
-      if (this.isEmpty) {
-        this.renderEmptyState();
-      } else {
-        List({ space: 0 }) {
-          LazyForEach(this.dataSource, (item: GoodsListItemType, index?: number) => {
-            ListItem() {
-              this.listRow(item, index ?? 0);
-            }
-            .margin({ left: 4, right: 4 })
-            .onAppear(() => {
-              if (index !== undefined && this.shouldLoadMore(index)) {
-                this.triggerLoadMore();
-              }
-            })
-          }, (item: GoodsListItemType) => `${item.id}`)
-        }
-        .edgeEffect(EdgeEffect.Spring)
-        .width(commonConst.GOODS_LIST_WIDTH)
-        .listDirection(Axis.Vertical)
-        .chainAnimation(false)
-      }
-
-      if (this.showLoading) {
-        Text($r('app.string.loading_more_text'))
-          .fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE)
-          .fontColor($r('app.color.gray'))
-          .margin({ top: 8 })
-      }
-    }
-    .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
-    .justifyContent(FlexAlign.Start)
-  }
-
-  private shouldLoadMore(index: number): boolean {
-    const remaining: number = this.dataSource.totalCount() - index - 1;
-    return remaining <= 6;
-  }
-
-  private triggerLoadMore(): void {
-    if (this.showLoading) {
-      return;
-    }
-    this.showLoading = true;
-    if (this.onLoadMore !== undefined) {
-      this.onLoadMore();
-    }
-    setTimeout(() => {
-      this.showLoading = false;
-    }, 500);
-  }
-
-  @Builder
-  private renderEmptyState() {
-    Column() {
-      Image($r('app.media.failure'))
-        .width(120)
-        .height(120)
-        .margin({ bottom: 16 })
-      Text($r('app.string.empty_list_hint'))
-        .fontSize(commonConst.NORMAL_FONT_SIZE)
-        .fontColor($r('app.color.gray'))
-    }
-    .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
-    .height(200)
-    .justifyContent(FlexAlign.Center)
-    .alignItems(HorizontalAlign.Center)
-  }
-
-  @Builder
-  private listRow(item: GoodsListItemType, index: number) {
-    Column() {
-      Row({ space: 8 }) {
-        Image(item.cover)
-          .width(112)
-          .height(112)
-          .borderRadius(16)
-          .objectFit(ImageFit.Cover)
-          .draggable(false)
-        Column() {
-          Text(item.title)
-            .fontSize(commonConst.NORMAL_FONT_SIZE)
-            .fontWeight(FontWeight.Medium)
-            .fontColor($r('app.color.deepGray'))
-            .maxLines(2)
-            .textAlign(TextAlign.Start)
-            .textOverflow({ overflow: TextOverflow.Ellipsis })
-            .width('100%')
-          Text(item.description)
-            .fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE)
-            .fontColor($r('app.color.gray'))
-            .maxLines(2)
-            .textAlign(TextAlign.Start)
-            .textOverflow({ overflow: TextOverflow.Ellipsis })
-            .width('100%')
-            .margin({ top: 4, bottom: 4 })
-          Row({ space: 6 }) {
-            ForEach(item.tags, (tag: Resource, tagIndex?: number) => {
-              Text(tag)
-                .fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE)
-                .fontColor($r('app.color.freshRed'))
-                .padding({ left: 8, right: 8, top: 2, bottom: 2 })
-                .borderRadius(12)
-                .backgroundColor($r('app.color.softAccent'))
-            }, (tag: Resource, tagIndex?: number) => `${tagIndex ?? 0}`)
-          }
-          .margin({ bottom: 6 })
-          Row({ space: 8 }) {
-            Text(`Â¥${item.price.toFixed(0)}`)
-              .fontSize(commonConst.BIGGER_FONT_SIZE)
-              .fontColor($r('app.color.freshRed'))
-            Text(item.evaluate)
-              .fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE)
-              .fontColor($r('app.color.gray'))
-          }
-          .alignItems(VerticalAlign.Center)
-          .justifyContent(FlexAlign.Start)
-        }
-        .alignItems(HorizontalAlign.Start)
-        .layoutWeight(1)
-      }
-      .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
-      .alignItems(VerticalAlign.Center)
-      .padding({ top: 12, bottom: 12 })
-      .onClick(() => {
-        router.pushUrl({
-          url: 'pages/GoodsDetailPage',
-          params: { goods: item }
-        }).catch((err: Error) => {
-          console.error('è·³è½¬å¤±è´¥:', err.message);
-        });
-      })
-      
-      Divider()
-        .color($r('app.color.divider'))
-        .opacity(0.6)
-        .margin({ top: 12 })
-    }
-    .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
-    .margin({ left: 4, right: 4 })
-  }
-}ÀÔrE”¬@ohos.router¹../common/CommonConstants¸../viewmodel/InitialData»../viewmodel/ListDataSourceÔrF—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÃÙR hvigor_ignore_D:_DevEco Studio2_sdk_default_openharmony_ets_api_@ohos.router.d.tsAÃªoh-resolveÂFAÂÙzD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets\common\CommonConstants.etsAÃªoh-resolveÂFAÂÙyD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets\viewmodel\InitialData.etsAÃªoh-resolveÂFAÂÙ|D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets\viewmodel\ListDataSource.etsAÃªoh-resolveÂ“ÔrG–§version¤fileªsourceRoot§sources¥names¨mappingsµGoodsListComponent.js ‘¶GoodsListComponent.etsÜH‘”    ‘” –”   ” ” ” ”! !”" "—”   ” ” ” ” ”8 8”9 9˜”   ” ”	 ” (” *” 0”7 ÌJ”8 ÌK˜”   ” ”	 	” ” (” .”< ÌK”= ÌL“”   ” ” “” ” ” "—” ” ” 	” ” ”" ”# ’” ” ”” ” ” ” š” ” ” 	” ” ”$  ”% !”* &”+ '”, (’” ” ‘” –”   ” ” ” ” ” ‘”  ˜”  ”  #”,  1”-  2”9  >”:  ?”ÌB  ÌG”ÌC  ÌH’”6 "$”; ")’”: #(”? #-–” $2”! $6”7 $ÌL”8 $ÌM”< $ÌQ”= $ÌR‘” ’” "” "’” "” "’” #” #’” #” #”” &” &” &” &—” '” '” '	” '” '” '” '’” (” (’” *” *œ” +” +” +	” +” +”- +)”. +*”2 +.”3 +/”Ì@ +<”ÌA +=”ÌB +>’” ,” ,’” .” .œ” /” /” /	” /” /”/ /+”0 /,”4 /0”5 /1”ÌB />”ÌC /?”ÌD /Ì@’” 0” 0‘” 2’” 3” 3
-˜” 3” 3
-” ÌQ” ÌQ
-” ÌQ”$ ÌQ”% ÌQ”; ÌQ-˜” 3” 3
-” ÌR”! ÌR”" ÌR”+ ÌR”, ÌR”1 ÌR#–” 4” 4
-” 4” 4” 4” 4•” 5” 5” 5”) 5”6 5‘” 6‘” 6˜” 7” 7”$ 7”& 7”+ 7”- 7”. 7”0 7˜” 7” 7” ÌD	”' ÌD”( ÌD”2 ÌD”3 ÌD”9 ÌD%˜” 7” 7” ÌE	”" ÌE”# ÌE”. ÌE”/ ÌE”? ÌE+˜” 7” 7” ÌF	”* ÌF”+ ÌF”/ ÌF”0 ÌF”8 ÌF$–” 7” 7” ÌG	”+ ÌG”, ÌG”1 ÌG’”ÌE 8ÌA”ÌJ 8ÌO”$ 9”, 9”- <”3 <”4 <”6 <”: <”< <”= <”? <”ÌD <$”ÌF <&”ÌG <'”ÌI <)—”$ 9”, 9”- =”5 =”6 =”9 =”; =”( >”, >”1 >”6 >”? >%”ÌC >)”ÌG >-”ÌH >.”ÌV ><”ÌW >=”Ì\ >ÌB”Ì] >ÌC”Ì_ >ÌE–”, ?”0 ?”1 ?”Ì@ ?$”ÌB ?&”ÌC ?'‘”) Ì@’”$ ÌA”% ÌA›”$ :”( :”) :”0 :”< :”Ì@ :”ÌB :!”ÌG :&”ÌK :*”ÌL :+”ÌM :,’”$ 9”, 9›”8 ÌB”9 ÌB”= ÌB%”? ÌB'”ÌA ÌB)”ÌB ÌB*”ÌE ÌB-”ÌI ÌB1”ÌJ ÌB2”ÌL ÌB4”ÌN ÌB6””6 8”: 8”; 8”ÌE 8%’” 8
-”# 8’” 7” 7‘” ÌH–” ÌJ” ÌJ
-” ÌJ” ÌJ”  ÌJ”" ÌJ’” ÌK” ÌK˜” ÌK” ÌK” ÌL”% ÌL”& ÌL”1 ÌL”2 ÌL ”ÌJ ÌL8”” ÌK” ÌK” ÌM”& ÌMš” ÌK” ÌK” ÌN”# ÌN”$ ÌN”& ÌN”) ÌN”+ ÌN”, ÌN”. ÌN’” ÌK” ÌK‘” ÌO‘” ÌO’” 3” 3
-‘” ÌS”” ÌU
-” ÌU” ÌU” ÌU&Ÿ” ÌV” ÌV
-” ÌV” ÌV” ÌV"” ÌV#”) ÌV-”* ÌV.”4 ÌV8”6 ÌV:”9 ÌV=”> ÌVÌB”ÌA ÌVÌE”ÌB ÌVÌF”ÌC ÌVÌG–” ÌW” ÌW” ÌW” ÌW” ÌW” ÌW’” ÌX” ÌX’” ÌZ
-” ÌZ–” Ì[” Ì[” Ì[” Ì[” Ì[” Ì[’” Ì\” Ì\‘”	 Ì]—” Ì^” Ì^” Ì^	” Ì^” Ì^” Ì^”  Ì^˜” Ì_” Ì_” Ì_” Ì_” Ì_”  Ì_”) Ì_%”+ Ì_'–” Ì`” Ì`
-” Ì`” Ì`” Ì`” Ì`‘”	 Ìa•” Ìb” Ìb” Ìb” Ìb” Ìb—” Ìc” Ìc
-” Ìc” Ìc” Ìc”$ Ìc”% Ìc–” Ìd”	 Ìd” Ìd” Ìd
-” Ìd” Ìd’” Ìe” Ìe’” Ìh
-” Ìh’” Ìi” Ìi
-˜” Ìi” Ìi
-” Ìr” Ìr
-” Ìr”$ Ìr”% Ìr”; Ìr-–” Ìi” Ìi
-” Ìs” Ìs” Ìs” Ìs˜” Ìi” Ìi
-” Ìt”! Ìt”" Ìt”+ Ìt”, Ìt”2 Ìt$˜” Ìi” Ìi
-” Ìu” Ìu” Ìu”- Ìu”. Ìu ”4 Ìu&’” Ìj” Ìj–” Ìj” Ìj” Ìk	” Ìk” Ìk” Ìk–” Ìj” Ìj” Ìl	” Ìl” Ìl” Ìlš” Ìj” Ìj” Ìm	” Ìm” Ìm” Ìm”! Ìm”# Ìm”% Ìm”' Ìm’” Ìn” Ìn
-˜” Ìn” Ìn
-” Ìo	” Ìo” Ìo”% Ìo”& Ìo”6 Ìo.”” Ìn” Ìn
-” Ìp	” Ìp’” Ìn” Ìn
-’” Ìi” Ìi
-‘” Ìv–” Ìy
-” Ìy” Ìy” Ìy)” Ìy+” Ìy8’” Ìz” Ìz
-˜” Ìz” Ìz
-” Ì½” Ì½
-” Ì½”$ Ì½”% Ì½”; Ì½-” Ìz” Ìz
-” Ì¾” Ì¾” Ì¾” Ì¾”  Ì¾”" Ì¾”# Ì¾”% Ì¾”* Ì¾”, Ì¾”- Ì¾”/ Ì¾!˜” Ì{” Ì{	” Ì{
-” Ì{” Ì{”  Ì{”! Ì{”# Ì{˜” Ì{” Ì{	” Ì¬” Ì¬” Ì¬”! Ì¬”" Ì¬”8 Ì¬/˜” Ì{” Ì{	” Ì­” Ì­” Ì­”( Ì­”) Ì­ ”/ Ì­&” Ì{” Ì{	” Ì®” Ì®” Ì®” Ì®” Ì®” Ì®”! Ì®”# Ì®”) Ì® ”+ Ì®"”- Ì®$”/ Ì®&—” Ì{” Ì{	” Ì¯” Ì¯” Ì¯” Ì¯” Ì¯•” Ì°” Ì°” Ì°” Ì°” Ì°”” Ì±
-” Ì±” Ì±”0 Ì±&˜” Ì²
-” Ì²” Ì²” Ì²”# Ì²”% Ì²”) Ì²”+ Ì²!™” Ì³	” Ì³
-” Ì³” Ì³” Ì³” Ì³” Ì³” Ì³”! Ì³ œ” Ì´
-” Ì´” Ì´”! Ì´”" Ì´”) Ì´”+ Ì´!”. Ì´$”/ Ì´%”6 Ì´,”7 Ì´-”8 Ì´.”” Ìµ” Ìµ	” Ìµ
-” Ìµ’” Ì¶” Ì¶–” Ì|” Ì|” Ì|” Ì|” Ì|”# Ì|–” Ì|” Ì|” Ì}” Ì}” Ì}” Ì}–” Ì|” Ì|” Ì~” Ì~” Ì~” Ì~–” Ì|” Ì|” Ì” Ì” Ì”! Ì˜” Ì|” Ì|” Ì€” Ì€” Ì€”$ Ì€”% Ì€”* Ì€#–” Ì|” Ì|” Ì” Ì” Ì”! Ì’” Ì‚” Ì‚˜” Ì‚” Ì‚” Ì©	” Ì©” Ì©”- Ì©#”. Ì©$”3 Ì©)–” Ì‚” Ì‚” Ìª	” Ìª”  Ìª”! Ìª–” Ìƒ
-” Ìƒ” Ìƒ” Ìƒ” Ìƒ”" Ìƒ˜” Ìƒ
-” Ìƒ” Ì„” Ì„” Ì„”% Ì„!”& Ì„"”6 Ì„2˜” Ìƒ
-” Ìƒ” Ì…” Ì…” Ì…”& Ì…"”' Ì…#”- Ì…)”” Ìƒ
-” Ìƒ” Ì†” Ì†–” Ìƒ
-” Ìƒ” Ì‡” Ì‡” Ì‡” Ì‡˜” Ìƒ
-” Ìƒ” Ìˆ” Ìˆ” Ìˆ”$ Ìˆ ”% Ìˆ!”* Ìˆ&œ” Ìƒ
-” Ìƒ” Ì‰” Ì‰” Ì‰”  Ì‰”( Ì‰$”* Ì‰&”6 Ì‰2”7 Ì‰3”? Ì‰;”ÌA Ì‰=–” Ìƒ
-” Ìƒ” ÌŠ” ÌŠ” ÌŠ” ÌŠ’” Ìƒ
-” Ìƒ–” Ì‹
-” Ì‹” Ì‹” Ì‹” Ì‹”( Ì‹˜” Ì‹
-” Ì‹” ÌŒ” ÌŒ” ÌŒ”% ÌŒ!”& ÌŒ"”> ÌŒ:”” Ì‹
-” Ì‹” Ì” Ì–” Ì‹
-” Ì‹” Ì” Ì” Ì” Ì˜” Ì‹
-” Ì‹” Ì” Ì” Ì”$ Ì ”% Ì!”* Ì&œ” Ì‹
-” Ì‹” Ì” Ì” Ì”  Ì”( Ì$”* Ì&”6 Ì2”7 Ì3”? Ì;”ÌA Ì=–” Ì‹
-” Ì‹” Ì‘” Ì‘” Ì‘” Ì‘” Ì‹
-” Ì‹” Ì’” Ì’” Ì’” Ì’” Ì’” Ì’”  Ì’”" Ì’”( Ì’$”* Ì’&”+ Ì’'”- Ì’)’” Ì‹
-” Ì‹˜” Ì“
-” Ì“” Ì“” Ì“” Ì“”  Ì“”! Ì“”# Ì“š” Ì“
-” Ì“” Ì” Ì” Ì” Ì” Ì”! Ì”" Ì”$ Ì’” Ì”” Ì”’”3 Ì”/”; Ì”Ì@”” Ì•” Ì•”  Ì•”# Ì•˜” Ì•” Ì•” Ì–”! Ì–”" Ì–”- Ì–%”. Ì–&”ÌF Ì–>”” Ì•” Ì•” Ì—”" Ì—Ü ” Ì•” Ì•” Ì˜”  Ì˜”! Ì˜”# Ì˜”' Ì˜”) Ì˜!”* Ì˜"”, Ì˜$”1 Ì˜)”3 Ì˜+”4 Ì˜,”6 Ì˜.”9 Ì˜1”; Ì˜3”< Ì˜4”> Ì˜6”ÌD Ì˜<”ÌF Ì˜>”ÌG Ì˜?”ÌI Ì˜ÌA–” Ì•” Ì•” Ì™”% Ì™”& Ì™”( Ì™ ”” Ì•” Ì•” Ìš”( Ìš ’” Ì•” Ì•Ü ”/ Ì””3 Ì””4 Ì””8 Ì””ÌR Ì›”ÌS Ì›”ÌV Ì›”ÌX Ì›”Ì` Ì›0”Ìb Ì›2”Ìd Ì›4”Ìe Ì›5”Ìh Ì›8”Ìp Ì›Ì@”Ìt Ì›ÌD”Ìu Ì›ÌE”Ìw Ì›ÌG’” Ì”” Ì”’” Ì“
-” Ì“˜” Ì
-” Ì” Ì” Ì” Ì”  Ì”! Ì”# Ì˜” Ì
-” Ì” Ì¦” Ì¦” Ì¦”( Ì¦#”) Ì¦$”/ Ì¦*˜” Ì
-” Ì” Ì§” Ì§” Ì§”( Ì§#”) Ì§$”. Ì§)” ÌŸ” ÌŸ” ÌŸ” ÌŸ”  ÌŸ”! ÌŸ”& ÌŸ”' ÌŸ ”. ÌŸ'”/ ÌŸ(”0 ÌŸ)”1 ÌŸ*”3 ÌŸ,˜” ÌŸ” ÌŸ” Ì ” Ì ” Ì ”% Ì #”& Ì $”6 Ì 4”” ÌŸ” ÌŸ” Ì¡” Ì¡’” ÌŸ” ÌŸ–” Ì¢” Ì¢” Ì¢” Ì¢” Ì¢”% Ì¢˜” Ì¢” Ì¢” Ì£” Ì£” Ì£”% Ì£#”& Ì£$”> Ì£<”” Ì¢” Ì¢” Ì¤” Ì¤’” Ì¢” Ì¢’” Ì
-” Ì’” Ì‚” Ì‚’” Ì{” Ì{	’” Ì¸” Ì¸”” Ì¸” Ì¸” Ì¹	” Ì¹–” Ì¸” Ì¸” Ìº	” Ìº” Ìº” Ìºš” Ì¸” Ì¸” Ì»	” Ì»” Ì»” Ì»”  Ì»”" Ì»”$ Ì»”& Ì»’” Ìz” Ìz
-‘” Ì¿ÔrH–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜM‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
- ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌĞ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  Ìİ ‘”  ÌŞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìğ ‘”  Ìñ ‘”  Ìò ‘”  Ìó ‘”  Ìô ‘”  Ìõ ‘”  Ìö ‘”  Ì÷ ‘”  Ìø ‘”  Ìù ‘”  Ìú ‘”  Ìû ‘”  Ìü ‘”  Ìı ‘”  Ìş ‘”  Ìÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
- ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ÔrI’§missing¦pluginÃ¦genAbcÂÔ  ÔrJ”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache”ÔrK•¤type¥start£endªspecifiers¦source±ImportDeclarationÍéÍ‘ÔrL”¤type¥start£end¥local¶ImportDefaultSpecifierÍğÍöÔrM”¤type¥start£end¤nameªIdentifierÍğÍö¦routerÔrN•¤type¥start£end¥value£raw§LiteralÍüÍ
-¬@ohos.router®'@ohos.router'K±ImportDeclarationÍÍF‘L¸ImportNamespaceSpecifierÍÍ$MªIdentifierÍÍ$«commonConstN§LiteralÍ*ÍE¹../common/CommonConstants»'../common/CommonConstants'K±ImportDeclarationÍHÍ€‘ÔrO•¤type¥start£end¨imported¥local¯ImportSpecifierÍQÍ]MªIdentifierÍQÍ]¬CategoryTypeMªIdentifierÍQÍ]¬CategoryTypeN§LiteralÍeÍ¸../viewmodel/InitialDataº'../viewmodel/InitialData'K±ImportDeclarationÍ‚Í¿‘O¯ImportSpecifierÍ‹Í™MªIdentifierÍ‹Í™®ListDataSourceMªIdentifierÍ‹Í™®ListDataSourceN§LiteralÍ¡Í¾»../viewmodel/ListDataSource½'../viewmodel/ListDataSource'

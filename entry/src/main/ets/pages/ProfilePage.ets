@@ -5,6 +5,7 @@ import { LAYOUT_WIDTH_OR_HEIGHT } from '../common/CommonConstants';
 import FavoritesStore, { FavoriteItem } from '../common/FavoritesStore';
 import OrderStore from '../common/OrderStore';
 import ReviewStore from '../common/ReviewStore';
+import AuthStore from '../common/AuthStore';
 import router from '@ohos.router';
 import prompt from '@system.prompt';
 
@@ -15,9 +16,12 @@ export default struct ProfilePage {
   @State private pendingShipCount: number = OrderStore.getPendingShipCount();
   @State private pendingReceiveCount: number = OrderStore.getPendingReceiveCount();
   @State private pendingReviewCount: number = ReviewStore.getPendingReviewCount();
+  @State private loggedIn: boolean = AuthStore.isLoggedIn();
+  @State private username: string = AuthStore.getCurrentUserName() || '未登录';
   private orderListener!: () => void;
   private favoritesListener!: () => void;
   private reviewListener!: () => void;
+  private authListener!: () => void;
 
   constructor() {
     super();
@@ -43,62 +47,91 @@ export default struct ProfilePage {
         console.error('更新待评价数失败:', String(err));
       }
     };
+    this.authListener = () => {
+      try {
+        this.loggedIn = AuthStore.isLoggedIn();
+        const name: string = AuthStore.getCurrentUserName();
+        this.username = name && name.length > 0 ? name : '未登录';
+      } catch (err) {
+        console.error('更新登录状态失败:', String(err));
+      }
+    };
     FavoritesStore.subscribe(this.favoritesListener);
     OrderStore.subscribe(this.orderListener);
     ReviewStore.subscribe(this.reviewListener);
+    AuthStore.subscribe(this.authListener);
   }
 
   onDestroy() {
     FavoritesStore.unsubscribe(this.favoritesListener);
     OrderStore.unsubscribe(this.orderListener);
     ReviewStore.unsubscribe(this.reviewListener);
+    AuthStore.unsubscribe(this.authListener);
   }
   build() {
     Column() {
       // 顶部用户信息卡
-      Row() {
-        Image($r('app.media.goodsImg'))
-          .width(64)
-          .height(64)
-          .borderRadius(32)
-          .margin({ left: 16 })
+      Column({ space: 20 }) {
+        Row({ space: 16 }) {
+          Image($r('app.media.goodsImg'))
+            .width(68)
+            .height(68)
+            .borderRadius(34)
 
-        Column() {
-          Row() {
-            Text('tbNick_04ies')
-              .fontSize(18)
-              .fontWeight(FontWeight.Medium)
-              .fontColor($r('app.color.deepGray'))
-            Text('黄金会员')
-              .fontSize(12)
-              .fontColor('#FFB800')
-              .backgroundColor('#FFF6E0')
-              .borderRadius(8)
-              .padding({ left: 6, right: 6 })
-              .margin({ left: 8 })
+          Column({ space: 6 }) {
+            Row({ space: 8 }) {
+              Text(this.username)
+                .fontSize(20)
+                .fontWeight(FontWeight.Bold)
+                .fontColor(Color.Black)
+              if (this.loggedIn) {
+                Text('黄金会员')
+                  .fontSize(12)
+                  .fontColor('#B35C00')
+                  .backgroundColor('#FFE4C4')
+                  .borderRadius(8)
+                  .padding({ left: 8, right: 8, top: 2, bottom: 2 })
+              }
+            }
+            Text(this.loggedIn ? '欢迎回来，祝您购物愉快' : '登录后可同步收藏与订单进度')
+              .fontSize(13)
+              .fontColor('#5F5F5F')
           }
-          .alignItems(VerticalAlign.Center)
+          .layoutWeight(1)
 
-          Row({ space: 12 }) {
-            Text('关注店铺')
-              .fontSize(12)
-              .fontColor($r('app.color.gray'))
-            Text('地址')
-              .fontSize(12)
-              .fontColor($r('app.color.gray'))
-            Text('客服')
-              .fontSize(12)
-              .fontColor($r('app.color.gray'))
+          if (this.loggedIn) {
+            Button('退出登录')
+              .height(34)
+              .backgroundColor('#FF7A00')
+              .fontColor(Color.White)
+              .padding({ left: 12, right: 12 })
+              .borderRadius(16)
+              .onClick(() => this.handleLogout())
+          } else {
+            Button('登录/注册')
+              .height(34)
+              .backgroundColor('#FF7A00')
+              .fontColor(Color.White)
+              .padding({ left: 12, right: 12 })
+              .borderRadius(16)
+              .onClick(() => this.gotoLogin())
           }
         }
-        .margin({ left: 12 })
+        .alignItems(VerticalAlign.Center)
 
-        Blank()
+        Row() {
+          this.renderUserStat('收藏', `${this.favorites.length}`)
+          this.renderUserStat('待收货', `${this.pendingReceiveCount}`)
+          this.renderUserStat('待评价', `${this.pendingReviewCount}`)
+        }
+        .justifyContent(FlexAlign.SpaceBetween)
       }
       .width(LAYOUT_WIDTH_OR_HEIGHT)
-      .height(120)
       .backgroundColor(Color.White)
-      .alignItems(VerticalAlign.Top)
+      .padding({ left: 20, right: 20, top: 20, bottom: 20 })
+      .borderRadius(24)
+      .margin({ left: 12, right: 12, top: 8 })
+      .shadow({ color: '#1F000000', radius: 12, offsetY: 4 })
 
       // 订单快捷入口（待付款/待发货/待收货/待评价/退款）
       Row() {
@@ -207,16 +240,17 @@ export default struct ProfilePage {
         .layoutWeight(1)
       }
       .width(LAYOUT_WIDTH_OR_HEIGHT)
-      .height(96)
+      .height(100)
       .padding({ left: 8, right: 8 })
       .backgroundColor(Color.White)
+      .margin({ top: 12 })
 
       // 我的收藏 标题
       Row() {
         Text('我的收藏')
           .fontSize(20)
           .fontWeight(FontWeight.Bold)
-          .padding({ left: 12, top: 12 })
+          .padding({ left: 16, top: 16, bottom: 8 })
         Blank()
       }
 
@@ -301,5 +335,43 @@ export default struct ProfilePage {
     .layoutWeight(1)
     .padding({ top: AppStorage.get<number>('statusBarHeight') })
     .backgroundColor($r('app.color.primaryBgColor'))
+  }
+
+  private async handleLogout(): Promise<void> {
+    try {
+      await AuthStore.logout();
+      prompt.showToast({ message: '已退出登录', duration: 1200 });
+      router.pushUrl({ url: 'pages/LoginRegisterPage' });
+    } catch (err) {
+      console.error('退出登录失败:', String(err));
+      prompt.showToast({ message: '退出失败，请稍后重试', duration: 1200 });
+    }
+  }
+
+  private gotoLogin(): void {
+    try {
+      router.pushUrl({ url: 'pages/LoginRegisterPage' });
+    } catch (err) {
+      console.error('跳转登录失败:', String(err));
+    }
+  }
+
+  @Builder
+  private renderUserStat(label: string, value: string) {
+    Column({ space: 4 }) {
+      Text(value)
+        .fontSize(20)
+        .fontWeight(FontWeight.Bold)
+        .fontColor('#1F1F1F')
+        .textAlign(TextAlign.Center)
+      Text(label)
+        .fontSize(12)
+        .fontColor('#7A7A7A')
+        .textAlign(TextAlign.Center)
+    }
+    .width('30%')
+    .padding({ top: 4, bottom: 4 })
+    .backgroundColor('#FFF8F1')
+    .borderRadius(12)
   }
 }

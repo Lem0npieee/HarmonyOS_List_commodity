@@ -122,6 +122,9 @@ export class ListDataSource extends BasicDataSource {
         // Simulate latency while keeping frame rate stable.
         await new Promise<void>((resolve) => setTimeout(resolve, REFRESH_TIME));
         this.rebuildData();
+        if (this.query.sort === SortOption.PriceLow || this.query.sort === SortOption.PriceHigh) {
+            this.autoLoadRemainingPages();
+        }
     }
     public requestMore(): void {
         if (this.isLoadingMore) {
@@ -137,6 +140,10 @@ export class ListDataSource extends BasicDataSource {
             this.isLoadingMore = false;
             this.notifyDataReload();
             this.notifyEmpty();
+            // If sorting by price, continue auto-loading remaining pages once user triggers load-more
+            if (this.query.sort === SortOption.PriceLow || this.query.sort === SortOption.PriceHigh) {
+                this.autoLoadRemainingPages();
+            }
         }, LOAD_DELAY);
     }
     public registerEmptyListener(listener: EmptyListener): void {
@@ -222,6 +229,27 @@ export class ListDataSource extends BasicDataSource {
         this.visibleData = this.filteredData.slice(0, initialLength);
         this.notifyDataReload();
         this.notifyEmpty();
+    }
+    private autoLoadRemainingPages(): void {
+        if (this.visibleData.length >= this.filteredData.length) {
+            return;
+        }
+        const loadChunk = (): void => {
+            if (this.visibleData.length >= this.filteredData.length) {
+                this.isLoadingMore = false;
+                return;
+            }
+            this.isLoadingMore = true;
+            const nextLength: number = Math.min(this.visibleData.length + this.pageSize, this.filteredData.length);
+            this.visibleData = this.filteredData.slice(0, nextLength);
+            this.isLoadingMore = false;
+            this.notifyDataReload();
+            this.notifyEmpty();
+            if (this.visibleData.length < this.filteredData.length) {
+                setTimeout(loadChunk, LOAD_DELAY);
+            }
+        };
+        loadChunk();
     }
     private matchesFilters(item: GoodsListItemType): boolean {
         const result = this.query.filters.every((filterId: FilterId) => {

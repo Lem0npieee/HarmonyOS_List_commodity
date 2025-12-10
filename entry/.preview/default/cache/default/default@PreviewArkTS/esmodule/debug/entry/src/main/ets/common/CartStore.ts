@@ -1,26 +1,28 @@
-import type { GoodsListItemType } from '../viewmodel/InitialData';
-import StorageUtil from "@bundle:com.example.list_harmony/entry/ets/common/StorageUtil";
+import type dataPreferences from "@ohos:data.preferences";
+import { goodsPool } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
+import type { GoodsListItemType } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
+type Preferences = dataPreferences.Preferences;
+interface StoredCartEntry {
+    id: number;
+    quantity: number;
+}
 export interface CartItem {
     product: GoodsListItemType;
     quantity: number;
 }
 export default class CartStore {
     private static cart: CartItem[] = [];
-    private static readonly STORAGE_KEY: string = 'app.cart';
     private static listeners: Array<() => void> = [];
-    // 异步初始化：在应用入口处调用 CartStore.init() 恢复持久化数据
-    static async init(): Promise<void> {
-        try {
-            const raw = await StorageUtil.getString(CartStore.STORAGE_KEY);
-            if (raw) {
-                const parsed = JSON.parse(raw) as CartItem[];
-                if (Array.isArray(parsed))
-                    CartStore.cart = parsed;
-            }
+    private static preferences: Preferences | null = null;
+    private static readonly CART_KEY: string = 'cart_items';
+    private static initialized: boolean = false;
+    static async init(preferences: Preferences): Promise<void> {
+        if (CartStore.initialized) {
+            return;
         }
-        catch (e) {
-            console.error('CartStore loadFromStorage failed:', String(e));
-        }
+        CartStore.preferences = preferences;
+        await CartStore.restoreFromStorage();
+        CartStore.initialized = true;
     }
     static add(product: GoodsListItemType): void {
         const idx: number = CartStore.cart.findIndex((c: CartItem) => c.product.id === product.id);
@@ -30,14 +32,7 @@ export default class CartStore {
         else {
             CartStore.cart.push({ product, quantity: 1 });
         }
-        try {
-            const json = JSON.stringify(CartStore.cart);
-            StorageUtil.putString(CartStore.STORAGE_KEY, json);
-            console.info(`[CartStore] persisted key=${CartStore.STORAGE_KEY} value=${json}`);
-        }
-        catch (e) {
-            console.error('CartStore persist failed:', String(e));
-        }
+        CartStore.persist();
         CartStore.notifyListeners();
     }
     static getItems(): CartItem[] {
@@ -45,13 +40,7 @@ export default class CartStore {
     }
     static clear(): void {
         CartStore.cart = [];
-        try {
-            StorageUtil.remove(CartStore.STORAGE_KEY);
-            console.info(`[CartStore] cleared key=${CartStore.STORAGE_KEY}`);
-        }
-        catch (e) {
-            console.error('CartStore clear persist failed:', String(e));
-        }
+        CartStore.persist();
         CartStore.notifyListeners();
     }
     static subscribe(cb: () => void): void {
@@ -78,5 +67,45 @@ export default class CartStore {
         catch (err) {
             console.error('CartStore notify failed:', String(err));
         }
+    }
+    private static async restoreFromStorage(): Promise<void> {
+        if (!CartStore.preferences) {
+            return;
+        }
+        try {
+            const storedValue = await CartStore.preferences.get(CartStore.CART_KEY, '[]');
+            const raw: string = typeof storedValue === 'string' ? storedValue : JSON.stringify(storedValue);
+            const parsed = JSON.parse(raw) as StoredCartEntry[];
+            const mapped = parsed.map((entry: StoredCartEntry) => {
+                const product = CartStore.resolveProductById(entry.id);
+                if (!product) {
+                    return null;
+                }
+                const item: CartItem = { product: product, quantity: entry.quantity };
+                return item;
+            });
+            const restored = mapped.filter((item) => item !== null) as CartItem[];
+            CartStore.cart = restored;
+            CartStore.notifyListeners();
+        }
+        catch (e) {
+            console.error('CartStore restore failed:', String(e));
+        }
+    }
+    private static persist(): void {
+        if (!CartStore.preferences) {
+            return;
+        }
+        const payload: StoredCartEntry[] = CartStore.cart.map((item: CartItem) => {
+            const entry: StoredCartEntry = { id: item.product.id, quantity: item.quantity };
+            return entry;
+        });
+        CartStore.preferences.put(CartStore.CART_KEY, JSON.stringify(payload))
+            .then(() => CartStore.preferences?.flush())
+            .catch((err: Error) => console.error('CartStore persist failed:', String(err)));
+    }
+    private static resolveProductById(id: number): GoodsListItemType | null {
+        const product = goodsPool.find((item: GoodsListItemType) => item.id === id);
+        return product ?? null;
     }
 }

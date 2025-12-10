@@ -9,6 +9,7 @@ import CartStore from "@bundle:com.example.list_harmony/entry/ets/common/CartSto
 import FavoritesStore from "@bundle:com.example.list_harmony/entry/ets/common/FavoritesStore";
 import OrderStore from "@bundle:com.example.list_harmony/entry/ets/common/OrderStore";
 import ReviewStore from "@bundle:com.example.list_harmony/entry/ets/common/ReviewStore";
+import AuthStore from "@bundle:com.example.list_harmony/entry/ets/common/AuthStore";
 const USER_DATA_STORE: string = 'user_persistent_state';
 export default class EntryAbility extends UIAbility {
     onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
@@ -28,7 +29,13 @@ export default class EntryAbility extends UIAbility {
         // 等待各个 store 恢复持久化数据
         try {
             const prefs = await dataPreferences.getPreferences(this.context, USER_DATA_STORE);
-            await Promise.all([CartStore.init(prefs), FavoritesStore.init(prefs), OrderStore.init(prefs), ReviewStore.init(prefs)]);
+            await Promise.all([
+                CartStore.init(prefs),
+                FavoritesStore.init(prefs),
+                OrderStore.init(prefs),
+                ReviewStore.init(prefs),
+                AuthStore.init(prefs)
+            ]);
         }
         catch (e) {
             hilog.error(0x0000, 'testTag', 'Store init failed: %{public}s', String(e));

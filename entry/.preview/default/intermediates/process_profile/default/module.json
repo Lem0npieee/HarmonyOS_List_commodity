@@ -39,9 +39,9 @@
 				"name": "entryAbility",
 				"srcEntry": "./ets/entryability/EntryAbility.ets",
 				"description": "$string:EntryAbility_desc",
-				"icon": "$media:icon",
+				"icon": "$media:logo",
 				"label": "$string:EntryAbility_label",
-				"startWindowIcon": "$media:icon",
+				"startWindowIcon": "$media:logo",
 				"startWindowBackground": "$color:white",
 				"exported": true,
 				"skills": [

@@ -18,6 +18,8 @@ import CartPage from './CartPage';
 import ProfilePage from './ProfilePage';
 import NotificationComponent from '../view/NotificationComponent';
 import { LAYOUT_WIDTH_OR_HEIGHT, STORE } from '../common/CommonConstants';
+import AuthStore from '../common/AuthStore';
+import router from '@ohos.router';
 
 @Entry
 @Component
@@ -86,7 +88,15 @@ struct ListIndex {
             .justifyContent(FlexAlign.Center)
             .layoutWeight(1)
             .onClick(() => {
-              this.selectedBottomIndex = 2;
+              if (AuthStore.isLoggedIn()) {
+                this.selectedBottomIndex = 2;
+              } else {
+                try {
+                  router.pushUrl({ url: 'pages/LoginRegisterPage' });
+                } catch (err) {
+                  console.error('跳转登录注册页面失败:', String(err));
+                }
+              }
             })
           }
           .height(64)

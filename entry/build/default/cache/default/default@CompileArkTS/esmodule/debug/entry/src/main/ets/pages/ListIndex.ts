@@ -9,6 +9,8 @@ import CartPage from "@bundle:com.example.list_harmony/entry/ets/pages/CartPage"
 import ProfilePage from "@bundle:com.example.list_harmony/entry/ets/pages/ProfilePage";
 import NotificationComponent from "@bundle:com.example.list_harmony/entry/ets/view/NotificationComponent";
 import { LAYOUT_WIDTH_OR_HEIGHT, STORE } from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
+import AuthStore from "@bundle:com.example.list_harmony/entry/ets/common/AuthStore";
+import router from "@ohos:router";
 class ListIndex extends ViewPU {
     constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
         super(parent, __localStorage, elmtId, extraInfo);
@@ -73,7 +75,7 @@ class ListIndex extends ViewPU {
                     {
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             if (isInitialRender) {
-                                let componentCall = new TabBar(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 32, col: 13 });
+                                let componentCall = new TabBar(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 34, col: 13 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
                                     return {};
@@ -97,7 +99,7 @@ class ListIndex extends ViewPU {
                     {
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             if (isInitialRender) {
-                                let componentCall = new CartPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 35, col: 13 });
+                                let componentCall = new CartPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 37, col: 13 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
                                     return {};
@@ -121,7 +123,7 @@ class ListIndex extends ViewPU {
                     {
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             if (isInitialRender) {
-                                let componentCall = new ProfilePage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 38, col: 13 });
+                                let componentCall = new ProfilePage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 40, col: 13 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
                                     return {};
@@ -213,7 +215,17 @@ class ListIndex extends ViewPU {
             Column.layoutWeight(1);
             // 我的
             Column.onClick(() => {
-                this.selectedBottomIndex = 2;
+                if (AuthStore.isLoggedIn()) {
+                    this.selectedBottomIndex = 2;
+                }
+                else {
+                    try {
+                        router.pushUrl({ url: 'pages/LoginRegisterPage' });
+                    }
+                    catch (err) {
+                        console.error('跳转登录注册页面失败:', String(err));
+                    }
+                }
             });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -238,7 +250,7 @@ class ListIndex extends ViewPU {
                 if (isInitialRender) {
                     let componentCall = new 
                     // 全局通知气泡（位于导航之上）
-                    NotificationComponent(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 104, col: 7 });
+                    NotificationComponent(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 114, col: 7 });
                     ViewPU.create(componentCall);
                     let paramsLambda = () => {
                         return {};

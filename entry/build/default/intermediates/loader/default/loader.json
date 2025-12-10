@@ -1,10 +1,10 @@
 {
   "modulePathMap": {
-    "entry": "D:\\List_commodity\\entry"
+    "entry": "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry"
   },
   "compileMode": "esmodule",
-  "projectRootPath": "D:\\List_commodity",
-  "nodeModulesPath": "D:\\List_commodity\\entry\\build\\default\\intermediates\\loader_out\\default\\node_modules",
+  "projectRootPath": "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity",
+  "nodeModulesPath": "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\loader_out\\default\\node_modules",
   "byteCodeHarInfo": {},
   "declarationEntry": [],
   "moduleName": "entry",
@@ -17,9 +17,9 @@
   "routerMap": [],
   "hspResourcesMap": {},
   "updateVersionInfo": {},
-  "anBuildOutPut": "D:\\List_commodity\\entry\\build\\default\\intermediates\\loader_out\\default\\an\\arm64-v8a",
+  "anBuildOutPut": "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\loader_out\\default\\an\\arm64-v8a",
   "anBuildMode": "type",
   "patchConfig": {
-    "changedFileList": "D:\\List_commodity\\entry\\build\\default\\intermediates\\patch\\default\\changedFileList.json"
+    "changedFileList": "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\patch\\default\\changedFileList.json"
   }
 }

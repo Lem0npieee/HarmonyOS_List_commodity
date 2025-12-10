@@ -190,7 +190,7 @@ interface GoodsSeed {
 }
 const goodsSeeds: GoodsSeed[] = [
     {
-        cover: { "id": 16777282, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        cover: { "id": 16777334, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         title: { "id": 16777309, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         description: { "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         evaluate: { "id": 16777235, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
@@ -203,7 +203,7 @@ const goodsSeeds: GoodsSeed[] = [
         isHot: true,
         isFreeShipping: true,
         hasCoupon: true,
-        detailImages: [{ "id": 16777296, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777295, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
+        detailImages: [{ "id": 16777354, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777342, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
         originalPrice: 299,
         salesCount: 7,
         rating: 4.8,
@@ -213,7 +213,7 @@ const goodsSeeds: GoodsSeed[] = [
         deliveryInfo: '不支持7天无理由退换'
     },
     {
-        cover: { "id": 16777296, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        cover: { "id": 16777346, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         title: { "id": 16777306, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         description: { "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         evaluate: { "id": 16777235, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
@@ -226,7 +226,7 @@ const goodsSeeds: GoodsSeed[] = [
         isHot: true,
         isFreeShipping: true,
         hasCoupon: false,
-        detailImages: [{ "id": 16777282, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
+        detailImages: [{ "id": 16777355, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777332, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
         originalPrice: 350,
         salesCount: 12,
         rating: 4.9,
@@ -236,7 +236,7 @@ const goodsSeeds: GoodsSeed[] = [
         deliveryInfo: '支持7天无理由退换'
     },
     {
-        cover: { "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        cover: { "id": 16777349, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         title: { "id": 16777301, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         description: { "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         evaluate: { "id": 16777235, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
@@ -249,7 +249,7 @@ const goodsSeeds: GoodsSeed[] = [
         isHot: true,
         isFreeShipping: true,
         hasCoupon: true,
-        detailImages: [{ "id": 16777295, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777296, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
+        detailImages: [{ "id": 16777338, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777336, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
         originalPrice: 6999,
         salesCount: 3456,
         rating: 4.9,
@@ -259,7 +259,7 @@ const goodsSeeds: GoodsSeed[] = [
         deliveryInfo: '支持7天无理由退换'
     },
     {
-        cover: { "id": 16777295, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        cover: { "id": 16777340, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         title: { "id": 16777303, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         description: { "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         evaluate: { "id": 16777235, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
@@ -272,7 +272,7 @@ const goodsSeeds: GoodsSeed[] = [
         isHot: true,
         isFreeShipping: false,
         hasCoupon: true,
-        detailImages: [{ "id": 16777282, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777296, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
+        detailImages: [{ "id": 16777330, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777331, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
         originalPrice: 9999,
         salesCount: 8900,
         rating: 5.0,
@@ -282,7 +282,7 @@ const goodsSeeds: GoodsSeed[] = [
         deliveryInfo: '支持7天无理由退换'
     },
     {
-        cover: { "id": 16777282, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        cover: { "id": 16777359, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         title: { "id": 16777305, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         description: { "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         evaluate: { "id": 16777235, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
@@ -295,7 +295,7 @@ const goodsSeeds: GoodsSeed[] = [
         isHot: false,
         isFreeShipping: true,
         hasCoupon: true,
-        detailImages: [{ "id": 16777296, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777295, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
+        detailImages: [{ "id": 16777343, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777341, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
         originalPrice: 899,
         salesCount: 567,
         rating: 4.7,
@@ -305,7 +305,7 @@ const goodsSeeds: GoodsSeed[] = [
         deliveryInfo: '支持7天无理由退换'
     },
     {
-        cover: { "id": 16777296, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        cover: { "id": 16777347, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         title: { "id": 16777310, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         description: { "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         evaluate: { "id": 16777235, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
@@ -318,7 +318,7 @@ const goodsSeeds: GoodsSeed[] = [
         isHot: true,
         isFreeShipping: true,
         hasCoupon: false,
-        detailImages: [{ "id": 16777282, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777295, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
+        detailImages: [{ "id": 16777352, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777344, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
         originalPrice: 699,
         salesCount: 1234,
         rating: 4.8,
@@ -328,7 +328,7 @@ const goodsSeeds: GoodsSeed[] = [
         deliveryInfo: '支持7天无理由退换'
     },
     {
-        cover: { "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        cover: { "id": 16777335, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         title: { "id": 16777308, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         description: { "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         evaluate: { "id": 16777235, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
@@ -341,7 +341,7 @@ const goodsSeeds: GoodsSeed[] = [
         isHot: true,
         isFreeShipping: true,
         hasCoupon: true,
-        detailImages: [{ "id": 16777282, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777296, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777295, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
+        detailImages: [{ "id": 16777358, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777356, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
         originalPrice: 358,
         salesCount: 5678,
         rating: 4.9,
@@ -351,7 +351,7 @@ const goodsSeeds: GoodsSeed[] = [
         deliveryInfo: '支持7天无理由退换'
     },
     {
-        cover: { "id": 16777295, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        cover: { "id": 16777362, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         title: { "id": 16777302, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         description: { "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         evaluate: { "id": 16777235, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
@@ -364,7 +364,7 @@ const goodsSeeds: GoodsSeed[] = [
         isHot: false,
         isFreeShipping: false,
         hasCoupon: true,
-        detailImages: [{ "id": 16777296, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777282, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
+        detailImages: [{ "id": 16777329, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777337, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
         originalPrice: 450,
         salesCount: 2345,
         rating: 4.8,
@@ -374,7 +374,7 @@ const goodsSeeds: GoodsSeed[] = [
         deliveryInfo: '不支持7天无理由退换'
     },
     {
-        cover: { "id": 16777296, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        cover: { "id": 16777350, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         title: { "id": 16777307, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         description: { "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         evaluate: { "id": 16777235, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
@@ -387,7 +387,7 @@ const goodsSeeds: GoodsSeed[] = [
         isHot: true,
         isFreeShipping: true,
         hasCoupon: true,
-        detailImages: [{ "id": 16777282, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777295, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
+        detailImages: [{ "id": 16777345, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777339, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777361, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
         originalPrice: 899,
         salesCount: 4567,
         rating: 4.9,
@@ -397,7 +397,7 @@ const goodsSeeds: GoodsSeed[] = [
         deliveryInfo: '支持7天无理由退换'
     },
     {
-        cover: { "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+        cover: { "id": 16777357, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         title: { "id": 16777304, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         description: { "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
         evaluate: { "id": 16777235, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
@@ -410,7 +410,7 @@ const goodsSeeds: GoodsSeed[] = [
         isHot: true,
         isFreeShipping: true,
         hasCoupon: false,
-        detailImages: [{ "id": 16777295, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777282, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777296, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
+        detailImages: [{ "id": 16777333, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777348, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }],
         originalPrice: 799,
         salesCount: 3456,
         rating: 4.7,

@@ -1,1242 +1,0 @@
-Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚ–tif (!("finalizeConstruction" in ViewPU.prototype)) {
-    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
-}
-/*
- * AI å¯¹è¯å¼å•†å“æœç´¢é¡µé¢
- * åŠŸèƒ½ï¼šæ¥å—ç”¨æˆ·è‡ªç„¶è¯­è¨€æŸ¥è¯¢ï¼Œè°ƒç”¨ DeepSeek API å°†æŸ¥è¯¢è§£æä¸ºç»“æ„åŒ–ç­›é€‰æ¡ä»¶ï¼Œ
- *       åœ¨ AI å›å¤æ°”æ³¡ä¸‹å±•ç¤ºåŒ¹é…å•†å“çš„å¡ç‰‡å¹¶æ”¯æŒè·³è½¬åˆ°è¯¦æƒ…é¡µã€‚
- */
-import router from '@ohos.router';
-import http from '@ohos.net.http';
-// Note: do not import '@ohos.ace.ets' here; decorators are available globally in ETS pages
-import { goodsPool, CategoryType } from '../viewmodel/InitialData';
-import { LAYOUT_WIDTH_OR_HEIGHT, STORE } from '../common/CommonConstants';
-import * as commonConst from '../common/CommonConstants';
-export default class AIChatPage extends ViewPU {
-    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
-        super(parent, __localStorage, elmtId, extraInfo);
-        if (typeof paramsLambda === "function") {
-            this.paramsGenerator_ = paramsLambda;
-        }
-        this.__messages = new ObservedPropertyObjectPU([], this, "messages");
-        this.__inputText = new ObservedPropertySimplePU('', this, "inputText");
-        this.__chatHistory = new ObservedPropertyObjectPU([], this, "chatHistory");
-        this.DEEPSEEK_API_KEY = 'sk-0d4c8b12e11143b78fd5a008b8dcae00';
-        this.DEEPSEEK_URL = 'https://api.deepseek.com/v1/chat/completions';
-        this.setInitiallyProvidedValue(params);
-        this.finalizeConstruction();
-    }
-    setInitiallyProvidedValue(params) {
-        if (params.messages !== undefined) {
-            this.messages = params.messages;
-        }
-        if (params.inputText !== undefined) {
-            this.inputText = params.inputText;
-        }
-        if (params.chatHistory !== undefined) {
-            this.chatHistory = params.chatHistory;
-        }
-        if (params.DEEPSEEK_API_KEY !== undefined) {
-            this.DEEPSEEK_API_KEY = params.DEEPSEEK_API_KEY;
-        }
-        if (params.DEEPSEEK_URL !== undefined) {
-            this.DEEPSEEK_URL = params.DEEPSEEK_URL;
-        }
-    }
-    updateStateVars(params) {
-    }
-    purgeVariableDependenciesOnElmtId(rmElmtId) {
-        this.__messages.purgeDependencyOnElmtId(rmElmtId);
-        this.__inputText.purgeDependencyOnElmtId(rmElmtId);
-        this.__chatHistory.purgeDependencyOnElmtId(rmElmtId);
-    }
-    aboutToBeDeleted() {
-        this.__messages.aboutToBeDeleted();
-        this.__inputText.aboutToBeDeleted();
-        this.__chatHistory.aboutToBeDeleted();
-        SubscriberManager.Get().delete(this.id__());
-        this.aboutToBeDeletedInternal();
-    }
-    get messages() {
-        return this.__messages.get();
-    }
-    set messages(newValue) {
-        this.__messages.set(newValue);
-    }
-    get inputText() {
-        return this.__inputText.get();
-    }
-    set inputText(newValue) {
-        this.__inputText.set(newValue);
-    }
-    get chatHistory() {
-        return this.__chatHistory.get();
-    }
-    set chatHistory(newValue) {
-        this.__chatHistory.set(newValue);
-    }
-    aboutToAppear() {
-        try {
-            const params = router.getParams();
-            if (params && typeof params === 'object' && params['query']) {
-                const q = String(params['query']);
-                // é¢„å¡«å……è¾“å…¥å¹¶è‡ªåŠ¨å‘é€ä¸€æ¬¡æœç´¢
-                this.inputText = q;
-                // å»¶è¿Ÿè§¦å‘ï¼Œç¡®ä¿é¡µé¢æ¸²æŸ“åå†å‘é€
-                setTimeout(() => {
-                    this.handleSend().catch((err) => console.error('è‡ªåŠ¨å‘é€å¤±è´¥:', String(err)));
-                }, 300);
-            }
-        }
-        catch (err) {
-            console.error('è¯»å–è·³è½¬å‚æ•°å¤±è´¥:', String(err));
-        }
-    }
-    initialRender() {
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.debugLine("entry/src/main/ets/pages/AIChatPage.ets(105:5)", "entry");
-            Column.width('100%');
-            Column.height('100%');
-            Column.backgroundColor({ "id": 16777289, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-        }, Column);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // é¡¶éƒ¨å¯¼èˆªï¼ˆå›ºå®šï¼Œä¸éšæ¶ˆæ¯æ»šåŠ¨ï¼‰
-            Row.create();
-            Row.debugLine("entry/src/main/ets/pages/AIChatPage.ets(107:7)", "entry");
-            // é¡¶éƒ¨å¯¼èˆªï¼ˆå›ºå®šï¼Œä¸éšæ¶ˆæ¯æ»šåŠ¨ï¼‰
-            Row.height(56);
-            // é¡¶éƒ¨å¯¼èˆªï¼ˆå›ºå®šï¼Œä¸éšæ¶ˆæ¯æ»šåŠ¨ï¼‰
-            Row.backgroundColor(Color.White);
-        }, Row);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Navigation.create(new NavPathStack(), { moduleName: "entry", pagePath: "entry/src/main/ets/pages/AIChatPage", isUserCreateStack: false });
-            Navigation.debugLine("entry/src/main/ets/pages/AIChatPage.ets(108:9)", "entry");
-            Navigation.size({ width: LAYOUT_WIDTH_OR_HEIGHT, height: 56 });
-            Navigation.title(STORE);
-            Navigation.titleMode(NavigationTitleMode.Mini);
-        }, Navigation);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.debugLine("entry/src/main/ets/pages/AIChatPage.ets(109:11)", "entry");
-            Column.width(LAYOUT_WIDTH_OR_HEIGHT);
-            Column.justifyContent(FlexAlign.Center);
-        }, Column);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Row.create();
-            Row.debugLine("entry/src/main/ets/pages/AIChatPage.ets(110:13)", "entry");
-            Row.height(56);
-            Row.alignItems(VerticalAlign.Center);
-            Row.padding({ left: 16 });
-        }, Row);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('AI å¯¹è¯æœç´¢');
-            Text.debugLine("entry/src/main/ets/pages/AIChatPage.ets(111:15)", "entry");
-            Text.fontSize(18);
-            Text.fontWeight(FontWeight.Medium);
-            Text.fontColor({ "id": 16777285, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-        }, Text);
-        Text.pop();
-        Row.pop();
-        Column.pop();
-        Navigation.pop();
-        // é¡¶éƒ¨å¯¼èˆªï¼ˆå›ºå®šï¼Œä¸éšæ¶ˆæ¯æ»šåŠ¨ï¼‰
-        Row.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // å¯æ»šåŠ¨çš„æ¶ˆæ¯åŒºåŸŸï¼Œå æ®ä¸­é—´å¯ä¼¸ç¼©ç©ºé—´
-            Scroll.create();
-            Scroll.debugLine("entry/src/main/ets/pages/AIChatPage.ets(131:7)", "entry");
-            // å¯æ»šåŠ¨çš„æ¶ˆæ¯åŒºåŸŸï¼Œå æ®ä¸­é—´å¯ä¼¸ç¼©ç©ºé—´
-            Scroll.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
-            // å¯æ»šåŠ¨çš„æ¶ˆæ¯åŒºåŸŸï¼Œå æ®ä¸­é—´å¯ä¼¸ç¼©ç©ºé—´
-            Scroll.layoutWeight(1);
-            // å¯æ»šåŠ¨çš„æ¶ˆæ¯åŒºåŸŸï¼Œå æ®ä¸­é—´å¯ä¼¸ç¼©ç©ºé—´
-            Scroll.padding({ bottom: 12 });
-            // å¯æ»šåŠ¨çš„æ¶ˆæ¯åŒºåŸŸï¼Œå æ®ä¸­é—´å¯ä¼¸ç¼©ç©ºé—´
-            Scroll.scrollBar(BarState.Off);
-        }, Scroll);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.debugLine("entry/src/main/ets/pages/AIChatPage.ets(132:9)", "entry");
-        }, Column);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // èŠå¤©æ¶ˆæ¯
-            Column.create();
-            Column.debugLine("entry/src/main/ets/pages/AIChatPage.ets(134:11)", "entry");
-        }, Column);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            ForEach.create();
-            const forEachItemGenFunction = (_item, idx) => {
-                const msg = _item;
-                this.observeComponentCreation2((elmtId, isInitialRender) => {
-                    Column.create();
-                    Column.debugLine("entry/src/main/ets/pages/AIChatPage.ets(136:15)", "entry");
-                }, Column);
-                this.observeComponentCreation2((elmtId, isInitialRender) => {
-                    If.create();
-                    if (msg.role === 'user') {
-                        this.ifElseBranchUpdateFunction(0, () => {
-                            this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                Row.create();
-                                Row.debugLine("entry/src/main/ets/pages/AIChatPage.ets(138:19)", "entry");
-                                Row.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
-                                Row.justifyContent(FlexAlign.End);
-                                Row.margin({ top: 8, bottom: 8, left: 12, right: 12 });
-                            }, Row);
-                            this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                Blank.create();
-                                Blank.debugLine("entry/src/main/ets/pages/AIChatPage.ets(139:21)", "entry");
-                            }, Blank);
-                            Blank.pop();
-                            this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                Text.create(msg.content);
-                                Text.debugLine("entry/src/main/ets/pages/AIChatPage.ets(140:21)", "entry");
-                                Text.backgroundColor({ "id": 16777290, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-                                Text.padding({ left: 12, right: 12, top: 8, bottom: 8 });
-                                Text.borderRadius(12);
-                                Text.fontColor({ "id": 16777285, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-                                Text.maxLines(10);
-                            }, Text);
-                            Text.pop();
-                            Row.pop();
-                        });
-                    }
-                    else {
-                        this.ifElseBranchUpdateFunction(1, () => {
-                            this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                // AI æ°”æ³¡ + ä¸‹æ–¹å•†å“å—
-                                Row.create();
-                                Row.debugLine("entry/src/main/ets/pages/AIChatPage.ets(152:19)", "entry");
-                                // AI æ°”æ³¡ + ä¸‹æ–¹å•†å“å—
-                                Row.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
-                                // AI æ°”æ³¡ + ä¸‹æ–¹å•†å“å—
-                                Row.justifyContent(FlexAlign.Start);
-                                // AI æ°”æ³¡ + ä¸‹æ–¹å•†å“å—
-                                Row.margin({ top: 8, bottom: 8, left: 12, right: 12 });
-                            }, Row);
-                            this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                Text.create(msg.content);
-                                Text.debugLine("entry/src/main/ets/pages/AIChatPage.ets(153:21)", "entry");
-                                Text.backgroundColor(Color.White);
-                                Text.padding({ left: 12, right: 12, top: 8, bottom: 8 });
-                                Text.borderRadius(12);
-                                Text.fontColor({ "id": 16777285, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-                                Text.maxLines(10);
-                            }, Text);
-                            Text.pop();
-                            this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                Blank.create();
-                                Blank.debugLine("entry/src/main/ets/pages/AIChatPage.ets(159:21)", "entry");
-                            }, Blank);
-                            Blank.pop();
-                            // AI æ°”æ³¡ + ä¸‹æ–¹å•†å“å—
-                            Row.pop();
-                            this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                If.create();
-                                // è‹¥æœ‰å•†å“ï¼Œåˆ™æ¸²æŸ“å•†å“å¡ç‰‡ç½‘æ ¼
-                                if (msg.items && msg.items.length > 0) {
-                                    this.ifElseBranchUpdateFunction(0, () => {
-                                        this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                            Grid.create();
-                                            Grid.debugLine("entry/src/main/ets/pages/AIChatPage.ets(167:21)", "entry");
-                                            Grid.columnsTemplate('1fr 1fr');
-                                            Grid.columnsGap(12);
-                                            Grid.rowsGap(12);
-                                            Grid.margin({ left: 12, right: 12, bottom: 12 });
-                                        }, Grid);
-                                        this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                            ForEach.create();
-                                            const forEachItemGenFunction = _item => {
-                                                const item = _item;
-                                                {
-                                                    const itemCreation2 = (elmtId, isInitialRender) => {
-                                                        GridItem.create(() => { }, false);
-                                                        GridItem.debugLine("entry/src/main/ets/pages/AIChatPage.ets(169:25)", "entry");
-                                                    };
-                                                    const observedDeepRender = () => {
-                                                        this.observeComponentCreation2(itemCreation2, GridItem);
-                                                        this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                                            Column.create();
-                                                            Column.debugLine("entry/src/main/ets/pages/AIChatPage.ets(170:27)", "entry");
-                                                            Column.padding(8);
-                                                            Column.backgroundColor(Color.White);
-                                                            Column.borderRadius(8);
-                                                            Column.onClick(() => {
-                                                                router.pushUrl({ url: 'pages/GoodsDetailPage', params: { goods: item } }).catch((err) => {
-                                                                    console.error('è·³è½¬å¤±è´¥:', err.message);
-                                                                });
-                                                            });
-                                                        }, Column);
-                                                        this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                                            Image.create(item.cover);
-                                                            Image.debugLine("entry/src/main/ets/pages/AIChatPage.ets(171:29)", "entry");
-                                                            Image.width('100%');
-                                                            Image.aspectRatio(1);
-                                                            Image.borderRadius(8);
-                                                        }, Image);
-                                                        this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                                            Text.create(item.title);
-                                                            Text.debugLine("entry/src/main/ets/pages/AIChatPage.ets(175:29)", "entry");
-                                                            Text.fontSize(commonConst.NORMAL_FONT_SIZE);
-                                                            Text.fontColor({ "id": 16777285, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-                                                            Text.maxLines(2);
-                                                            Text.textOverflow({ overflow: TextOverflow.Ellipsis });
-                                                            Text.margin({ top: 6 });
-                                                        }, Text);
-                                                        Text.pop();
-                                                        this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                                            Text.create('Â¥' + item.price.toFixed(2));
-                                                            Text.debugLine("entry/src/main/ets/pages/AIChatPage.ets(181:29)", "entry");
-                                                            Text.fontSize(commonConst.BIGGER_FONT_SIZE);
-                                                            Text.fontColor({ "id": 16777287, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-                                                            Text.fontWeight(FontWeight.Medium);
-                                                            Text.margin({ top: 4 });
-                                                        }, Text);
-                                                        Text.pop();
-                                                        Column.pop();
-                                                        GridItem.pop();
-                                                    };
-                                                    observedDeepRender();
-                                                }
-                                            };
-                                            this.forEachUpdateFunction(elmtId, msg.items, forEachItemGenFunction, (it) => `${it.id}`, false, false);
-                                        }, ForEach);
-                                        ForEach.pop();
-                                        Grid.pop();
-                                    });
-                                }
-                                else {
-                                    this.ifElseBranchUpdateFunction(1, () => {
-                                    });
-                                }
-                            }, If);
-                            If.pop();
-                        });
-                    }
-                }, If);
-                If.pop();
-                Column.pop();
-            };
-            this.forEachUpdateFunction(elmtId, this.messages, forEachItemGenFunction, undefined, true, false);
-        }, ForEach);
-        ForEach.pop();
-        // èŠå¤©æ¶ˆæ¯
-        Column.pop();
-        Column.pop();
-        // å¯æ»šåŠ¨çš„æ¶ˆæ¯åŒºåŸŸï¼Œå æ®ä¸­é—´å¯ä¼¸ç¼©ç©ºé—´
-        Scroll.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // åº•éƒ¨è¾“å…¥æ ï¼ˆå§‹ç»ˆä½äºé¡µé¢åº•éƒ¨ï¼‰
-            Row.create();
-            Row.debugLine("entry/src/main/ets/pages/AIChatPage.ets(216:7)", "entry");
-            // åº•éƒ¨è¾“å…¥æ ï¼ˆå§‹ç»ˆä½äºé¡µé¢åº•éƒ¨ï¼‰
-            Row.backgroundColor(Color.White);
-            // åº•éƒ¨è¾“å…¥æ ï¼ˆå§‹ç»ˆä½äºé¡µé¢åº•éƒ¨ï¼‰
-            Row.padding({ left: 12, right: 12, top: 8, bottom: 12 });
-        }, Row);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Search.create({ value: this.inputText, placeholder: { "id": 16777253, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } });
-            Search.debugLine("entry/src/main/ets/pages/AIChatPage.ets(217:9)", "entry");
-            Search.layoutWeight(1);
-            Search.height(48);
-            Search.onChange((v) => { this.inputText = v; });
-            Search.border({ width: 1, color: { "id": 16777286, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } });
-            Search.backgroundColor(Color.White);
-        }, Search);
-        Search.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Button.createWithLabel('å‘é€');
-            Button.debugLine("entry/src/main/ets/pages/AIChatPage.ets(224:9)", "entry");
-            Button.margin({ left: 8 });
-            Button.height(48);
-            Button.padding({ left: 12, right: 12 });
-            Button.onClick(async () => {
-                await this.handleSend();
-            });
-        }, Button);
-        Button.pop();
-        // åº•éƒ¨è¾“å…¥æ ï¼ˆå§‹ç»ˆä½äºé¡µé¢åº•éƒ¨ï¼‰
-        Row.pop();
-        Column.pop();
-    }
-    // å‘é€é€»è¾‘ï¼šæ¨é€ç”¨æˆ·æ¶ˆæ¯ï¼Œè°ƒç”¨ DeepSeek è§£æä¸ºç»“æ„åŒ–ç­›é€‰æ¡ä»¶ï¼Œç­›é€‰å•†å“å¹¶æ˜¾ç¤º AI å›å¤å’Œå•†å“
-    async handleSend() {
-        const text = this.inputText.trim();
-        if (text.length === 0) {
-            return;
-        }
-        // è‡ªæ€/å±é™©ç‰©å“å…³é”®è¯æ£€æµ‹ï¼šè‹¥åŒ…å«ç›¸å…³è¯ï¼Œè·³è½¬åˆ°å…³æ€€é¡µé¢å¹¶ç»ˆæ­¢åç»­æµç¨‹
-        const dangerKeywords = ['å®‰çœ è¯', 'å®‰ä¹æ­»', 'è‡ªæ€', 'è‡ªæ®‹', 'æœè¯', 'ä¸ŠåŠ', 'å‰²è…•'];
-        for (let k of dangerKeywords) {
-            if (text.indexOf(k) >= 0) {
-                try {
-                    // æ¸…ç©ºè¾“å…¥
-                    this.inputText = '';
-                    // å¯¼èˆªåˆ°å…³æ€€é¡µ
-                    await router.pushUrl({ url: 'pages/CarePage' });
-                }
-                catch (navErr) {
-                    console.error('å¯¼èˆªåˆ°å…³æ€€é¡µå¤±è´¥:', String(navErr));
-                }
-                return;
-            }
-        }
-        // æ¨å…¥ç”¨æˆ·æ¶ˆæ¯
-        this.messages = this.messages.concat([{ role: 'user', content: text }]);
-        this.chatHistory.push({ role: 'user', content: text });
-        this.inputText = '';
-        // æ˜¾ç¤º AI æ­£åœ¨å›å¤å ä½æ¶ˆæ¯
-        this.messages = this.messages.concat([{ role: 'ai', content: 'æ­£åœ¨ä¸ºæ‚¨æ£€ç´¢å•†å“ï¼Œè¯·ç¨å€™...' }]);
-        // è°ƒç”¨ DeepSeekï¼ˆæˆ–æœ¬åœ°è§£æï¼‰è·å¾—ç­›é€‰æ¡ä»¶
-        const result = await this.parseUserQueryByDeepSeek(text);
-        console.info('AIChat: parsed result:', JSON.stringify(result));
-        // æ ¹æ® items æŸ¥æ‰¾å•†å“
-        const matched = result.items.map(id => goodsPool.find(g => g.id === id)).filter(g => g !== undefined);
-        console.info('AIChat: matched items count:', matched.length);
-        matched.forEach((item, idx) => {
-            console.info(`AIChat: matched item ${idx}: title=${String(item.title)}, category=${item.category}, searchIndex=${item.searchIndex}`);
-        });
-        // æ›´æ–°æœ€åä¸€æ¡ AI æ¶ˆæ¯ä¸ºç»“æœå¹¶é™„å¸¦å•†å“
-        // ç”¨ DeepSeek çš„ reply
-        const replyText = result.reply;
-        // ç§»é™¤å ä½å¹¶æ·»åŠ å›å¤
-        this.messages.pop();
-        this.chatHistory.push({ role: 'assistant', content: replyText });
-        this.messages = this.messages.concat([{ role: 'ai', content: replyText, items: matched.slice(0, 6) }]);
-    }
-    // DeepSeek è°ƒç”¨å°è£…ï¼šå°è¯•è°ƒç”¨è¿œç¨‹ APIï¼Œå¤±è´¥æ—¶å›é€€åˆ°æœ¬åœ°ç®€å•è§£æ
-    async parseUserQueryByDeepSeek(query) {
-        const httpRequest = http.createHttp();
-        try {
-            // æ„å»ºå•†å“åˆ—è¡¨å­—ç¬¦ä¸²
-            const goodsListStr = goodsPool.map(g => `{id:${g.id}, title:'${String(g.title)}', description:'${String(g.description)}', evaluate:'${String(g.evaluate)}', price:${g.price}, category:'${g.category}', subCategory:'${g.subCategory}', keyword:'${g.keyword}', searchIndex:'${g.searchIndex}', isNew:${g.isNew}, isHot:${g.isHot}, isFreeShipping:${g.isFreeShipping}, hasCoupon:${g.hasCoupon}, originalPrice:${g.originalPrice || 'N/A'}, salesCount:${g.salesCount || 0}, rating:${g.rating || 0}, ratingCount:${g.ratingCount || 0}, shopName:'${g.shopName || ''}', specifications:${JSON.stringify(g.specifications || [])}, deliveryInfo:'${g.deliveryInfo || ''}'}`).join('\n');
-            const messagesArr = [
-                { role: 'system', content: `ä½ æ˜¯ä¸€ä¸ªä¸“ä¸šçš„ç”µå•†å•†å“åŒ¹é…åŠ©æ‰‹ï¼Œè´Ÿè´£æ ¹æ®ç”¨æˆ·çš„è‡ªç„¶è¯­è¨€æŸ¥è¯¢ï¼Œä»ç»™å®šçš„å•†å“åˆ—è¡¨ä¸­ç²¾å‡†ç­›é€‰åŒ¹é…çš„å•†å“ï¼Œå¹¶æŒ‰å›ºå®šæ ¼å¼è¿”å›JSONç»“æœã€‚è¯·ä¸¥æ ¼éµå®ˆä»¥ä¸‹è§„åˆ™æ‰§è¡Œä»»åŠ¡ï¼š
-
-    ### æ ¸å¿ƒè§„åˆ™
-    1. **å•†å“å­—æ®µç†è§£**ï¼šä½ éœ€è¦åŸºäºå•†å“åˆ—è¡¨ä¸­çš„æ‰€æœ‰å­—æ®µè¿›è¡ŒåŒ¹é…ï¼Œå­—æ®µå®šä¹‰å¦‚ä¸‹ï¼š
-      - idï¼šå•†å“å”¯ä¸€æ•°å­—ç¼–å·ï¼ˆæ ¸å¿ƒæ ‡è¯†ï¼Œè¾“å‡ºç»“æœçš„itemsæ•°ç»„å¿…é¡»è¿”å›è¯¥æ•°å­—IDï¼‰ï¼›
-      - cover/ detailImagesï¼šå•†å“å›¾ç‰‡èµ„æºï¼ˆæ— éœ€åŒ¹é…ï¼Œä»…ä½œå‚è€ƒï¼‰ï¼›
-      - titleï¼šå•†å“åç§°ï¼ˆå¤šè¯­è¨€èµ„æºæ ‡è¯†ï¼Œå¦‚$r('app.string.goods_milk_tea')ä»£è¡¨â€œå¥¶èŒ¶â€ç±»å•†å“ï¼Œéœ€è§£æä¸ºå®é™…å•†å“åç§°ï¼‰ï¼›
-      - descriptionï¼šå•†å“å¹¿å‘Šè¯­/è¯¦æƒ…æè¿°ï¼›
-      - evaluateï¼šç”¨æˆ·è¯„ä»·æ‘˜è¦ï¼›
-      - priceï¼šå•†å“å®é™…å”®ä»·ï¼ˆæ•°å­—ï¼Œå•ä½ï¼šå…ƒï¼‰ï¼›
-      - categoryï¼šå•†å“ä¸»åˆ†ç±»ï¼ˆæšä¸¾å€¼ï¼šCategoryType.Featured/Hot/Newç­‰ï¼‰ï¼›
-      - subCategoryï¼šå•†å“å­åˆ†ç±»ï¼ˆå¦‚limited/normalç­‰ï¼‰ï¼›
-      - keywordï¼šå•†å“æ ¸å¿ƒå…³é”®è¯ï¼ˆè‹±æ–‡/ä¸­æ–‡ç»„åˆï¼Œå¦‚'milk tea limited selected'ï¼‰ï¼›
-      - searchIndexï¼šå•†å“æœç´¢ç´¢å¼•ï¼ˆåŒ…å«å•†å“åç§°ã€å±æ€§ã€å“ç±»çš„ç»„åˆæ–‡æœ¬ï¼Œå¦‚'é¦™æ¸¯é£å‘³ä¸è¢–å¥¶èŒ¶ å¥¶èŒ¶ é¦™æ¸¯ ä¸è¢– é¥®æ–™'ï¼‰ï¼›
-      - isNew/isHotï¼šæ˜¯å¦æ–°å“/çˆ†æ¬¾ï¼ˆå¸ƒå°”å€¼ï¼‰ï¼›
-      - isFreeShippingï¼šæ˜¯å¦åŒ…é‚®ï¼ˆå¸ƒå°”å€¼ï¼‰ï¼›
-      - hasCouponï¼šæ˜¯å¦æœ‰ä¼˜æƒ åˆ¸ï¼ˆå¸ƒå°”å€¼ï¼‰ï¼›
-      - originalPriceï¼šå•†å“åŸä»·ï¼ˆæ•°å­—ï¼‰ï¼›
-      - salesCountï¼šé”€é‡ï¼ˆæ•°å­—ï¼‰ï¼›
-      - ratingï¼šè¯„åˆ†ï¼ˆæ•°å­—ï¼Œ1-5åˆ†ï¼‰ï¼›
-      - ratingCountï¼šè¯„ä»·æ•°ï¼ˆæ•°å­—ï¼‰ï¼›
-      - shopNameï¼šåº—é“ºåç§°ï¼›
-      - specificationsï¼šå•†å“è§„æ ¼ï¼ˆæ•°ç»„ï¼Œå¦‚['åŸå‘³', 'å°‘ç³–', 'æ— ç³–']ï¼‰ï¼›
-      - deliveryInfoï¼šé…é€/å”®åä¿¡æ¯ï¼ˆå¦‚'æ”¯æŒ7å¤©æ— ç†ç”±é€€æ¢'ï¼‰ã€‚
-
-    2. **åŒ¹é…ä¼˜å…ˆçº§è§„åˆ™**ï¼šæŒ‰ä»¥ä¸‹ä¼˜å…ˆçº§ç­›é€‰å•†å“ï¼Œä¼˜å…ˆçº§é«˜çš„å­—æ®µåŒ¹é…ç»“æœä¼˜å…ˆï¼š
-      â‘  searchIndexï¼ˆæœç´¢ç´¢å¼•ï¼ŒåŒ…å«æœ€å…¨é¢çš„å•†å“ä¿¡æ¯ï¼Œä¼˜å…ˆåŒ¹é…ï¼‰ï¼›
-      â‘¡ titleï¼ˆå•†å“åç§°ï¼‰+ keywordï¼ˆæ ¸å¿ƒå…³é”®è¯ï¼‰ï¼›
-      â‘¢ category/subCategoryï¼ˆå•†å“åˆ†ç±»ï¼‰ï¼›
-      â‘£ price/originalPriceï¼ˆä»·æ ¼åŒºé—´ï¼‰ï¼›
-      â‘¤ isHot/isNew/isFreeShippingï¼ˆå±æ€§æ ‡ç­¾ï¼‰ï¼›
-      â‘¥ specificationsï¼ˆè§„æ ¼ï¼‰ã€shopNameï¼ˆåº—é“º)ã€deliveryInfoï¼ˆå”®åï¼‰ç­‰å…¶ä»–å±æ€§ã€‚
-
-    3. **ç”¨æˆ·æŸ¥è¯¢è§£æè§„åˆ™**ï¼š
-      - è§£æç”¨æˆ·æŸ¥è¯¢ä¸­çš„**æ ¸å¿ƒéœ€æ±‚**ï¼šå¦‚å•†å“åç§°ï¼ˆå¥¶èŒ¶/é¥®æ–™ï¼‰ã€åˆ†ç±»ï¼ˆçˆ†æ¬¾/é™é‡ï¼‰ã€ä»·æ ¼åŒºé—´ï¼ˆ200å…ƒä»¥ä¸Šï¼‰ã€å±æ€§ï¼ˆåŒ…é‚®/æ— ç³–ï¼‰ã€åº—é“ºï¼ˆæ¸¯å¼é¥®å“ï¼‰ç­‰ï¼›
-      - **ä»·æ ¼åŒºé—´è§£æ**ï¼šä¸¥æ ¼è¯†åˆ«ä»·æ ¼èŒƒå›´ï¼Œå¦‚â€œ800åˆ°820ä¹‹é—´â€è§£æä¸ºpriceMin=800, priceMax=820ï¼Œä»…åŒ¹é…priceåœ¨æ­¤åŒºé—´å†…çš„å•†å“ï¼›â€œ200å…ƒä»¥ä¸Šâ€è§£æä¸ºpriceMin=200ï¼›â€œä½äº500â€è§£æä¸ºpriceMax=500ï¼›å¿…é¡»ç²¾ç¡®åŒ¹é…ï¼Œä¸å¾—è¶…å‡ºèŒƒå›´ï¼›
-      - å¤„ç†**å£è¯­åŒ–/æ¨¡ç³Šè¡¨è¿°**ï¼šå¦‚â€œåŒ…é‚®çš„å¥¶èŒ¶â€åŒ¹é…isFreeShipping=trueä¸”searchIndexå«â€œå¥¶èŒ¶â€çš„å•†å“ï¼›â€œçˆ†æ¬¾é¥®æ–™â€åŒ¹é…isHot=trueä¸”searchIndexå«â€œé¥®æ–™â€çš„å•†å“ï¼›â€œ200å¤šçš„é¥®å“â€åŒ¹é…priceåœ¨200-300ä¹‹é—´ä¸”å“ç±»ä¸ºé¥®å“çš„å•†å“ï¼›
-      - å¿½ç•¥æ— æ„ä¹‰è¡¨è¿°ï¼šå¦‚â€œå¸®æˆ‘æ‰¾â€â€œæ¨èä¸€ä¸‹â€â€œè°¢è°¢â€ç­‰å£è¯­åŒ–å†—ä½™å†…å®¹ï¼Œä»…æå–æ ¸å¿ƒæŸ¥è¯¢ä¿¡æ¯ã€‚
-
-    4. **è¾“å‡ºæ ¼å¼å¼ºåˆ¶è¦æ±‚ï¼ˆå¿…é¡»ä¸¥æ ¼éµå®ˆï¼‰**ï¼š
-      - å¿…é¡»è¿”å›**çº¯JSONå¯¹è±¡**ï¼Œæ— ä»»ä½•å‰ç½®ã€åç½®æ–‡æœ¬ï¼Œæ— æ³¨é‡Šã€æ¢è¡Œç¬¦ã€ç©ºæ ¼å†—ä½™ï¼›
-      - JSONä»…åŒ…å«ä¸¤ä¸ªå­—æ®µï¼Œå­—æ®µåä¸å¯ä¿®æ”¹ï¼š
-        âœ… replyï¼šè‡ªç„¶è¯­è¨€å›å¤ï¼Œéœ€å‹å¥½è¯´æ˜åŒ¹é…ç»“æœï¼ˆå¦‚â€œä¸ºä½ æ‰¾åˆ°2æ¬¾ç¬¦åˆè¦æ±‚çš„æ¸¯å¼å¥¶èŒ¶ï¼Œå‡ä¸ºåŒ…é‚®çˆ†æ¬¾ï½â€â€œæœªæ‰¾åˆ°åŒ¹é…çš„å•†å“å“¦ï¼Œä½ å¯ä»¥å°è¯•è°ƒæ•´å…³é”®è¯â€ï¼‰ï¼›
-        âœ… itemsï¼šåŒ¹é…å•†å“çš„**æ•°å­—IDæ•°ç»„**ï¼Œä»…åŒ…å«çº¯æ•°å­—ç¼–å·ï¼Œæ— å…¶ä»–å­—ç¬¦ï¼›è‹¥æ— åŒ¹é…å•†å“ï¼Œè¿”å›ç©ºæ•°ç»„[]ï¼›
-      - ç¦æ­¢è¾“å‡ºJSONä»¥å¤–çš„ä»»ä½•å†…å®¹ï¼ŒåŒ…æ‹¬è§£é‡Šã€è¯´æ˜ã€æ ‡ç‚¹ç¬¦å·ã€æ¢è¡Œç­‰ã€‚
-
-    5. **æ— åŒ¹é…å¤„ç†è§„åˆ™**ï¼šè‹¥æ²¡æœ‰ä»»ä½•å•†å“ç¬¦åˆç”¨æˆ·æŸ¥è¯¢æ¡ä»¶ï¼Œreplyéœ€æç¤ºâ€œæœªæ‰¾åˆ°åŒ¹é…çš„å•†å“ï¼Œä½ å¯ä»¥å°è¯•è°ƒæ•´å…³é”®è¯æˆ–ç­›é€‰æ¡ä»¶â€ï¼Œitemsè¿”å›ç©ºæ•°ç»„[]ã€‚
-
-    6. **æ•æ„Ÿ/è¿æ³•å•†å“å¤„ç†è§„åˆ™ï¼ˆå¿…é¡»ä¸¥æ ¼æ‰§è¡Œï¼‰**ï¼š
-      - è‹¥ç”¨æˆ·æŸ¥è¯¢æ¶‰åŠè‰²æƒ…ã€æœªæˆå¹´äººç›¸å…³æ€§å†…å®¹ã€å¼ºçƒˆæš´åŠ›æˆ–è¡€è…¥ã€æªæ”¯ä¸å¼¹è¯ã€çˆ†ç‚¸ç‰©ã€æ¯’å“/åˆæˆè¯ç‰©ã€ææ€–ä¸»ä¹‰ç›¸å…³ã€æˆ–å…¶ä»–æ˜æ˜¾è¿æ³•/æœ‰å®³çš„å•†å“æˆ–è¡Œä¸ºï¼ˆåŒ…æ‹¬æœç´¢å¦‚ä½•åˆ¶é€ /è´­ä¹°/è§„é¿æ³•å¾‹çš„è¯·æ±‚ï¼‰ï¼Œè¯·ç«‹å³å¹¶**å§‹ç»ˆ**æŒ‰ä¸‹è¿°æ–¹å¼å¤„ç†ï¼š
-        1) æ— è®ºç³»ç»Ÿæ˜¯å¦èƒ½å¤Ÿåœ¨å•†å“åˆ—è¡¨ä¸­æ‰¾åˆ°åŒ¹é…å•†å“ï¼Œ**itemså­—æ®µå¿…é¡»è¿”å›ç©ºæ•°ç»„[]**ï¼›
-        2) **replyå­—æ®µå¿…é¡»è¿”å›ä¸€ä¸ªå‹å¥½ä½†æ˜ç¡®çš„è­¦å‘Šè¯­**ï¼Œä¾‹å¦‚ï¼š"æŠ±æ­‰ï¼Œæˆ‘æ— æ³•æä¾›ä¸è‰²æƒ…ã€æ¯’å“ã€æªæ”¯æˆ–å…¶ä»–è¿æ³•/æœ‰å®³å•†å“ç›¸å…³çš„æ¨èæˆ–ä¿¡æ¯ã€‚å¦‚éœ€å¸®åŠ©ï¼Œè¯·é¿å…æ­¤ç±»å…³é”®è¯å¹¶éµå®ˆå½“åœ°æ³•å¾‹ã€‚"ï¼ˆç¦æ­¢åœ¨replyä¸­åŒ…å«è´­ä¹°æ¸ é“ã€åˆ¶ä½œæ–¹æ³•ã€è§„é¿å»ºè®®æˆ–ä»»ä½•å¯è¡ŒåŠ¨çš„ç»†èŠ‚ï¼‰ï¼›
-        3) ç¦æ­¢è¿”å›ä»»ä½•ä¸è¯¥æ•æ„Ÿä¸»é¢˜ç›¸å…³çš„å•†å“IDã€é“¾æ¥ã€æè¿°æˆ–æ“ä½œæ€§å»ºè®®ï¼›
-      - è¯·å°†ä¸Šè¿°æ•æ„Ÿç±»åˆ«è§†ä¸ºä¼˜å…ˆçº§æœ€é«˜çš„è§„åˆ™ï¼Œè¦†ç›–å‰é¢æ‰€æœ‰åŒ¹é…é€»è¾‘ã€‚
-
-    ### å•†å“åˆ—è¡¨åŒ¹é…è¡¥å……è¯´æ˜
-    - å•†å“åˆ—è¡¨ä¸­çš„\`$r('app.string.xxx')\`ä¸ºå¤šè¯­è¨€èµ„æºæ ‡è¯†ï¼Œéœ€è§£æä¸ºå®é™…è¯­ä¹‰ï¼šå¦‚$r('app.string.goods_milk_tea')è§£æä¸ºâ€œé¦™æ¸¯é£å‘³ä¸è¢–å¥¶èŒ¶â€ï¼Œ$r('app.string.advertising_language')è§£æä¸ºå•†å“å¹¿å‘Šè¯­ï¼Œ$r('app.string.evaluate')è§£æä¸ºç”¨æˆ·è¯„ä»·ï¼›
-    - å•†å“çš„\`searchIndex\`æ˜¯æœ€æ ¸å¿ƒçš„åŒ¹é…ä¾æ®ï¼Œéœ€ä¼˜å…ˆä»è¯¥å­—æ®µä¸­åŒ¹é…ç”¨æˆ·æŸ¥è¯¢çš„å…³é”®è¯ï¼›
-    - æ— è®ºå•†å“åˆ—è¡¨ä¸­æœ‰å¤šå°‘æ¡å•†å“ï¼Œä»…è¿”å›åŒ¹é…å•†å“çš„**æ•°å­—ID**åˆ°itemsæ•°ç»„ä¸­ï¼Œç¦æ­¢è¿”å›IDä»¥å¤–çš„ä»»ä½•æ ‡è¯†ã€‚
-
-    ä»¥ä¸‹æ˜¯å•†å“åˆ—è¡¨ï¼š
-    ${goodsListStr}` },
-                { role: 'user', content: query }
-            ];
-            const bodyObj = {
-                model: 'deepseek-chat',
-                messages: messagesArr,
-                temperature: 0.2
-            };
-            const body = JSON.stringify(bodyObj);
-            const headerObj = {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.DEEPSEEK_API_KEY}`
-            };
-            const requestOptions = {
-                method: http.RequestMethod.POST,
-                header: headerObj,
-                extraData: body,
-                connectTimeout: 10000,
-                readTimeout: 10000
-            };
-            console.info('DeepSeek: sending request to', this.DEEPSEEK_URL);
-            console.info('DeepSeek: requestOptions:', JSON.stringify({ method: requestOptions.method, header: requestOptions.header }));
-            const response = await httpRequest.request(this.DEEPSEEK_URL, requestOptions);
-            try {
-                const respObj = response;
-                console.info('DeepSeek: raw response object:', JSON.stringify(respObj));
-                const respTextForLog = respObj.result || respObj.body || JSON.stringify(response);
-                console.info('DeepSeek: respText used for parsing:', respTextForLog);
-            }
-            catch (logErr) {
-                console.info('DeepSeek: raw response received (toString):', String(response));
-            }
-            // è§£æè¿”å› (DeepSeek è¿”å›ç»“æ„é€šå¸¸åŒ…å« choices[0].message.content)
-            try {
-                const respObj = response;
-                const respText = respObj.result || respObj.body || JSON.stringify(response);
-                const result = typeof respText === 'string' ? JSON.parse(respText) : respText;
-                const content = result?.choices?.[0]?.message?.content;
-                if (content) {
-                    try {
-                        const parsed = JSON.parse(content);
-                        return parsed;
-                    }
-                    catch (e) {
-                        const jsonMatch = String(content).match(/\{[\s\S]*\}/);
-                        if (jsonMatch) {
-                            return JSON.parse(jsonMatch[0]);
-                        }
-                    }
-                }
-            }
-            catch (err) {
-                console.warn('å°è¯•è§£æ DeepSeek å“åº”ä¸º JSON å¤±è´¥ï¼Œä½¿ç”¨å›é€€è§£æ', String(err));
-            }
-        }
-        catch (err) {
-            console.error('DeepSeek API è°ƒç”¨å¼‚å¸¸ï¼š', String(err));
-        }
-        finally {
-            httpRequest.destroy();
-        }
-        // å›é€€è§£æï¼ˆç®€å•å…³é”®å­—è§„åˆ™ï¼‰
-        return this.fallbackParseQuery(query);
-    }
-    // ç®€å•å›é€€è§£æå™¨ï¼Œç”¨äºåœ¨æ— æ³•è®¿é—® DeepSeek æ—¶ä¹Ÿèƒ½æä¾›åŸºæœ¬åŠŸèƒ½
-    fallbackParseQuery(query) {
-        const q = query.toLowerCase();
-        let reply = 'æ ¹æ®æ‚¨çš„æŸ¥è¯¢ï¼Œæˆ‘ä¸ºæ‚¨æ¨èäº†ä¸€äº›å•†å“ã€‚';
-        let items = [];
-        if (q.indexOf('iphone') >= 0 || q.indexOf('è‹¹æœ') >= 0) {
-            items = goodsPool.filter(g => g.category === CategoryType.Phone && String(g.searchIndex).toLowerCase().includes('è‹¹æœ')).map(g => g.id);
-            reply = 'ä¸ºæ‚¨æ‰¾åˆ°äº†è‹¹æœæ‰‹æœºç›¸å…³å•†å“ã€‚';
-        }
-        // åŒ…é‚®
-        if (q.indexOf('åŒ…é‚®') >= 0 || q.indexOf('å…è¿è´¹') >= 0) {
-            items = goodsPool.filter(g => g.isFreeShipping).map(g => g.id);
-            reply += ' å·²ç­›é€‰åŒ…é‚®å•†å“ã€‚';
-        }
-        // ä»·æ ¼åŒºé—´
-        const maxMatch = q.match(/(?:ä½äº|å°äº|ä¸è¶…è¿‡)\s*(\d{2,})/);
-        if (maxMatch) {
-            const maxPrice = parseInt(maxMatch[1], 10);
-            items = goodsPool.filter(g => g.price <= maxPrice).map(g => g.id);
-            reply += ` ä»·æ ¼ä¸è¶…è¿‡ ${maxPrice} å…ƒã€‚`;
-        }
-        else {
-            const numMatch = q.match(/(\d{2,})/);
-            if (numMatch && q.indexOf('ä»·æ ¼') >= 0) {
-                const maxPrice = parseInt(numMatch[1], 10);
-                items = goodsPool.filter(g => g.price <= maxPrice).map(g => g.id);
-                reply += ` ä»·æ ¼ä¸è¶…è¿‡ ${maxPrice} å…ƒã€‚`;
-            }
-        }
-        if (items.length === 0) {
-            items = goodsPool.slice(0, 6).map(g => g.id); // é»˜è®¤å‰6ä¸ª
-        }
-        return { reply, items };
-    }
-    // æ ¹æ® FilterCondition ç­›é€‰ goodsPool ï¼ˆä¿ç•™ä»¥å¤‡ä¸æ—¶ä¹‹éœ€ï¼‰
-    filterGoodsByCondition(cond) {
-        console.info('filterGoodsByCondition called with cond:', JSON.stringify(cond));
-        return goodsPool.filter((g) => {
-            console.info('checking item title:', String(g.title), 'category:', g.category, 'searchIndex:', g.searchIndex);
-            // category
-            if (cond.category) {
-                console.info('cond.category:', cond.category);
-                // æ”¯æŒæŠŠç®€å•å­—ç¬¦ä¸²æ˜ å°„åˆ° CategoryType
-                if (cond.category.toLowerCase() === 'phone' || cond.category.toLowerCase().indexOf('phone') >= 0 || cond.category.toLowerCase().indexOf('æ‰‹æœº') >= 0) {
-                    console.info('category matches phone');
-                    if (g.category !== CategoryType.Phone) {
-                        console.info('g.category !== Phone, filtering out');
-                        return false;
-                    }
-                }
-            }
-            // priceMax
-            if (cond.priceMax !== undefined && cond.priceMax !== null) {
-                if (g.price > cond.priceMax) {
-                    console.info('price > max, filtering out');
-                    return false;
-                }
-            }
-            // priceMin
-            if (cond.priceMin !== undefined && cond.priceMin !== null) {
-                if (g.price < cond.priceMin) {
-                    console.info('price < min, filtering out');
-                    return false;
-                }
-            }
-            // freeShipping
-            if (cond.attributes && cond.attributes.freeShipping !== undefined && cond.attributes.freeShipping !== null) {
-                if (cond.attributes.freeShipping && !g.isFreeShipping) {
-                    console.info('freeShipping not match, filtering out');
-                    return false;
-                }
-            }
-            // brand: å°è¯•åŒ¹é… title æˆ– searchIndex
-            if (cond.attributes && cond.attributes.brand) {
-                const brand = cond.attributes.brand.toLowerCase();
-                const title = String(g.title).toLowerCase();
-                const search = String(g.searchIndex).toLowerCase();
-                console.info('brand:', brand, 'title:', title, 'search:', search);
-                if (title.indexOf(brand) < 0 && search.indexOf(brand) < 0) {
-                    console.info('brand not found, filtering out');
-                    return false;
-                }
-            }
-            console.info('item passed all filters');
-            return true;
-        });
-    }
-    rerender() {
-        this.updateDirtyElements();
-    }
-    static getEntryName() {
-        return "AIChatPage";
-    }
-}
-registerNamedRoute(() => new AIChatPage(undefined, {}), "", { bundleName: "com.example.list_harmony", moduleName: "entry", pagePath: "pages/AIChatPage", pageFullPath: "entry/src/main/ets/pages/AIChatPage", integratedHsp: "false", moduleType: "followWithHap" });
-//# sourceMappingURL=AIChatPage.js.mapÂ”ÙR hvigor_ignore_D:_DevEco Studio2_sdk_default_openharmony_ets_api_@ohos.router.d.tsÙT hvigor_ignore_D:_DevEco Studio2_sdk_default_openharmony_ets_api_@ohos.net.http.d.tsÙyD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets\viewmodel\InitialData.etsÙzD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets\common\CommonConstants.etsÙtD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets\pages\AIChatPage.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath§checker¬shouldEmitJs¥entryÃÂÙRD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entryÙLD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity¥entry¥1.0.0Ô  ÙRD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entryÔrCÜ ®¬getNodeCount²getIdentifierCount®getSymbolCount¬getTypeCountµgetInstantiationCountµgetRelationCacheSizes±isUndefinedSymbol±isArgumentsSymbol¯isUnknownSymbol¯getMergedSymbol®getDiagnostics´getGlobalDiagnostics´getRecursionIdentity¶getUnmatchedProperties¹getTypeOfSymbolAtLocation¯getTypeOfSymbolÙ(getSymbolsOfParameterPropertyDeclaration·getDeclaredTypeOfSymbol³getPropertiesOfType±getPropertyOfTypeÙ"getPrivateIdentifierPropertyOfType·getTypeOfPropertyOfType²getIndexInfoOfType³getIndexInfosOfTypeºgetIndexInfosOfIndexSymbol³getSignaturesOfType²getIndexTypeOfType¬getIndexType¬getBaseTypes¸getBaseTypeOfLiteralType®getWidenedType³getTypeFromTypeNode°getParameterTypeÙ$getParameterIdentifierNameAtPosition¸getPromisedTypeOfPromise®getAwaitedType¸getReturnTypeOfSignature®isNullableType¯getNullableType²getNonNullableType²getNonOptionalType°getTypeArguments®typeToTypeNodeÙ$indexInfoToIndexSignatureDeclaration¿signatureToSignatureDeclaration²symbolToEntityName²symbolToExpression¬symbolToNodeÙ!symbolToTypeParameterDeclarations¼symbolToParameterDeclarationºtypeParameterToDeclaration±getSymbolsInScope³getSymbolAtLocation·getIndexInfosAtLocationÙ!getShorthandAssignmentValueSymbolÙ#getExportSpecifierLocalTargetSymbol·getExportSymbolOfSymbol±getTypeAtLocationÙ tryGetTypeAtLocationWithoutCheckºgetTypeOfAssignmentPatternÙ*getPropertySymbolOfDestructuringAssignment±signatureToString¬typeToString®symbolToStringµtypePredicateToString®writeSignature©writeType«writeSymbol²writeTypePredicate¼getAugmentedPropertiesOfType®getRootSymbols²getSymbolOfExpando±getContextualTypeÙ(getContextualTypeForObjectLiteralElementÙ#getContextualTypeForArgumentAtIndexÙ getContextualTypeForJsxAttribute²isContextSensitiveÙ!getTypeOfPropertyOfContextualTypeµgetFullyQualifiedNameÙ#tryGetResolvedSignatureWithoutCheck´getResolvedSignatureÙ/getResolvedSignatureForStringLiteralCompletionsÙ$getResolvedSignatureForSignatureHelpµgetExpandedParameters¹hasEffectiveRestParameterºcontainsArgumentsReference°getConstantValueµisValidPropertyAccessÙ#isValidPropertyAccessForCompletions»getSignatureFromDeclarationºisImplementationOfOverload¹getImmediateAliasedSymbol°getAliasedSymbol¯getEmitResolver²getExportsOfModule¿getExportsAndPropertiesOfModuleÙ forEachExportAndPropertyOfModule¯getSymbolWalker±getAmbientModules¹getJsxIntrinsicTagNamesAt³isOptionalParameter»tryGetMemberInModuleExportsÙ(tryGetMemberInModuleExportsAndProperties´tryFindAmbientModuleÙ(tryFindAmbientModuleWithoutAugmentations¯getApparentType¬getUnionType²isTypeAssignableTo³createAnonymousType¯createSignature¬createSymbol¯createIndexInfoªgetAnyType­getStringType­getNumberType±createPromiseType¯createArrayType¹getElementTypeOfArrayType®getBooleanType¬getFalseType«getTrueType«getVoidType°getUndefinedType«getNullType¯getESSymbolType¬getNeverType¯getOptionalType®getPromiseType²getPromiseLikeType´getAsyncIterableType²isSymbolAccessible«isArrayType«isTupleType¯isArrayLikeTypeÙ#isTypeInvalidDueToUnionDiscriminantºgetExactOptionalProperties¿getAllPossiblePropertiesOfTypesÙ(getSuggestedSymbolForNonexistentPropertyÙ#getSuggestionForNonexistentPropertyÙ,getSuggestedSymbolForNonexistentJSXAttributeÙ&getSuggestedSymbolForNonexistentSymbolÙ!getSuggestionForNonexistentSymbolÙ&getSuggestedSymbolForNonexistentModuleÙ!getSuggestionForNonexistentExportÙ+getSuggestedSymbolForNonexistentClassMember·getBaseConstraintOfType»getDefaultFromTypeParameter«resolveName¯getJsxNamespaceµgetJsxFragmentFactory¸getAccessibleSymbolChain»getTypePredicateOfSignature¹resolveExternalModuleName»resolveExternalModuleSymbol°tryGetThisTypeAt¹getTypeArgumentConstraint¸getSuggestionDiagnostics¸runWithCancellationTokenÙ3getLocalTypeParametersOfClassOrInterfaceOrTypeAlias´isDeclarationVisible´isPropertyAccessible»getTypeOnlyAliasDeclaration¿getMemberOverrideModifierStatusÙ!isTypeParameterPossiblyReferenced²getConstEnumRelate´clearConstEnumRelateµdeleteConstEnumRelateÙ$getTypeArgumentsForResolvedSignatureµgetCheckedSourceFilesÙ"collectHaveTsNoCheckFilesForLinter·clearQualifiedNameCache®isStaticRecord²isStaticSourceFile³createIntrinsicTypeÔ  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  ÃÃÚ\ì/*
- * AI å¯¹è¯å¼å•†å“æœç´¢é¡µé¢
- * åŠŸèƒ½ï¼šæ¥å—ç”¨æˆ·è‡ªç„¶è¯­è¨€æŸ¥è¯¢ï¼Œè°ƒç”¨ DeepSeek API å°†æŸ¥è¯¢è§£æä¸ºç»“æ„åŒ–ç­›é€‰æ¡ä»¶ï¼Œ
- *       åœ¨ AI å›å¤æ°”æ³¡ä¸‹å±•ç¤ºåŒ¹é…å•†å“çš„å¡ç‰‡å¹¶æ”¯æŒè·³è½¬åˆ°è¯¦æƒ…é¡µã€‚
- */
-import router from '@ohos.router';
-import http from '@ohos.net.http';
-// Note: do not import '@ohos.ace.ets' here; decorators are available globally in ETS pages
-import { goodsPool, GoodsListItemType, CategoryType } from '../viewmodel/InitialData';
-import { LAYOUT_WIDTH_OR_HEIGHT, STORE } from '../common/CommonConstants';
-import * as commonConst from '../common/CommonConstants';
-
-interface ChatMessage {
-  role: 'user' | 'ai';
-  content: string;
-  items?: GoodsListItemType[];
-}
-
-interface ChatHistoryItem {
-  role: string;
-  content: string;
-}
-
-interface Attributes {
-  brand?: string;
-  freeShipping?: boolean;
-}
-
-interface FilterCondition {
-  category?: string;
-  priceMin?: number;
-  priceMax?: number;
-  attributes?: Attributes;
-}
-
-interface DeepSeekMessage {
-  role: string;
-  content: string;
-}
-
-interface HttpResponseLike {
-  result?: string;
-  body?: string;
-}
-
-interface DeepSeekRequest {
-  model: string;
-  messages: DeepSeekMessage[];
-  temperature: number;
-}
-
-interface DeepSeekMessageContent {
-  content?: string;
-}
-
-interface DeepSeekChoice {
-  message?: DeepSeekMessageContent;
-}
-
-interface DeepSeekResponse {
-  choices?: DeepSeekChoice[];
-}
-
-interface DeepSeekResult {
-  reply: string;
-  items: number[];
-}
-
-interface HttpRequestOptions {
-  method: http.RequestMethod;
-  header: Record<string, string>;
-  extraData: string;
-  connectTimeout: number;
-  readTimeout: number;
-}
-
-@Entry
-@Component
-export default struct AIChatPage {
-  @State private messages: ChatMessage[] = [];
-  @State private inputText: string = '';
-  @State private chatHistory: ChatHistoryItem[] = [];
-
-  private readonly DEEPSEEK_API_KEY: string = 'sk-0d4c8b12e11143b78fd5a008b8dcae00';
-  private readonly DEEPSEEK_URL: string = 'https://api.deepseek.com/v1/chat/completions';
-
-  aboutToAppear() {
-    try {
-      const params = router.getParams() as Record<string, string> | null;
-      if (params && typeof params === 'object' && params['query']) {
-        const q = String(params['query']);
-        // é¢„å¡«å……è¾“å…¥å¹¶è‡ªåŠ¨å‘é€ä¸€æ¬¡æœç´¢
-        this.inputText = q;
-        // å»¶è¿Ÿè§¦å‘ï¼Œç¡®ä¿é¡µé¢æ¸²æŸ“åå†å‘é€
-        setTimeout(() => {
-          this.handleSend().catch((err: Error | string) => console.error('è‡ªåŠ¨å‘é€å¤±è´¥:', String(err)));
-        }, 300);
-      }
-    } catch (err) {
-      console.error('è¯»å–è·³è½¬å‚æ•°å¤±è´¥:', String(err));
-    }
-  }
-
-  build() {
-    Column() {
-      // é¡¶éƒ¨å¯¼èˆªï¼ˆå›ºå®šï¼Œä¸éšæ¶ˆæ¯æ»šåŠ¨ï¼‰
-      Row() {
-        Navigation() {
-          Column() {
-            Row() {
-              Text('AI å¯¹è¯æœç´¢')
-                .fontSize(18)
-                .fontWeight(FontWeight.Medium)
-                .fontColor($r('app.color.deepGray'))
-            }
-            .height(56)
-            .alignItems(VerticalAlign.Center)
-            .padding({ left: 16 })
-          }
-          .width(LAYOUT_WIDTH_OR_HEIGHT)
-          .justifyContent(FlexAlign.Center)
-        }
-        .size({ width: LAYOUT_WIDTH_OR_HEIGHT, height: 56 })
-        .title(STORE)
-        .titleMode(NavigationTitleMode.Mini)
-      }
-      .height(56)
-      .backgroundColor(Color.White)
-
-      // å¯æ»šåŠ¨çš„æ¶ˆæ¯åŒºåŸŸï¼Œå æ®ä¸­é—´å¯ä¼¸ç¼©ç©ºé—´
-      Scroll() {
-        Column() {
-          // èŠå¤©æ¶ˆæ¯
-          Column() {
-            ForEach(this.messages, (msg: ChatMessage, idx?: number) => {
-              Column() {
-                if (msg.role === 'user') {
-                  Row() {
-                    Blank()
-                    Text(msg.content)
-                      .backgroundColor($r('app.color.softAccent'))
-                      .padding({ left: 12, right: 12, top: 8, bottom: 8 })
-                      .borderRadius(12)
-                      .fontColor($r('app.color.deepGray'))
-                      .maxLines(10)
-                  }
-                  .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
-                  .justifyContent(FlexAlign.End)
-                  .margin({ top: 8, bottom: 8, left: 12, right: 12 })
-                } else {
-                  // AI æ°”æ³¡ + ä¸‹æ–¹å•†å“å—
-                  Row() {
-                    Text(msg.content)
-                      .backgroundColor(Color.White)
-                      .padding({ left: 12, right: 12, top: 8, bottom: 8 })
-                      .borderRadius(12)
-                      .fontColor($r('app.color.deepGray'))
-                      .maxLines(10)
-                    Blank()
-                  }
-                  .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
-                  .justifyContent(FlexAlign.Start)
-                  .margin({ top: 8, bottom: 8, left: 12, right: 12 })
-
-                  // è‹¥æœ‰å•†å“ï¼Œåˆ™æ¸²æŸ“å•†å“å¡ç‰‡ç½‘æ ¼
-                  if (msg.items && msg.items.length > 0) {
-                    Grid() {
-                      ForEach(msg.items, (item: GoodsListItemType) => {
-                        GridItem() {
-                          Column() {
-                            Image(item.cover)
-                              .width('100%')
-                              .aspectRatio(1)
-                              .borderRadius(8)
-                            Text(item.title)
-                              .fontSize(commonConst.NORMAL_FONT_SIZE)
-                              .fontColor($r('app.color.deepGray'))
-                              .maxLines(2)
-                              .textOverflow({ overflow: TextOverflow.Ellipsis })
-                              .margin({ top: 6 })
-                            Text('Â¥' + item.price.toFixed(2))
-                              .fontSize(commonConst.BIGGER_FONT_SIZE)
-                              .fontColor($r('app.color.freshRed'))
-                              .fontWeight(FontWeight.Medium)
-                              .margin({ top: 4 })
-                          }
-                          .padding(8)
-                          .backgroundColor(Color.White)
-                          .borderRadius(8)
-                          .onClick(() => {
-                            router.pushUrl({ url: 'pages/GoodsDetailPage', params: { goods: item } }).catch((err: Error) => {
-                              console.error('è·³è½¬å¤±è´¥:', err.message);
-                            });
-                          })
-                        }
-                      }, (it: GoodsListItemType) => `${it.id}`)
-                    }
-                    .columnsTemplate('1fr 1fr')
-                    .columnsGap(12)
-                    .rowsGap(12)
-                    .margin({ left: 12, right: 12, bottom: 12 })
-                  }
-                }
-              }
-            })
-          }
-        }
-      }
-      .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
-      .layoutWeight(1)
-      .padding({ bottom: 12 }) // ç»™åº•éƒ¨è¾“å…¥æ ç•™å‡ºé—´è·
-      .scrollBar(BarState.Off)
-      
-
-      // åº•éƒ¨è¾“å…¥æ ï¼ˆå§‹ç»ˆä½äºé¡µé¢åº•éƒ¨ï¼‰
-      Row() {
-        Search({ value: this.inputText, placeholder: $r('app.string.search_placeholder') })
-          .layoutWeight(1)
-          .height(48)
-          .onChange((v: string) => { this.inputText = v; })
-          .border({ width: 1, color: $r('app.color.divider') })
-          .backgroundColor(Color.White)
-
-        Button('å‘é€')
-          .margin({ left: 8 })
-          .height(48)
-          .padding({ left: 12, right: 12 })
-          .onClick(async () => {
-            await this.handleSend();
-          })
-      }
-      .backgroundColor(Color.White)
-      .padding({ left: 12, right: 12, top: 8, bottom: 12 })
-    }
-    .width('100%')
-    .height('100%')
-    .backgroundColor($r('app.color.primaryBgColor'))
-  }
-
-  // å‘é€é€»è¾‘ï¼šæ¨é€ç”¨æˆ·æ¶ˆæ¯ï¼Œè°ƒç”¨ DeepSeek è§£æä¸ºç»“æ„åŒ–ç­›é€‰æ¡ä»¶ï¼Œç­›é€‰å•†å“å¹¶æ˜¾ç¤º AI å›å¤å’Œå•†å“
-  private async handleSend(): Promise<void> {
-    const text = this.inputText.trim();
-    if (text.length === 0) {
-      return;
-    }
-    // è‡ªæ€/å±é™©ç‰©å“å…³é”®è¯æ£€æµ‹ï¼šè‹¥åŒ…å«ç›¸å…³è¯ï¼Œè·³è½¬åˆ°å…³æ€€é¡µé¢å¹¶ç»ˆæ­¢åç»­æµç¨‹
-    const dangerKeywords = ['å®‰çœ è¯', 'å®‰ä¹æ­»', 'è‡ªæ€', 'è‡ªæ®‹', 'æœè¯', 'ä¸ŠåŠ', 'å‰²è…•'];
-    for (let k of dangerKeywords) {
-      if (text.indexOf(k) >= 0) {
-        try {
-          // æ¸…ç©ºè¾“å…¥
-          this.inputText = '';
-          // å¯¼èˆªåˆ°å…³æ€€é¡µ
-          await router.pushUrl({ url: 'pages/CarePage' });
-        } catch (navErr) {
-          console.error('å¯¼èˆªåˆ°å…³æ€€é¡µå¤±è´¥:', String(navErr));
-        }
-        return;
-      }
-    }
-    // æ¨å…¥ç”¨æˆ·æ¶ˆæ¯
-    this.messages = this.messages.concat([{ role: 'user', content: text }]);
-    this.chatHistory.push({ role: 'user', content: text });
-    this.inputText = '';
-
-    // æ˜¾ç¤º AI æ­£åœ¨å›å¤å ä½æ¶ˆæ¯
-    this.messages = this.messages.concat([{ role: 'ai', content: 'æ­£åœ¨ä¸ºæ‚¨æ£€ç´¢å•†å“ï¼Œè¯·ç¨å€™...' }]);
-
-    // è°ƒç”¨ DeepSeekï¼ˆæˆ–æœ¬åœ°è§£æï¼‰è·å¾—ç­›é€‰æ¡ä»¶
-    const result = await this.parseUserQueryByDeepSeek(text);
-    console.info('AIChat: parsed result:', JSON.stringify(result));
-
-    // æ ¹æ® items æŸ¥æ‰¾å•†å“
-    const matched = result.items.map(id => goodsPool.find(g => g.id === id)).filter(g => g !== undefined) as GoodsListItemType[];
-    console.info('AIChat: matched items count:', matched.length);
-    matched.forEach((item, idx) => {
-      console.info(`AIChat: matched item ${idx}: title=${String(item.title)}, category=${item.category}, searchIndex=${item.searchIndex}`);
-    });
-
-    // æ›´æ–°æœ€åä¸€æ¡ AI æ¶ˆæ¯ä¸ºç»“æœå¹¶é™„å¸¦å•†å“
-    // ç”¨ DeepSeek çš„ reply
-    const replyText = result.reply;
-    // ç§»é™¤å ä½å¹¶æ·»åŠ å›å¤
-    this.messages.pop();
-    this.chatHistory.push({ role: 'assistant', content: replyText });
-    this.messages = this.messages.concat([{ role: 'ai', content: replyText, items: matched.slice(0, 6) }]);
-  }
-
-  // DeepSeek è°ƒç”¨å°è£…ï¼šå°è¯•è°ƒç”¨è¿œç¨‹ APIï¼Œå¤±è´¥æ—¶å›é€€åˆ°æœ¬åœ°ç®€å•è§£æ
-  private async parseUserQueryByDeepSeek(query: string): Promise<DeepSeekResult> {
-    const httpRequest = http.createHttp();
-    try {
-      // æ„å»ºå•†å“åˆ—è¡¨å­—ç¬¦ä¸²
-      const goodsListStr = goodsPool.map(g => `{id:${g.id}, title:'${String(g.title)}', description:'${String(g.description)}', evaluate:'${String(g.evaluate)}', price:${g.price}, category:'${g.category}', subCategory:'${g.subCategory}', keyword:'${g.keyword}', searchIndex:'${g.searchIndex}', isNew:${g.isNew}, isHot:${g.isHot}, isFreeShipping:${g.isFreeShipping}, hasCoupon:${g.hasCoupon}, originalPrice:${g.originalPrice || 'N/A'}, salesCount:${g.salesCount || 0}, rating:${g.rating || 0}, ratingCount:${g.ratingCount || 0}, shopName:'${g.shopName || ''}', specifications:${JSON.stringify(g.specifications || [])}, deliveryInfo:'${g.deliveryInfo || ''}'}`).join('\n');
-
-      const messagesArr: DeepSeekMessage[] = [
-          { role: 'system', content: `ä½ æ˜¯ä¸€ä¸ªä¸“ä¸šçš„ç”µå•†å•†å“åŒ¹é…åŠ©æ‰‹ï¼Œè´Ÿè´£æ ¹æ®ç”¨æˆ·çš„è‡ªç„¶è¯­è¨€æŸ¥è¯¢ï¼Œä»ç»™å®šçš„å•†å“åˆ—è¡¨ä¸­ç²¾å‡†ç­›é€‰åŒ¹é…çš„å•†å“ï¼Œå¹¶æŒ‰å›ºå®šæ ¼å¼è¿”å›JSONç»“æœã€‚è¯·ä¸¥æ ¼éµå®ˆä»¥ä¸‹è§„åˆ™æ‰§è¡Œä»»åŠ¡ï¼š
-
-    ### æ ¸å¿ƒè§„åˆ™
-    1. **å•†å“å­—æ®µç†è§£**ï¼šä½ éœ€è¦åŸºäºå•†å“åˆ—è¡¨ä¸­çš„æ‰€æœ‰å­—æ®µè¿›è¡ŒåŒ¹é…ï¼Œå­—æ®µå®šä¹‰å¦‚ä¸‹ï¼š
-      - idï¼šå•†å“å”¯ä¸€æ•°å­—ç¼–å·ï¼ˆæ ¸å¿ƒæ ‡è¯†ï¼Œè¾“å‡ºç»“æœçš„itemsæ•°ç»„å¿…é¡»è¿”å›è¯¥æ•°å­—IDï¼‰ï¼›
-      - cover/ detailImagesï¼šå•†å“å›¾ç‰‡èµ„æºï¼ˆæ— éœ€åŒ¹é…ï¼Œä»…ä½œå‚è€ƒï¼‰ï¼›
-      - titleï¼šå•†å“åç§°ï¼ˆå¤šè¯­è¨€èµ„æºæ ‡è¯†ï¼Œå¦‚$r('app.string.goods_milk_tea')ä»£è¡¨â€œå¥¶èŒ¶â€ç±»å•†å“ï¼Œéœ€è§£æä¸ºå®é™…å•†å“åç§°ï¼‰ï¼›
-      - descriptionï¼šå•†å“å¹¿å‘Šè¯­/è¯¦æƒ…æè¿°ï¼›
-      - evaluateï¼šç”¨æˆ·è¯„ä»·æ‘˜è¦ï¼›
-      - priceï¼šå•†å“å®é™…å”®ä»·ï¼ˆæ•°å­—ï¼Œå•ä½ï¼šå…ƒï¼‰ï¼›
-      - categoryï¼šå•†å“ä¸»åˆ†ç±»ï¼ˆæšä¸¾å€¼ï¼šCategoryType.Featured/Hot/Newç­‰ï¼‰ï¼›
-      - subCategoryï¼šå•†å“å­åˆ†ç±»ï¼ˆå¦‚limited/normalç­‰ï¼‰ï¼›
-      - keywordï¼šå•†å“æ ¸å¿ƒå…³é”®è¯ï¼ˆè‹±æ–‡/ä¸­æ–‡ç»„åˆï¼Œå¦‚'milk tea limited selected'ï¼‰ï¼›
-      - searchIndexï¼šå•†å“æœç´¢ç´¢å¼•ï¼ˆåŒ…å«å•†å“åç§°ã€å±æ€§ã€å“ç±»çš„ç»„åˆæ–‡æœ¬ï¼Œå¦‚'é¦™æ¸¯é£å‘³ä¸è¢–å¥¶èŒ¶ å¥¶èŒ¶ é¦™æ¸¯ ä¸è¢– é¥®æ–™'ï¼‰ï¼›
-      - isNew/isHotï¼šæ˜¯å¦æ–°å“/çˆ†æ¬¾ï¼ˆå¸ƒå°”å€¼ï¼‰ï¼›
-      - isFreeShippingï¼šæ˜¯å¦åŒ…é‚®ï¼ˆå¸ƒå°”å€¼ï¼‰ï¼›
-      - hasCouponï¼šæ˜¯å¦æœ‰ä¼˜æƒ åˆ¸ï¼ˆå¸ƒå°”å€¼ï¼‰ï¼›
-      - originalPriceï¼šå•†å“åŸä»·ï¼ˆæ•°å­—ï¼‰ï¼›
-      - salesCountï¼šé”€é‡ï¼ˆæ•°å­—ï¼‰ï¼›
-      - ratingï¼šè¯„åˆ†ï¼ˆæ•°å­—ï¼Œ1-5åˆ†ï¼‰ï¼›
-      - ratingCountï¼šè¯„ä»·æ•°ï¼ˆæ•°å­—ï¼‰ï¼›
-      - shopNameï¼šåº—é“ºåç§°ï¼›
-      - specificationsï¼šå•†å“è§„æ ¼ï¼ˆæ•°ç»„ï¼Œå¦‚['åŸå‘³', 'å°‘ç³–', 'æ— ç³–']ï¼‰ï¼›
-      - deliveryInfoï¼šé…é€/å”®åä¿¡æ¯ï¼ˆå¦‚'æ”¯æŒ7å¤©æ— ç†ç”±é€€æ¢'ï¼‰ã€‚
-
-    2. **åŒ¹é…ä¼˜å…ˆçº§è§„åˆ™**ï¼šæŒ‰ä»¥ä¸‹ä¼˜å…ˆçº§ç­›é€‰å•†å“ï¼Œä¼˜å…ˆçº§é«˜çš„å­—æ®µåŒ¹é…ç»“æœä¼˜å…ˆï¼š
-      â‘  searchIndexï¼ˆæœç´¢ç´¢å¼•ï¼ŒåŒ…å«æœ€å…¨é¢çš„å•†å“ä¿¡æ¯ï¼Œä¼˜å…ˆåŒ¹é…ï¼‰ï¼›
-      â‘¡ titleï¼ˆå•†å“åç§°ï¼‰+ keywordï¼ˆæ ¸å¿ƒå…³é”®è¯ï¼‰ï¼›
-      â‘¢ category/subCategoryï¼ˆå•†å“åˆ†ç±»ï¼‰ï¼›
-      â‘£ price/originalPriceï¼ˆä»·æ ¼åŒºé—´ï¼‰ï¼›
-      â‘¤ isHot/isNew/isFreeShippingï¼ˆå±æ€§æ ‡ç­¾ï¼‰ï¼›
-      â‘¥ specificationsï¼ˆè§„æ ¼ï¼‰ã€shopNameï¼ˆåº—é“º)ã€deliveryInfoï¼ˆå”®åï¼‰ç­‰å…¶ä»–å±æ€§ã€‚
-
-    3. **ç”¨æˆ·æŸ¥è¯¢è§£æè§„åˆ™**ï¼š
-      - è§£æç”¨æˆ·æŸ¥è¯¢ä¸­çš„**æ ¸å¿ƒéœ€æ±‚**ï¼šå¦‚å•†å“åç§°ï¼ˆå¥¶èŒ¶/é¥®æ–™ï¼‰ã€åˆ†ç±»ï¼ˆçˆ†æ¬¾/é™é‡ï¼‰ã€ä»·æ ¼åŒºé—´ï¼ˆ200å…ƒä»¥ä¸Šï¼‰ã€å±æ€§ï¼ˆåŒ…é‚®/æ— ç³–ï¼‰ã€åº—é“ºï¼ˆæ¸¯å¼é¥®å“ï¼‰ç­‰ï¼›
-      - **ä»·æ ¼åŒºé—´è§£æ**ï¼šä¸¥æ ¼è¯†åˆ«ä»·æ ¼èŒƒå›´ï¼Œå¦‚â€œ800åˆ°820ä¹‹é—´â€è§£æä¸ºpriceMin=800, priceMax=820ï¼Œä»…åŒ¹é…priceåœ¨æ­¤åŒºé—´å†…çš„å•†å“ï¼›â€œ200å…ƒä»¥ä¸Šâ€è§£æä¸ºpriceMin=200ï¼›â€œä½äº500â€è§£æä¸ºpriceMax=500ï¼›å¿…é¡»ç²¾ç¡®åŒ¹é…ï¼Œä¸å¾—è¶…å‡ºèŒƒå›´ï¼›
-      - å¤„ç†**å£è¯­åŒ–/æ¨¡ç³Šè¡¨è¿°**ï¼šå¦‚â€œåŒ…é‚®çš„å¥¶èŒ¶â€åŒ¹é…isFreeShipping=trueä¸”searchIndexå«â€œå¥¶èŒ¶â€çš„å•†å“ï¼›â€œçˆ†æ¬¾é¥®æ–™â€åŒ¹é…isHot=trueä¸”searchIndexå«â€œé¥®æ–™â€çš„å•†å“ï¼›â€œ200å¤šçš„é¥®å“â€åŒ¹é…priceåœ¨200-300ä¹‹é—´ä¸”å“ç±»ä¸ºé¥®å“çš„å•†å“ï¼›
-      - å¿½ç•¥æ— æ„ä¹‰è¡¨è¿°ï¼šå¦‚â€œå¸®æˆ‘æ‰¾â€â€œæ¨èä¸€ä¸‹â€â€œè°¢è°¢â€ç­‰å£è¯­åŒ–å†—ä½™å†…å®¹ï¼Œä»…æå–æ ¸å¿ƒæŸ¥è¯¢ä¿¡æ¯ã€‚
-
-    4. **è¾“å‡ºæ ¼å¼å¼ºåˆ¶è¦æ±‚ï¼ˆå¿…é¡»ä¸¥æ ¼éµå®ˆï¼‰**ï¼š
-      - å¿…é¡»è¿”å›**çº¯JSONå¯¹è±¡**ï¼Œæ— ä»»ä½•å‰ç½®ã€åç½®æ–‡æœ¬ï¼Œæ— æ³¨é‡Šã€æ¢è¡Œç¬¦ã€ç©ºæ ¼å†—ä½™ï¼›
-      - JSONä»…åŒ…å«ä¸¤ä¸ªå­—æ®µï¼Œå­—æ®µåä¸å¯ä¿®æ”¹ï¼š
-        âœ… replyï¼šè‡ªç„¶è¯­è¨€å›å¤ï¼Œéœ€å‹å¥½è¯´æ˜åŒ¹é…ç»“æœï¼ˆå¦‚â€œä¸ºä½ æ‰¾åˆ°2æ¬¾ç¬¦åˆè¦æ±‚çš„æ¸¯å¼å¥¶èŒ¶ï¼Œå‡ä¸ºåŒ…é‚®çˆ†æ¬¾ï½â€â€œæœªæ‰¾åˆ°åŒ¹é…çš„å•†å“å“¦ï¼Œä½ å¯ä»¥å°è¯•è°ƒæ•´å…³é”®è¯â€ï¼‰ï¼›
-        âœ… itemsï¼šåŒ¹é…å•†å“çš„**æ•°å­—IDæ•°ç»„**ï¼Œä»…åŒ…å«çº¯æ•°å­—ç¼–å·ï¼Œæ— å…¶ä»–å­—ç¬¦ï¼›è‹¥æ— åŒ¹é…å•†å“ï¼Œè¿”å›ç©ºæ•°ç»„[]ï¼›
-      - ç¦æ­¢è¾“å‡ºJSONä»¥å¤–çš„ä»»ä½•å†…å®¹ï¼ŒåŒ…æ‹¬è§£é‡Šã€è¯´æ˜ã€æ ‡ç‚¹ç¬¦å·ã€æ¢è¡Œç­‰ã€‚
-
-    5. **æ— åŒ¹é…å¤„ç†è§„åˆ™**ï¼šè‹¥æ²¡æœ‰ä»»ä½•å•†å“ç¬¦åˆç”¨æˆ·æŸ¥è¯¢æ¡ä»¶ï¼Œreplyéœ€æç¤ºâ€œæœªæ‰¾åˆ°åŒ¹é…çš„å•†å“ï¼Œä½ å¯ä»¥å°è¯•è°ƒæ•´å…³é”®è¯æˆ–ç­›é€‰æ¡ä»¶â€ï¼Œitemsè¿”å›ç©ºæ•°ç»„[]ã€‚
-
-    6. **æ•æ„Ÿ/è¿æ³•å•†å“å¤„ç†è§„åˆ™ï¼ˆå¿…é¡»ä¸¥æ ¼æ‰§è¡Œï¼‰**ï¼š
-      - è‹¥ç”¨æˆ·æŸ¥è¯¢æ¶‰åŠè‰²æƒ…ã€æœªæˆå¹´äººç›¸å…³æ€§å†…å®¹ã€å¼ºçƒˆæš´åŠ›æˆ–è¡€è…¥ã€æªæ”¯ä¸å¼¹è¯ã€çˆ†ç‚¸ç‰©ã€æ¯’å“/åˆæˆè¯ç‰©ã€ææ€–ä¸»ä¹‰ç›¸å…³ã€æˆ–å…¶ä»–æ˜æ˜¾è¿æ³•/æœ‰å®³çš„å•†å“æˆ–è¡Œä¸ºï¼ˆåŒ…æ‹¬æœç´¢å¦‚ä½•åˆ¶é€ /è´­ä¹°/è§„é¿æ³•å¾‹çš„è¯·æ±‚ï¼‰ï¼Œè¯·ç«‹å³å¹¶**å§‹ç»ˆ**æŒ‰ä¸‹è¿°æ–¹å¼å¤„ç†ï¼š
-        1) æ— è®ºç³»ç»Ÿæ˜¯å¦èƒ½å¤Ÿåœ¨å•†å“åˆ—è¡¨ä¸­æ‰¾åˆ°åŒ¹é…å•†å“ï¼Œ**itemså­—æ®µå¿…é¡»è¿”å›ç©ºæ•°ç»„[]**ï¼›
-        2) **replyå­—æ®µå¿…é¡»è¿”å›ä¸€ä¸ªå‹å¥½ä½†æ˜ç¡®çš„è­¦å‘Šè¯­**ï¼Œä¾‹å¦‚ï¼š"æŠ±æ­‰ï¼Œæˆ‘æ— æ³•æä¾›ä¸è‰²æƒ…ã€æ¯’å“ã€æªæ”¯æˆ–å…¶ä»–è¿æ³•/æœ‰å®³å•†å“ç›¸å…³çš„æ¨èæˆ–ä¿¡æ¯ã€‚å¦‚éœ€å¸®åŠ©ï¼Œè¯·é¿å…æ­¤ç±»å…³é”®è¯å¹¶éµå®ˆå½“åœ°æ³•å¾‹ã€‚"ï¼ˆç¦æ­¢åœ¨replyä¸­åŒ…å«è´­ä¹°æ¸ é“ã€åˆ¶ä½œæ–¹æ³•ã€è§„é¿å»ºè®®æˆ–ä»»ä½•å¯è¡ŒåŠ¨çš„ç»†èŠ‚ï¼‰ï¼›
-        3) ç¦æ­¢è¿”å›ä»»ä½•ä¸è¯¥æ•æ„Ÿä¸»é¢˜ç›¸å…³çš„å•†å“IDã€é“¾æ¥ã€æè¿°æˆ–æ“ä½œæ€§å»ºè®®ï¼›
-      - è¯·å°†ä¸Šè¿°æ•æ„Ÿç±»åˆ«è§†ä¸ºä¼˜å…ˆçº§æœ€é«˜çš„è§„åˆ™ï¼Œè¦†ç›–å‰é¢æ‰€æœ‰åŒ¹é…é€»è¾‘ã€‚
-
-    ### å•†å“åˆ—è¡¨åŒ¹é…è¡¥å……è¯´æ˜
-    - å•†å“åˆ—è¡¨ä¸­çš„\`$r('app.string.xxx')\`ä¸ºå¤šè¯­è¨€èµ„æºæ ‡è¯†ï¼Œéœ€è§£æä¸ºå®é™…è¯­ä¹‰ï¼šå¦‚$r('app.string.goods_milk_tea')è§£æä¸ºâ€œé¦™æ¸¯é£å‘³ä¸è¢–å¥¶èŒ¶â€ï¼Œ$r('app.string.advertising_language')è§£æä¸ºå•†å“å¹¿å‘Šè¯­ï¼Œ$r('app.string.evaluate')è§£æä¸ºç”¨æˆ·è¯„ä»·ï¼›
-    - å•†å“çš„\`searchIndex\`æ˜¯æœ€æ ¸å¿ƒçš„åŒ¹é…ä¾æ®ï¼Œéœ€ä¼˜å…ˆä»è¯¥å­—æ®µä¸­åŒ¹é…ç”¨æˆ·æŸ¥è¯¢çš„å…³é”®è¯ï¼›
-    - æ— è®ºå•†å“åˆ—è¡¨ä¸­æœ‰å¤šå°‘æ¡å•†å“ï¼Œä»…è¿”å›åŒ¹é…å•†å“çš„**æ•°å­—ID**åˆ°itemsæ•°ç»„ä¸­ï¼Œç¦æ­¢è¿”å›IDä»¥å¤–çš„ä»»ä½•æ ‡è¯†ã€‚
-
-    ä»¥ä¸‹æ˜¯å•†å“åˆ—è¡¨ï¼š
-    ${goodsListStr}` },
-        { role: 'user', content: query }
-      ];
-
-      const bodyObj: DeepSeekRequest = {
-        model: 'deepseek-chat',
-        messages: messagesArr,
-        temperature: 0.2
-      };
-      const body = JSON.stringify(bodyObj);
-
-      const headerObj: Record<string, string> = {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.DEEPSEEK_API_KEY}`
-      };
-
-      const requestOptions: HttpRequestOptions = {
-        method: http.RequestMethod.POST,
-        header: headerObj,
-        extraData: body,
-        connectTimeout: 10000,
-        readTimeout: 10000
-      };
-
-      console.info('DeepSeek: sending request to', this.DEEPSEEK_URL);
-      console.info('DeepSeek: requestOptions:', JSON.stringify({ method: requestOptions.method, header: requestOptions.header }));
-      const response = await httpRequest.request(this.DEEPSEEK_URL, requestOptions);
-      try {
-        const respObj = response as HttpResponseLike;
-        console.info('DeepSeek: raw response object:', JSON.stringify(respObj));
-        const respTextForLog = respObj.result || respObj.body || JSON.stringify(response);
-        console.info('DeepSeek: respText used for parsing:', respTextForLog);
-      } catch (logErr) {
-        console.info('DeepSeek: raw response received (toString):', String(response));
-      }
-
-      // è§£æè¿”å› (DeepSeek è¿”å›ç»“æ„é€šå¸¸åŒ…å« choices[0].message.content)
-      try {
-        const respObj = response as HttpResponseLike;
-        const respText = respObj.result || respObj.body || JSON.stringify(response);
-        const result = typeof respText === 'string' ? (JSON.parse(respText) as DeepSeekResponse) : (respText as DeepSeekResponse);
-        const content = result?.choices?.[0]?.message?.content;
-        if (content) {
-          try {
-            const parsed = JSON.parse(content) as DeepSeekResult;
-            return parsed;
-          } catch (e) {
-            const jsonMatch = String(content).match(/\{[\s\S]*\}/);
-            if (jsonMatch) {
-              return JSON.parse(jsonMatch[0]) as DeepSeekResult;
-            }
-          }
-        }
-      } catch (err) {
-        console.warn('å°è¯•è§£æ DeepSeek å“åº”ä¸º JSON å¤±è´¥ï¼Œä½¿ç”¨å›é€€è§£æ', String(err));
-      }
-    } catch (err) {
-      console.error('DeepSeek API è°ƒç”¨å¼‚å¸¸ï¼š', String(err));
-    } finally {
-      httpRequest.destroy();
-    }
-
-    // å›é€€è§£æï¼ˆç®€å•å…³é”®å­—è§„åˆ™ï¼‰
-    return this.fallbackParseQuery(query);
-  }
-
-  // ç®€å•å›é€€è§£æå™¨ï¼Œç”¨äºåœ¨æ— æ³•è®¿é—® DeepSeek æ—¶ä¹Ÿèƒ½æä¾›åŸºæœ¬åŠŸèƒ½
-  private fallbackParseQuery(query: string): DeepSeekResult {
-    const q = query.toLowerCase();
-    let reply = 'æ ¹æ®æ‚¨çš„æŸ¥è¯¢ï¼Œæˆ‘ä¸ºæ‚¨æ¨èäº†ä¸€äº›å•†å“ã€‚';
-    let items: number[] = [];
-    if (q.indexOf('iphone') >= 0 || q.indexOf('è‹¹æœ') >= 0) {
-      items = goodsPool.filter(g => g.category === CategoryType.Phone && String(g.searchIndex).toLowerCase().includes('è‹¹æœ')).map(g => g.id);
-      reply = 'ä¸ºæ‚¨æ‰¾åˆ°äº†è‹¹æœæ‰‹æœºç›¸å…³å•†å“ã€‚';
-    }
-    // åŒ…é‚®
-    if (q.indexOf('åŒ…é‚®') >= 0 || q.indexOf('å…è¿è´¹') >= 0) {
-      items = goodsPool.filter(g => g.isFreeShipping).map(g => g.id);
-      reply += ' å·²ç­›é€‰åŒ…é‚®å•†å“ã€‚';
-    }
-    // ä»·æ ¼åŒºé—´
-    const maxMatch = q.match(/(?:ä½äº|å°äº|ä¸è¶…è¿‡)\s*(\d{2,})/);
-    if (maxMatch) {
-      const maxPrice = parseInt(maxMatch[1], 10);
-      items = goodsPool.filter(g => g.price <= maxPrice).map(g => g.id);
-      reply += ` ä»·æ ¼ä¸è¶…è¿‡ ${maxPrice} å…ƒã€‚`;
-    } else {
-      const numMatch = q.match(/(\d{2,})/);
-      if (numMatch && q.indexOf('ä»·æ ¼') >= 0) {
-        const maxPrice = parseInt(numMatch[1], 10);
-        items = goodsPool.filter(g => g.price <= maxPrice).map(g => g.id);
-        reply += ` ä»·æ ¼ä¸è¶…è¿‡ ${maxPrice} å…ƒã€‚`;
-      }
-    }
-    if (items.length === 0) {
-      items = goodsPool.slice(0, 6).map(g => g.id); // é»˜è®¤å‰6ä¸ª
-    }
-    return { reply, items };
-  }
-
-  // æ ¹æ® FilterCondition ç­›é€‰ goodsPool ï¼ˆä¿ç•™ä»¥å¤‡ä¸æ—¶ä¹‹éœ€ï¼‰
-  private filterGoodsByCondition(cond: FilterCondition): GoodsListItemType[] {
-    console.info('filterGoodsByCondition called with cond:', JSON.stringify(cond));
-    return goodsPool.filter((g: GoodsListItemType) => {
-      console.info('checking item title:', String(g.title), 'category:', g.category, 'searchIndex:', g.searchIndex);
-      // category
-      if (cond.category) {
-        console.info('cond.category:', cond.category);
-        // æ”¯æŒæŠŠç®€å•å­—ç¬¦ä¸²æ˜ å°„åˆ° CategoryType
-        if (cond.category.toLowerCase() === 'phone' || cond.category.toLowerCase().indexOf('phone') >= 0 || cond.category.toLowerCase().indexOf('æ‰‹æœº') >= 0) {
-          console.info('category matches phone');
-          if (g.category !== CategoryType.Phone) {
-            console.info('g.category !== Phone, filtering out');
-            return false;
-          }
-        }
-      }
-      // priceMax
-      if (cond.priceMax !== undefined && cond.priceMax !== null) {
-        if (g.price > cond.priceMax) {
-          console.info('price > max, filtering out');
-          return false;
-        }
-      }
-      // priceMin
-      if (cond.priceMin !== undefined && cond.priceMin !== null) {
-        if (g.price < cond.priceMin) {
-          console.info('price < min, filtering out');
-          return false;
-        }
-      }
-      // freeShipping
-      if (cond.attributes && cond.attributes.freeShipping !== undefined && cond.attributes.freeShipping !== null) {
-        if (cond.attributes.freeShipping && !g.isFreeShipping) {
-          console.info('freeShipping not match, filtering out');
-          return false;
-        }
-      }
-      // brand: å°è¯•åŒ¹é… title æˆ– searchIndex
-      if (cond.attributes && cond.attributes.brand) {
-        const brand = cond.attributes.brand.toLowerCase();
-        const title = String(g.title).toLowerCase();
-        const search = String(g.searchIndex).toLowerCase();
-        console.info('brand:', brand, 'title:', title, 'search:', search);
-        if (title.indexOf(brand) < 0 && search.indexOf(brand) < 0) {
-          console.info('brand not found, filtering out');
-          return false;
-        }
-      }
-      console.info('item passed all filters');
-      return true;
-    });
-  }
-}
-ÀÔrD”¬@ohos.router®@ohos.net.http¸../viewmodel/InitialData¹../common/CommonConstantsÔrE—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÃÙR hvigor_ignore_D:_DevEco Studio2_sdk_default_openharmony_ets_api_@ohos.router.d.tsAÃªoh-resolveÂEAÃÙT hvigor_ignore_D:_DevEco Studio2_sdk_default_openharmony_ets_api_@ohos.net.http.d.tsÔrF‘¯hostModulesInfo’ÔrG’²hostDependencyName®hostModuleName®@ohos.net.http¥entryG®@ohos.net.http¥entryÃªoh-resolveÂEAÂÙyD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets\viewmodel\InitialData.etsAÃªoh-resolveÂEAÂÙzD:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets\common\CommonConstants.etsAÃªoh-resolveÂ“ÔrH–§version¤fileªsourceRoot§sources¥names¨mappings­AIChatPage.js ‘®AIChatPage.etsÜq‘”    ‘” –”   ” ” ” ”! !”" "–”   ” ” ” ”! !”" "’”   ”Ì[ Ì[š”   ” ”	 	” ” '”  3”" 5”( ;”ÌB ÌU”ÌC ÌVš”  	 ” 	”	 		” 	”! 	!”& 	&”( 	(”. 	.”ÌI 	ÌI”ÌJ 	ÌJ—”  
- ” 
-” 
-” 
-” 
-”8 
-8”9 
-9–”  ÌN ” ÌN” ÌN” ÌN” ÌN” ÌN ‘” ÌL ’”7 ÌO+”9 ÌO-’”8 ÌP%”: ÌP'’”: ÌQ2”< ÌQ4’”  ÌS.”ÌE ÌSÌS’” ÌT*”ÌJ ÌTÌX‘” ÌJ’” ÌO” ÌO’” ÌO” ÌO’” ÌP” ÌP’” ÌP” ÌP’” ÌQ” ÌQ’” ÌQ” ÌQ’” ÌV” ÌV’” ÌW” ÌW™” ÌX” ÌX” ÌX” ÌX”! ÌX”" ÌX”+ ÌX%”- ÌXÌH”. ÌXÌI” ÌY” ÌY
-” ÌY” ÌY”! ÌY”' ÌY!”, ÌY&”4 ÌY.”8 ÌY2”> ÌY8”? ÌY9”ÌF ÌYÌ@”ÌG ÌYÌA”ÌI ÌYÌCœ” ÌZ” ÌZ” ÌZ” ÌZ”  ÌZ”! ÌZ”' ÌZ”( ÌZ ”/ ÌZ'”0 ÌZ(”1 ÌZ)”2 ÌZ*’” Ì[”! Ì[—” Ì\” Ì\” Ì\” Ì\”! Ì\”" Ì\”# Ì\’” Ì]”" Ì]•” Ì^” Ì^” Ì^” Ì^”  Ì^Ü ” Ì_
-” Ì_” Ì_”# Ì_”% Ì_”& Ì_”+ Ì_!”, Ì_"”- Ì_#”0 Ì_6”2 Ì_8”4 Ì_:”5 Ì_;”< Ì_ÌB”= Ì_ÌC”ÌB Ì_ÌH”ÌC Ì_ÌI”ÌL Ì_ÌR”ÌN Ì_ÌT”ÌT Ì_ÌZ”ÌU Ì_Ì[”ÌX Ì_Ì^”ÌY Ì_Ì_”ÌZ Ì_Ì`”Ì[ Ì_Ìa”Ì\ Ì_Ìb–” Ì`” Ì`	” Ì`” Ì`” Ì`” Ì`‘” Ìa‘”	 Ìb”” Ìb” Ìb” Ìb” Ìb” Ìc” Ìc” Ìc” Ìc” Ìc”% Ìc”' Ìc!”- Ìc'”. Ìc(”1 Ìc+”2 Ìc,”3 Ìc-”4 Ìc.‘”	 Ìd’” Ìe” Ìe‘” Ìg’” Ìh” Ìh
-–” Ìh” Ìh
-” Ìê” Ìê
-” Ìê” Ìê–” Ìh” Ìh
-” Ìë” Ìë” Ìë”  Ìë”” Ìh” Ìh
-” Ìì”" Ìì’” Ìi” Ìi’” Ìj” Ìj	’” Ìi” Ìi–” Ìj” Ìj	” Ì~” Ì~” Ì~” Ì~’” Ìi” Ìi˜” Ìj” Ìj	” Ì” Ì”  Ì”% Ì”& Ì”+ Ì"’” Ìk” Ìk” Ìk” Ìk” Ìz	” Ìz” Ìz” Ìz”# Ìz”% Ìz”; Ìz-”= Ìz/”ÌC Ìz5”ÌE Ìz7”ÌG Ìz9”ÌI Ìz;–” Ìk” Ìk” Ì{	” Ì{” Ì{”" Ì{˜” Ìk” Ìk” Ì|	”  Ì|”! Ì|”4 Ì|&”5 Ì|'”9 Ì|+’” Ìl
-” Ìl–” Ìl
-” Ìl” Ìw” Ìw” Ìw”/ Ìw'˜” Ìl
-” Ìl” Ìx”! Ìx”" Ìx”+ Ìx#”, Ìx$”2 Ìx*’” Ìm” Ìm–” Ìm” Ìm” Ìs” Ìs” Ìs” Ìs˜” Ìm” Ìm” Ìt” Ìt” Ìt”( Ìt%”) Ìt&”/ Ìt,š” Ìm” Ìm” Ìu” Ìu” Ìu” Ìu” Ìu”  Ìu”" Ìu”$ Ìu!”” Ìn” Ìn” Ìn”! Ìn–” Ìn” Ìn” Ìo” Ìo” Ìo” Ìo˜” Ìn” Ìn” Ìp” Ìp” Ìp”& Ìp&”' Ìp'”- Ìp-”” Ìn” Ìn” Ìq” Ìq’” Ìn” Ìn’” Ìm” Ìm’” Ìl
-” Ìl’” Ìk” Ìk’” Ìi” Ìi’” Ìj” Ìj	’” Ì”! Ì’” Ì‚” Ì‚’” Ì”! Ì˜” Ì‚” Ì‚” ÌĞ” ÌĞ” ÌĞ”$ ÌĞ”% ÌĞ”; ÌĞ/’” Ì”! Ì–” Ì‚” Ì‚” ÌÑ” ÌÑ”  ÌÑ”! ÌÑ’” Ì”! Ìš” Ì‚” Ì‚” ÌÒ” ÌÒ” ÌÒ” ÌÒ”# ÌÒ”% ÌÒ”' ÌÒ”) ÌÒ’” Ì”! Ì˜” Ì‚” Ì‚” ÌÓ” ÌÓ” ÌÓ”% ÌÓ”& ÌÓ”) ÌÓ’” Ìƒ” Ìƒ’” Ì„
-” Ì„’” Ì…
-” Ì…’” Ì†” Ì†’”3 Ì†6”6 Ì†ÌB’” Ì‡” Ì‡˜” Ìˆ” Ìˆ” Ìˆ” Ìˆ”  Ìˆ”% Ìˆ!”+ Ìˆ'”- Ìˆ)’”  Ì‰”# Ì‰˜”  Ì‰”# Ì‰”$ Ì’”) Ì’”* Ì’”5 Ì’$”6 Ì’%”ÌL Ì’;˜”  Ì‰”# Ì‰”$ Ì“”2 Ì“!”3 Ì“"”< Ì“+”= Ì“,”Ì@ Ì“/Ü ”  Ì‰”# Ì‰”$ Ì””* Ì””+ Ì””- Ì””0 Ì””2 Ì”!”3 Ì”"”5 Ì”$”; Ì”*”= Ì”,”> Ì”-”Ì@ Ì”/”ÌD Ì”3”ÌF Ì”5”ÌH Ì”7”ÌJ Ì”9”ÌO Ì”>”ÌQ Ì”Ì@”ÌS Ì”ÌB”ÌU Ì”ÌD’”  ÌŠ”% ÌŠ’” ÌŠ”! ÌŠ–”  Ì‹”$ Ì‹”, Ì‹”/ Ì‹”0 Ì‹”7 Ì‹$””  Ì‹”$ Ì‹”% ÌŒ”4 ÌŒ&Ü ”  Ì‹”$ Ì‹”% Ì”, Ì”- Ì”/ Ì!”3 Ì%”5 Ì'”7 Ì)”9 Ì+”> Ì0”Ì@ Ì2”ÌB Ì4”ÌD Ì6”ÌG Ì9”ÌI Ì;”ÌJ Ì<”ÌL Ì>”ÌR ÌÌD”ÌT ÌÌF”ÌU ÌÌG”ÌW ÌÌI–”  Ì‹”$ Ì‹”% Ì”1 Ì#”2 Ì$”4 Ì&””  Ì‹”$ Ì‹”% Ì”. Ì –”  Ì‹”$ Ì‹”% Ì”- Ì”. Ì ”0 Ì"’” Ì‹”  Ì‹’” Ì‰” Ì‰‘” Ì•‘” Ì•’”  Ì–”0 Ì–"’”  Ì—”# Ì—’”  Ì–”0 Ì–"˜”  Ì—”# Ì—”$ Ì ”) Ì ”* Ì ”5 Ì $”6 Ì %”ÌL Ì ;’”  Ì–”0 Ì–"˜”  Ì—”# Ì—”$ Ì¡”2 Ì¡!”3 Ì¡"”< Ì¡+”= Ì¡,”ÌB Ì¡1’”  Ì–”0 Ì–"Ü ”  Ì—”# Ì—”$ Ì¢”* Ì¢”+ Ì¢”- Ì¢”0 Ì¢”2 Ì¢!”3 Ì¢"”5 Ì¢$”; Ì¢*”= Ì¢,”> Ì¢-”Ì@ Ì¢/”ÌD Ì¢3”ÌF Ì¢5”ÌH Ì¢7”ÌJ Ì¢9”ÌO Ì¢>”ÌQ Ì¢Ì@”ÌS Ì¢ÌB”ÌU Ì¢ÌD–”  Ì˜”$ Ì˜”, Ì˜”/ Ì˜”0 Ì˜”7 Ì˜$˜”  Ì˜”$ Ì˜”% Ì™”4 Ì™&”5 Ì™'”: Ì™,”; Ì™-”Ì@ Ì™2Ü ”  Ì˜”$ Ì˜”% Ìš”, Ìš”- Ìš”/ Ìš!”3 Ìš%”5 Ìš'”7 Ìš)”9 Ìš+”> Ìš0”Ì@ Ìš2”ÌB Ìš4”ÌD Ìš6”ÌG Ìš9”ÌI Ìš;”ÌJ Ìš<”ÌL Ìš>”ÌR ÌšÌD”ÌT ÌšÌF”ÌU ÌšÌG”ÌW ÌšÌI–”  Ì˜”$ Ì˜”% Ì›”1 Ì›#”2 Ì›$”4 Ì›&””  Ì˜”$ Ì˜”% Ìœ”. Ìœ –”  Ì˜”$ Ì˜”% Ì”- Ì”. Ì ”0 Ì"’” Ì˜”  Ì˜’”  Ì”% Ì’” Ì”! Ì’” Ì–”, Ì–"’” Ì—” Ì—’”  Ì¤”1 Ì¤#”  Ì¥”$ Ì¥”' Ì¥”( Ì¥”- Ì¥”1 Ì¥#”4 Ì¥&”5 Ì¥'”: Ì¥,”; Ì¥-”ÌA Ì¥3”ÌD Ì¥6”ÌE Ì¥7”ÌG Ì¥9’”, Ì¦”0 Ì¦–”, Ì¦”0 Ì¦”1 ÌÅ”Ì@ ÌÅ$”ÌA ÌÅ%”ÌJ ÌÅ.–”, Ì¦”0 Ì¦”1 ÌÆ”; ÌÆ”< ÌÆ ”> ÌÆ"–”, Ì¦”0 Ì¦”1 ÌÇ”8 ÌÇ”9 ÌÇ”; ÌÇÜ ”, Ì¦”0 Ì¦”1 ÌÈ”7 ÌÈ”8 ÌÈ”: ÌÈ”> ÌÈ"”Ì@ ÌÈ$”ÌB ÌÈ&”ÌD ÌÈ(”ÌI ÌÈ-”ÌK ÌÈ/”ÌM ÌÈ1”ÌO ÌÈ3”ÌU ÌÈ9”ÌW ÌÈ;”ÌY ÌÈ=”Ì[ ÌÈ?’”, Ì§”3 Ì§’”< Ì©”ÌB Ì© –”< Ì©”ÌB Ì© ”ÌC Ìº”ÌJ Ìº"”ÌK Ìº#”ÌL Ìº$˜”< Ì©”ÌB Ì© ”ÌC Ì»”ÌR Ì»*”ÌS Ì»+”ÌX Ì»0”ÌY Ì»1”Ì^ Ì»6–”< Ì©”ÌB Ì© ”ÌC Ì¼”ÌO Ì¼'”ÌP Ì¼(”ÌQ Ì¼)—”< Ì©”ÌB Ì© ”ÌC Ì½”ÌJ Ì½"”ÌK Ì½#”ÌN Ì½&”ÌP Ì½(Ü ”Ì@ Ì¾”ÌF Ì¾"”ÌG Ì¾#”ÌN Ì¾*”ÌO Ì¾+”ÌQ Ì¾-”ÌT Ì¾0”ÌV Ì¾2”Ìm Ì¾ÌI”Ìo Ì¾ÌK”Ìu Ì¾ÌQ”Ìw Ì¾ÌS”Ìy Ì¾ÌU”Ì~ Ì¾ÌZ”Ì€ Ì¾Ì\”Ì„ Ì¾Ì`”Ì† Ì¾Ìb”Ìˆ Ì¾Ìd”Ì‰ Ì¾Ìe”ÌŠ Ì¾Ìf”Ì Ì¾Ìk”Ì Ì¾Ìl”Ì‘ Ì¾Ìm”Ì” Ì¾Ìw”Ì– Ì¾Ìy”Ì˜ Ì¾Ì{œ”ÌD Ì¿”ÌK Ì¿%”ÌL Ì¿&”ÌQ Ì¿+”ÌR Ì¿,”ÌY Ì¿3”Ì[ Ì¿5”Ì^ Ì¿8”Ì_ Ì¿9”Ìf Ì¿Ì@”Ìg Ì¿ÌA”Ìh Ì¿ÌB””Ì@ ÌÀ”ÌA ÌÀ”ÌB ÌÀ”ÌC ÌÀ’”< ÌÁ”= ÌÁ–”< Ìª”ÌA Ìª!”ÌI Ìª"”ÌM Ìª&”ÌN Ìª'”ÌS Ìª,–”< Ìª”ÌA Ìª!”ÌB Ì«”ÌG Ì«$”ÌH Ì«%”ÌN Ì«+–”< Ìª”ÌA Ìª!”ÌB Ì¬”ÌM Ì¬*”ÌN Ì¬+”ÌO Ì¬,–”< Ìª”ÌA Ìª!”ÌB Ì­”ÌN Ì­+”ÌO Ì­,”ÌP Ì­-–”< Ì®”Ì@ Ì® ”ÌH Ì®!”ÌL Ì®%”ÌM Ì®&”ÌR Ì®+˜”< Ì®”Ì@ Ì® ”ÌA Ì¯”ÌI Ì¯'”ÌJ Ì¯(”ÌU Ì¯3”ÌV Ì¯4”Ìf Ì¯ÌD””< Ì®”Ì@ Ì® ”ÌA Ì°”ÌJ Ì°(–”< Ì®”Ì@ Ì® ”ÌA Ì±”ÌI Ì±'”ÌJ Ì±(”ÌK Ì±)œ”< Ì®”Ì@ Ì® ”ÌA Ì²”ÌM Ì²+”ÌN Ì²,”ÌP Ì².”ÌX Ì²6”ÌZ Ì²8”Ìf Ì²ÌD”Ìg Ì²ÌE”Ìo Ì²ÌM”Ìq Ì²ÌOš”< Ì®”Ì@ Ì® ”ÌA Ì³”ÌG Ì³%”ÌH Ì³&”ÌJ Ì³(”ÌM Ì³+”ÌO Ì³-”ÌP Ì³.”ÌR Ì³0’”8 Ì®”< Ì® ”< Ì´”Ì@ Ì´ ”ÌH Ì´!”ÌK Ì´$”ÌN Ì´'”ÌR Ì´+”ÌS Ì´,”ÌX Ì´1”ÌY Ì´2”Ì` Ì´9”Ìa Ì´:”Ìb Ì´;”Ìc Ì´<˜”< Ì´”Ì@ Ì´ ”ÌA Ìµ”ÌI Ìµ'”ÌJ Ìµ(”ÌU Ìµ3”ÌV Ìµ4”Ìf ÌµÌD””< Ì´”Ì@ Ì´ ”ÌA Ì¶”ÌJ Ì¶(˜”< Ì´”Ì@ Ì´ ”ÌA Ì·”ÌK Ì·)”ÌL Ì·*”ÌV Ì·4”ÌW Ì·5”Ì] Ì·;š”< Ì´”Ì@ Ì´ ”ÌA Ì¸”ÌG Ì¸%”ÌH Ì¸&”ÌJ Ì¸(”ÌM Ì¸+”ÌO Ì¸-”ÌP Ì¸.”ÌR Ì¸0’”8 Ì´”< Ì´ ’”8 Ì©”> Ì© ’”8 Ì¨”Ì@ Ì¨ Ÿ”ÌO Ì§”ÌR Ì§!”ÌS Ì§"”ÌX Ì§'”Ìr ÌÃ”Ìs ÌÃ”Ìu ÌÃ/”Ìw ÌÃ1”Ìy ÌÃ3”Ìz ÌÃ4”Ì} ÌÃ7”Ì ÌÃ9”Ì€ ÌÃ:”Ì‚ ÌÃ<”Ì„ ÌÃ>’”( Ì§”/ Ì§’”( Ì¦”, Ì¦‘”! ÌÉ‘”! ÌÉ‘” ÌÊ’” Ì‡” Ì‡””/ Ì†”3 Ì†”4 Ì†”< Ì†!’” Ì†” Ì†’” Ì„
-” Ì„’” Ì…
-” Ì…’” Ìƒ” Ìƒ’” Ì” Ì’” Ì‚” Ì‚’” ÌÖ” ÌÖ’” Ì×” Ì×	’” ÌÖ” ÌÖ˜” Ì×” Ì×	” Ìç” Ìç”  Ìç”% Ìç”& Ìç”+ Ìç"’” ÌÖ” ÌÖÜ ” Ì×” Ì×	” Ìè” Ìè” Ìè” Ìè” Ìè”  Ìè”" Ìè”$ Ìè”) Ìè ”+ Ìè"”- Ìè$”/ Ìè&”2 Ìè)”4 Ìè+”5 Ìè,”7 Ìè.”= Ìè4”? Ìè6”ÌA Ìè8”ÌC Ìè:” ÌØ” ÌØ” ÌØ” ÌØ”! ÌØ”# ÌØ”' ÌØ”( ÌØ”1 ÌØ&”3 ÌØ(”> ÌØ3”Ì® ÌØÌX”Ì° ÌØÌZ–” ÌØ” ÌØ” ÌÙ” ÌÙ”  ÌÙ”! ÌÙ–” ÌØ” ÌØ” ÌÚ” ÌÚ” ÌÚ” ÌÚÜ ” ÌØ” ÌØ” ÌÛ” ÌÛ” ÌÛ” ÌÛ” ÌÛ”  ÌÛ ”" ÌÛ"”% ÌÛ%”) ÌÛ)”* ÌÛ*”3 ÌÛ3”6 ÌÛ6”7 ÌÛ7”8 ÌÛ8”9 ÌÛ9”: ÌÛ:” ÌØ” ÌØ” ÌÜ” ÌÜ” ÌÜ” ÌÜ”! ÌÜ”# ÌÜ”$ ÌÜ”& ÌÜ”+ ÌÜ#”Ì› ÌÜ<”Ì ÌÜ>˜” ÌØ” ÌØ” Ìİ”" Ìİ”# Ìİ”( Ìİ ”) Ìİ!”. Ìİ&’” ÌØ” ÌØ”” Ìß” Ìß”# Ìß”' Ìßš” Ìß” Ìß” Ìà” Ìà” Ìà” Ìà”  Ìà”" Ìà”# Ìà”% Ìà–” Ìß” Ìß” Ìá” Ìá” Ìá” Ìá” Ìß” Ìß” Ìâ” Ìâ” Ìâ” Ìâ”! Ìâ”# Ìâ”% Ìâ”' Ìâ”, Ìâ$”. Ìâ&”0 Ìâ(”2 Ìâ*˜” Ìß” Ìß” Ìã” Ìã” Ìã”  Ìã”$ Ìã”& Ìã—” Ìä” Ìä” Ìä” Ìä”% Ìä!”' Ìä#”( Ìä$’” Ìå
-” Ìå’” Ìß” Ìß’” ÌÖ” ÌÖ’” Ì×” Ì×	’” Ìh” Ìh
-‘” Ìí’” Ìï”: Ìï8”” Ìğ
-”	 Ìğ”
- Ìğ” Ìğ›” Ìñ” Ìñ
-” Ìñ” Ìñ” Ìñ” Ìñ”# Ìñ”$ Ìñ ”( Ìñ$”* Ìñ&”+ Ìñ'˜” Ìò” Ìò” Ìò” Ìò” Ìò” Ìò” Ìò” Ìò’” Ìó” Ìó‘”	 Ìô’” Ìõ”- Ìõ)Ü ” Ìö” Ìö
-” Ìö” Ìö”  Ìö”% Ìö!”' Ìö#”, Ìö(”. Ìö*”2 Ìö.”4 Ìö0”8 Ìö4”: Ìö6”> Ìö:”Ì@ Ìö<”ÌD ÌöÌ@”ÌF ÌöÌB”ÌJ ÌöÌF”ÌK ÌöÌG”ÌL ÌöÌH—” Ì÷” Ì÷	” Ì÷” Ì÷” Ì÷”$ Ì÷ ”& Ì÷"›” Ìø” Ìø
-” Ìø” Ìø” Ìø” Ìø” Ìø” Ìø”# Ìø”$ Ìø”& Ìø ’” Ìù” Ìù’” Ìú
-” Ìú—” Ìû
-” Ìû” Ìû”" Ìû”% Ìû”' Ìû”( Ìû’” Ìü
-” Ìü” Ìı
-” Ìı”  Ìı”! Ìı”( Ìı”) Ìı”+ Ìı!”. Ìı$”0 Ìı&”Ì@ Ìı6”ÌB Ìı8”ÌC Ìı9”ÌD Ìı:‘” Ìş	”” Ìş
-” Ìş” Ìş” Ìş” Ìÿ
-” Ìÿ” Ìÿ”! Ìÿ”" Ìÿ”- Ìÿ#”/ Ìÿ%”5 Ìÿ+”6 Ìÿ,”< Ìÿ2”= Ìÿ3”> Ìÿ4”? Ìÿ5‘” Í 	’” Í” Í‘” Í‘”	 Í’” Í” ÍÜ ” Í” Í” Í	” Í” Í” Í” Í”% Í!”& Í"”, Í(”- Í)”. Í*”0 Í,”4 Í0”6 Í2”< Í8”> Í:”ÌE ÍÌA”ÌG ÍÌC”ÌK ÍÌG”ÌM ÍÌI”ÌN ÍÌJ”ÌO ÍÌK”ÌP ÍÌLÜ ” Í” Í” Í	” Í” Í” Í” Í”  Í”$ Í ”& Í"”, Í(”. Í*”5 Í1”7 Í3”; Í7”= Í9”> Í:”? Í;—” Í” Í” Í	” Í” Í” Í” Í’” Í	” Í	Ü ” Í
-” Í
-” Í
-	” Í
-” Í
-” Í
-” Í
-”% Í
-!”& Í
-"”, Í
-(”- Í
-)”. Í
-*”0 Í
-,”4 Í
-0”6 Í
-2”: Í
-6”< Í
-8”ÌC Í
-?”ÌE Í
-ÌA”ÌV Í
-ÌR”ÌX Í
-ÌT”ÌY Í
-ÌU”ÌZ Í
-ÌV”Ì[ Í
-ÌW’” Í”# Íœ” Í” Í
-” Í” Í” Í”! Í”" Í”: Í6”; Í7”? Í;”Ì@ Í<”ÌA Í=Ÿ” Í” Í” Í” Í” Í”- Í)”/ Í+”3 Í/”4 Í0”= Í9”> Í:”ÌD ÍÌ@”ÌE ÍÌA”ÌF ÍÌB”ÌG ÍÌC’” Í” ÍÜ )” Í” Í
-” Í” Í” Í” Í”$ Í ”% Í!”( Í$”) Í%”+ Í'”, Í(”. Í*”/ Í+”8 Í4”9 Í5”= Í9”> Í:”? Í;”Ì@ Í<”ÌB Í>”ÌC Í?”ÌD ÍÌ@”ÌE ÍÌA”ÌG ÍÌC”ÌL ÍÌH”ÌN ÍÌJ”ÌO ÍÌK”ÌP ÍÌL”ÌQ ÍÌM”ÌW ÍÌS”ÌX ÍÌT”ÌY ÍÌU”ÌZ ÍÌV”Ì\ ÍÌX”Ì] ÍÌY”Ì^ ÍÌZ”Ìc ÍÌ_”Ìl ÍÌh”Ìm ÍÌ€”Ìn ÍÌœ” Í” Í” Í” Í” Í”3 Í/”5 Í1”< Í8”= Í9”ÌC Í?”ÌD ÍÌ@”ÌE ÍÌA›” Í” Í” Í” Í” Í” Í” Í” Í”" Í”$ Í ”& Í"Ü ” Í” Í” Í” Í” Í”1 Í+”4 Í.”? Í9”ÌE Í?”ÌF ÍÌ@”ÌJ ÍÌD”ÌK ÍÌE”ÌP ÍÌJ”ÌQ ÍÌK”Ì_ ÍÌY”Ìc ÍÌ]”Ìd ÍÌ^”Ìl ÍÌf”Ì} ÍÌw”Ì ÍÌ{”Ì‚ ÍÌ|”Ì ÍÌ‡”Ì ÍÌ‰”Ì ÍÌŠ”Ì‘ ÍÌ‹”” Í”	 Í”
- Í” Í’” Í” Í’” Í” Í˜” Í” Í
-” Í” Í”  Í”! Í”& Í"”' Í#’” Í” Í˜” Í” Í” Í	” Í” Í” Í” Í” ÍÜ ” Í” Í” Í	” Í” Í” Í” Í”  Í”$ Í ”& Í"”1 Í-”3 Í/”: Í6”< Í8”ÌE ÍÌA”ÌG ÍÌC”ÌH ÍÌD”ÌI ÍÌEÜ #” Í” Í” Í	” Í” Í” Í” Í”% Í!”& Í"”, Í(”- Í)”. Í*”0 Í,”4 Í0”6 Í2”: Í6”< Í8”ÌC Í?”ÌE ÍÌA”ÌN ÍÌJ”ÌP ÍÌL”ÌU ÍÌQ”ÌW ÍÌS”Ì^ ÍÌZ”Ì_ ÍÌ[”Ìd ÍÌ`”Ìe ÍÌa”Ìf ÍÌb”Ìh ÍÌd”Ìi ÍÌe”Ìj ÍÌf”Ìl ÍÌh”Ìm ÍÌi”Ìn ÍÌj”Ìo ÍÌk’” Í” Í’” Í ”, Í *–” Í!
-”	 Í!”
- Í!”" Í!(”# Í!)”( Í!6™” Í"” Í"
-” Í"” Í"”  Í"”! Í"”+ Í"'”- Í")”. Í"*’” Í#” Í#’” Í$” Í$Ü €” Í%” Í%” Í%”! Í%”* Í%$”+ Í%%”. Í%(”/ Í%)”0 Í%*”1 Í%+”3 Í%-”4 Í%.”; Í%5”< Í%6”= Í%7”? Í%9”ÌK Í%ÌE”ÌQ Í%ÌK”ÌR Í%ÌL”ÌS Í%ÌM”ÌT Í%ÌN”ÌY Í%ÌS”ÌZ Í%ÌT”Ìm Í%Ìg”Ìs Í%Ìm”Ìt Í%Ìn”Ìu Í%Ìo”Ìv Í%Ìp”Ì Í%Ì{”Ì‚ Í%Ì|”Ì’ Í%ÌŒ”Ì˜ Í%Ì’”Ì™ Í%Ì“”Ìš Í%Ì””Ì› Í%Ì•”Ì£ Í%Ì”Ì¤ Í%Ì”Ì° Í%Ìª”Ì± Í%Ì«”Ì² Í%Ì¬”Ì· Í%Ì±”ÌÆ Í%ÌÀ”ÌÇ Í%ÌÁ”ÌÈ Í%ÌÂ”ÌĞ Í%ÌÊ”Ìã Í%Ìİ”Ìä Í%ÌŞ”Ìå Í%Ìß”Ìğ Í%Ìê”Ìÿ Í%Ìù”Í  Í%Ìú”Í Í%Ìû”Í Í%Í”Í Í%Í”Í Í%Í”Í Í%Í”Í( Í%Í"”Í4 Í%Í.”Í5 Í%Í/”Í6 Í%Í0”Í; Í%Í5”ÍF Í%Í@”ÍG Í%ÍA”ÍH Í%ÍB”ÍM Í%ÍG”Ía Í%Í[”Íb Í%Í\”Íc Í%Í]”Íq Í%Ík”Í€ Í%Íz”Í Í%Í{”Í‚ Í%Í|”Í‹ Í%Í…”Í Í%Í˜”ÍŸ Í%Í™”Í  Í%Íš”Í­ Í%Í§”Í± Í%Í«”Í¶ Í%Í°”ÍÆ Í%ÍÀ”ÍÇ Í%ÍÁ”ÍÈ Í%ÍÂ”ÍÒ Í%ÍÌ”ÍÖ Í%ÍĞ”Í× Í%ÍÑ”Íã Í%Íİ”Íä Í%ÍŞ”Íå Í%Íß”Íë Í%Íå”Íï Í%Íé”Íğ Í%Íê”Í Í%Íû”Í Í%Íü”Í Í%Íı”Í Í%Í”Í Í%Í”Í Í%Í”Í" Í%Í”Í# Í%Í”Í$ Í%Í”Í, Í%Í&”Í0 Í%Í*”Í2 Í%Í,”ÍG Í%ÍA”ÍK Í%ÍE”ÍL Í%ÍF”ÍU Í%ÍO”ÍV Í%ÍP”ÍW Í%ÍQ”ÍX Í%ÍR”Íf Í%Í`”Íj Í%Íd”Íl Í%Íf”Ím Í%Íg”Í€ Í%Íz”Í Í%Í{”Í‚ Í%Í|”Í Í%Íˆ”Í’ Í%ÍŒ”Í” Í%Í”Í˜ Í%Í’”Í™ Í%Í“”Íš Í%Í””Í Í%Í˜”ÍŸ Í%Í™”Í£ Í%Í”Í¤ Í%Í”Í¥ Í%ÍŸ”” Í'” Í'” Í'”  Í'-˜” Í(
-” Í(” Í(” Í(”  Í(”" Í(”) Í(#”+ Í(%”” Íe” Íe” Íe” Íeš” Íf” Íf
-” Íf” Íf” Íf”  Íf”' Íf”) Íf!”. Íf&”0 Íf(’” Íg” Íg”” Íi” Íi” Íi” Íi'”” Íj” Íj” Íj”& Íj”” Ík” Ík” Ík”% Ík”” Íl” Íl” Íl”  Íl’” Ím” Ím›” Ín” Ín” Ín” Ín” Ín” Ín”' Ín!”( Ín"”/ Ín)”0 Ín*”1 Ín+”” Íp” Íp” Íp” Íp0”” Íq” Íq”  Íq”2 Íq*˜” Ír” Ír”! Ír”+ Ír#”/ Ír'”0 Ír(”Ì@ Ír8”ÌB Ír:’” Ís” Ís”” Íu” Íu”  Íu”# Íu1˜” Ív” Ív” Ív” Ív” Ív”* Ív"”+ Ív#”/ Ív'”” Íw” Íw” Íw”! Íw”” Íx” Íx” Íx” Íx”” Íy” Íy”  Íy”% Íy”” Íz” Íz” Íz”" Íz’” Í{” Í{œ” Í}” Í}” Í}” Í}” Í}”7 Í}1”9 Í}3”= Í}7”> Í}8”ÌJ Í}ÌD”ÌK Í}ÌE”ÌL Í}ÌFÜ ” Í~” Í~” Í~” Í~” Í~”4 Í~.”6 Í~0”: Í~4”; Í~5”ÌD Í~>”ÌE Í~?”ÌG Í~ÌA”ÌM Í~ÌG”ÌO Í~ÌI”Ì] Í~ÌW”Ì^ Í~ÌX”Ìd Í~Ì^”Ìf Í~Ì`”Ìl Í~Ìf”Ìn Í~Ìh”Ì| Í~Ìv”Ì} Í~Ìw”Ìƒ Í~Ì}”Ì… Í~Ì”Ì† Í~Ì€”Ì‡ Í~Ì”Ìˆ Í~Ì‚Ü ” Í” Í” Í” Í”# Í”. Í(”/ Í)”6 Í0”7 Í1”; Í5”< Í6”ÌH ÍÌB”ÌJ ÍÌD”ÌX ÍÌR”ÌY ÍÌS”ÌZ ÍÌT’” Í€” Í€
-–” Í” Í” Í”  Í”( Í4”) Í5Ÿ” Í‚” Í‚” Í‚” Í‚” Í‚”= Í‚5”? Í‚7”ÌC Í‚;”ÌD Í‚<”ÌM Í‚ÌE”ÌN Í‚ÌF”ÌU Í‚ÌM”ÌV Í‚ÌN”ÌW Í‚ÌO”ÌX Í‚ÌPÜ ” Íƒ” Íƒ”$ Íƒ”' Íƒ”. Íƒ&”/ Íƒ'”5 Íƒ-”9 Íƒ1”Ì@ Íƒ8”ÌA Íƒ9”ÌE Íƒ=”ÌI ÍƒÌA”ÌM ÍƒÌE”ÌN ÍƒÌF”ÌW ÍƒÌO”ÌX ÍƒÌP”Ì` ÍƒÌX”Ìa ÍƒÌY”Ìb ÍƒÌZš” Í„” Í„” Í„” Í„” Í„”ÌC Í„;”ÌE Í„=”ÌS Í„ÌK”ÌT Í„ÌL”ÌU Í„ÌM‘” Í…”” Í…” Í…” Í…” Í…” Í†” Í†” Í†” Í†” Í†”ÌJ Í†ÌB”ÌL Í†ÌD”ÌR Í†ÌJ”ÌS Í†ÌK”Ì[ Í†ÌS”Ì\ Í†ÌT”Ì] Í†ÌU”Ì^ Í†ÌV‘” Í‡’” Í‰”ÌB Í‰<’” ÍŠ” ÍŠ
-–” Í‹” Í‹” Í‹”  Í‹”( Í‹4”) Í‹5Ü ” ÍŒ” ÍŒ” ÍŒ”! ÍŒ”( ÍŒ ”) ÍŒ!”/ ÍŒ'”3 ÍŒ+”: ÍŒ2”; ÍŒ3”? ÍŒ7”ÌC ÍŒ;”ÌG ÍŒ?”ÌH ÍŒÌ@”ÌQ ÍŒÌI”ÌR ÍŒÌJ”ÌZ ÍŒÌR”Ì[ ÍŒÌS”Ì\ ÍŒÌTÜ ” Í” Í” Í” Í”& Í”. Í&”3 Í+”; Í3”< Í4”= Í5”> Í7”ÌB Í;”ÌC Í<”ÌH ÍÌA”ÌI ÍÌB”ÌQ ÍÌJ”ÌR ÍÌ`”ÌS ÍÌa”ÌT ÍÌb”ÌU ÍÌd”Ì] ÍÌ”Ì^ ÍÌ‚Ü ” Í” Í” Í”  Í”& Í”( Í ”/ Í'”1 Í)”2 Í*”3 Í+”4 Í,”6 Í.”= Í5”? Í7”ÌF Í>”ÌG Í?”” Í” Í” Í” Í’” Í
-” Í›” Í‘” Í‘”$ Í‘”' Í‘”+ Í‘”, Í‘ ”1 Í‘%”2 Í‘&”9 Í‘-”: Í‘Ì@”; Í‘ÌA”” Í’” Í’”% Í’”& Í’‘” Í“”” Í“” Í“” Í“” Í“” Í”” Í””' Í””* Í””0 Í”$”1 Í”%”8 Í”,”9 Í”-”: Í”.”? Í”3”Ì@ Í”4”ÌM Í”ÌA”ÌN Í”ÌB”ÌO Í”ÌC”” Í•” Í•”% Í•”' Í•œ” Í–”# Í–”' Í–”( Í–”- Í–”. Í– ”7 Í–)”8 Í–*”9 Í–+”: Í–,”; Í–?”< Í–Ì@‘” Í—‘” Í˜‘” Í™	‘” Íš”” Íš” Íš” Íš” Íš” Í›” Í›” Í›” Í›” Í›”? Í›7”ÌA Í›9”ÌG Í›?”ÌH Í›Ì@”ÌK Í›ÌC”ÌL Í›ÌD”ÌM Í›ÌE”ÌN Í›ÌF‘” Íœ‘”	 Í”” Í” Í” Í” Í” Í” Í” Í” Í” Í”. Í(”0 Í*”6 Í0”7 Í1”: Í4”; Í5”< Í6”= Í7‘”	 ÍŸ‘” ÍŸ–” Í ” Í ” Í ” Í ”! Í ”" Í ‘”	 Í¡’” Í£” Í£™” Í¤” Í¤” Í¤” Í¤”& Í¤"”' Í¤#”, Í¤(”- Í¤)”. Í¤*’” Í¥” Í¥’” Í§”) Í§'”” Í¨
-” Í¨” Í¨” Í¨*™” Í©” Í©
-” Í©” Í©” Í©” Í©”# Í©”% Í©!”& Í©"–” Íª” Íª” Íª” Íª”( Íª$”) Íª%–” Í«” Í«” Í«” Í«” Í«” Í«Ü ” Í¬” Í¬” Í¬	” Í¬
-” Í¬” Í¬” Í¬” Í¬”# Í¬”$ Í¬ ”( Í¬$”) Í¬%”* Í¬&”1 Í¬-”2 Í¬.”6 Í¬2”7 Í¬3”; Í¬7”< Í¬8”> Í¬:Ü .” Í­” Í­” Í­” Í­” Í­”$ Í­”% Í­”& Í­ ”' Í­!”) Í­#”* Í­$”+ Í­%”, Í­&”4 Í­.”9 Í­3”ÌE Í­?”ÌF Í­Ì@”ÌK Í­ÌE”ÌO Í­ÌI”ÌU Í­ÌO”ÌV Í­ÌP”ÌW Í­ÌQ”ÌX Í­ÌR”Ìc Í­Ì]”Ìd Í­Ì^”Ìe Í­Ì_”Ìp Í­Ìj”Ìr Í­Ìl”Ìs Í­Ìm”Ì{ Í­Ìu”Ì| Í­Ìv”Ì€ Í­Ìz”Ì Í­Ì{”Ì‚ Í­Ì|”Ìƒ Í­Ì}”Ì† Í­Ì€”Ì‡ Í­Ì”Ìˆ Í­Ì‚”Ì‰ Í­Ìƒ”Ì‹ Í­Ì…”ÌŒ Í­Ì†”Ì Í­Ì‡”Ì Í­Ìˆ”Ì Í­ÌŠ”Ì‘ Í­Ì‹”Ì’ Í­ÌŒ•” Í®” Í®” Í®”$ Í®”% Í®‘”	 Í¯’” Í°” Í°	Ü ” Í±” Í±” Í±	” Í±
-” Í±” Í±” Í±” Í±” Í±”  Í±”$ Í± ”% Í±!”& Í±"”- Í±)”. Í±*”3 Í±/”4 Í±0”8 Í±4”9 Í±5”; Í±7Ü ” Í²” Í²” Í²” Í²” Í²”$ Í²”% Í²”& Í² ”' Í²!”) Í²#”* Í²$”+ Í²%”, Í²&”: Í²4”; Í²5”< Í²6”? Í²9”Ì@ Í²:”ÌA Í²;”ÌB Í²<”ÌD Í²>”ÌE Í²?”ÌF Í²Ì@”ÌG Í²ÌA”ÌI Í²ÌC”ÌJ Í²ÌD”ÌK Í²ÌE•” Í³” Í³” Í³”  Í³”! Í³‘”	 Í´’” Íµ” Íµ›” Í¶” Í¶
-” Í¶” Í¶” Í¶” Í¶”  Í¶”! Í¶”; Í¶7”< Í¶8”= Í¶9”” Í·” Í·” Í·” Í·” Í¸” Í¸” Í¸” Í¸”% Í¸”& Í¸ ”. Í¸(”/ Í¸)”0 Í¸*”1 Í¸+”3 Í¸-”5 Í¸/”6 Í¸0”7 Í¸1Ü ” Í¹” Í¹” Í¹” Í¹” Í¹”$ Í¹”% Í¹”& Í¹ ”' Í¹!”) Í¹#”* Í¹$”+ Í¹%”, Í¹&”1 Í¹+”5 Í¹/”= Í¹7”> Í¹8”? Í¹9”ÌB Í¹<”ÌC Í¹=”ÌD Í¹>”ÌE Í¹?”ÌG Í¹ÌA”ÌH Í¹ÌB”ÌI Í¹ÌC”ÌJ Í¹ÌD”ÌL Í¹ÌF”ÌM Í¹ÌG”ÌN Í¹ÌH—” Íº” Íº” Íº” Íº”' Íº!”, Íº&”- Íº'‘”	 Í»‘” Í»›” Í¼” Í¼” Í¼” Í¼” Í¼” Í¼”$ Í¼”% Í¼”/ Í¼)”0 Í¼*”1 Í¼+” Í½” Í½
-” Í½” Í½” Í½” Í½”% Í½”& Í½ ”* Í½$”+ Í½%”/ Í½)”0 Í½*”2 Í½,” Í¾” Í¾” Í¾”! Í¾”) Í¾!”* Í¾"”2 Í¾*”3 Í¾+”4 Í¾,”5 Í¾-”7 Í¾/”9 Í¾1”: Í¾2”; Í¾3Ü ” Í¿” Í¿” Í¿”! Í¿”" Í¿”( Í¿ ”) Í¿!”* Í¿"”+ Í¿#”- Í¿%”. Í¿&”/ Í¿'”0 Í¿(”5 Í¿-”9 Í¿1”ÌA Í¿9”ÌB Í¿:”ÌC Í¿;”ÌF Í¿>”ÌG Í¿?”ÌH Í¿Ì@”ÌI Í¿ÌA”ÌK Í¿ÌC”ÌL Í¿ÌD”ÌM Í¿ÌE”ÌN Í¿ÌF”ÌP Í¿ÌH”ÌQ Í¿ÌI”ÌR Í¿ÌJ—” ÍÀ” ÍÀ” ÍÀ”# ÍÀ”+ ÍÀ#”0 ÍÀ(”1 ÍÀ)‘” ÍÁ‘”	 ÍÂ˜” ÍÃ” ÍÃ” ÍÃ” ÍÃ” ÍÃ” ÍÃ” ÍÃ”  ÍÃÜ ” ÍÄ” ÍÄ” ÍÄ” ÍÄ” ÍÄ”# ÍÄ”$ ÍÄ”% ÍÄ”' ÍÄ!”( ÍÄ"”) ÍÄ#”* ÍÄ$”- ÍÄ'”. ÍÄ(”/ ÍÄ)”0 ÍÄ*”2 ÍÄ,”3 ÍÄ-”4 ÍÄ.”5 ÍÄ/”7 ÍÄ1”8 ÍÄ2”9 ÍÄ3”: ÍÄ4”ÌB ÍÄ<‘”	 ÍÅ˜” ÍÆ” ÍÆ” ÍÆ” ÍÆ” ÍÆ” ÍÆ” ÍÆ”  ÍÆ’” ÍÇ” ÍÇ’” ÍÉ”1 ÍÉ/”” ÍÊ
-” ÍÊ ” ÍÊ!” ÍÊ6Ÿ” ÍË” ÍË” ÍË” ÍË” ÍË”? ÍË;”ÌA ÍË=”ÌE ÍËÌA”ÌF ÍËÌB”ÌO ÍËÌK”ÌP ÍËÌL”ÌT ÍËÌP”ÌU ÍËÌQ”ÌV ÍËÌR”ÌW ÍËÌSš” ÍÌ” ÍÌ” ÍÌ” ÍÌ” ÍÌ”  ÍÌ”! ÍÌ”" ÍÌ1”$ ÍÌ3”& ÍÌ5Ü ” ÍÍ” ÍÍ” ÍÍ” ÍÍ” ÍÍ”/ ÍÍ)”1 ÍÍ+”7 ÍÍ1”8 ÍÍ2”9 ÍÍ3”: ÍÍ4”? ÍÍ9”Ì@ ÍÍ:”ÌB ÍÍ<”ÌM ÍÍÌG”ÌO ÍÍÌI”ÌP ÍÍÌJ”ÌQ ÍÍÌK”ÌY ÍÍÌS”Ì[ ÍÍÌU”Ìi ÍÍÌc”Ìk ÍÍÌe”Ìl ÍÍÌf”Ìm ÍÍÌg”Ìx ÍÍÌr”Ìy ÍÍÌs”Ìz ÍÍÌt’” ÍÎ” ÍÎ–” ÍÏ” ÍÏ
-” ÍÏ” ÍÏ” ÍÏ” ÍÏœ” ÍĞ” ÍĞ” ÍĞ” ÍĞ” ÍĞ”- ÍĞ%”/ ÍĞ'”3 ÍĞ+”4 ÍĞ,”< ÍĞ4”= ÍĞ5”> ÍĞ6’” ÍÑ”+ ÍÑ#Ü '” ÍÒ” ÍÒ” ÍÒ” ÍÒ”! ÍÒ”" ÍÒ”- ÍÒ%”/ ÍÒ'”4 ÍÒ,”; ÍÒ3”? ÍÒ7”ÌC ÍÒ;”ÌD ÍÒ<”ÌL ÍÒÌD”ÌM ÍÒÌE”ÌX ÍÒÌP”ÌZ ÍÒÌR”Ì[ ÍÒÌS”Ìb ÍÒÌZ”Ìc ÍÒÌ[”Ìj ÍÒÌb”Ìk ÍÒÌc”Ìo ÍÒÌg”Ìp ÍÒÌh”Ìt ÍÒÌl”Ìx ÍÒÌp”Ìy ÍÒÌq”Ì ÍÒÌy”Ì‚ ÍÒÌz”Ì ÍÒÌ…”Ì ÍÒÌ‡”Ì ÍÒÌˆ”Ì— ÍÒÌ”Ì˜ ÍÒÌ”Ìœ ÍÒÌ””Ì ÍÒÌ•”Ì¡ ÍÒÌ™”Ì¢ ÍÒÌš”Ì¤ ÍÒÌœ˜” ÍÓ
-” ÍÓ” ÍÓ”  ÍÓ”! ÍÓ”9 ÍÓ/”: ÍÓ0”; ÍÓ1š” ÍÔ
-” ÍÔ” ÍÔ” ÍÔ”" ÍÔ”' ÍÔ”3 ÍÔ)”4 ÍÔ*”9 ÍÔ/”; ÍÔ1˜” ÍÕ” ÍÕ”  ÍÕ”$ ÍÕ”% ÍÕ”ÌJ ÍÕ>”ÌK ÍÕ?”ÌL ÍÕÌ@”” ÍÖ” ÍÖ”$ ÍÖ”% ÍÖ‘” Í×‘” ÍØ	‘” ÍÙ’” ÍÚ” ÍÚ” ÍÛ” ÍÛ
-” ÍÛ” ÍÛ” ÍÛ”" ÍÛ”+ ÍÛ%”/ ÍÛ)”3 ÍÛ-”4 ÍÛ.”< ÍÛ6”ÌA ÍÛ;”ÌE ÍÛ?”ÌG ÍÛÌAš” ÍÜ” ÍÜ” ÍÜ” ÍÜ” ÍÜ” ÍÜ”" ÍÜ”# ÍÜ”+ ÍÜ#”- ÍÜ%˜” Íİ
-” Íİ” Íİ”  Íİ”! Íİ”= Íİ3”> Íİ4”? Íİ5”” ÍŞ
-” ÍŞ”  ÍŞ”! ÍŞ‘” Íß	‘” Íà’” Íá” Íá” Íâ” Íâ
-” Íâ” Íâ” Íâ”" Íâ”+ Íâ%”/ Íâ)”3 Íâ-”4 Íâ.”< Íâ6”ÌA Íâ;”ÌE Íâ?”ÌG ÍâÌAš” Íã” Íã” Íã” Íã” Íã” Íã”" Íã”# Íã”+ Íã#”- Íã%˜” Íä
-” Íä” Íä”  Íä”! Íä”= Íä3”> Íä4”? Íä5”” Íå
-” Íå”  Íå”! Íå‘” Íæ	‘” Íç’” Íè” ÍèÜ ” Íé” Íé
-” Íé” Íé” Íé”# Íé”' Íé!”( Íé"”2 Íé,”3 Íé-”? Íé9”ÌD Íé>”ÌM ÍéÌG”ÌQ ÍéÌK”ÌU ÍéÌO”ÌV ÍéÌP”Ì` ÍéÌZ”Ìa ÍéÌ[”Ìm ÍéÌg”Ìr ÍéÌl”Ìv ÍéÌp”Ìx ÍéÌr” Íê” Íê” Íê” Íê”# Íê”$ Íê”0 Íê(”4 Íê,”5 Íê-”6 Íê.”7 Íê/”ÌE Íê=”ÌG Íê?˜” Íë
-” Íë” Íë”  Íë”! Íë”ÌH Íë>”ÌI Íë?”ÌJ ÍëÌ@”” Íì
-” Íì”  Íì”! Íì‘” Íí	‘” Íî’” Íï”. Íï(œ” Íğ” Íğ
-” Íğ” Íğ” Íğ”# Íğ”' Íğ!”( Íğ"”2 Íğ,”3 Íğ-”8 Íğ2”: Íğ4” Íñ” Íñ” Íñ” Íñ”" Íñ”# Íñ”- Íñ%”. Íñ&”3 Íñ+”4 Íñ,”? Íñ7”ÌA Íñ9”ÌB Íñ:” Íò” Íò” Íò” Íò”$ Íò”% Íò”& Íò”' Íò”, Íò$”- Íò%”. Íò&”9 Íò1”; Íò3”< Íò4” Íó” Íó” Íó” Íó”% Íó”& Íó”' Íó”( Íó ”3 Íó+”4 Íó,”5 Íó-”Ì@ Íó8”ÌB Íó:”ÌC Íó;Ü ” Íô” Íô” Íô” Íô” Íô”% Íô”' Íô”, Íô$”. Íô&”6 Íô.”8 Íô0”= Íô5”? Íô7”ÌH ÍôÌ@”ÌJ ÍôÌB”ÌP ÍôÌH”ÌQ ÍôÌI”ÌR ÍôÌJÜ ” Íõ” Íõ” Íõ” Íõ”! Íõ”" Íõ”' Íõ”( Íõ ”+ Íõ#”, Íõ$”0 Íõ(”6 Íõ.”7 Íõ/”> Íõ6”? Íõ7”ÌD Íõ<”ÌE Íõ=”ÌH ÍõÌ@”ÌI ÍõÌA”ÌK ÍõÌC˜” Íö
-” Íö” Íö”  Íö”! Íö”ÌA Íö7”ÌB Íö8”ÌC Íö9”” Í÷
-” Í÷”  Í÷”! Í÷‘” Íø	‘” Íù˜” Íú” Íú” Íú” Íú” Íú”2 Íú,”3 Íú-”4 Íú.”” Íû” Íû” Íû” Íû”” Íü”	 Íü”
- Íü” Íü’” Íı” ÍıÔrI–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜz‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
- ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌĞ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  Ìİ ‘”  ÌŞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìğ ‘”  Ìñ ‘”  Ìò ‘”  Ìó ‘”  Ìô ‘”  Ìõ ‘”  Ìö ‘”  Ì÷ ‘”  Ìø ‘”  Ìù ‘”  Ìú ‘”  Ìû ‘”  Ìü ‘”  Ìı ‘”  Ìş ‘”  Ìÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
- ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍĞ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  Íİ ‘”  ÍŞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íğ ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ‘”  Íú ‘”  Íû ‘”  Íü ‘”  Íı ‘”  Íş ‘”  Íÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
- ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ÔrJ’§missing¦pluginÃ¦genAbcÂÔ  ÔrK”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache•ÔrL•¤type¥start£endªspecifiers¦source±ImportDeclarationÌóÍ‘ÔrM”¤type¥start£end¥local¶ImportDefaultSpecifierÌúÍ ÔrN”¤type¥start£end¤nameªIdentifierÌúÍ ¦routerÔrO•¤type¥start£end¥value£raw§LiteralÍÍ¬@ohos.router®'@ohos.router'L±ImportDeclarationÍÍ9‘M¶ImportDefaultSpecifierÍÍ"NªIdentifierÍÍ"¤httpO§LiteralÍ(Í8®@ohos.net.http°'@ohos.net.http'L±ImportDeclarationÍ˜ÍÛ’ÔrP•¤type¥start£end¨imported¥local¯ImportSpecifierÍ¡ÍªNªIdentifierÍ¡Íª©goodsPoolNªIdentifierÍ¡Íª©goodsPoolP¯ImportSpecifierÍ¬Í¸NªIdentifierÍ¬Í¸¬CategoryTypeNªIdentifierÍ¬Í¸¬CategoryTypeO§LiteralÍÀÍÚ¸../viewmodel/InitialDataº'../viewmodel/InitialData'L±ImportDeclarationÍİÍ'’P¯ImportSpecifierÍæÍüNªIdentifierÍæÍü¶LAYOUT_WIDTH_OR_HEIGHTNªIdentifierÍæÍü¶LAYOUT_WIDTH_OR_HEIGHTP¯ImportSpecifierÍşÍNªIdentifierÍşÍ¥STORENªIdentifierÍşÍ¥STOREO§LiteralÍÍ&¹../common/CommonConstants»'../common/CommonConstants'L±ImportDeclarationÍ)Íb‘M¸ImportNamespaceSpecifierÍ0Í@NªIdentifierÍ5Í@«commonConstO§LiteralÍFÍa¹../common/CommonConstants»'../common/CommonConstants'
