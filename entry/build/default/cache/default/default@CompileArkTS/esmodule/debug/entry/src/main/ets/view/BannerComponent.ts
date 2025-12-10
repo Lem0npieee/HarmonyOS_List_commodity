@@ -6,7 +6,7 @@ interface BannerComponent_Params {
     controller?: SwiperController;
 }
 import * as commonConst from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
-import type { BannerMeta } from '../viewmodel/InitialData';
+import type { BannerMeta, BannerImageItem } from '../viewmodel/InitialData';
 export default class BannerComponent extends ViewPU {
     constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
         super(parent, __localStorage, elmtId, extraInfo);
@@ -53,21 +53,21 @@ export default class BannerComponent extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             ForEach.create();
             const forEachItemGenFunction = _item => {
-                const image = _item;
-                this.bannerSlide.bind(this)(image);
+                const imageItem = _item;
+                this.bannerSlide.bind(this)(imageItem as Resource | BannerImageItem);
             };
             this.forEachUpdateFunction(elmtId, this.banner.images, forEachItemGenFunction);
         }, ForEach);
         ForEach.pop();
         Swiper.pop();
     }
-    private bannerSlide(image: Resource, parent = null) {
+    private bannerSlide(imageItem: Resource | BannerImageItem, parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Stack.create();
             Stack.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
         }, Stack);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create(image);
+            Image.create((imageItem as BannerImageItem).image ? (imageItem as BannerImageItem).image : (imageItem as Resource));
             Image.objectFit(ImageFit.Cover);
             Image.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
             Image.height(180);
@@ -83,7 +83,7 @@ export default class BannerComponent extends ViewPU {
             Column.borderRadius(20);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(this.banner.primary);
+            Text.create((imageItem as BannerImageItem).primary ? (imageItem as BannerImageItem).primary : this.banner.primary);
             Text.fontSize(commonConst.BIGGER_FONT_SIZE);
             Text.fontColor(Color.White);
             Text.fontWeight(FontWeight.Medium);
@@ -91,7 +91,7 @@ export default class BannerComponent extends ViewPU {
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(this.banner.secondary);
+            Text.create((imageItem as BannerImageItem).secondary ? (imageItem as BannerImageItem).secondary : this.banner.secondary);
             Text.fontSize(commonConst.NORMAL_FONT_SIZE);
             Text.fontColor(Color.White);
             Text.opacity(0.85);

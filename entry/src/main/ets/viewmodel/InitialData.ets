@@ -38,7 +38,13 @@ export interface SubCategoryMeta {
 export interface BannerMeta {
   primary: Resource;
   secondary: Resource;
-  images: Resource[];
+  images: Array<Resource | BannerImageItem>;
+}
+
+export interface BannerImageItem {
+  image: Resource;
+  primary?: Resource;
+  secondary?: Resource;
 }
 
 export interface TabMeta {
@@ -84,6 +90,7 @@ export interface GoodsListItemType {
   shopName?: string;          // 店铺名称
   specifications?: string[];  // 规格选项
   deliveryInfo?: string;      // 配送信息
+  redeemPoints?: number;      // 积分兑换所需积分
 }
 
 export const sortOptionMetas: SortOptionMeta[] = [
@@ -112,7 +119,12 @@ export const tabBarMeta: TabMeta[] = [
     banner: {
       primary: $r('app.string.banner_selected_primary'),
       secondary: $r('app.string.banner_selected_secondary'),
-      images: [$r('app.media.goodsImg'), $r('app.media.goodsImg_2'), $r('app.media.goodsImg_3'), $r('app.media.goodsImg_4')]
+      images: [
+        { image: $r('app.media.homepage_show1'), primary: $r('app.string.home_banner_1_line1'), secondary: $r('app.string.home_banner_1_line2') },
+        { image: $r('app.media.homepage_show2'), primary: $r('app.string.home_banner_2_line1'), secondary: $r('app.string.home_banner_2_line2') },
+        { image: $r('app.media.homepage_show3'), primary: $r('app.string.home_banner_3_line1'), secondary: $r('app.string.home_banner_3_line2') },
+        { image: $r('app.media.homepage_show4'), primary: $r('app.string.home_banner_4_line1'), secondary: $r('app.string.home_banner_4_line2') }
+      ]
     }
   },
   {

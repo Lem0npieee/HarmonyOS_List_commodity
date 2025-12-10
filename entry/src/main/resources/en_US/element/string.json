@@ -285,6 +285,38 @@
       "value": "Smart devices bundle"
     },
     {
+      "name": "home_banner_1_line1",
+      "value": "Big-brand Home & Decor"
+    },
+    {
+      "name": "home_banner_1_line2",
+      "value": "Decorate a quality life"
+    },
+    {
+      "name": "home_banner_2_line1",
+      "value": "Office Light Supply"
+    },
+    {
+      "name": "home_banner_2_line2",
+      "value": "Home binge-watch energy station"
+    },
+    {
+      "name": "home_banner_3_line1",
+      "value": "Trendy Tech Toys"
+    },
+    {
+      "name": "home_banner_3_line2",
+      "value": "3C Digital Carnival"
+    },
+    {
+      "name": "home_banner_4_line1",
+      "value": "Smart Home Renewal"
+    },
+    {
+      "name": "home_banner_4_line2",
+      "value": "Appliance festival, save big"
+    },
+    {
       "name": "tag_hot",
       "value": "HOT"
     },
@@ -319,6 +351,46 @@
     {
       "name": "refresh_failed_text",
       "value": "Network busy, try again"
+    },
+    {
+      "name": "points_good_tissue",
+      "value": "Soft tissue family pack"
+    },
+    {
+      "name": "points_good_tissue_desc",
+      "value": "Household tissues, value pack for daily use"
+    },
+    {
+      "name": "points_good_stationery",
+      "value": "Stationery gift set"
+    },
+    {
+      "name": "points_good_stationery_desc",
+      "value": "Notebook and gel pen bundle for study or office"
+    },
+    {
+      "name": "points_good_tea",
+      "value": "Premium tea gift"
+    },
+    {
+      "name": "points_good_tea_desc",
+      "value": "10-pack assorted tea bags, mellow flavor"
+    },
+    {
+      "name": "points_good_office",
+      "value": "Office combo set"
+    },
+    {
+      "name": "points_good_office_desc",
+      "value": "Laptop stand with wireless mouse and keyboard"
+    },
+    {
+      "name": "points_good_sports",
+      "value": "Sports hydration kit"
+    },
+    {
+      "name": "points_good_sports_desc",
+      "value": "Bottle, yoga towel, and jump rope set"
     }
   ]
 }

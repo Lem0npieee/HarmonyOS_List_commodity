@@ -22,6 +22,7 @@ import type { GoodsListItemType } from "@bundle:com.example.list_harmony/entry/e
 import CartStore from "@bundle:com.example.list_harmony/entry/ets/common/CartStore";
 import FavoritesStore from "@bundle:com.example.list_harmony/entry/ets/common/FavoritesStore";
 import OrderStore from "@bundle:com.example.list_harmony/entry/ets/common/OrderStore";
+import PointsStore from "@bundle:com.example.list_harmony/entry/ets/common/PointsStore";
 import NotificationStore from "@bundle:com.example.list_harmony/entry/ets/common/NotificationStore";
 import type { NotificationPayload } from "@bundle:com.example.list_harmony/entry/ets/common/NotificationStore";
 import { LAYOUT_WIDTH_OR_HEIGHT, STORE } from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
@@ -718,35 +719,61 @@ class GoodsDetailPage extends ViewPU {
             Row.margin({ bottom: 12 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('¥');
-            Text.fontSize(16);
-            Text.fontColor('#FF0000');
-            Text.fontWeight(FontWeight.Bold);
-        }, Text);
-        Text.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(this.goods?.price.toFixed(2));
-            Text.fontSize(28);
-            Text.fontColor('#FF0000');
-            Text.fontWeight(FontWeight.Bold);
-        }, Text);
-        Text.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
-            if (this.goods?.originalPrice && this.goods.originalPrice > this.goods.price) {
+            if (this.isPointsGoods()) {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('¥' + this.goods.originalPrice.toFixed(2));
-                        Text.fontSize(14);
-                        Text.fontColor('#999999');
-                        Text.decoration({ type: TextDecorationType.LineThrough });
-                        Text.margin({ left: 8 });
+                        Text.create(this.getRedeemPoints().toFixed(0) + ' 积分');
+                        Text.fontSize(30);
+                        Text.fontWeight(FontWeight.Bold);
+                        Text.fontColor('#FF7A00');
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('积分兑换');
+                        Text.fontSize(13);
+                        Text.fontColor('#FF7A00');
+                        Text.margin({ left: 12 });
                     }, Text);
                     Text.pop();
                 });
             }
             else {
                 this.ifElseBranchUpdateFunction(1, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('¥');
+                        Text.fontSize(16);
+                        Text.fontColor('#FF0000');
+                        Text.fontWeight(FontWeight.Bold);
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(this.goods?.price.toFixed(2));
+                        Text.fontSize(28);
+                        Text.fontColor('#FF0000');
+                        Text.fontWeight(FontWeight.Bold);
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        If.create();
+                        if (this.goods?.originalPrice && this.goods.originalPrice > this.goods.price) {
+                            this.ifElseBranchUpdateFunction(0, () => {
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    Text.create('¥' + this.goods.originalPrice.toFixed(2));
+                                    Text.fontSize(14);
+                                    Text.fontColor('#999999');
+                                    Text.decoration({ type: TextDecorationType.LineThrough });
+                                    Text.margin({ left: 8 });
+                                }, Text);
+                                Text.pop();
+                            });
+                        }
+                        else {
+                            this.ifElseBranchUpdateFunction(1, () => {
+                            });
+                        }
+                    }, If);
+                    If.pop();
                 });
             }
         }, If);
@@ -952,7 +979,7 @@ class GoodsDetailPage extends ViewPU {
             Row.margin({ bottom: 8 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('麦当劳');
+            Text.create('款式');
             Text.fontSize(14);
             Text.fontColor('#333333');
             Text.width(60);
@@ -1659,60 +1686,87 @@ class GoodsDetailPage extends ViewPU {
             // 立即购买
             Button.margin({ left: 8 });
             // 立即购买
-            Button.onClick(() => {
-                try {
-                    if (this.goods) {
-                        // 记录此订单为待发货（以商品 id 为 key）
-                        const goodsId = this.goods.id;
-                        const goodsTitle = this.goods.title;
-                        OrderStore.addOrderPendingShip(goodsId);
-                        prompt.showToast({ message: '购买成功', duration: 1500 });
-                        // 安排后续的发货和到货通知（示意）
-                        setTimeout(() => {
-                            try {
-                                // Use resource payload so NotificationComponent can render resource correctly
-                                if (goodsTitle) {
-                                    const payload: NotificationPayload = { resource: goodsTitle, suffix: ' 现已发货' } as NotificationPayload;
-                                    NotificationStore.show(payload, 5000);
-                                }
-                                else {
-                                    NotificationStore.show('商品已发货', 5000);
-                                }
-                                // 标记已发货：如果之前是待发货，该操作会让待发货数 -1
-                                OrderStore.markShipped(goodsId);
-                                prompt.showToast({ message: '您购买的商品已发货', duration: 3000 });
-                            }
-                            catch (e) {
-                                console.error('发货通知失败:', String(e));
-                            }
-                        }, 5000);
-                        setTimeout(() => {
-                            try {
-                                if (goodsTitle) {
-                                    const payload2: NotificationPayload = { resource: goodsTitle, suffix: ' 现已到货，请注意查收' } as NotificationPayload;
-                                    NotificationStore.show(payload2, 5000);
-                                }
-                                else {
-                                    NotificationStore.show('商品已到货', 5000);
-                                }
-                                // 标记已到货：如果之前是已发货/待发货，则会增加待收货计数
-                                OrderStore.markArrived(goodsId);
-                                prompt.showToast({ message: '您购买的商品已到货，请注意查收', duration: 3000 });
-                            }
-                            catch (e) {
-                                console.error('到货通知失败:', String(e));
-                            }
-                        }, 10000);
-                    }
-                }
-                catch (err) {
-                    console.error('购买失败:', String(err));
-                }
+            Button.onClick(async () => {
+                await this.handlePurchase();
             });
         }, Button);
         // 立即购买
         Button.pop();
         Row.pop();
+    }
+    private isPointsGoods(): boolean {
+        return !!(this.goods && typeof this.goods.redeemPoints === 'number' && this.goods.redeemPoints > 0);
+    }
+    private getRedeemPoints(): number {
+        if (!this.isPointsGoods() || !this.goods) {
+            return 0;
+        }
+        return Math.max(0, this.goods.redeemPoints ?? 0);
+    }
+    private async handlePurchase(): Promise<void> {
+        try {
+            if (!this.goods) {
+                return;
+            }
+            const goodsId: number = this.goods.id;
+            const goodsTitle: Resource | undefined = this.goods.title;
+            const pointsMode: boolean = this.isPointsGoods();
+            if (pointsMode) {
+                const cost: number = this.getRedeemPoints();
+                const success: boolean = await PointsStore.spendPoints(cost);
+                if (!success) {
+                    prompt.showToast({ message: '积分不足', duration: 1500 });
+                    return;
+                }
+            }
+            OrderStore.addOrderPendingShip(goodsId);
+            prompt.showToast({ message: pointsMode ? '兑换成功' : '购买成功', duration: 1500 });
+            if (!pointsMode) {
+                const earnedPoints: number = Math.round((this.goods.price / 10) * 10) / 10;
+                if (earnedPoints > 0) {
+                    await PointsStore.addPoints(earnedPoints);
+                    prompt.showToast({ message: `积分+${earnedPoints.toFixed(1)}`, duration: 1500 });
+                }
+            }
+            this.scheduleOrderLifecycle(goodsId, goodsTitle);
+        }
+        catch (err) {
+            console.error('购买失败:', String(err));
+        }
+    }
+    private scheduleOrderLifecycle(goodsId: number, goodsTitle?: Resource): void {
+        setTimeout(() => {
+            try {
+                if (goodsTitle) {
+                    const payload: NotificationPayload = { resource: goodsTitle, suffix: ' 现已发货' } as NotificationPayload;
+                    NotificationStore.show(payload, 5000);
+                }
+                else {
+                    NotificationStore.show('商品已发货', 5000);
+                }
+                OrderStore.markShipped(goodsId);
+                prompt.showToast({ message: '您购买的商品已发货', duration: 3000 });
+            }
+            catch (e) {
+                console.error('发货通知失败:', String(e));
+            }
+        }, 5000);
+        setTimeout(() => {
+            try {
+                if (goodsTitle) {
+                    const payload2: NotificationPayload = { resource: goodsTitle, suffix: ' 现已到货，请注意查收' } as NotificationPayload;
+                    NotificationStore.show(payload2, 5000);
+                }
+                else {
+                    NotificationStore.show('商品已到货', 5000);
+                }
+                OrderStore.markArrived(goodsId);
+                prompt.showToast({ message: '您购买的商品已到货，请注意查收', duration: 3000 });
+            }
+            catch (e) {
+                console.error('到货通知失败:', String(e));
+            }
+        }, 10000);
     }
     rerender() {
         this.updateDirtyElements();

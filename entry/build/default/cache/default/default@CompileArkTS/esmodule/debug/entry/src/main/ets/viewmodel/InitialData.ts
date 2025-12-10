@@ -33,7 +33,12 @@ export interface SubCategoryMeta {
 export interface BannerMeta {
     primary: Resource;
     secondary: Resource;
-    images: Resource[];
+    images: Array<Resource | BannerImageItem>;
+}
+export interface BannerImageItem {
+    image: Resource;
+    primary?: Resource;
+    secondary?: Resource;
 }
 export interface TabMeta {
     id: CategoryType;
@@ -75,6 +80,7 @@ export interface GoodsListItemType {
     shopName?: string; // 店铺名称
     specifications?: string[]; // 规格选项
     deliveryInfo?: string; // 配送信息
+    redeemPoints?: number; // 积分兑换所需积分
 }
 export const sortOptionMetas: SortOptionMeta[] = [
     { id: SortOption.Comprehensive, title: { "id": 16777269, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
@@ -100,7 +106,12 @@ export const tabBarMeta: TabMeta[] = [
         banner: {
             primary: { "id": 16777230, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
             secondary: { "id": 16777231, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-            images: [{ "id": 16777325, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777326, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777327, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, { "id": 16777328, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }]
+            images: [
+                { image: { "id": 16777386, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, primary: { "id": 16777378, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, secondary: { "id": 16777379, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+                { image: { "id": 16777387, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, primary: { "id": 16777380, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, secondary: { "id": 16777381, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+                { image: { "id": 16777388, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, primary: { "id": 16777382, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, secondary: { "id": 16777383, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+                { image: { "id": 16777389, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, primary: { "id": 16777384, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, secondary: { "id": 16777385, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
+            ]
         }
     },
     {

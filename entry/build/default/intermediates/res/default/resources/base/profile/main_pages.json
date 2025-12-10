@@ -7,6 +7,7 @@
     "pages/CustomerServicePage",
     "pages/ConfirmReceiptPage",
     "pages/PendingReviewPage",
-    "pages/LoginRegisterPage"
+    "pages/LoginRegisterPage",
+    "pages/PointsMallPage"
   ]
 }

@@ -10,6 +10,7 @@ import FavoritesStore from "@bundle:com.example.list_harmony/entry/ets/common/Fa
 import OrderStore from "@bundle:com.example.list_harmony/entry/ets/common/OrderStore";
 import ReviewStore from "@bundle:com.example.list_harmony/entry/ets/common/ReviewStore";
 import AuthStore from "@bundle:com.example.list_harmony/entry/ets/common/AuthStore";
+import PointsStore from "@bundle:com.example.list_harmony/entry/ets/common/PointsStore";
 const USER_DATA_STORE: string = 'user_persistent_state';
 export default class EntryAbility extends UIAbility {
     onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
@@ -34,7 +35,8 @@ export default class EntryAbility extends UIAbility {
                 FavoritesStore.init(prefs),
                 OrderStore.init(prefs),
                 ReviewStore.init(prefs),
-                AuthStore.init(prefs)
+                AuthStore.init(prefs),
+                PointsStore.init(prefs)
             ]);
         }
         catch (e) {

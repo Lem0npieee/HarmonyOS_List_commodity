@@ -1,5 +1,6 @@
 import dataPreferences from '@ohos.data.preferences';
 import { GoodsListItemType, goodsPool } from '../viewmodel/InitialData';
+import { pointsGoodsPool } from '../viewmodel/PointsGoodsData';
 import ReviewStore from './ReviewStore';
 
 type Preferences = dataPreferences.Preferences;
@@ -197,7 +198,8 @@ export default class OrderStore {
     if (Number.isNaN(numericId)) {
       return null;
     }
-    const product = goodsPool.find((item: GoodsListItemType) => item.id === numericId);
+    const product = goodsPool.find((item: GoodsListItemType) => item.id === numericId)
+      ?? pointsGoodsPool.find((item: GoodsListItemType) => item.id === numericId);
     return product ?? null;
   }
 }

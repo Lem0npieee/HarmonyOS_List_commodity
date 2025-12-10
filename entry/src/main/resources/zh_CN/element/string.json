@@ -285,6 +285,38 @@
       "value": "智能设备套装"
     },
     {
+      "name": "home_banner_1_line1",
+      "value": "大牌家居家装"
+    },
+    {
+      "name": "home_banner_1_line2",
+      "value": "点缀品质生活"
+    },
+    {
+      "name": "home_banner_2_line1",
+      "value": "办公轻补给"
+    },
+    {
+      "name": "home_banner_2_line2",
+      "value": "宅家追剧能量站"
+    },
+    {
+      "name": "home_banner_3_line1",
+      "value": "潮玩黑科技"
+    },
+    {
+      "name": "home_banner_3_line2",
+      "value": "数码3C狂欢盛典"
+    },
+    {
+      "name": "home_banner_4_line1",
+      "value": "智能家居换新季"
+    },
+    {
+      "name": "home_banner_4_line2",
+      "value": "家电狂欢省到底"
+    },
+    {
       "name": "tag_hot",
       "value": "热卖"
     },
@@ -319,6 +351,46 @@
     {
       "name": "refresh_failed_text",
       "value": "网络繁忙，请重试"
+    },
+    {
+      "name": "points_good_tissue",
+      "value": "家庭装抽纸"
+    },
+    {
+      "name": "points_good_tissue_desc",
+      "value": "柔韧亲肤，日常囤货超值装"
+    },
+    {
+      "name": "points_good_stationery",
+      "value": "文具礼盒套装"
+    },
+    {
+      "name": "points_good_stationery_desc",
+      "value": "笔记本+中性笔组合，学习办公皆宜"
+    },
+    {
+      "name": "points_good_tea",
+      "value": "精品茶礼盒"
+    },
+    {
+      "name": "points_good_tea_desc",
+      "value": "10袋茶包组合，醇厚回甘"
+    },
+    {
+      "name": "points_good_office",
+      "value": "办公三件套"
+    },
+    {
+      "name": "points_good_office_desc",
+      "value": "笔记本支架+无线鼠标+键盘组合"
+    },
+    {
+      "name": "points_good_sports",
+      "value": "运动补水套装"
+    },
+    {
+      "name": "points_good_sports_desc",
+      "value": "运动水杯+瑜伽毛巾+跳绳"
     }
   ]
 }

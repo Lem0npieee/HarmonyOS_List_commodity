@@ -6,6 +6,7 @@ import FavoritesStore, { FavoriteItem } from '../common/FavoritesStore';
 import OrderStore from '../common/OrderStore';
 import ReviewStore from '../common/ReviewStore';
 import AuthStore from '../common/AuthStore';
+import PointsStore from '../common/PointsStore';
 import router from '@ohos.router';
 import prompt from '@system.prompt';
 
@@ -18,10 +19,12 @@ export default struct ProfilePage {
   @State private pendingReviewCount: number = ReviewStore.getPendingReviewCount();
   @State private loggedIn: boolean = AuthStore.isLoggedIn();
   @State private username: string = AuthStore.getCurrentUserName() || '未登录';
+  @State private pointsBalance: number = PointsStore.getPoints();
   private orderListener!: () => void;
   private favoritesListener!: () => void;
   private reviewListener!: () => void;
   private authListener!: () => void;
+  private pointsListener!: () => void;
 
   constructor() {
     super();
@@ -56,10 +59,18 @@ export default struct ProfilePage {
         console.error('更新登录状态失败:', String(err));
       }
     };
+    this.pointsListener = () => {
+      try {
+        this.pointsBalance = PointsStore.getPoints();
+      } catch (err) {
+        console.error('更新积分失败:', String(err));
+      }
+    };
     FavoritesStore.subscribe(this.favoritesListener);
     OrderStore.subscribe(this.orderListener);
     ReviewStore.subscribe(this.reviewListener);
     AuthStore.subscribe(this.authListener);
+    PointsStore.subscribe(this.pointsListener);
   }
 
   onDestroy() {
@@ -67,6 +78,7 @@ export default struct ProfilePage {
     OrderStore.unsubscribe(this.orderListener);
     ReviewStore.unsubscribe(this.reviewListener);
     AuthStore.unsubscribe(this.authListener);
+    PointsStore.unsubscribe(this.pointsListener);
   }
   build() {
     Column() {
@@ -119,12 +131,16 @@ export default struct ProfilePage {
         }
         .alignItems(VerticalAlign.Center)
 
-        Row() {
-          this.renderUserStat('收藏', `${this.favorites.length}`)
-          this.renderUserStat('待收货', `${this.pendingReceiveCount}`)
-          this.renderUserStat('待评价', `${this.pendingReviewCount}`)
+        Column({ space: 10 }) {
+          Row({ space: 12 }) {
+            this.renderUserStat('收藏', `${this.favorites.length}`, '#FFF4EC')
+            this.renderUserStat('待收货', `${this.pendingReceiveCount}`, '#ECF2FF')
+          }
+          Row({ space: 12 }) {
+            this.renderUserStat('待评价', `${this.pendingReviewCount}`, '#FDF1FF')
+            this.renderUserStat('积分', this.pointsBalance.toFixed(1), '#FFF8E1')
+          }
         }
-        .justifyContent(FlexAlign.SpaceBetween)
       }
       .width(LAYOUT_WIDTH_OR_HEIGHT)
       .backgroundColor(Color.White)
@@ -233,11 +249,12 @@ export default struct ProfilePage {
           Image($r('app.media.tuikuanshouhou'))
             .width(36)
             .height(36)
-          Text('退款/售后')
+          Text('积分商城')
             .fontSize(12)
         }
         .alignItems(HorizontalAlign.Center)
         .layoutWeight(1)
+        .onClick(() => this.gotoPointsMall())
       }
       .width(LAYOUT_WIDTH_OR_HEIGHT)
       .height(100)
@@ -357,7 +374,7 @@ export default struct ProfilePage {
   }
 
   @Builder
-  private renderUserStat(label: string, value: string) {
+  private renderUserStat(label: string, value: string, bgColor: string) {
     Column({ space: 4 }) {
       Text(value)
         .fontSize(20)
@@ -369,9 +386,17 @@ export default struct ProfilePage {
         .fontColor('#7A7A7A')
         .textAlign(TextAlign.Center)
     }
-    .width('30%')
-    .padding({ top: 4, bottom: 4 })
-    .backgroundColor('#FFF8F1')
-    .borderRadius(12)
+    .padding({ top: 8, bottom: 8 })
+    .backgroundColor(bgColor)
+    .borderRadius(14)
+    .layoutWeight(1)
+  }
+
+  private gotoPointsMall(): void {
+    try {
+      router.pushUrl({ url: 'pages/PointsMallPage' });
+    } catch (err) {
+      console.error('跳转积分商城失败:', String(err));
+    }
   }
 }

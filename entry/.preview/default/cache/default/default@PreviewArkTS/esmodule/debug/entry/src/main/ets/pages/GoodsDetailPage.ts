@@ -1000,7 +1000,7 @@ class GoodsDetailPage extends ViewPU {
             Row.margin({ bottom: 8 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('麦当劳');
+            Text.create('款式');
             Text.debugLine("entry/src/main/ets/pages/GoodsDetailPage.ets(662:7)", "entry");
             Text.fontSize(14);
             Text.fontColor('#333333');

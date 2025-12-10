@@ -14,7 +14,7 @@
  */
 
 import * as commonConst from '../common/CommonConstants';
-import { BannerMeta } from '../viewmodel/InitialData';
+import { BannerMeta, BannerImageItem } from '../viewmodel/InitialData';
 
 @Component
 export default struct BannerComponent {
@@ -27,8 +27,8 @@ export default struct BannerComponent {
 
   build() {
     Swiper(this.controller) {
-      ForEach(this.banner.images, (image: Resource) => {
-        this.bannerSlide(image);
+      ForEach(this.banner.images, (imageItem: Resource | BannerImageItem) => {
+        this.bannerSlide(imageItem as Resource | BannerImageItem);
       })
     }
     .indicator(true)
@@ -40,20 +40,20 @@ export default struct BannerComponent {
   }
 
   @Builder
-  private bannerSlide(image: Resource) {
+  private bannerSlide(imageItem: Resource | BannerImageItem) {
     Stack() {
-      Image(image)
+      Image((imageItem as BannerImageItem).image ? (imageItem as BannerImageItem).image : (imageItem as Resource))
         .objectFit(ImageFit.Cover)
         .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
         .height(180)
         .borderRadius(20)
       Column() {
-        Text(this.banner.primary)
+        Text((imageItem as BannerImageItem).primary ? (imageItem as BannerImageItem).primary : this.banner.primary)
           .fontSize(commonConst.BIGGER_FONT_SIZE)
           .fontColor(Color.White)
           .fontWeight(FontWeight.Medium)
           .margin({ bottom: 4 })
-        Text(this.banner.secondary)
+        Text((imageItem as BannerImageItem).secondary ? (imageItem as BannerImageItem).secondary : this.banner.secondary)
           .fontSize(commonConst.NORMAL_FONT_SIZE)
           .fontColor(Color.White)
           .opacity(0.85)

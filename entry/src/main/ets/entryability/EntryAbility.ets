@@ -23,6 +23,7 @@ import FavoritesStore from '../common/FavoritesStore';
 import OrderStore from '../common/OrderStore';
 import ReviewStore from '../common/ReviewStore';
 import AuthStore from '../common/AuthStore';
+import PointsStore from '../common/PointsStore';
 
 const USER_DATA_STORE: string = 'user_persistent_state';
 
@@ -51,7 +52,8 @@ export default class EntryAbility extends UIAbility {
         FavoritesStore.init(prefs),
         OrderStore.init(prefs),
         ReviewStore.init(prefs),
-        AuthStore.init(prefs)
+        AuthStore.init(prefs),
+        PointsStore.init(prefs)
       ]);
     } catch (e) {
       hilog.error(0x0000, 'testTag', 'Store init failed: %{public}s', String(e));

@@ -221,6 +221,38 @@
       "value": "Smart devices bundle"
     },
     {
+      "name": "home_banner_1_line1",
+      "value": "大牌家居家装"
+    },
+    {
+      "name": "home_banner_1_line2",
+      "value": "点缀品质生活"
+    },
+    {
+      "name": "home_banner_2_line1",
+      "value": "办公轻补给"
+    },
+    {
+      "name": "home_banner_2_line2",
+      "value": "宅家追剧能量站"
+    },
+    {
+      "name": "home_banner_3_line1",
+      "value": "潮玩黑科技"
+    },
+    {
+      "name": "home_banner_3_line2",
+      "value": "数码3C狂欢盛典"
+    },
+    {
+      "name": "home_banner_4_line1",
+      "value": "智能家居换新季"
+    },
+    {
+      "name": "home_banner_4_line2",
+      "value": "家电狂欢省到底"
+    },
+    {
       "name": "tag_hot",
       "value": "HOT"
     },
@@ -255,6 +287,46 @@
     {
       "name": "refresh_failed_text",
       "value": "Network busy, try again"
+    },
+    {
+      "name": "points_good_tissue",
+      "value": "Soft tissue family pack"
+    },
+    {
+      "name": "points_good_tissue_desc",
+      "value": "Household tissues, value pack for daily use"
+    },
+    {
+      "name": "points_good_stationery",
+      "value": "Stationery gift set"
+    },
+    {
+      "name": "points_good_stationery_desc",
+      "value": "Notebook and gel pen bundle for study or office"
+    },
+    {
+      "name": "points_good_tea",
+      "value": "Premium tea gift"
+    },
+    {
+      "name": "points_good_tea_desc",
+      "value": "10-pack assorted tea bags, mellow flavor"
+    },
+    {
+      "name": "points_good_office",
+      "value": "Office combo set"
+    },
+    {
+      "name": "points_good_office_desc",
+      "value": "Laptop stand with wireless mouse and keyboard"
+    },
+    {
+      "name": "points_good_sports",
+      "value": "Sports hydration kit"
+    },
+    {
+      "name": "points_good_sports_desc",
+      "value": "Bottle, yoga towel, and jump rope set"
     }
   ]
 }

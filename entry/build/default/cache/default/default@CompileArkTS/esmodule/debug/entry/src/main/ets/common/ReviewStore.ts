@@ -1,6 +1,7 @@
 import type dataPreferences from "@ohos:data.preferences";
 import { goodsPool } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
 import type { GoodsListItemType } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
+import { pointsGoodsPool } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/PointsGoodsData";
 type Preferences = dataPreferences.Preferences;
 export interface StoredReviewRecord {
     goodsId: number;
@@ -168,7 +169,8 @@ export default class ReviewStore {
         if (Number.isNaN(numericId)) {
             return null;
         }
-        const product = goodsPool.find((item: GoodsListItemType) => item.id === numericId);
+        const product = goodsPool.find((item: GoodsListItemType) => item.id === numericId)
+            ?? pointsGoodsPool.find((item: GoodsListItemType) => item.id === numericId);
         return product ?? null;
     }
 }

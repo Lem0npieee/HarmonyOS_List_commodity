@@ -9,10 +9,12 @@ interface ProfilePage_Params {
     pendingReviewCount?: number;
     loggedIn?: boolean;
     username?: string;
+    pointsBalance?: number;
     orderListener?: () => void;
     favoritesListener?: () => void;
     reviewListener?: () => void;
     authListener?: () => void;
+    pointsListener?: () => void;
 }
 import { LAYOUT_WIDTH_OR_HEIGHT } from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
 import FavoritesStore from "@bundle:com.example.list_harmony/entry/ets/common/FavoritesStore";
@@ -20,6 +22,7 @@ import type { FavoriteItem } from "@bundle:com.example.list_harmony/entry/ets/co
 import OrderStore from "@bundle:com.example.list_harmony/entry/ets/common/OrderStore";
 import ReviewStore from "@bundle:com.example.list_harmony/entry/ets/common/ReviewStore";
 import AuthStore from "@bundle:com.example.list_harmony/entry/ets/common/AuthStore";
+import PointsStore from "@bundle:com.example.list_harmony/entry/ets/common/PointsStore";
 import router from "@ohos:router";
 import prompt from "@ohos:prompt";
 export default class ProfilePage extends ViewPU {
@@ -35,10 +38,12 @@ export default class ProfilePage extends ViewPU {
         this.__pendingReviewCount = new ObservedPropertySimplePU(ReviewStore.getPendingReviewCount(), this, "pendingReviewCount");
         this.__loggedIn = new ObservedPropertySimplePU(AuthStore.isLoggedIn(), this, "loggedIn");
         this.__username = new ObservedPropertySimplePU(AuthStore.getCurrentUserName() || '未登录', this, "username");
+        this.__pointsBalance = new ObservedPropertySimplePU(PointsStore.getPoints(), this, "pointsBalance");
         this.orderListener = undefined;
         this.favoritesListener = undefined;
         this.reviewListener = undefined;
         this.authListener = undefined;
+        this.pointsListener = undefined;
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
     }
@@ -64,6 +69,9 @@ export default class ProfilePage extends ViewPU {
         if (params.username !== undefined) {
             this.username = params.username;
         }
+        if (params.pointsBalance !== undefined) {
+            this.pointsBalance = params.pointsBalance;
+        }
         if (params.orderListener !== undefined) {
             this.orderListener = params.orderListener;
         }
@@ -76,6 +84,9 @@ export default class ProfilePage extends ViewPU {
         if (params.authListener !== undefined) {
             this.authListener = params.authListener;
         }
+        if (params.pointsListener !== undefined) {
+            this.pointsListener = params.pointsListener;
+        }
     }
     updateStateVars(params: ProfilePage_Params) {
     }
@@ -86,6 +97,7 @@ export default class ProfilePage extends ViewPU {
         this.__pendingReviewCount.purgeDependencyOnElmtId(rmElmtId);
         this.__loggedIn.purgeDependencyOnElmtId(rmElmtId);
         this.__username.purgeDependencyOnElmtId(rmElmtId);
+        this.__pointsBalance.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
         this.__favorites.aboutToBeDeleted();
@@ -94,6 +106,7 @@ export default class ProfilePage extends ViewPU {
         this.__pendingReviewCount.aboutToBeDeleted();
         this.__loggedIn.aboutToBeDeleted();
         this.__username.aboutToBeDeleted();
+        this.__pointsBalance.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
     }
@@ -140,15 +153,24 @@ export default class ProfilePage extends ViewPU {
     set username(newValue: string) {
         this.__username.set(newValue);
     }
+    private __pointsBalance: ObservedPropertySimplePU<number>;
+    get pointsBalance() {
+        return this.__pointsBalance.get();
+    }
+    set pointsBalance(newValue: number) {
+        this.__pointsBalance.set(newValue);
+    }
     private orderListener: () => void;
     private favoritesListener: () => void;
     private reviewListener: () => void;
     private authListener: () => void;
+    private pointsListener: () => void;
     onDestroy() {
         FavoritesStore.unsubscribe(this.favoritesListener);
         OrderStore.unsubscribe(this.orderListener);
         ReviewStore.unsubscribe(this.reviewListener);
         AuthStore.unsubscribe(this.authListener);
+        PointsStore.unsubscribe(this.pointsListener);
     }
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -261,13 +283,21 @@ export default class ProfilePage extends ViewPU {
         If.pop();
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Row.create();
-            Row.justifyContent(FlexAlign.SpaceBetween);
+            Column.create({ space: 10 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create({ space: 12 });
         }, Row);
-        this.renderUserStat.bind(this)('收藏', `${this.favorites.length}`);
-        this.renderUserStat.bind(this)('待收货', `${this.pendingReceiveCount}`);
-        this.renderUserStat.bind(this)('待评价', `${this.pendingReviewCount}`);
+        this.renderUserStat.bind(this)('收藏', `${this.favorites.length}`, '#FFF4EC');
+        this.renderUserStat.bind(this)('待收货', `${this.pendingReceiveCount}`, '#ECF2FF');
         Row.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create({ space: 12 });
+        }, Row);
+        this.renderUserStat.bind(this)('待评价', `${this.pendingReviewCount}`, '#FDF1FF');
+        this.renderUserStat.bind(this)('积分', this.pointsBalance.toFixed(1), '#FFF8E1');
+        Row.pop();
+        Column.pop();
         // 顶部用户信息卡
         Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -453,6 +483,7 @@ export default class ProfilePage extends ViewPU {
             Column.create();
             Column.alignItems(HorizontalAlign.Center);
             Column.layoutWeight(1);
+            Column.onClick(() => this.gotoPointsMall());
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 16777358, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
@@ -460,7 +491,7 @@ export default class ProfilePage extends ViewPU {
             Image.height(36);
         }, Image);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('退款/售后');
+            Text.create('积分商城');
             Text.fontSize(12);
         }, Text);
         Text.pop();
@@ -629,13 +660,13 @@ export default class ProfilePage extends ViewPU {
             console.error('跳转登录失败:', String(err));
         }
     }
-    private renderUserStat(label: string, value: string, parent = null) {
+    private renderUserStat(label: string, value: string, bgColor: string, parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create({ space: 4 });
-            Column.width('30%');
-            Column.padding({ top: 4, bottom: 4 });
-            Column.backgroundColor('#FFF8F1');
-            Column.borderRadius(12);
+            Column.padding({ top: 8, bottom: 8 });
+            Column.backgroundColor(bgColor);
+            Column.borderRadius(14);
+            Column.layoutWeight(1);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(value);
@@ -653,6 +684,14 @@ export default class ProfilePage extends ViewPU {
         }, Text);
         Text.pop();
         Column.pop();
+    }
+    private gotoPointsMall(): void {
+        try {
+            router.pushUrl({ url: 'pages/PointsMallPage' });
+        }
+        catch (err) {
+            console.error('跳转积分商城失败:', String(err));
+        }
     }
     rerender() {
         this.updateDirtyElements();

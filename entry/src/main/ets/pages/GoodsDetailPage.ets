@@ -6,6 +6,7 @@ import { GoodsListItemType, CategoryType, goodsPool } from '../viewmodel/Initial
 import CartStore from '../common/CartStore';
 import FavoritesStore from '../common/FavoritesStore';
 import OrderStore from '../common/OrderStore';
+import PointsStore from '../common/PointsStore';
 import NotificationStore, { NotificationPayload } from '../common/NotificationStore';
 import { LAYOUT_WIDTH_OR_HEIGHT, STORE } from '../common/CommonConstants';
 import ReviewStore, { StoredReviewRecord } from '../common/ReviewStore';
@@ -523,21 +524,32 @@ struct GoodsDetailPage {
     Column() {
       // 价格区域
       Row() {
-        Text('¥')
-          .fontSize(16)
-          .fontColor('#FF0000')
-          .fontWeight(FontWeight.Bold)
-        Text(this.goods?.price.toFixed(2))
-          .fontSize(28)
-          .fontColor('#FF0000')
-          .fontWeight(FontWeight.Bold)
-        
-        if (this.goods?.originalPrice && this.goods.originalPrice > this.goods.price) {
-          Text('¥' + this.goods.originalPrice.toFixed(2))
-            .fontSize(14)
-            .fontColor('#999999')
-            .decoration({ type: TextDecorationType.LineThrough })
-            .margin({ left: 8 })
+        if (this.isPointsGoods()) {
+          Text(this.getRedeemPoints().toFixed(0) + ' 积分')
+            .fontSize(30)
+            .fontWeight(FontWeight.Bold)
+            .fontColor('#FF7A00')
+          Text('积分兑换')
+            .fontSize(13)
+            .fontColor('#FF7A00')
+            .margin({ left: 12 })
+        } else {
+          Text('¥')
+            .fontSize(16)
+            .fontColor('#FF0000')
+            .fontWeight(FontWeight.Bold)
+          Text(this.goods?.price.toFixed(2))
+            .fontSize(28)
+            .fontColor('#FF0000')
+            .fontWeight(FontWeight.Bold)
+          
+          if (this.goods?.originalPrice && this.goods.originalPrice > this.goods.price) {
+            Text('¥' + this.goods.originalPrice.toFixed(2))
+              .fontSize(14)
+              .fontColor('#999999')
+              .decoration({ type: TextDecorationType.LineThrough })
+              .margin({ left: 8 })
+          }
         }
         
         Blank()
@@ -659,7 +671,7 @@ struct GoodsDetailPage {
   @Builder
   buildSpecifications() {
     Row() {
-      Text('麦当劳')
+      Text('款式')
         .fontSize(14)
         .fontColor('#333333')
         .width(60)
@@ -1100,50 +1112,8 @@ struct GoodsDetailPage {
         .height(40)
         .width(90)
         .margin({ left: 8 })
-        .onClick(() => {
-          try {
-            if (this.goods) {
-              // 记录此订单为待发货（以商品 id 为 key）
-              const goodsId = this.goods.id;
-              const goodsTitle = this.goods.title;
-              OrderStore.addOrderPendingShip(goodsId);
-              prompt.showToast({ message: '购买成功', duration: 1500 });
-              // 安排后续的发货和到货通知（示意）
-              setTimeout(() => {
-                try {
-                  // Use resource payload so NotificationComponent can render resource correctly
-                  if (goodsTitle) {
-                    const payload: NotificationPayload = { resource: goodsTitle, suffix: ' 现已发货' } as NotificationPayload;
-                    NotificationStore.show(payload, 5000);
-                  } else {
-                    NotificationStore.show('商品已发货', 5000);
-                  }
-                  // 标记已发货：如果之前是待发货，该操作会让待发货数 -1
-                  OrderStore.markShipped(goodsId);
-                  prompt.showToast({ message: '您购买的商品已发货', duration: 3000 });
-                } catch (e) {
-                  console.error('发货通知失败:', String(e));
-                }
-              }, 5000);
-              setTimeout(() => {
-                try {
-                  if (goodsTitle) {
-                    const payload2: NotificationPayload = { resource: goodsTitle, suffix: ' 现已到货，请注意查收' } as NotificationPayload;
-                    NotificationStore.show(payload2, 5000);
-                  } else {
-                    NotificationStore.show('商品已到货', 5000);
-                  }
-                  // 标记已到货：如果之前是已发货/待发货，则会增加待收货计数
-                  OrderStore.markArrived(goodsId);
-                  prompt.showToast({ message: '您购买的商品已到货，请注意查收', duration: 3000 });
-                } catch (e) {
-                  console.error('到货通知失败:', String(e));
-                }
-              }, 10000);
-            }
-          } catch (err) {
-            console.error('购买失败:', String(err));
-          }
+        .onClick(async () => {
+          await this.handlePurchase();
         })
     }
     .width('100%')
@@ -1152,5 +1122,78 @@ struct GoodsDetailPage {
     .backgroundColor(Color.White)
     .shadow({ radius: 8, color: '#10000000', offsetY: -2 })
     .alignItems(VerticalAlign.Center)
+  }
+
+  private isPointsGoods(): boolean {
+    return !!(this.goods && typeof this.goods.redeemPoints === 'number' && this.goods.redeemPoints > 0);
+  }
+
+  private getRedeemPoints(): number {
+    if (!this.isPointsGoods() || !this.goods) {
+      return 0;
+    }
+    return Math.max(0, this.goods.redeemPoints ?? 0);
+  }
+
+  private async handlePurchase(): Promise<void> {
+    try {
+      if (!this.goods) {
+        return;
+      }
+      const goodsId: number = this.goods.id;
+      const goodsTitle: Resource | undefined = this.goods.title;
+      const pointsMode: boolean = this.isPointsGoods();
+      if (pointsMode) {
+        const cost: number = this.getRedeemPoints();
+        const success: boolean = await PointsStore.spendPoints(cost);
+        if (!success) {
+          prompt.showToast({ message: '积分不足', duration: 1500 });
+          return;
+        }
+      }
+      OrderStore.addOrderPendingShip(goodsId);
+      prompt.showToast({ message: pointsMode ? '兑换成功' : '购买成功', duration: 1500 });
+      if (!pointsMode) {
+        const earnedPoints: number = Math.round((this.goods.price / 10) * 10) / 10;
+        if (earnedPoints > 0) {
+          await PointsStore.addPoints(earnedPoints);
+          prompt.showToast({ message: `积分+${earnedPoints.toFixed(1)}`, duration: 1500 });
+        }
+      }
+      this.scheduleOrderLifecycle(goodsId, goodsTitle);
+    } catch (err) {
+      console.error('购买失败:', String(err));
+    }
+  }
+
+  private scheduleOrderLifecycle(goodsId: number, goodsTitle?: Resource): void {
+    setTimeout(() => {
+      try {
+        if (goodsTitle) {
+          const payload: NotificationPayload = { resource: goodsTitle, suffix: ' 现已发货' } as NotificationPayload;
+          NotificationStore.show(payload, 5000);
+        } else {
+          NotificationStore.show('商品已发货', 5000);
+        }
+        OrderStore.markShipped(goodsId);
+        prompt.showToast({ message: '您购买的商品已发货', duration: 3000 });
+      } catch (e) {
+        console.error('发货通知失败:', String(e));
+      }
+    }, 5000);
+    setTimeout(() => {
+      try {
+        if (goodsTitle) {
+          const payload2: NotificationPayload = { resource: goodsTitle, suffix: ' 现已到货，请注意查收' } as NotificationPayload;
+          NotificationStore.show(payload2, 5000);
+        } else {
+          NotificationStore.show('商品已到货', 5000);
+        }
+        OrderStore.markArrived(goodsId);
+        prompt.showToast({ message: '您购买的商品已到货，请注意查收', duration: 3000 });
+      } catch (e) {
+        console.error('到货通知失败:', String(e));
+      }
+    }, 10000);
   }
 }
