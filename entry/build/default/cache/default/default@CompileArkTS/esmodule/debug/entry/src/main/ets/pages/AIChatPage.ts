@@ -5,10 +5,12 @@ interface AIChatPage_Params {
     messages?: ChatMessage[];
     inputText?: string;
     chatHistory?: ChatHistoryItem[];
-    DEEPSEEK_API_KEY?: string;
-    DEEPSEEK_URL?: string;
+    AI_API_KEY?: string;
+    AI_API_URL?: string;
+    AI_MODEL_NAME?: string;
 }
 import router from "@ohos:router";
+import AuthStore from "@bundle:com.example.list_harmony/entry/ets/common/AuthStore";
 import http from "@ohos:net.http";
 import { goodsPool, CategoryType } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
 import type { GoodsListItemType } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
@@ -75,8 +77,9 @@ export default class AIChatPage extends ViewPU {
         this.__messages = new ObservedPropertyObjectPU([], this, "messages");
         this.__inputText = new ObservedPropertySimplePU('', this, "inputText");
         this.__chatHistory = new ObservedPropertyObjectPU([], this, "chatHistory");
-        this.DEEPSEEK_API_KEY = 'sk-0d4c8b12e11143b78fd5a008b8dcae00';
-        this.DEEPSEEK_URL = 'https://api.deepseek.com/v1/chat/completions';
+        this.AI_API_KEY = 'sk-NutbXT4WhS16xUbYYn4SpQFdtej7mvzlV28btCf3TaQOldLz';
+        this.AI_API_URL = 'https://www.dmxapi.cn/v1/chat/completions';
+        this.AI_MODEL_NAME = 'gpt-4o-2024-05-13';
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
     }
@@ -90,11 +93,14 @@ export default class AIChatPage extends ViewPU {
         if (params.chatHistory !== undefined) {
             this.chatHistory = params.chatHistory;
         }
-        if (params.DEEPSEEK_API_KEY !== undefined) {
-            this.DEEPSEEK_API_KEY = params.DEEPSEEK_API_KEY;
+        if (params.AI_API_KEY !== undefined) {
+            this.AI_API_KEY = params.AI_API_KEY;
         }
-        if (params.DEEPSEEK_URL !== undefined) {
-            this.DEEPSEEK_URL = params.DEEPSEEK_URL;
+        if (params.AI_API_URL !== undefined) {
+            this.AI_API_URL = params.AI_API_URL;
+        }
+        if (params.AI_MODEL_NAME !== undefined) {
+            this.AI_MODEL_NAME = params.AI_MODEL_NAME;
         }
     }
     updateStateVars(params: AIChatPage_Params) {
@@ -132,8 +138,9 @@ export default class AIChatPage extends ViewPU {
     set chatHistory(newValue: ChatHistoryItem[]) {
         this.__chatHistory.set(newValue);
     }
-    private readonly DEEPSEEK_API_KEY: string;
-    private readonly DEEPSEEK_URL: string;
+    private readonly AI_API_KEY: string;
+    private readonly AI_API_URL: string;
+    private readonly AI_MODEL_NAME: string;
     aboutToAppear() {
         try {
             const params = router.getParams() as Record<string, string> | null;
@@ -302,9 +309,18 @@ export default class AIChatPage extends ViewPU {
                                                             Column.backgroundColor(Color.White);
                                                             Column.borderRadius(8);
                                                             Column.onClick(() => {
-                                                                router.pushUrl({ url: 'pages/GoodsDetailPage', params: { goods: item } }).catch((err: Error) => {
-                                                                    console.error('跳转失败:', err.message);
-                                                                });
+                                                                try {
+                                                                    if (!AuthStore.isLoggedIn()) {
+                                                                        router.pushUrl({ url: 'pages/LoginRegisterPage' }).catch((err: Error) => console.error('跳转登录失败:', err.message));
+                                                                        return;
+                                                                    }
+                                                                    router.pushUrl({ url: 'pages/GoodsDetailPage', params: { goods: item } }).catch((err: Error) => {
+                                                                        console.error('跳转失败:', err.message);
+                                                                    });
+                                                                }
+                                                                catch (err) {
+                                                                    console.error('跳转商品详情失败:', String(err));
+                                                                }
                                                             });
                                                         }, Column);
                                                         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -513,14 +529,14 @@ export default class AIChatPage extends ViewPU {
                 { role: 'user', content: query }
             ];
             const bodyObj: DeepSeekRequest = {
-                model: 'deepseek-chat',
+                model: this.AI_MODEL_NAME,
                 messages: messagesArr,
                 temperature: 0.2
             };
             const body = JSON.stringify(bodyObj);
             const headerObj: Record<string, string> = {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.DEEPSEEK_API_KEY}`
+                'Authorization': `Bearer ${this.AI_API_KEY}`
             };
             const requestOptions: HttpRequestOptions = {
                 method: http.RequestMethod.POST,
@@ -529,17 +545,17 @@ export default class AIChatPage extends ViewPU {
                 connectTimeout: 10000,
                 readTimeout: 10000
             };
-            console.info('DeepSeek: sending request to', this.DEEPSEEK_URL);
-            console.info('DeepSeek: requestOptions:', JSON.stringify({ method: requestOptions.method, header: requestOptions.header }));
-            const response = await httpRequest.request(this.DEEPSEEK_URL, requestOptions);
+            console.info('AIService: sending request to', this.AI_API_URL);
+            console.info('AIService: requestOptions:', JSON.stringify({ method: requestOptions.method, header: requestOptions.header }));
+            const response = await httpRequest.request(this.AI_API_URL, requestOptions);
             try {
                 const respObj = response as HttpResponseLike;
-                console.info('DeepSeek: raw response object:', JSON.stringify(respObj));
+                console.info('AIService: raw response object:', JSON.stringify(respObj));
                 const respTextForLog = respObj.result || respObj.body || JSON.stringify(response);
-                console.info('DeepSeek: respText used for parsing:', respTextForLog);
+                console.info('AIService: respText used for parsing:', respTextForLog);
             }
             catch (logErr) {
-                console.info('DeepSeek: raw response received (toString):', String(response));
+                console.info('AIService: raw response received (toString):', String(response));
             }
             // 解析返回 (DeepSeek 返回结构通常包含 choices[0].message.content)
             try {
@@ -561,11 +577,11 @@ export default class AIChatPage extends ViewPU {
                 }
             }
             catch (err) {
-                console.warn('尝试解析 DeepSeek 响应为 JSON 失败，使用回退解析', String(err));
+                console.warn('尝试解析 AI 服务响应为 JSON 失败，使用回退解析', String(err));
             }
         }
         catch (err) {
-            console.error('DeepSeek API 调用异常：', String(err));
+            console.error('AI API 调用异常：', String(err));
         }
         finally {
             httpRequest.destroy();

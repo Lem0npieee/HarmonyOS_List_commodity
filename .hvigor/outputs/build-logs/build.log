@@ -89,3 +89,1590 @@
 [2025-12-17T11:46:26.196] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
 [2025-12-17T11:46:26.197] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
 [2025-12-17T11:46:26.198] [DEBUG] debug-file - worker[14] exits with exit code 1.
+[2025-12-17T11:48:42.231] [DEBUG] debug-file - session manager: set active socket. socketId=7WZWkrvzda-1tEejAABH
+[2025-12-17T11:48:42.255] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-17T11:48:42.261] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' },
+  optimizationStrategy: 'memory',
+  hotCompile: undefined,
+  hotReloadBuild: undefined
+}
+[2025-12-17T11:48:42.267] [DEBUG] debug-file - Cache service initialization finished in 6 ms 
+[2025-12-17T11:48:42.268] [DEBUG] debug-file - hvigorfile, resolving D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\hvigorfile.ts
+[2025-12-17T11:48:42.275] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2025-12-17T11:48:42.275] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2025-12-17T11:48:42.279] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2025-12-17T11:48:42.279] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2025-12-17T11:48:42.279] [DEBUG] debug-file - Product 'default' build option initialized
+[2025-12-17T11:48:42.279] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2025-12-17T11:48:42.280] [DEBUG] debug-file - Obtain build option for product 'default'in this build.
+[2025-12-17T11:48:42.282] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2025-12-17T11:48:42.285] [DEBUG] debug-file - Start recording SDK configuration permission data.
+[2025-12-17T11:48:42.314] [DEBUG] debug-file - Sdk init in 31 ms 
+[2025-12-17T11:48:42.317] [DEBUG] debug-file - Project task initialization takes 3 ms 
+[2025-12-17T11:48:42.317] [DEBUG] debug-file - hvigorfile, resolve finished D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\hvigorfile.ts
+[2025-12-17T11:48:42.317] [DEBUG] debug-file - hvigorfile, resolving D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\hvigorfile.ts
+[2025-12-17T11:48:42.320] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2025-12-17T11:48:42.320] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2025-12-17T11:48:42.321] [DEBUG] debug-file - failed to load cangjie to dynamically generate schemas: Error: Cannot find module '@ohos/cangjie-build-support/index'
+Require stack:
+- D:\DevEco Studio2\tools\hvigor\hvigor-ohos-plugin\src\plugin\factory\plugin-factory.js
+- D:\DevEco Studio2\tools\hvigor\hvigor-ohos-plugin\index.js
+- D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\hvigorfile.ts
+- D:\DevEco Studio2\tools\hvigor\hvigor\src\base\internal\lifecycle\configuration.js
+- D:\DevEco Studio2\tools\hvigor\hvigor\src\base\boot\index.js
+- D:\DevEco Studio2\tools\hvigor\hvigor\src\base\daemon\cluster\worker-process-lifecycle.js
+- D:\DevEco Studio2\tools\hvigor\hvigor\src\base\daemon\process\daemon-process-boot-script.js
+[2025-12-17T11:48:42.324] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=release
+[2025-12-17T11:48:42.324] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-17T11:48:42.324] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-17T11:48:42.324] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-17T11:48:42.324] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-17T11:48:42.324] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-17T11:48:42.324] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-17T11:48:42.324] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-17T11:48:42.324] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-17T11:48:42.324] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-17T11:48:42.324] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-17T11:48:42.324] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-17T11:48:42.324] [DEBUG] debug-file - Obtain build option for module 'entry' target 'default'in this build.
+[2025-12-17T11:48:42.326] [DEBUG] debug-file - Module entry task initialization takes 1 ms 
+[2025-12-17T11:48:42.326] [DEBUG] debug-file - hvigorfile, resolve finished D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\hvigorfile.ts
+[2025-12-17T11:48:42.342] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 16 ms 
+[2025-12-17T11:48:42.342] [DEBUG] debug-file - project has submodules:entry
+[2025-12-17T11:48:42.344] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2025-12-17T11:48:42.351] [DEBUG] debug-file - load to the disk finished
+[2025-12-17T11:48:42.352] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-12-17T11:48:42.354] [DEBUG] debug-file - Module List_commodity Collected Dependency: 
+[2025-12-17T11:48:42.354] [DEBUG] debug-file - Module List_commodity's total dependency: 0
+[2025-12-17T11:48:42.354] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-12-17T11:48:42.357] [DEBUG] debug-file - Module entry Collected Dependency: 
+[2025-12-17T11:48:42.357] [DEBUG] debug-file - Module entry's total dependency: 0
+[2025-12-17T11:48:42.359] [DEBUG] debug-file - Configuration phase cost:93 ms 
+[2025-12-17T11:48:42.360] [DEBUG] debug-file - Configuration task cost before running: 102 ms 
+[2025-12-17T11:48:42.365] [DEBUG] debug-file - Executing task :entry:default@PreBuild
+[2025-12-17T11:48:42.365] [DEBUG] debug-file - Task 'entry:default@PreBuild' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:48:42.375] [DEBUG] debug-file - Incremental task entry:default@PreBuild pre-execution cost: 7 ms .
+[2025-12-17T11:48:42.375] [DEBUG] debug-file - entry : default@PreBuild cost memory 0.32706451416015625
+[2025-12-17T11:48:42.377] [INFO] debug-file - UP-TO-DATE :entry:default@PreBuild...  
+[2025-12-17T11:48:42.378] [DEBUG] debug-file - Executing task :entry:default@CreateModuleInfo
+[2025-12-17T11:48:42.378] [DEBUG] debug-file - Task 'entry:default@CreateModuleInfo' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:48:42.379] [DEBUG] debug-file - entry : default@CreateModuleInfo cost memory 0.03888702392578125
+[2025-12-17T11:48:42.379] [DEBUG] debug-file - runTaskFromQueue task cost before running: 120 ms 
+[2025-12-17T11:48:42.379] [INFO] debug-file - Finished :entry:default@CreateModuleInfo... after 1 ms 
+[2025-12-17T11:48:42.380] [DEBUG] debug-file - Executing task :entry:default@GenerateMetadata
+[2025-12-17T11:48:42.380] [DEBUG] debug-file - Task 'entry:default@GenerateMetadata' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:48:42.381] [DEBUG] debug-file - Incremental task entry:default@GenerateMetadata pre-execution cost: 1 ms .
+[2025-12-17T11:48:42.381] [DEBUG] debug-file - entry : default@GenerateMetadata cost memory 0.08739471435546875
+[2025-12-17T11:48:42.381] [INFO] debug-file - UP-TO-DATE :entry:default@GenerateMetadata...  
+[2025-12-17T11:48:42.383] [DEBUG] debug-file - Executing task :entry:default@ConfigureCmake
+[2025-12-17T11:48:42.383] [DEBUG] debug-file - entry : default@ConfigureCmake cost memory 0.01512908935546875
+[2025-12-17T11:48:42.383] [DEBUG] debug-file - runTaskFromQueue task cost before running: 125 ms 
+[2025-12-17T11:48:42.383] [INFO] debug-file - Finished :entry:default@ConfigureCmake... after 1 ms 
+[2025-12-17T11:48:42.384] [DEBUG] debug-file - Executing task :entry:default@MergeProfile
+[2025-12-17T11:48:42.384] [DEBUG] debug-file - Task 'entry:default@MergeProfile' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:48:42.386] [DEBUG] debug-file - Incremental task entry:default@MergeProfile pre-execution cost: 2 ms .
+[2025-12-17T11:48:42.386] [DEBUG] debug-file - entry : default@MergeProfile cost memory 0.1289825439453125
+[2025-12-17T11:48:42.386] [INFO] debug-file - UP-TO-DATE :entry:default@MergeProfile...  
+[2025-12-17T11:48:42.387] [DEBUG] debug-file - Executing task :entry:default@CreateBuildProfile
+[2025-12-17T11:48:42.388] [DEBUG] debug-file - Task 'entry:default@CreateBuildProfile' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:48:42.389] [DEBUG] debug-file - Incremental task entry:default@CreateBuildProfile pre-execution cost: 1 ms .
+[2025-12-17T11:48:42.389] [DEBUG] debug-file - entry : default@CreateBuildProfile cost memory 0.09545135498046875
+[2025-12-17T11:48:42.389] [INFO] debug-file - UP-TO-DATE :entry:default@CreateBuildProfile...  
+[2025-12-17T11:48:42.390] [DEBUG] debug-file - Executing task :entry:default@PreCheckSyscap
+[2025-12-17T11:48:42.390] [DEBUG] debug-file - entry : default@PreCheckSyscap cost memory 0.015350341796875
+[2025-12-17T11:48:42.390] [DEBUG] debug-file - runTaskFromQueue task cost before running: 132 ms 
+[2025-12-17T11:48:42.390] [INFO] debug-file - Finished :entry:default@PreCheckSyscap... after 1 ms 
+[2025-12-17T11:48:42.391] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgContextInfo
+[2025-12-17T11:48:42.395] [DEBUG] debug-file - Task 'entry:default@GeneratePkgContextInfo' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:48:42.395] [DEBUG] debug-file - entry : default@GeneratePkgContextInfo cost memory -1.4695892333984375
+[2025-12-17T11:48:42.395] [DEBUG] debug-file - runTaskFromQueue task cost before running: 137 ms 
+[2025-12-17T11:48:42.395] [INFO] debug-file - Finished :entry:default@GeneratePkgContextInfo... after 4 ms 
+[2025-12-17T11:48:42.399] [DEBUG] debug-file - Executing task :entry:default@ProcessIntegratedHsp
+[2025-12-17T11:48:42.399] [DEBUG] debug-file - entry:default@ProcessIntegratedHsp is not up-to-date, since the output file 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\build\cache\default\integrated_hsp\integratedHspCache.json' does not exist.
+[2025-12-17T11:48:42.399] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp pre-execution cost: 1 ms .
+[2025-12-17T11:48:42.399] [DEBUG] debug-file - entry : default@ProcessIntegratedHsp cost memory 0.0652618408203125
+[2025-12-17T11:48:42.399] [DEBUG] debug-file - runTaskFromQueue task cost before running: 141 ms 
+[2025-12-17T11:48:42.399] [INFO] debug-file - Finished :entry:default@ProcessIntegratedHsp... after 1 ms 
+[2025-12-17T11:48:42.400] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithCmake
+[2025-12-17T11:48:42.401] [DEBUG] debug-file - entry : default@BuildNativeWithCmake cost memory 0.0197296142578125
+[2025-12-17T11:48:42.401] [DEBUG] debug-file - runTaskFromQueue task cost before running: 142 ms 
+[2025-12-17T11:48:42.401] [INFO] debug-file - Finished :entry:default@BuildNativeWithCmake... after 1 ms 
+[2025-12-17T11:48:42.402] [DEBUG] debug-file - Executing task :entry:default@MakePackInfo
+[2025-12-17T11:48:42.403] [DEBUG] debug-file - Incremental task entry:default@MakePackInfo pre-execution cost: 2 ms .
+[2025-12-17T11:48:42.403] [DEBUG] debug-file - entry : default@MakePackInfo cost memory 0.10781097412109375
+[2025-12-17T11:48:42.403] [INFO] debug-file - UP-TO-DATE :entry:default@MakePackInfo...  
+[2025-12-17T11:48:42.404] [DEBUG] debug-file - Executing task :entry:default@SyscapTransform
+[2025-12-17T11:48:42.405] [DEBUG] debug-file - File: 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\syscap.json' from 'sysCapJsonPath' is not exists, just ignore.
+[2025-12-17T11:48:42.405] [DEBUG] debug-file - Task 'entry:default@SyscapTransform' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:48:42.407] [DEBUG] debug-file - entry:default@SyscapTransform is not up-to-date, since the output file 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\syscap\default\rpcid.sc' does not exist.
+[2025-12-17T11:48:42.407] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform pre-execution cost: 2 ms .
+[2025-12-17T11:48:42.407] [DEBUG] debug-file - entry : default@SyscapTransform cost memory 0.14347076416015625
+[2025-12-17T11:48:42.407] [DEBUG] debug-file - runTaskFromQueue task cost before running: 149 ms 
+[2025-12-17T11:48:42.407] [INFO] debug-file - Finished :entry:default@SyscapTransform... after 3 ms 
+[2025-12-17T11:48:42.408] [DEBUG] debug-file - Executing task :entry:default@ProcessProfile
+[2025-12-17T11:48:42.410] [DEBUG] debug-file - Task 'entry:default@ProcessProfile' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:48:42.411] [DEBUG] debug-file - Incremental task entry:default@ProcessProfile pre-execution cost: 1 ms .
+[2025-12-17T11:48:42.411] [DEBUG] debug-file - entry : default@ProcessProfile cost memory 0.12708282470703125
+[2025-12-17T11:48:42.411] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessProfile...  
+[2025-12-17T11:48:42.412] [DEBUG] debug-file - Executing task :entry:default@ProcessRouterMap
+[2025-12-17T11:48:42.415] [DEBUG] debug-file - Incremental task entry:default@ProcessRouterMap pre-execution cost: 3 ms .
+[2025-12-17T11:48:42.415] [DEBUG] debug-file - entry : default@ProcessRouterMap cost memory 0.1498565673828125
+[2025-12-17T11:48:42.416] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessRouterMap...  
+[2025-12-17T11:48:42.417] [DEBUG] debug-file - Executing task :entry:default@ProcessShareConfig
+[2025-12-17T11:48:42.419] [DEBUG] debug-file - Incremental task entry:default@ProcessShareConfig pre-execution cost: 2 ms .
+[2025-12-17T11:48:42.420] [DEBUG] debug-file - entry : default@ProcessShareConfig cost memory -1.5014495849609375
+[2025-12-17T11:48:42.420] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessShareConfig...  
+[2025-12-17T11:48:42.421] [DEBUG] debug-file - Executing task :entry:default@ProcessStartupConfig
+[2025-12-17T11:48:42.421] [DEBUG] debug-file - Task 'entry:default@ProcessStartupConfig' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:48:42.422] [DEBUG] debug-file - entry:default@ProcessStartupConfig is not up-to-date, since the output file 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\startup\default\startup_config.json' does not exist.
+[2025-12-17T11:48:42.422] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig pre-execution cost: 1 ms .
+[2025-12-17T11:48:42.422] [DEBUG] debug-file - entry : default@ProcessStartupConfig cost memory 0.11180877685546875
+[2025-12-17T11:48:42.422] [DEBUG] debug-file - runTaskFromQueue task cost before running: 164 ms 
+[2025-12-17T11:48:42.422] [INFO] debug-file - Finished :entry:default@ProcessStartupConfig... after 2 ms 
+[2025-12-17T11:48:42.423] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithNinja
+[2025-12-17T11:48:42.424] [DEBUG] debug-file - entry : default@BuildNativeWithNinja cost memory 0.02518463134765625
+[2025-12-17T11:48:42.424] [DEBUG] debug-file - runTaskFromQueue task cost before running: 165 ms 
+[2025-12-17T11:48:42.424] [INFO] debug-file - Finished :entry:default@BuildNativeWithNinja... after 1 ms 
+[2025-12-17T11:48:42.425] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@ProcessResource
+[2025-12-17T11:48:42.426] [DEBUG] debug-file - Executing task :entry:default@ProcessResource
+[2025-12-17T11:48:42.426] [DEBUG] debug-file - Task 'entry:default@ProcessResource' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:48:42.427] [DEBUG] debug-file - Incremental task entry:default@ProcessResource pre-execution cost: 1 ms .
+[2025-12-17T11:48:42.427] [DEBUG] debug-file - entry : default@ProcessResource cost memory 0.1464996337890625
+[2025-12-17T11:48:42.429] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessResource...  
+[2025-12-17T11:48:42.432] [DEBUG] debug-file - Executing task :entry:default@GenerateLoaderJson
+[2025-12-17T11:48:42.432] [DEBUG] debug-file - Task 'entry:default@GenerateLoaderJson' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:48:42.441] [DEBUG] debug-file - Incremental task entry:default@GenerateLoaderJson pre-execution cost: 5 ms .
+[2025-12-17T11:48:42.441] [DEBUG] debug-file - entry : default@GenerateLoaderJson cost memory 0.5558013916015625
+[2025-12-17T11:48:42.444] [INFO] debug-file - UP-TO-DATE :entry:default@GenerateLoaderJson...  
+[2025-12-17T11:48:42.446] [DEBUG] debug-file - Executing task :entry:default@ProcessLibs
+[2025-12-17T11:48:42.449] [DEBUG] debug-file - Incremental task entry:default@ProcessLibs pre-execution cost: 2 ms .
+[2025-12-17T11:48:42.450] [DEBUG] debug-file - entry : default@ProcessLibs cost memory 0.116180419921875
+[2025-12-17T11:48:42.450] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessLibs...  
+[2025-12-17T11:48:42.452] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@CompileResource
+[2025-12-17T11:48:42.452] [DEBUG] debug-file - Executing task :entry:default@CompileResource
+[2025-12-17T11:48:42.475] [DEBUG] debug-file - Incremental task entry:default@CompileResource pre-execution cost: 22 ms .
+[2025-12-17T11:48:42.475] [DEBUG] debug-file - entry : default@CompileResource cost memory 0.01905059814453125
+[2025-12-17T11:48:42.476] [INFO] debug-file - UP-TO-DATE :entry:default@CompileResource...  
+[2025-12-17T11:48:42.477] [DEBUG] debug-file - Executing task :entry:default@DoNativeStrip
+[2025-12-17T11:48:42.478] [DEBUG] debug-file - Task 'entry:default@DoNativeStrip' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:48:42.479] [DEBUG] debug-file - Incremental task entry:default@DoNativeStrip pre-execution cost: 2 ms .
+[2025-12-17T11:48:42.479] [DEBUG] debug-file - entry : default@DoNativeStrip cost memory 0.08000946044921875
+[2025-12-17T11:48:42.480] [INFO] debug-file - UP-TO-DATE :entry:default@DoNativeStrip...  
+[2025-12-17T11:48:42.481] [DEBUG] debug-file - Executing task :entry:default@CompileArkTS
+[2025-12-17T11:48:42.482] [DEBUG] debug-file - obfuscationOptions: undefined
+[2025-12-17T11:48:42.495] [DEBUG] debug-file - entry:default@CompileArkTS is not up-to-date, since the input file 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets' has been changed.
+[2025-12-17T11:48:42.496] [DEBUG] debug-file - Incremental task entry:default@CompileArkTS pre-execution cost: 12 ms .
+[2025-12-17T11:48:42.506] [DEBUG] debug-file - build config:
+[2025-12-17T11:48:42.506] [DEBUG] debug-file - {
+  moduleType: 'entry',
+  perf: 0,
+  targetName: '.default',
+  packageManagerType: 'ohpm',
+  localPropertiesPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\local.properties',
+  isPreview: false,
+  isOhosTest: false,
+  isLocalTest: false,
+  buildMode: 'Debug',
+  hotReloadBuild: undefined,
+  watchMode: 'false',
+  aceProfilePath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\res\\default\\resources\\base\\profile',
+  etsLoaderPath: 'D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader',
+  modulePath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry',
+  testFrameworkPar: {
+    testMode: undefined,
+    coveragePathFilter: undefined,
+    coverageMode: undefined
+  },
+  needCoverageInsert: false,
+  debugLine: false,
+  projectTopDir: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity',
+  compileSdkVersion: 20,
+  compatibleSdkVersion: 17,
+  compatibleSdkVersionStage: undefined,
+  bundleName: 'c***y',
+  etsLoaderVersion: '6.0.0.47',
+  etsLoaderReleaseType: 'Release',
+  aotCompileMode: 'type',
+  apPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\modules.ap',
+  entryModuleName: 'entry',
+  entryModuleVersion: '1.0.0',
+  entryPackageName: 'entry',
+  allModuleNameHash: '46dc69cfbe882dbb4ab08d779a14723b',
+  externalApiPaths: [ 'D:\\DevEco Studio2\\sdk\\default\\hms\\ets' ],
+  compilerTypes: [],
+  isCrossplatform: false,
+  hvigorPluginFile: undefined,
+  compilePluginPath: undefined,
+  buildGeneratedProfilePath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\generated\\profile\\default',
+  bundleType: 'app',
+  arkTSVersion: undefined,
+  apiVersion: 20,
+  needCompleteSourcesMap: false,
+  isFaMode: false,
+  strictMode: undefined,
+  buildDir: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build',
+  deviceTypes: [ 'phone' ],
+  useNormalizedOHMUrl: false,
+  pkgContextInfo: undefined,
+  ohPackagePathMap: {},
+  dependencyAliasMap: {},
+  permission: { requestPermissions: [ [Object] ], definePermissions: undefined },
+  integratedHsp: false,
+  projectArkOption: undefined,
+  sourceMapDir: undefined,
+  branchElimination: false,
+  transformLib: undefined,
+  caseSensitiveCheck: false,
+  tsImportSendable: false,
+  resolveConflictMode: true,
+  depName2RootPath: {},
+  depName2DepInfo: {},
+  rootPathSet: [
+    'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity'
+  ],
+  useNativeResolver: true,
+  shouldEmitJs: true,
+  useTscResolve: false,
+  singleFileEmit: false,
+  userProjectConfig: {
+    autoLazyImport: false,
+    allowEmptyBundleName: false,
+    reExportCheckMode: 'noCheck',
+    executionMode: 'memory',
+    usePathPlaceholder: false,
+    writeRollupCache: true,
+    isExpandImportEnabled: false,
+    expandImportExclude: '',
+    ignoreCrossplatformCheck: false,
+    isPreloadSoEnabled: false
+  },
+  skipOhModulesLint: false,
+  executionMode: 'memory',
+  autoLazyImport: false,
+  allowEmptyBundleName: false,
+  reExportCheckMode: 'noCheck',
+  usePathPlaceholder: false,
+  writeRollupCache: true,
+  isExpandImportEnabled: false,
+  expandImportExclude: '',
+  ignoreCrossplatformCheck: false,
+  isPreloadSoEnabled: false,
+  arkCompileCachePath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule',
+  aceModuleJsonPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\res\\default\\ark_module.json',
+  appResource: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\res\\default\\ResourceTable.txt',
+  rawFileResource: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\res\\default\\resources\\rawfile',
+  resourceTableHash: '58702bc33f008c91a3e6596e10d0227a',
+  runtimeOS: 'HarmonyOS',
+  sdkInfo: 'false:20:6.0.0.47:Release',
+  aceModuleRoot: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets',
+  compileMode: 'esmodule',
+  aceSuperVisualPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\supervisual',
+  aceBuildJson: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\loader\\default\\loader.json',
+  cachePath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule\\debug',
+  aceModuleBuild: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\loader_out\\default\\ets',
+  supportChunks: true,
+  declaredFilesPath: undefined,
+  shouldCollectDirectImportees: false,
+  isByteCodeHarOptimize: false,
+  expandImportPath: undefined,
+  pkgNameToPkgBriefInfo: {
+    entry: {
+      pkgRoot: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry',
+      originalSourceRoots: undefined,
+      sourceRoots: [Array],
+      pkgName: 'entry'
+    }
+  },
+  projectModel: {
+    'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main': {
+      moduleName: 'entry',
+      modulePkgPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry',
+      belongProjectPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity'
+    },
+    'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry': {
+      moduleName: 'entry',
+      modulePkgPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry',
+      belongProjectPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity'
+    },
+    'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity': {
+      moduleName: 'List_commodity',
+      modulePkgPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity',
+      belongProjectPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity'
+    }
+  },
+  pkgJsonFileHash: '73952b0c20fc6d4c363e85190646ec08',
+  allModulePaths: [
+    'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry'
+  ],
+  routerMap: {},
+  obfuscationOptions: undefined,
+  byteCodeHarToDependencyKeys: undefined,
+  compileBlockPkg: [],
+  mockParams: {
+    decorator: '@MockSetup',
+    packageName: '@ohos/hamock',
+    etsSourceRootPath: 'src/main/ets',
+    mockConfigPath: undefined,
+    mockConfigKey2ModuleInfo: {},
+    source2ModuleIdMap: {}
+  },
+  copyCodeResourceEnable: true,
+  copyCodeResourceExcludes: [],
+  copyCodeResourceIncludes: undefined,
+  uiTransformOptimization: false,
+  sdkPath: 'D:/DevEco Studio2/sdk',
+  needPreloadSoFileSet: {},
+  preloadSoFilePath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\preload\\default\\preload.json',
+  useSourceHash: false,
+  localModuleParamMap: {},
+  otherPaths: {
+    'entry/*': [
+      '..\\*',
+      '..\\..\\..\\build\\default\\generated\\profile\\default\\*'
+    ]
+  },
+  collectImportersConfig: undefined
+}
+[2025-12-17T11:48:42.506] [DEBUG] debug-file - Compile arkts with external api path: D:\DevEco Studio2\sdk\default\hms\ets
+[2025-12-17T11:48:42.507] [DEBUG] debug-file - default@CompileArkTS work[64] is submitted.
+[2025-12-17T11:48:42.507] [DEBUG] debug-file - default@CompileArkTS work[64] is pushed to ready queue.
+[2025-12-17T11:48:42.507] [DEBUG] debug-file - A work dispatched to worker[15] failed because unable to get work from ready queue.
+[2025-12-17T11:48:42.507] [DEBUG] debug-file - A work dispatched to worker[14] failed because unable to get work from ready queue.
+[2025-12-17T11:48:42.507] [DEBUG] debug-file - A work dispatched to worker[13] failed because unable to get work from ready queue.
+[2025-12-17T11:48:42.507] [DEBUG] debug-file - A work dispatched to worker[12] failed because unable to get work from ready queue.
+[2025-12-17T11:48:42.507] [DEBUG] debug-file - A work dispatched to worker[11] failed because unable to get work from ready queue.
+[2025-12-17T11:48:42.507] [DEBUG] debug-file - A work dispatched to worker[10] failed because unable to get work from ready queue.
+[2025-12-17T11:48:42.507] [DEBUG] debug-file - A work dispatched to worker[9] failed because unable to get work from ready queue.
+[2025-12-17T11:48:42.507] [DEBUG] debug-file - A work dispatched to worker[8] failed because unable to get work from ready queue.
+[2025-12-17T11:48:42.507] [DEBUG] debug-file - A work dispatched to worker[7] failed because unable to get work from ready queue.
+[2025-12-17T11:48:42.507] [DEBUG] debug-file - A work dispatched to worker[6] failed because unable to get work from ready queue.
+[2025-12-17T11:48:42.507] [DEBUG] debug-file - A work dispatched to worker[5] failed because unable to get work from ready queue.
+[2025-12-17T11:48:42.507] [DEBUG] debug-file - default@CompileArkTS work[64] has been dispatched to worker[4].
+[2025-12-17T11:48:42.507] [DEBUG] debug-file - default@CompileArkTS work[64] is dispatched.
+[2025-12-17T11:48:42.507] [DEBUG] debug-file - CopyResources startTime: 383126631456300
+[2025-12-17T11:48:42.507] [DEBUG] debug-file - default@CompileArkTS work[65] is submitted.
+[2025-12-17T11:48:42.507] [DEBUG] debug-file - default@CompileArkTS work[65] is pushed to ready queue.
+[2025-12-17T11:48:42.508] [DEBUG] debug-file - A work dispatched to worker[15] failed because unable to get work from ready queue.
+[2025-12-17T11:48:42.508] [DEBUG] debug-file - Create  resident worker with id: 14.
+[2025-12-17T11:48:42.509] [DEBUG] debug-file - default@CompileArkTS work[65] has been dispatched to worker[14].
+[2025-12-17T11:48:42.509] [DEBUG] debug-file - default@CompileArkTS work[65] is dispatched.
+[2025-12-17T11:48:42.509] [DEBUG] debug-file - entry : default@CompileArkTS cost memory 0.06107330322265625
+[2025-12-17T11:48:42.511] [DEBUG] debug-file - Executing task :entry:default@BuildJS
+[2025-12-17T11:48:42.515] [DEBUG] debug-file - entry : default@BuildJS cost memory 0.1352386474609375
+[2025-12-17T11:48:42.515] [DEBUG] debug-file - runTaskFromQueue task cost before running: 257 ms 
+[2025-12-17T11:48:42.515] [INFO] debug-file - Finished :entry:default@BuildJS... after 4 ms 
+[2025-12-17T11:48:42.516] [DEBUG] debug-file - Executing task :entry:default@CacheNativeLibs
+[2025-12-17T11:48:42.517] [DEBUG] debug-file - Task 'entry:default@CacheNativeLibs' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:48:42.518] [DEBUG] debug-file - Incremental task entry:default@CacheNativeLibs pre-execution cost: 2 ms .
+[2025-12-17T11:48:42.518] [DEBUG] debug-file - entry : default@CacheNativeLibs cost memory 0.0953826904296875
+[2025-12-17T11:48:42.518] [INFO] debug-file - UP-TO-DATE :entry:default@CacheNativeLibs...  
+[2025-12-17T11:48:43.877] [DEBUG] debug-file - worker[14] has one work done.
+[2025-12-17T11:48:43.877] [DEBUG] debug-file - CopyResources is end, endTime: 383128001506900
+[2025-12-17T11:48:43.877] [DEBUG] debug-file - default@CompileArkTS work[65] done.
+[2025-12-17T11:48:43.878] [DEBUG] debug-file - A work dispatched to worker[14] failed because unable to get work from ready queue.
+[2025-12-17T11:48:44.371] [DEBUG] debug-file - worker[4] has one work done.
+[2025-12-17T11:48:44.373] [DEBUG] debug-file - default@CompileArkTS work[64] done.
+[2025-12-17T11:48:44.373] [DEBUG] debug-file - A work dispatched to worker[4] failed because unable to get work from ready queue.
+[2025-12-17T11:48:44.376] [INFO] debug-file - Finished :entry:default@CompileArkTS... after 1 s 890 ms 
+[2025-12-17T11:48:44.377] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgModuleJson
+[2025-12-17T11:48:44.377] [DEBUG] debug-file - File: 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\preload\default\preload.json' from 'preloadSoJsonPath' is not exists, just ignore.
+[2025-12-17T11:48:44.377] [DEBUG] debug-file - Task 'entry:default@GeneratePkgModuleJson' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:48:44.378] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgModuleJson pre-execution cost: 1 ms .
+[2025-12-17T11:48:44.378] [DEBUG] debug-file - entry : default@GeneratePkgModuleJson cost memory 0.0943603515625
+[2025-12-17T11:48:44.378] [INFO] debug-file - UP-TO-DATE :entry:default@GeneratePkgModuleJson...  
+[2025-12-17T11:48:44.379] [DEBUG] debug-file - Executing task :entry:default@ProcessCompiledResources
+[2025-12-17T11:48:44.380] [DEBUG] debug-file - File: 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\preload\default\preload.json' from 'preloadSoJsonPath' is not exists, just ignore.
+[2025-12-17T11:48:44.380] [DEBUG] debug-file - Task 'entry:default@ProcessCompiledResources' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:48:44.380] [DEBUG] debug-file - entry : default@ProcessCompiledResources cost memory 0.06714630126953125
+[2025-12-17T11:48:44.380] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 122 ms 
+[2025-12-17T11:48:44.381] [INFO] debug-file - Finished :entry:default@ProcessCompiledResources... after 1 ms 
+[2025-12-17T11:48:44.384] [DEBUG] debug-file - Executing task :entry:default@PackageHap
+[2025-12-17T11:48:44.397] [DEBUG] debug-file - entry:default@PackageHap is not up-to-date, since the input file 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader_out\default\ets' has been changed.
+[2025-12-17T11:48:44.397] [DEBUG] debug-file - Incremental task entry:default@PackageHap pre-execution cost: 12 ms .
+[2025-12-17T11:48:44.398] [DEBUG] debug-file - Use tool [D:\DevEco Studio2\sdk\default\openharmony\toolchains\lib\app_packing_tool.jar]
+ [
+  'java',
+  '-Dfile.encoding=GBK',
+  '-jar',
+  'D:\\DevEco Studio2\\sdk\\default\\openharmony\\toolchains\\lib\\app_packing_tool.jar',
+  '--mode',
+  'hap',
+  '--force',
+  'true',
+  '--lib-path',
+  'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\stripped_native_libs\\default',
+  '--json-path',
+  'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\package\\default\\module.json',
+  '--resources-path',
+  'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\res\\default\\resources',
+  '--index-path',
+  'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\res\\default\\resources.index',
+  '--pack-info-path',
+  'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\outputs\\default\\pack.info',
+  '--out-path',
+  'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\outputs\\default\\entry-default-unsigned.hap',
+  '--ets-path',
+  'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\loader_out\\default\\ets'
+]
+[2025-12-17T11:48:45.097] [DEBUG] debug-file - java daemon socket received message:{"code":0,"message":"pack success"}
+[2025-12-17T11:48:45.101] [DEBUG] debug-file - entry : default@PackageHap cost memory -0.034423828125
+[2025-12-17T11:48:45.101] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 843 ms 
+[2025-12-17T11:48:45.103] [INFO] debug-file - Finished :entry:default@PackageHap... after 718 ms 
+[2025-12-17T11:48:45.104] [DEBUG] debug-file - Executing task :entry:default@PackingCheck
+[2025-12-17T11:48:45.109] [DEBUG] debug-file - entry : default@PackingCheck cost memory 0.5540924072265625
+[2025-12-17T11:48:45.109] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 850 ms 
+[2025-12-17T11:48:45.109] [INFO] debug-file - Finished :entry:default@PackingCheck... after 5 ms 
+[2025-12-17T11:48:45.110] [DEBUG] debug-file - Executing task :entry:default@SignHap
+[2025-12-17T11:48:45.111] [WARN] debug-file - Will skip sign 'hos_hap'. No signingConfigs profile is configured in current project.
+             If needed, configure the signingConfigs in D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\build-profile.json5.
+[2025-12-17T11:48:45.112] [DEBUG] debug-file - entry:default@SignHap is not up-to-date, since the input file 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\outputs\default\entry-default-unsigned.hap' has been changed.
+[2025-12-17T11:48:45.112] [DEBUG] debug-file - Incremental task entry:default@SignHap pre-execution cost: 1 ms .
+[2025-12-17T11:48:45.112] [DEBUG] debug-file - entry : default@SignHap cost memory 0.09955596923828125
+[2025-12-17T11:48:45.112] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 854 ms 
+[2025-12-17T11:48:45.113] [INFO] debug-file - Finished :entry:default@SignHap... after 2 ms 
+[2025-12-17T11:48:45.114] [DEBUG] debug-file - Executing task :entry:default@CollectDebugSymbol
+[2025-12-17T11:48:45.115] [DEBUG] debug-file - entry : default@CollectDebugSymbol cost memory 0.1179351806640625
+[2025-12-17T11:48:45.115] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 857 ms 
+[2025-12-17T11:48:45.115] [INFO] debug-file - Finished :entry:default@CollectDebugSymbol... after 2 ms 
+[2025-12-17T11:48:45.116] [DEBUG] debug-file - Executing task :entry:assembleHap
+[2025-12-17T11:48:45.116] [DEBUG] debug-file - entry : assembleHap cost memory 0.0133514404296875
+[2025-12-17T11:48:45.116] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 858 ms 
+[2025-12-17T11:48:45.116] [INFO] debug-file - Finished :entry:assembleHap... after 1 ms 
+[2025-12-17T11:48:45.124] [INFO] debug-file - BUILD SUCCESSFUL in 2 s 866 ms 
+[2025-12-17T11:48:45.124] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@PreBuild is up-to-date.
+[2025-12-17T11:48:45.124] [DEBUG] debug-file - Update task entry:default@CreateModuleInfo output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\generated\profile\default\ModuleInfo.ts cache.
+[2025-12-17T11:48:45.125] [DEBUG] debug-file - Incremental task entry:default@CreateModuleInfo post-execution cost:1 ms .
+[2025-12-17T11:48:45.125] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GenerateMetadata is up-to-date.
+[2025-12-17T11:48:45.125] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@MergeProfile is up-to-date.
+[2025-12-17T11:48:45.125] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CreateBuildProfile is up-to-date.
+[2025-12-17T11:48:45.125] [DEBUG] debug-file - Update task entry:default@GeneratePkgContextInfo output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader\default\pkgContextInfo.json cache.
+[2025-12-17T11:48:45.125] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgContextInfo post-execution cost:1 ms .
+[2025-12-17T11:48:45.125] [DEBUG] debug-file - Update task entry:default@ProcessIntegratedHsp output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\build\cache\default\integrated_hsp\integratedHspCache.json cache.
+[2025-12-17T11:48:45.126] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp post-execution cost:1 ms .
+[2025-12-17T11:48:45.126] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@MakePackInfo is up-to-date.
+[2025-12-17T11:48:45.126] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:D:\DevEco Studio2\sdk\default\openharmony\toolchains\syscap_tool.exe cache by regenerate.
+[2025-12-17T11:48:45.126] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:D:\DevEco Studio2\sdk\default\openharmony\ets\api\device-define cache by regenerate.
+[2025-12-17T11:48:45.127] [DEBUG] debug-file - Update task entry:default@SyscapTransform output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\syscap\default\rpcid.sc cache.
+[2025-12-17T11:48:45.128] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform post-execution cost:2 ms .
+[2025-12-17T11:48:45.128] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessProfile is up-to-date.
+[2025-12-17T11:48:45.128] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessRouterMap is up-to-date.
+[2025-12-17T11:48:45.128] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessShareConfig is up-to-date.
+[2025-12-17T11:48:45.129] [DEBUG] debug-file - Update task entry:default@ProcessStartupConfig output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\startup\default\startup_config.json cache.
+[2025-12-17T11:48:45.129] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig post-execution cost:2 ms .
+[2025-12-17T11:48:45.129] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessResource is up-to-date.
+[2025-12-17T11:48:45.129] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GenerateLoaderJson is up-to-date.
+[2025-12-17T11:48:45.129] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessLibs is up-to-date.
+[2025-12-17T11:48:45.129] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CompileResource is up-to-date.
+[2025-12-17T11:48:45.130] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@DoNativeStrip is up-to-date.
+[2025-12-17T11:48:45.132] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader\default cache by regenerate.
+[2025-12-17T11:48:45.133] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\ResourceTable.txt cache by regenerate.
+[2025-12-17T11:48:45.133] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\ark_module.json cache by regenerate.
+[2025-12-17T11:48:45.133] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\resources\base\profile cache by regenerate.
+[2025-12-17T11:48:45.134] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets cache from map.
+[2025-12-17T11:48:45.134] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\generated\profile\default\BuildProfile.ets cache by regenerate.
+[2025-12-17T11:48:45.134] [DEBUG] debug-file - Update task entry:default@CompileArkTS output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader_out\default\ets cache.
+[2025-12-17T11:48:45.135] [DEBUG] debug-file - Incremental task entry:default@CompileArkTS post-execution cost:6 ms .
+[2025-12-17T11:48:45.136] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader\default cache by regenerate.
+[2025-12-17T11:48:45.137] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\ResourceTable.txt cache by regenerate.
+[2025-12-17T11:48:45.137] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\ark_module.json cache by regenerate.
+[2025-12-17T11:48:45.137] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\resources\base\profile cache by regenerate.
+[2025-12-17T11:48:45.138] [DEBUG] debug-file - Update task entry:default@BuildJS output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader_out\default\js cache.
+[2025-12-17T11:48:45.138] [DEBUG] debug-file - Incremental task entry:default@BuildJS post-execution cost:4 ms .
+[2025-12-17T11:48:45.138] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CacheNativeLibs is up-to-date.
+[2025-12-17T11:48:45.138] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GeneratePkgModuleJson is up-to-date.
+[2025-12-17T11:48:45.138] [DEBUG] debug-file - Incremental task entry:default@ProcessCompiledResources post-execution cost:1 ms .
+[2025-12-17T11:48:45.139] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\stripped_native_libs\default cache by regenerate.
+[2025-12-17T11:48:45.140] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\module.json cache by regenerate.
+[2025-12-17T11:48:45.140] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\resources cache by regenerate.
+[2025-12-17T11:48:45.150] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\resources.index cache by regenerate.
+[2025-12-17T11:48:45.150] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\outputs\default\pack.info cache by regenerate.
+[2025-12-17T11:48:45.150] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader_out\default\ets cache from map.
+[2025-12-17T11:48:45.150] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader_out\default\ets\sourceMaps.map cache by regenerate.
+[2025-12-17T11:48:45.151] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\generated\profile\default\BuildProfile.ets cache by regenerate.
+[2025-12-17T11:48:45.151] [DEBUG] debug-file - Update task entry:default@PackageHap output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\outputs\default\entry-default-unsigned.hap cache.
+[2025-12-17T11:48:45.151] [DEBUG] debug-file - Update task entry:default@PackageHap output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\source_map\default\sourceMaps.map cache.
+[2025-12-17T11:48:45.152] [DEBUG] debug-file - Update task entry:default@PackageHap output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\outputs\default\mapping\sourceMaps.map cache.
+[2025-12-17T11:48:45.152] [DEBUG] debug-file - Incremental task entry:default@PackageHap post-execution cost:14 ms .
+[2025-12-17T11:48:45.152] [DEBUG] debug-file - Update task entry:default@SignHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\outputs\default\entry-default-unsigned.hap cache from map.
+[2025-12-17T11:48:45.153] [DEBUG] debug-file - Update task entry:default@SignHap output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\outputs\default\entry-default-signed.hap cache.
+[2025-12-17T11:48:45.153] [DEBUG] debug-file - Incremental task entry:default@SignHap post-execution cost:1 ms .
+[2025-12-17T11:48:45.154] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader_out\default\ets\sourceMaps.map cache by regenerate.
+[2025-12-17T11:48:45.154] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\libs\default cache by regenerate.
+[2025-12-17T11:48:45.155] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\outputs\default\symbol cache.
+[2025-12-17T11:48:45.156] [DEBUG] debug-file - Incremental task entry:default@CollectDebugSymbol post-execution cost:3 ms .
+[2025-12-17T11:48:45.184] [DEBUG] debug-file - Cleanup worker 14.
+[2025-12-17T11:48:45.184] [DEBUG] debug-file - Worker 14 has been cleaned up.
+[2025-12-17T11:48:45.184] [DEBUG] debug-file - Current idle worker size: 1.
+[2025-12-17T11:48:45.184] [DEBUG] debug-file - Current resident worker size: 2.
+[2025-12-17T11:48:45.186] [DEBUG] debug-file - hvigor build process will be closed.
+[2025-12-17T11:48:45.186] [DEBUG] debug-file - java daemon socket close code:1000 reason:close by user
+[2025-12-17T11:48:45.192] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-12-17T11:48:45.193] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-12-17T11:48:45.193] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-17T11:48:45.194] [DEBUG] debug-file - worker[14] exits with exit code 1.
+[2025-12-17T11:48:45.194] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-17T11:58:47.105] [DEBUG] debug-file - session manager: set active socket. socketId=DBNsILizEvGd5udPAABJ
+[2025-12-17T11:58:47.131] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-17T11:58:47.142] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' },
+  optimizationStrategy: 'memory',
+  hotCompile: undefined,
+  hotReloadBuild: undefined
+}
+[2025-12-17T11:58:47.147] [DEBUG] debug-file - Cache service initialization finished in 5 ms 
+[2025-12-17T11:58:47.149] [DEBUG] debug-file - hvigorfile, resolving D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\hvigorfile.ts
+[2025-12-17T11:58:47.155] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2025-12-17T11:58:47.156] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2025-12-17T11:58:47.162] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2025-12-17T11:58:47.162] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2025-12-17T11:58:47.162] [DEBUG] debug-file - Product 'default' build option initialized
+[2025-12-17T11:58:47.162] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2025-12-17T11:58:47.163] [DEBUG] debug-file - Obtain build option for product 'default'in this build.
+[2025-12-17T11:58:47.164] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2025-12-17T11:58:47.170] [DEBUG] debug-file - Start recording SDK configuration permission data.
+[2025-12-17T11:58:47.197] [DEBUG] debug-file - Sdk init in 32 ms 
+[2025-12-17T11:58:47.201] [DEBUG] debug-file - Project task initialization takes 3 ms 
+[2025-12-17T11:58:47.201] [DEBUG] debug-file - hvigorfile, resolve finished D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\hvigorfile.ts
+[2025-12-17T11:58:47.201] [DEBUG] debug-file - hvigorfile, resolving D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\hvigorfile.ts
+[2025-12-17T11:58:47.204] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2025-12-17T11:58:47.205] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2025-12-17T11:58:47.206] [DEBUG] debug-file - failed to load cangjie to dynamically generate schemas: Error: Cannot find module '@ohos/cangjie-build-support/index'
+Require stack:
+- D:\DevEco Studio2\tools\hvigor\hvigor-ohos-plugin\src\plugin\factory\plugin-factory.js
+- D:\DevEco Studio2\tools\hvigor\hvigor-ohos-plugin\index.js
+- D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\hvigorfile.ts
+- D:\DevEco Studio2\tools\hvigor\hvigor\src\base\internal\lifecycle\configuration.js
+- D:\DevEco Studio2\tools\hvigor\hvigor\src\base\boot\index.js
+- D:\DevEco Studio2\tools\hvigor\hvigor\src\base\daemon\cluster\worker-process-lifecycle.js
+- D:\DevEco Studio2\tools\hvigor\hvigor\src\base\daemon\process\daemon-process-boot-script.js
+[2025-12-17T11:58:47.208] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=release
+[2025-12-17T11:58:47.209] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-17T11:58:47.209] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-17T11:58:47.209] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-17T11:58:47.209] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-17T11:58:47.209] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-17T11:58:47.209] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-17T11:58:47.209] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-17T11:58:47.209] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-17T11:58:47.209] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-17T11:58:47.209] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-17T11:58:47.209] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-17T11:58:47.209] [DEBUG] debug-file - Obtain build option for module 'entry' target 'default'in this build.
+[2025-12-17T11:58:47.212] [DEBUG] debug-file - Module entry task initialization takes 3 ms 
+[2025-12-17T11:58:47.212] [DEBUG] debug-file - hvigorfile, resolve finished D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\hvigorfile.ts
+[2025-12-17T11:58:47.231] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 19 ms 
+[2025-12-17T11:58:47.231] [DEBUG] debug-file - project has submodules:entry
+[2025-12-17T11:58:47.233] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2025-12-17T11:58:47.239] [DEBUG] debug-file - load to the disk finished
+[2025-12-17T11:58:47.240] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-12-17T11:58:47.241] [DEBUG] debug-file - Module List_commodity Collected Dependency: 
+[2025-12-17T11:58:47.241] [DEBUG] debug-file - Module List_commodity's total dependency: 0
+[2025-12-17T11:58:47.242] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-12-17T11:58:47.243] [DEBUG] debug-file - Module entry Collected Dependency: 
+[2025-12-17T11:58:47.243] [DEBUG] debug-file - Module entry's total dependency: 0
+[2025-12-17T11:58:47.245] [DEBUG] debug-file - Configuration phase cost:98 ms 
+[2025-12-17T11:58:47.246] [DEBUG] debug-file - Configuration task cost before running: 109 ms 
+[2025-12-17T11:58:47.251] [DEBUG] debug-file - Executing task :entry:default@PreBuild
+[2025-12-17T11:58:47.251] [DEBUG] debug-file - Task 'entry:default@PreBuild' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:58:47.258] [DEBUG] debug-file - Incremental task entry:default@PreBuild pre-execution cost: 5 ms .
+[2025-12-17T11:58:47.258] [DEBUG] debug-file - entry : default@PreBuild cost memory 0.3124237060546875
+[2025-12-17T11:58:47.260] [INFO] debug-file - UP-TO-DATE :entry:default@PreBuild...  
+[2025-12-17T11:58:47.261] [DEBUG] debug-file - Executing task :entry:default@CreateModuleInfo
+[2025-12-17T11:58:47.261] [DEBUG] debug-file - Task 'entry:default@CreateModuleInfo' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:58:47.262] [DEBUG] debug-file - entry : default@CreateModuleInfo cost memory 0.04100799560546875
+[2025-12-17T11:58:47.262] [DEBUG] debug-file - runTaskFromQueue task cost before running: 125 ms 
+[2025-12-17T11:58:47.262] [INFO] debug-file - Finished :entry:default@CreateModuleInfo... after 1 ms 
+[2025-12-17T11:58:47.263] [DEBUG] debug-file - Executing task :entry:default@GenerateMetadata
+[2025-12-17T11:58:47.264] [DEBUG] debug-file - Task 'entry:default@GenerateMetadata' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:58:47.265] [DEBUG] debug-file - Incremental task entry:default@GenerateMetadata pre-execution cost: 1 ms .
+[2025-12-17T11:58:47.265] [DEBUG] debug-file - entry : default@GenerateMetadata cost memory -1.6848983764648438
+[2025-12-17T11:58:47.265] [INFO] debug-file - UP-TO-DATE :entry:default@GenerateMetadata...  
+[2025-12-17T11:58:47.266] [DEBUG] debug-file - Executing task :entry:default@ConfigureCmake
+[2025-12-17T11:58:47.267] [DEBUG] debug-file - entry : default@ConfigureCmake cost memory 0.01512908935546875
+[2025-12-17T11:58:47.267] [DEBUG] debug-file - runTaskFromQueue task cost before running: 130 ms 
+[2025-12-17T11:58:47.267] [INFO] debug-file - Finished :entry:default@ConfigureCmake... after 1 ms 
+[2025-12-17T11:58:47.268] [DEBUG] debug-file - Executing task :entry:default@MergeProfile
+[2025-12-17T11:58:47.268] [DEBUG] debug-file - Task 'entry:default@MergeProfile' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:58:47.270] [DEBUG] debug-file - Incremental task entry:default@MergeProfile pre-execution cost: 2 ms .
+[2025-12-17T11:58:47.270] [DEBUG] debug-file - entry : default@MergeProfile cost memory 0.12168121337890625
+[2025-12-17T11:58:47.270] [INFO] debug-file - UP-TO-DATE :entry:default@MergeProfile...  
+[2025-12-17T11:58:47.271] [DEBUG] debug-file - Executing task :entry:default@CreateBuildProfile
+[2025-12-17T11:58:47.272] [DEBUG] debug-file - Task 'entry:default@CreateBuildProfile' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:58:47.273] [DEBUG] debug-file - Incremental task entry:default@CreateBuildProfile pre-execution cost: 1 ms .
+[2025-12-17T11:58:47.273] [DEBUG] debug-file - entry : default@CreateBuildProfile cost memory 0.097442626953125
+[2025-12-17T11:58:47.273] [INFO] debug-file - UP-TO-DATE :entry:default@CreateBuildProfile...  
+[2025-12-17T11:58:47.274] [DEBUG] debug-file - Executing task :entry:default@PreCheckSyscap
+[2025-12-17T11:58:47.274] [DEBUG] debug-file - entry : default@PreCheckSyscap cost memory 0.015350341796875
+[2025-12-17T11:58:47.274] [DEBUG] debug-file - runTaskFromQueue task cost before running: 137 ms 
+[2025-12-17T11:58:47.274] [INFO] debug-file - Finished :entry:default@PreCheckSyscap... after 1 ms 
+[2025-12-17T11:58:47.276] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgContextInfo
+[2025-12-17T11:58:47.278] [DEBUG] debug-file - Task 'entry:default@GeneratePkgContextInfo' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:58:47.279] [DEBUG] debug-file - entry : default@GeneratePkgContextInfo cost memory 0.1878662109375
+[2025-12-17T11:58:47.279] [DEBUG] debug-file - runTaskFromQueue task cost before running: 142 ms 
+[2025-12-17T11:58:47.279] [INFO] debug-file - Finished :entry:default@GeneratePkgContextInfo... after 4 ms 
+[2025-12-17T11:58:47.282] [DEBUG] debug-file - Executing task :entry:default@ProcessIntegratedHsp
+[2025-12-17T11:58:47.283] [DEBUG] debug-file - entry:default@ProcessIntegratedHsp is not up-to-date, since the output file 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\build\cache\default\integrated_hsp\integratedHspCache.json' does not exist.
+[2025-12-17T11:58:47.283] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp pre-execution cost: 1 ms .
+[2025-12-17T11:58:47.283] [DEBUG] debug-file - entry : default@ProcessIntegratedHsp cost memory 0.06545257568359375
+[2025-12-17T11:58:47.283] [DEBUG] debug-file - runTaskFromQueue task cost before running: 146 ms 
+[2025-12-17T11:58:47.283] [INFO] debug-file - Finished :entry:default@ProcessIntegratedHsp... after 1 ms 
+[2025-12-17T11:58:47.284] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithCmake
+[2025-12-17T11:58:47.284] [DEBUG] debug-file - entry : default@BuildNativeWithCmake cost memory 0.01617431640625
+[2025-12-17T11:58:47.285] [DEBUG] debug-file - runTaskFromQueue task cost before running: 148 ms 
+[2025-12-17T11:58:47.285] [INFO] debug-file - Finished :entry:default@BuildNativeWithCmake... after 1 ms 
+[2025-12-17T11:58:47.286] [DEBUG] debug-file - Executing task :entry:default@MakePackInfo
+[2025-12-17T11:58:47.287] [DEBUG] debug-file - Incremental task entry:default@MakePackInfo pre-execution cost: 2 ms .
+[2025-12-17T11:58:47.287] [DEBUG] debug-file - entry : default@MakePackInfo cost memory 0.10750579833984375
+[2025-12-17T11:58:47.287] [INFO] debug-file - UP-TO-DATE :entry:default@MakePackInfo...  
+[2025-12-17T11:58:47.289] [DEBUG] debug-file - Executing task :entry:default@SyscapTransform
+[2025-12-17T11:58:47.289] [DEBUG] debug-file - File: 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\syscap.json' from 'sysCapJsonPath' is not exists, just ignore.
+[2025-12-17T11:58:47.290] [DEBUG] debug-file - Task 'entry:default@SyscapTransform' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:58:47.291] [DEBUG] debug-file - entry:default@SyscapTransform is not up-to-date, since the output file 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\syscap\default\rpcid.sc' does not exist.
+[2025-12-17T11:58:47.292] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform pre-execution cost: 2 ms .
+[2025-12-17T11:58:47.292] [DEBUG] debug-file - entry : default@SyscapTransform cost memory 0.14586639404296875
+[2025-12-17T11:58:47.292] [DEBUG] debug-file - runTaskFromQueue task cost before running: 155 ms 
+[2025-12-17T11:58:47.292] [INFO] debug-file - Finished :entry:default@SyscapTransform... after 3 ms 
+[2025-12-17T11:58:47.293] [DEBUG] debug-file - Executing task :entry:default@ProcessProfile
+[2025-12-17T11:58:47.294] [DEBUG] debug-file - Task 'entry:default@ProcessProfile' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:58:47.294] [DEBUG] debug-file - Incremental task entry:default@ProcessProfile pre-execution cost: 1 ms .
+[2025-12-17T11:58:47.294] [DEBUG] debug-file - entry : default@ProcessProfile cost memory 0.12474822998046875
+[2025-12-17T11:58:47.295] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessProfile...  
+[2025-12-17T11:58:47.295] [DEBUG] debug-file - Executing task :entry:default@ProcessRouterMap
+[2025-12-17T11:58:47.298] [DEBUG] debug-file - Incremental task entry:default@ProcessRouterMap pre-execution cost: 2 ms .
+[2025-12-17T11:58:47.298] [DEBUG] debug-file - entry : default@ProcessRouterMap cost memory 0.14458465576171875
+[2025-12-17T11:58:47.299] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessRouterMap...  
+[2025-12-17T11:58:47.300] [DEBUG] debug-file - Executing task :entry:default@ProcessShareConfig
+[2025-12-17T11:58:47.301] [DEBUG] debug-file - Incremental task entry:default@ProcessShareConfig pre-execution cost: 2 ms .
+[2025-12-17T11:58:47.301] [DEBUG] debug-file - entry : default@ProcessShareConfig cost memory 0.12450408935546875
+[2025-12-17T11:58:47.302] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessShareConfig...  
+[2025-12-17T11:58:47.303] [DEBUG] debug-file - Executing task :entry:default@ProcessStartupConfig
+[2025-12-17T11:58:47.303] [DEBUG] debug-file - Task 'entry:default@ProcessStartupConfig' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:58:47.303] [DEBUG] debug-file - entry:default@ProcessStartupConfig is not up-to-date, since the output file 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\startup\default\startup_config.json' does not exist.
+[2025-12-17T11:58:47.303] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig pre-execution cost: 1 ms .
+[2025-12-17T11:58:47.304] [DEBUG] debug-file - entry : default@ProcessStartupConfig cost memory 0.11154937744140625
+[2025-12-17T11:58:47.304] [DEBUG] debug-file - runTaskFromQueue task cost before running: 167 ms 
+[2025-12-17T11:58:47.304] [INFO] debug-file - Finished :entry:default@ProcessStartupConfig... after 1 ms 
+[2025-12-17T11:58:47.305] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithNinja
+[2025-12-17T11:58:47.305] [DEBUG] debug-file - entry : default@BuildNativeWithNinja cost memory 0.0252838134765625
+[2025-12-17T11:58:47.305] [DEBUG] debug-file - runTaskFromQueue task cost before running: 168 ms 
+[2025-12-17T11:58:47.306] [INFO] debug-file - Finished :entry:default@BuildNativeWithNinja... after 1 ms 
+[2025-12-17T11:58:47.307] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@ProcessResource
+[2025-12-17T11:58:47.308] [DEBUG] debug-file - Executing task :entry:default@ProcessResource
+[2025-12-17T11:58:47.308] [DEBUG] debug-file - Task 'entry:default@ProcessResource' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:58:47.309] [DEBUG] debug-file - Incremental task entry:default@ProcessResource pre-execution cost: 1 ms .
+[2025-12-17T11:58:47.309] [DEBUG] debug-file - entry : default@ProcessResource cost memory 0.1493988037109375
+[2025-12-17T11:58:47.312] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessResource...  
+[2025-12-17T11:58:47.314] [DEBUG] debug-file - Executing task :entry:default@GenerateLoaderJson
+[2025-12-17T11:58:47.315] [DEBUG] debug-file - Task 'entry:default@GenerateLoaderJson' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:58:47.321] [DEBUG] debug-file - Incremental task entry:default@GenerateLoaderJson pre-execution cost: 4 ms .
+[2025-12-17T11:58:47.321] [DEBUG] debug-file - entry : default@GenerateLoaderJson cost memory 0.5508651733398438
+[2025-12-17T11:58:47.324] [INFO] debug-file - UP-TO-DATE :entry:default@GenerateLoaderJson...  
+[2025-12-17T11:58:47.325] [DEBUG] debug-file - Executing task :entry:default@ProcessLibs
+[2025-12-17T11:58:47.327] [DEBUG] debug-file - Incremental task entry:default@ProcessLibs pre-execution cost: 2 ms .
+[2025-12-17T11:58:47.327] [DEBUG] debug-file - entry : default@ProcessLibs cost memory 0.11595916748046875
+[2025-12-17T11:58:47.328] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessLibs...  
+[2025-12-17T11:58:47.329] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@CompileResource
+[2025-12-17T11:58:47.330] [DEBUG] debug-file - Executing task :entry:default@CompileResource
+[2025-12-17T11:58:47.352] [DEBUG] debug-file - Incremental task entry:default@CompileResource pre-execution cost: 22 ms .
+[2025-12-17T11:58:47.352] [DEBUG] debug-file - entry : default@CompileResource cost memory 0.06400299072265625
+[2025-12-17T11:58:47.353] [INFO] debug-file - UP-TO-DATE :entry:default@CompileResource...  
+[2025-12-17T11:58:47.354] [DEBUG] debug-file - Executing task :entry:default@DoNativeStrip
+[2025-12-17T11:58:47.354] [DEBUG] debug-file - Task 'entry:default@DoNativeStrip' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:58:47.355] [DEBUG] debug-file - Incremental task entry:default@DoNativeStrip pre-execution cost: 1 ms .
+[2025-12-17T11:58:47.355] [DEBUG] debug-file - entry : default@DoNativeStrip cost memory 0.07930755615234375
+[2025-12-17T11:58:47.356] [INFO] debug-file - UP-TO-DATE :entry:default@DoNativeStrip...  
+[2025-12-17T11:58:47.357] [DEBUG] debug-file - Executing task :entry:default@CompileArkTS
+[2025-12-17T11:58:47.357] [DEBUG] debug-file - obfuscationOptions: undefined
+[2025-12-17T11:58:47.368] [DEBUG] debug-file - entry:default@CompileArkTS is not up-to-date, since the input file 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets' has been changed.
+[2025-12-17T11:58:47.369] [DEBUG] debug-file - Incremental task entry:default@CompileArkTS pre-execution cost: 9 ms .
+[2025-12-17T11:58:47.377] [DEBUG] debug-file - build config:
+[2025-12-17T11:58:47.377] [DEBUG] debug-file - {
+  moduleType: 'entry',
+  perf: 0,
+  targetName: '.default',
+  packageManagerType: 'ohpm',
+  localPropertiesPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\local.properties',
+  isPreview: false,
+  isOhosTest: false,
+  isLocalTest: false,
+  buildMode: 'Debug',
+  hotReloadBuild: undefined,
+  watchMode: 'false',
+  aceProfilePath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\res\\default\\resources\\base\\profile',
+  etsLoaderPath: 'D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader',
+  modulePath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry',
+  testFrameworkPar: {
+    testMode: undefined,
+    coveragePathFilter: undefined,
+    coverageMode: undefined
+  },
+  needCoverageInsert: false,
+  debugLine: false,
+  projectTopDir: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity',
+  compileSdkVersion: 20,
+  compatibleSdkVersion: 17,
+  compatibleSdkVersionStage: undefined,
+  bundleName: 'c***y',
+  etsLoaderVersion: '6.0.0.47',
+  etsLoaderReleaseType: 'Release',
+  aotCompileMode: 'type',
+  apPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\modules.ap',
+  entryModuleName: 'entry',
+  entryModuleVersion: '1.0.0',
+  entryPackageName: 'entry',
+  allModuleNameHash: '46dc69cfbe882dbb4ab08d779a14723b',
+  externalApiPaths: [ 'D:\\DevEco Studio2\\sdk\\default\\hms\\ets' ],
+  compilerTypes: [],
+  isCrossplatform: false,
+  hvigorPluginFile: undefined,
+  compilePluginPath: undefined,
+  buildGeneratedProfilePath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\generated\\profile\\default',
+  bundleType: 'app',
+  arkTSVersion: undefined,
+  apiVersion: 20,
+  needCompleteSourcesMap: false,
+  isFaMode: false,
+  strictMode: undefined,
+  buildDir: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build',
+  deviceTypes: [ 'phone' ],
+  useNormalizedOHMUrl: false,
+  pkgContextInfo: undefined,
+  ohPackagePathMap: {},
+  dependencyAliasMap: {},
+  permission: { requestPermissions: [ [Object] ], definePermissions: undefined },
+  integratedHsp: false,
+  projectArkOption: undefined,
+  sourceMapDir: undefined,
+  branchElimination: false,
+  transformLib: undefined,
+  caseSensitiveCheck: false,
+  tsImportSendable: false,
+  resolveConflictMode: true,
+  depName2RootPath: {},
+  depName2DepInfo: {},
+  rootPathSet: [
+    'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity'
+  ],
+  useNativeResolver: true,
+  shouldEmitJs: true,
+  useTscResolve: false,
+  singleFileEmit: false,
+  userProjectConfig: {
+    autoLazyImport: false,
+    allowEmptyBundleName: false,
+    reExportCheckMode: 'noCheck',
+    executionMode: 'memory',
+    usePathPlaceholder: false,
+    writeRollupCache: true,
+    isExpandImportEnabled: false,
+    expandImportExclude: '',
+    ignoreCrossplatformCheck: false,
+    isPreloadSoEnabled: false
+  },
+  skipOhModulesLint: false,
+  executionMode: 'memory',
+  autoLazyImport: false,
+  allowEmptyBundleName: false,
+  reExportCheckMode: 'noCheck',
+  usePathPlaceholder: false,
+  writeRollupCache: true,
+  isExpandImportEnabled: false,
+  expandImportExclude: '',
+  ignoreCrossplatformCheck: false,
+  isPreloadSoEnabled: false,
+  arkCompileCachePath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule',
+  aceModuleJsonPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\res\\default\\ark_module.json',
+  appResource: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\res\\default\\ResourceTable.txt',
+  rawFileResource: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\res\\default\\resources\\rawfile',
+  resourceTableHash: '58702bc33f008c91a3e6596e10d0227a',
+  runtimeOS: 'HarmonyOS',
+  sdkInfo: 'false:20:6.0.0.47:Release',
+  aceModuleRoot: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets',
+  compileMode: 'esmodule',
+  aceSuperVisualPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\supervisual',
+  aceBuildJson: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\loader\\default\\loader.json',
+  cachePath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule\\debug',
+  aceModuleBuild: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\loader_out\\default\\ets',
+  supportChunks: true,
+  declaredFilesPath: undefined,
+  shouldCollectDirectImportees: false,
+  isByteCodeHarOptimize: false,
+  expandImportPath: undefined,
+  pkgNameToPkgBriefInfo: {
+    entry: {
+      pkgRoot: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry',
+      originalSourceRoots: undefined,
+      sourceRoots: [Array],
+      pkgName: 'entry'
+    }
+  },
+  projectModel: {
+    'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main': {
+      moduleName: 'entry',
+      modulePkgPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry',
+      belongProjectPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity'
+    },
+    'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry': {
+      moduleName: 'entry',
+      modulePkgPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry',
+      belongProjectPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity'
+    },
+    'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity': {
+      moduleName: 'List_commodity',
+      modulePkgPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity',
+      belongProjectPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity'
+    }
+  },
+  pkgJsonFileHash: '73952b0c20fc6d4c363e85190646ec08',
+  allModulePaths: [
+    'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry'
+  ],
+  routerMap: {},
+  obfuscationOptions: undefined,
+  byteCodeHarToDependencyKeys: undefined,
+  compileBlockPkg: [],
+  mockParams: {
+    decorator: '@MockSetup',
+    packageName: '@ohos/hamock',
+    etsSourceRootPath: 'src/main/ets',
+    mockConfigPath: undefined,
+    mockConfigKey2ModuleInfo: {},
+    source2ModuleIdMap: {}
+  },
+  copyCodeResourceEnable: true,
+  copyCodeResourceExcludes: [],
+  copyCodeResourceIncludes: undefined,
+  uiTransformOptimization: false,
+  sdkPath: 'D:/DevEco Studio2/sdk',
+  needPreloadSoFileSet: {},
+  preloadSoFilePath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\preload\\default\\preload.json',
+  useSourceHash: false,
+  localModuleParamMap: {},
+  otherPaths: {
+    'entry/*': [
+      '..\\*',
+      '..\\..\\..\\build\\default\\generated\\profile\\default\\*'
+    ]
+  },
+  collectImportersConfig: undefined
+}
+[2025-12-17T11:58:47.378] [DEBUG] debug-file - Compile arkts with external api path: D:\DevEco Studio2\sdk\default\hms\ets
+[2025-12-17T11:58:47.378] [DEBUG] debug-file - default@CompileArkTS work[66] is submitted.
+[2025-12-17T11:58:47.379] [DEBUG] debug-file - default@CompileArkTS work[66] is pushed to ready queue.
+[2025-12-17T11:58:47.379] [DEBUG] debug-file - A work dispatched to worker[15] failed because unable to get work from ready queue.
+[2025-12-17T11:58:47.379] [DEBUG] debug-file - A work dispatched to worker[14] failed because unable to get work from ready queue.
+[2025-12-17T11:58:47.379] [DEBUG] debug-file - A work dispatched to worker[13] failed because unable to get work from ready queue.
+[2025-12-17T11:58:47.379] [DEBUG] debug-file - A work dispatched to worker[12] failed because unable to get work from ready queue.
+[2025-12-17T11:58:47.379] [DEBUG] debug-file - A work dispatched to worker[11] failed because unable to get work from ready queue.
+[2025-12-17T11:58:47.379] [DEBUG] debug-file - A work dispatched to worker[10] failed because unable to get work from ready queue.
+[2025-12-17T11:58:47.379] [DEBUG] debug-file - A work dispatched to worker[9] failed because unable to get work from ready queue.
+[2025-12-17T11:58:47.379] [DEBUG] debug-file - A work dispatched to worker[8] failed because unable to get work from ready queue.
+[2025-12-17T11:58:47.379] [DEBUG] debug-file - A work dispatched to worker[7] failed because unable to get work from ready queue.
+[2025-12-17T11:58:47.379] [DEBUG] debug-file - A work dispatched to worker[6] failed because unable to get work from ready queue.
+[2025-12-17T11:58:47.379] [DEBUG] debug-file - A work dispatched to worker[5] failed because unable to get work from ready queue.
+[2025-12-17T11:58:47.379] [DEBUG] debug-file - default@CompileArkTS work[66] has been dispatched to worker[4].
+[2025-12-17T11:58:47.379] [DEBUG] debug-file - default@CompileArkTS work[66] is dispatched.
+[2025-12-17T11:58:47.379] [DEBUG] debug-file - CopyResources startTime: 383731503182000
+[2025-12-17T11:58:47.379] [DEBUG] debug-file - default@CompileArkTS work[67] is submitted.
+[2025-12-17T11:58:47.379] [DEBUG] debug-file - default@CompileArkTS work[67] is pushed to ready queue.
+[2025-12-17T11:58:47.379] [DEBUG] debug-file - A work dispatched to worker[15] failed because unable to get work from ready queue.
+[2025-12-17T11:58:47.379] [DEBUG] debug-file - Create  resident worker with id: 14.
+[2025-12-17T11:58:47.381] [DEBUG] debug-file - default@CompileArkTS work[67] has been dispatched to worker[14].
+[2025-12-17T11:58:47.381] [DEBUG] debug-file - default@CompileArkTS work[67] is dispatched.
+[2025-12-17T11:58:47.381] [DEBUG] debug-file - entry : default@CompileArkTS cost memory 0.010040283203125
+[2025-12-17T11:58:47.382] [DEBUG] debug-file - Executing task :entry:default@BuildJS
+[2025-12-17T11:58:47.386] [DEBUG] debug-file - entry : default@BuildJS cost memory -1.5833740234375
+[2025-12-17T11:58:47.386] [DEBUG] debug-file - runTaskFromQueue task cost before running: 249 ms 
+[2025-12-17T11:58:47.386] [INFO] debug-file - Finished :entry:default@BuildJS... after 4 ms 
+[2025-12-17T11:58:47.387] [DEBUG] debug-file - Executing task :entry:default@CacheNativeLibs
+[2025-12-17T11:58:47.387] [DEBUG] debug-file - Task 'entry:default@CacheNativeLibs' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:58:47.389] [DEBUG] debug-file - Incremental task entry:default@CacheNativeLibs pre-execution cost: 2 ms .
+[2025-12-17T11:58:47.389] [DEBUG] debug-file - entry : default@CacheNativeLibs cost memory 0.09511566162109375
+[2025-12-17T11:58:47.389] [INFO] debug-file - UP-TO-DATE :entry:default@CacheNativeLibs...  
+[2025-12-17T11:58:48.365] [DEBUG] debug-file - worker[14] has one work done.
+[2025-12-17T11:58:48.365] [DEBUG] debug-file - CopyResources is end, endTime: 383732488808700
+[2025-12-17T11:58:48.365] [DEBUG] debug-file - default@CompileArkTS work[67] done.
+[2025-12-17T11:58:48.365] [DEBUG] debug-file - A work dispatched to worker[14] failed because unable to get work from ready queue.
+[2025-12-17T11:58:49.676] [DEBUG] debug-file - worker[4] has one work done.
+[2025-12-17T11:58:49.677] [DEBUG] debug-file - default@CompileArkTS work[66] done.
+[2025-12-17T11:58:49.677] [DEBUG] debug-file - A work dispatched to worker[4] failed because unable to get work from ready queue.
+[2025-12-17T11:58:49.679] [INFO] debug-file - Finished :entry:default@CompileArkTS... after 2 s 318 ms 
+[2025-12-17T11:58:49.679] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgModuleJson
+[2025-12-17T11:58:49.680] [DEBUG] debug-file - File: 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\preload\default\preload.json' from 'preloadSoJsonPath' is not exists, just ignore.
+[2025-12-17T11:58:49.680] [DEBUG] debug-file - Task 'entry:default@GeneratePkgModuleJson' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:58:49.681] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgModuleJson pre-execution cost: 1 ms .
+[2025-12-17T11:58:49.681] [DEBUG] debug-file - entry : default@GeneratePkgModuleJson cost memory 0.091552734375
+[2025-12-17T11:58:49.681] [INFO] debug-file - UP-TO-DATE :entry:default@GeneratePkgModuleJson...  
+[2025-12-17T11:58:49.682] [DEBUG] debug-file - Executing task :entry:default@ProcessCompiledResources
+[2025-12-17T11:58:49.682] [DEBUG] debug-file - File: 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\preload\default\preload.json' from 'preloadSoJsonPath' is not exists, just ignore.
+[2025-12-17T11:58:49.682] [DEBUG] debug-file - Task 'entry:default@ProcessCompiledResources' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T11:58:49.682] [DEBUG] debug-file - entry : default@ProcessCompiledResources cost memory 0.070465087890625
+[2025-12-17T11:58:49.682] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 545 ms 
+[2025-12-17T11:58:49.682] [INFO] debug-file - Finished :entry:default@ProcessCompiledResources... after 1 ms 
+[2025-12-17T11:58:49.684] [DEBUG] debug-file - Executing task :entry:default@PackageHap
+[2025-12-17T11:58:49.698] [DEBUG] debug-file - entry:default@PackageHap is not up-to-date, since the input file 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader_out\default\ets' has been changed.
+[2025-12-17T11:58:49.698] [DEBUG] debug-file - Incremental task entry:default@PackageHap pre-execution cost: 13 ms .
+[2025-12-17T11:58:49.699] [DEBUG] debug-file - Use tool [D:\DevEco Studio2\sdk\default\openharmony\toolchains\lib\app_packing_tool.jar]
+ [
+  'java',
+  '-Dfile.encoding=GBK',
+  '-jar',
+  'D:\\DevEco Studio2\\sdk\\default\\openharmony\\toolchains\\lib\\app_packing_tool.jar',
+  '--mode',
+  'hap',
+  '--force',
+  'true',
+  '--lib-path',
+  'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\stripped_native_libs\\default',
+  '--json-path',
+  'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\package\\default\\module.json',
+  '--resources-path',
+  'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\res\\default\\resources',
+  '--index-path',
+  'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\res\\default\\resources.index',
+  '--pack-info-path',
+  'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\outputs\\default\\pack.info',
+  '--out-path',
+  'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\outputs\\default\\entry-default-unsigned.hap',
+  '--ets-path',
+  'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\loader_out\\default\\ets'
+]
+[2025-12-17T11:58:50.001] [DEBUG] debug-file - java daemon socket received message:{"code":0,"message":"pack success"}
+[2025-12-17T11:58:50.007] [DEBUG] debug-file - entry : default@PackageHap cost memory -0.32061004638671875
+[2025-12-17T11:58:50.007] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 870 ms 
+[2025-12-17T11:58:50.008] [INFO] debug-file - Finished :entry:default@PackageHap... after 323 ms 
+[2025-12-17T11:58:50.010] [DEBUG] debug-file - Executing task :entry:default@PackingCheck
+[2025-12-17T11:58:50.014] [DEBUG] debug-file - entry : default@PackingCheck cost memory 0.552093505859375
+[2025-12-17T11:58:50.014] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 877 ms 
+[2025-12-17T11:58:50.015] [INFO] debug-file - Finished :entry:default@PackingCheck... after 5 ms 
+[2025-12-17T11:58:50.016] [DEBUG] debug-file - Executing task :entry:default@SignHap
+[2025-12-17T11:58:50.016] [WARN] debug-file - Will skip sign 'hos_hap'. No signingConfigs profile is configured in current project.
+             If needed, configure the signingConfigs in D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\build-profile.json5.
+[2025-12-17T11:58:50.017] [DEBUG] debug-file - entry:default@SignHap is not up-to-date, since the input file 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\outputs\default\entry-default-unsigned.hap' has been changed.
+[2025-12-17T11:58:50.017] [DEBUG] debug-file - Incremental task entry:default@SignHap pre-execution cost: 1 ms .
+[2025-12-17T11:58:50.018] [DEBUG] debug-file - entry : default@SignHap cost memory 0.09937286376953125
+[2025-12-17T11:58:50.018] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 881 ms 
+[2025-12-17T11:58:50.018] [INFO] debug-file - Finished :entry:default@SignHap... after 2 ms 
+[2025-12-17T11:58:50.020] [DEBUG] debug-file - Executing task :entry:default@CollectDebugSymbol
+[2025-12-17T11:58:50.021] [DEBUG] debug-file - entry : default@CollectDebugSymbol cost memory 0.1179351806640625
+[2025-12-17T11:58:50.021] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 884 ms 
+[2025-12-17T11:58:50.022] [INFO] debug-file - Finished :entry:default@CollectDebugSymbol... after 2 ms 
+[2025-12-17T11:58:50.022] [DEBUG] debug-file - Executing task :entry:assembleHap
+[2025-12-17T11:58:50.022] [DEBUG] debug-file - entry : assembleHap cost memory 0.0133514404296875
+[2025-12-17T11:58:50.022] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 885 ms 
+[2025-12-17T11:58:50.022] [INFO] debug-file - Finished :entry:assembleHap... after 1 ms 
+[2025-12-17T11:58:50.030] [INFO] debug-file - BUILD SUCCESSFUL in 2 s 892 ms 
+[2025-12-17T11:58:50.030] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@PreBuild is up-to-date.
+[2025-12-17T11:58:50.030] [DEBUG] debug-file - Update task entry:default@CreateModuleInfo output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\generated\profile\default\ModuleInfo.ts cache.
+[2025-12-17T11:58:50.030] [DEBUG] debug-file - Incremental task entry:default@CreateModuleInfo post-execution cost:1 ms .
+[2025-12-17T11:58:50.030] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GenerateMetadata is up-to-date.
+[2025-12-17T11:58:50.030] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@MergeProfile is up-to-date.
+[2025-12-17T11:58:50.030] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CreateBuildProfile is up-to-date.
+[2025-12-17T11:58:50.030] [DEBUG] debug-file - Update task entry:default@GeneratePkgContextInfo output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader\default\pkgContextInfo.json cache.
+[2025-12-17T11:58:50.031] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgContextInfo post-execution cost:1 ms .
+[2025-12-17T11:58:50.031] [DEBUG] debug-file - Update task entry:default@ProcessIntegratedHsp output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\build\cache\default\integrated_hsp\integratedHspCache.json cache.
+[2025-12-17T11:58:50.031] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp post-execution cost:1 ms .
+[2025-12-17T11:58:50.031] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@MakePackInfo is up-to-date.
+[2025-12-17T11:58:50.031] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:D:\DevEco Studio2\sdk\default\openharmony\toolchains\syscap_tool.exe cache by regenerate.
+[2025-12-17T11:58:50.031] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:D:\DevEco Studio2\sdk\default\openharmony\ets\api\device-define cache by regenerate.
+[2025-12-17T11:58:50.033] [DEBUG] debug-file - Update task entry:default@SyscapTransform output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\syscap\default\rpcid.sc cache.
+[2025-12-17T11:58:50.033] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform post-execution cost:3 ms .
+[2025-12-17T11:58:50.033] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessProfile is up-to-date.
+[2025-12-17T11:58:50.033] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessRouterMap is up-to-date.
+[2025-12-17T11:58:50.033] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessShareConfig is up-to-date.
+[2025-12-17T11:58:50.033] [DEBUG] debug-file - Update task entry:default@ProcessStartupConfig output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\startup\default\startup_config.json cache.
+[2025-12-17T11:58:50.034] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig post-execution cost:1 ms .
+[2025-12-17T11:58:50.034] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessResource is up-to-date.
+[2025-12-17T11:58:50.034] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GenerateLoaderJson is up-to-date.
+[2025-12-17T11:58:50.034] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessLibs is up-to-date.
+[2025-12-17T11:58:50.034] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CompileResource is up-to-date.
+[2025-12-17T11:58:50.034] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@DoNativeStrip is up-to-date.
+[2025-12-17T11:58:50.035] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader\default cache by regenerate.
+[2025-12-17T11:58:50.036] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\ResourceTable.txt cache by regenerate.
+[2025-12-17T11:58:50.036] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\ark_module.json cache by regenerate.
+[2025-12-17T11:58:50.036] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\resources\base\profile cache by regenerate.
+[2025-12-17T11:58:50.037] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets cache from map.
+[2025-12-17T11:58:50.037] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\generated\profile\default\BuildProfile.ets cache by regenerate.
+[2025-12-17T11:58:50.037] [DEBUG] debug-file - Update task entry:default@CompileArkTS output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader_out\default\ets cache.
+[2025-12-17T11:58:50.038] [DEBUG] debug-file - Incremental task entry:default@CompileArkTS post-execution cost:4 ms .
+[2025-12-17T11:58:50.039] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader\default cache by regenerate.
+[2025-12-17T11:58:50.040] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\ResourceTable.txt cache by regenerate.
+[2025-12-17T11:58:50.040] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\ark_module.json cache by regenerate.
+[2025-12-17T11:58:50.040] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\resources\base\profile cache by regenerate.
+[2025-12-17T11:58:50.041] [DEBUG] debug-file - Update task entry:default@BuildJS output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader_out\default\js cache.
+[2025-12-17T11:58:50.041] [DEBUG] debug-file - Incremental task entry:default@BuildJS post-execution cost:4 ms .
+[2025-12-17T11:58:50.041] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CacheNativeLibs is up-to-date.
+[2025-12-17T11:58:50.042] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GeneratePkgModuleJson is up-to-date.
+[2025-12-17T11:58:50.042] [DEBUG] debug-file - Incremental task entry:default@ProcessCompiledResources post-execution cost:1 ms .
+[2025-12-17T11:58:50.042] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\stripped_native_libs\default cache by regenerate.
+[2025-12-17T11:58:50.043] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\module.json cache by regenerate.
+[2025-12-17T11:58:50.043] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\resources cache by regenerate.
+[2025-12-17T11:58:50.054] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\resources.index cache by regenerate.
+[2025-12-17T11:58:50.054] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\outputs\default\pack.info cache by regenerate.
+[2025-12-17T11:58:50.054] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader_out\default\ets cache from map.
+[2025-12-17T11:58:50.054] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader_out\default\ets\sourceMaps.map cache by regenerate.
+[2025-12-17T11:58:50.055] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\generated\profile\default\BuildProfile.ets cache by regenerate.
+[2025-12-17T11:58:50.055] [DEBUG] debug-file - Update task entry:default@PackageHap output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\outputs\default\entry-default-unsigned.hap cache.
+[2025-12-17T11:58:50.062] [DEBUG] debug-file - Update task entry:default@PackageHap output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\source_map\default\sourceMaps.map cache.
+[2025-12-17T11:58:50.063] [DEBUG] debug-file - Update task entry:default@PackageHap output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\outputs\default\mapping\sourceMaps.map cache.
+[2025-12-17T11:58:50.063] [DEBUG] debug-file - Incremental task entry:default@PackageHap post-execution cost:22 ms .
+[2025-12-17T11:58:50.064] [DEBUG] debug-file - Update task entry:default@SignHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\outputs\default\entry-default-unsigned.hap cache from map.
+[2025-12-17T11:58:50.064] [DEBUG] debug-file - Update task entry:default@SignHap output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\outputs\default\entry-default-signed.hap cache.
+[2025-12-17T11:58:50.064] [DEBUG] debug-file - Incremental task entry:default@SignHap post-execution cost:1 ms .
+[2025-12-17T11:58:50.065] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader_out\default\ets\sourceMaps.map cache by regenerate.
+[2025-12-17T11:58:50.066] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\libs\default cache by regenerate.
+[2025-12-17T11:58:50.066] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\outputs\default\symbol cache.
+[2025-12-17T11:58:50.067] [DEBUG] debug-file - Incremental task entry:default@CollectDebugSymbol post-execution cost:3 ms .
+[2025-12-17T11:58:50.087] [DEBUG] debug-file - Cleanup worker 14.
+[2025-12-17T11:58:50.087] [DEBUG] debug-file - Worker 14 has been cleaned up.
+[2025-12-17T11:58:50.087] [DEBUG] debug-file - Current idle worker size: 1.
+[2025-12-17T11:58:50.087] [DEBUG] debug-file - Current resident worker size: 2.
+[2025-12-17T11:58:50.088] [DEBUG] debug-file - hvigor build process will be closed.
+[2025-12-17T11:58:50.089] [DEBUG] debug-file - java daemon socket close code:1000 reason:close by user
+[2025-12-17T11:58:50.094] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-12-17T11:58:50.094] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-12-17T11:58:50.094] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-17T11:58:50.095] [DEBUG] debug-file - worker[14] exits with exit code 1.
+[2025-12-17T11:58:50.095] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-17T12:02:54.985] [DEBUG] debug-file - session manager: set active socket. socketId=VNFiJ7J0Et6N587UAABL
+[2025-12-17T12:02:55.011] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-17T12:02:55.018] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' },
+  optimizationStrategy: 'memory',
+  hotCompile: undefined,
+  hotReloadBuild: undefined
+}
+[2025-12-17T12:02:55.025] [DEBUG] debug-file - Cache service initialization finished in 7 ms 
+[2025-12-17T12:02:55.026] [DEBUG] debug-file - hvigorfile, resolving D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\hvigorfile.ts
+[2025-12-17T12:02:55.033] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2025-12-17T12:02:55.033] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2025-12-17T12:02:55.039] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2025-12-17T12:02:55.039] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2025-12-17T12:02:55.039] [DEBUG] debug-file - Product 'default' build option initialized
+[2025-12-17T12:02:55.039] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2025-12-17T12:02:55.042] [DEBUG] debug-file - Obtain build option for product 'default'in this build.
+[2025-12-17T12:02:55.043] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2025-12-17T12:02:55.046] [DEBUG] debug-file - Start recording SDK configuration permission data.
+[2025-12-17T12:02:55.073] [DEBUG] debug-file - Sdk init in 30 ms 
+[2025-12-17T12:02:55.076] [DEBUG] debug-file - Project task initialization takes 3 ms 
+[2025-12-17T12:02:55.076] [DEBUG] debug-file - hvigorfile, resolve finished D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\hvigorfile.ts
+[2025-12-17T12:02:55.077] [DEBUG] debug-file - hvigorfile, resolving D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\hvigorfile.ts
+[2025-12-17T12:02:55.079] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2025-12-17T12:02:55.079] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2025-12-17T12:02:55.081] [DEBUG] debug-file - failed to load cangjie to dynamically generate schemas: Error: Cannot find module '@ohos/cangjie-build-support/index'
+Require stack:
+- D:\DevEco Studio2\tools\hvigor\hvigor-ohos-plugin\src\plugin\factory\plugin-factory.js
+- D:\DevEco Studio2\tools\hvigor\hvigor-ohos-plugin\index.js
+- D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\hvigorfile.ts
+- D:\DevEco Studio2\tools\hvigor\hvigor\src\base\internal\lifecycle\configuration.js
+- D:\DevEco Studio2\tools\hvigor\hvigor\src\base\boot\index.js
+- D:\DevEco Studio2\tools\hvigor\hvigor\src\base\daemon\cluster\worker-process-lifecycle.js
+- D:\DevEco Studio2\tools\hvigor\hvigor\src\base\daemon\process\daemon-process-boot-script.js
+[2025-12-17T12:02:55.082] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=release
+[2025-12-17T12:02:55.082] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-17T12:02:55.082] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-17T12:02:55.082] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-17T12:02:55.083] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-17T12:02:55.083] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-17T12:02:55.083] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-17T12:02:55.083] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-17T12:02:55.084] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-17T12:02:55.084] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-17T12:02:55.084] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-17T12:02:55.084] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-17T12:02:55.084] [DEBUG] debug-file - Obtain build option for module 'entry' target 'default'in this build.
+[2025-12-17T12:02:55.085] [DEBUG] debug-file - Module entry task initialization takes 1 ms 
+[2025-12-17T12:02:55.085] [DEBUG] debug-file - hvigorfile, resolve finished D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\hvigorfile.ts
+[2025-12-17T12:02:55.102] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 17 ms 
+[2025-12-17T12:02:55.102] [DEBUG] debug-file - project has submodules:entry
+[2025-12-17T12:02:55.104] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2025-12-17T12:02:55.110] [DEBUG] debug-file - load to the disk finished
+[2025-12-17T12:02:55.111] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-12-17T12:02:55.112] [DEBUG] debug-file - Module List_commodity Collected Dependency: 
+[2025-12-17T12:02:55.112] [DEBUG] debug-file - Module List_commodity's total dependency: 0
+[2025-12-17T12:02:55.113] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-12-17T12:02:55.114] [DEBUG] debug-file - Module entry Collected Dependency: 
+[2025-12-17T12:02:55.114] [DEBUG] debug-file - Module entry's total dependency: 0
+[2025-12-17T12:02:55.116] [DEBUG] debug-file - Configuration phase cost:91 ms 
+[2025-12-17T12:02:55.117] [DEBUG] debug-file - Configuration task cost before running: 103 ms 
+[2025-12-17T12:02:55.121] [DEBUG] debug-file - Executing task :entry:default@PreBuild
+[2025-12-17T12:02:55.121] [DEBUG] debug-file - Task 'entry:default@PreBuild' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T12:02:55.127] [DEBUG] debug-file - Incremental task entry:default@PreBuild pre-execution cost: 4 ms .
+[2025-12-17T12:02:55.127] [DEBUG] debug-file - entry : default@PreBuild cost memory 0.3095550537109375
+[2025-12-17T12:02:55.129] [INFO] debug-file - UP-TO-DATE :entry:default@PreBuild...  
+[2025-12-17T12:02:55.130] [DEBUG] debug-file - Executing task :entry:default@CreateModuleInfo
+[2025-12-17T12:02:55.130] [DEBUG] debug-file - Task 'entry:default@CreateModuleInfo' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T12:02:55.131] [DEBUG] debug-file - entry : default@CreateModuleInfo cost memory 0.038818359375
+[2025-12-17T12:02:55.131] [DEBUG] debug-file - runTaskFromQueue task cost before running: 116 ms 
+[2025-12-17T12:02:55.131] [INFO] debug-file - Finished :entry:default@CreateModuleInfo... after 1 ms 
+[2025-12-17T12:02:55.132] [DEBUG] debug-file - Executing task :entry:default@GenerateMetadata
+[2025-12-17T12:02:55.132] [DEBUG] debug-file - Task 'entry:default@GenerateMetadata' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T12:02:55.133] [DEBUG] debug-file - Incremental task entry:default@GenerateMetadata pre-execution cost: 1 ms .
+[2025-12-17T12:02:55.133] [DEBUG] debug-file - entry : default@GenerateMetadata cost memory 0.08557891845703125
+[2025-12-17T12:02:55.133] [INFO] debug-file - UP-TO-DATE :entry:default@GenerateMetadata...  
+[2025-12-17T12:02:55.134] [DEBUG] debug-file - Executing task :entry:default@ConfigureCmake
+[2025-12-17T12:02:55.134] [DEBUG] debug-file - entry : default@ConfigureCmake cost memory 0.01512908935546875
+[2025-12-17T12:02:55.134] [DEBUG] debug-file - runTaskFromQueue task cost before running: 120 ms 
+[2025-12-17T12:02:55.134] [INFO] debug-file - Finished :entry:default@ConfigureCmake... after 1 ms 
+[2025-12-17T12:02:55.135] [DEBUG] debug-file - Executing task :entry:default@MergeProfile
+[2025-12-17T12:02:55.135] [DEBUG] debug-file - Task 'entry:default@MergeProfile' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T12:02:55.137] [DEBUG] debug-file - Incremental task entry:default@MergeProfile pre-execution cost: 2 ms .
+[2025-12-17T12:02:55.137] [DEBUG] debug-file - entry : default@MergeProfile cost memory 0.12387847900390625
+[2025-12-17T12:02:55.137] [INFO] debug-file - UP-TO-DATE :entry:default@MergeProfile...  
+[2025-12-17T12:02:55.138] [DEBUG] debug-file - Executing task :entry:default@CreateBuildProfile
+[2025-12-17T12:02:55.139] [DEBUG] debug-file - Task 'entry:default@CreateBuildProfile' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T12:02:55.140] [DEBUG] debug-file - Incremental task entry:default@CreateBuildProfile pre-execution cost: 2 ms .
+[2025-12-17T12:02:55.141] [DEBUG] debug-file - entry : default@CreateBuildProfile cost memory -1.6003265380859375
+[2025-12-17T12:02:55.141] [INFO] debug-file - UP-TO-DATE :entry:default@CreateBuildProfile...  
+[2025-12-17T12:02:55.142] [DEBUG] debug-file - Executing task :entry:default@PreCheckSyscap
+[2025-12-17T12:02:55.142] [DEBUG] debug-file - entry : default@PreCheckSyscap cost memory 0.015350341796875
+[2025-12-17T12:02:55.142] [DEBUG] debug-file - runTaskFromQueue task cost before running: 127 ms 
+[2025-12-17T12:02:55.142] [INFO] debug-file - Finished :entry:default@PreCheckSyscap... after 1 ms 
+[2025-12-17T12:02:55.143] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgContextInfo
+[2025-12-17T12:02:55.145] [DEBUG] debug-file - Task 'entry:default@GeneratePkgContextInfo' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T12:02:55.146] [DEBUG] debug-file - entry : default@GeneratePkgContextInfo cost memory 0.1876068115234375
+[2025-12-17T12:02:55.146] [DEBUG] debug-file - runTaskFromQueue task cost before running: 131 ms 
+[2025-12-17T12:02:55.146] [INFO] debug-file - Finished :entry:default@GeneratePkgContextInfo... after 3 ms 
+[2025-12-17T12:02:55.149] [DEBUG] debug-file - Executing task :entry:default@ProcessIntegratedHsp
+[2025-12-17T12:02:55.149] [DEBUG] debug-file - entry:default@ProcessIntegratedHsp is not up-to-date, since the output file 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\build\cache\default\integrated_hsp\integratedHspCache.json' does not exist.
+[2025-12-17T12:02:55.149] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp pre-execution cost: 1 ms .
+[2025-12-17T12:02:55.149] [DEBUG] debug-file - entry : default@ProcessIntegratedHsp cost memory 0.0650482177734375
+[2025-12-17T12:02:55.149] [DEBUG] debug-file - runTaskFromQueue task cost before running: 135 ms 
+[2025-12-17T12:02:55.149] [INFO] debug-file - Finished :entry:default@ProcessIntegratedHsp... after 1 ms 
+[2025-12-17T12:02:55.150] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithCmake
+[2025-12-17T12:02:55.150] [DEBUG] debug-file - entry : default@BuildNativeWithCmake cost memory 0.01617431640625
+[2025-12-17T12:02:55.150] [DEBUG] debug-file - runTaskFromQueue task cost before running: 136 ms 
+[2025-12-17T12:02:55.151] [INFO] debug-file - Finished :entry:default@BuildNativeWithCmake... after 1 ms 
+[2025-12-17T12:02:55.152] [DEBUG] debug-file - Executing task :entry:default@MakePackInfo
+[2025-12-17T12:02:55.154] [DEBUG] debug-file - Incremental task entry:default@MakePackInfo pre-execution cost: 2 ms .
+[2025-12-17T12:02:55.154] [DEBUG] debug-file - entry : default@MakePackInfo cost memory 0.10750579833984375
+[2025-12-17T12:02:55.154] [INFO] debug-file - UP-TO-DATE :entry:default@MakePackInfo...  
+[2025-12-17T12:02:55.155] [DEBUG] debug-file - Executing task :entry:default@SyscapTransform
+[2025-12-17T12:02:55.155] [DEBUG] debug-file - File: 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\syscap.json' from 'sysCapJsonPath' is not exists, just ignore.
+[2025-12-17T12:02:55.156] [DEBUG] debug-file - Task 'entry:default@SyscapTransform' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T12:02:55.157] [DEBUG] debug-file - entry:default@SyscapTransform is not up-to-date, since the output file 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\syscap\default\rpcid.sc' does not exist.
+[2025-12-17T12:02:55.158] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform pre-execution cost: 2 ms .
+[2025-12-17T12:02:55.158] [DEBUG] debug-file - entry : default@SyscapTransform cost memory 0.13973236083984375
+[2025-12-17T12:02:55.158] [DEBUG] debug-file - runTaskFromQueue task cost before running: 143 ms 
+[2025-12-17T12:02:55.158] [INFO] debug-file - Finished :entry:default@SyscapTransform... after 3 ms 
+[2025-12-17T12:02:55.159] [DEBUG] debug-file - Executing task :entry:default@ProcessProfile
+[2025-12-17T12:02:55.159] [DEBUG] debug-file - Task 'entry:default@ProcessProfile' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T12:02:55.160] [DEBUG] debug-file - Incremental task entry:default@ProcessProfile pre-execution cost: 1 ms .
+[2025-12-17T12:02:55.160] [DEBUG] debug-file - entry : default@ProcessProfile cost memory 0.12448883056640625
+[2025-12-17T12:02:55.160] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessProfile...  
+[2025-12-17T12:02:55.162] [DEBUG] debug-file - Executing task :entry:default@ProcessRouterMap
+[2025-12-17T12:02:55.164] [DEBUG] debug-file - Incremental task entry:default@ProcessRouterMap pre-execution cost: 2 ms .
+[2025-12-17T12:02:55.164] [DEBUG] debug-file - entry : default@ProcessRouterMap cost memory 0.14040374755859375
+[2025-12-17T12:02:55.165] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessRouterMap...  
+[2025-12-17T12:02:55.166] [DEBUG] debug-file - Executing task :entry:default@ProcessShareConfig
+[2025-12-17T12:02:55.169] [DEBUG] debug-file - Incremental task entry:default@ProcessShareConfig pre-execution cost: 3 ms .
+[2025-12-17T12:02:55.169] [DEBUG] debug-file - entry : default@ProcessShareConfig cost memory 0.12453460693359375
+[2025-12-17T12:02:55.170] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessShareConfig...  
+[2025-12-17T12:02:55.172] [DEBUG] debug-file - Executing task :entry:default@ProcessStartupConfig
+[2025-12-17T12:02:55.172] [DEBUG] debug-file - Task 'entry:default@ProcessStartupConfig' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T12:02:55.173] [DEBUG] debug-file - entry:default@ProcessStartupConfig is not up-to-date, since the output file 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\startup\default\startup_config.json' does not exist.
+[2025-12-17T12:02:55.173] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig pre-execution cost: 1 ms .
+[2025-12-17T12:02:55.173] [DEBUG] debug-file - entry : default@ProcessStartupConfig cost memory 0.11128997802734375
+[2025-12-17T12:02:55.173] [DEBUG] debug-file - runTaskFromQueue task cost before running: 159 ms 
+[2025-12-17T12:02:55.174] [INFO] debug-file - Finished :entry:default@ProcessStartupConfig... after 2 ms 
+[2025-12-17T12:02:55.175] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithNinja
+[2025-12-17T12:02:55.176] [DEBUG] debug-file - entry : default@BuildNativeWithNinja cost memory 0.02518463134765625
+[2025-12-17T12:02:55.176] [DEBUG] debug-file - runTaskFromQueue task cost before running: 162 ms 
+[2025-12-17T12:02:55.176] [INFO] debug-file - Finished :entry:default@BuildNativeWithNinja... after 1 ms 
+[2025-12-17T12:02:55.178] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@ProcessResource
+[2025-12-17T12:02:55.180] [DEBUG] debug-file - Executing task :entry:default@ProcessResource
+[2025-12-17T12:02:55.181] [DEBUG] debug-file - Task 'entry:default@ProcessResource' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T12:02:55.183] [DEBUG] debug-file - Incremental task entry:default@ProcessResource pre-execution cost: 2 ms .
+[2025-12-17T12:02:55.183] [DEBUG] debug-file - entry : default@ProcessResource cost memory 0.14723968505859375
+[2025-12-17T12:02:55.188] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessResource...  
+[2025-12-17T12:02:55.191] [DEBUG] debug-file - Executing task :entry:default@GenerateLoaderJson
+[2025-12-17T12:02:55.191] [DEBUG] debug-file - Task 'entry:default@GenerateLoaderJson' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T12:02:55.205] [DEBUG] debug-file - Incremental task entry:default@GenerateLoaderJson pre-execution cost: 9 ms .
+[2025-12-17T12:02:55.205] [DEBUG] debug-file - entry : default@GenerateLoaderJson cost memory -1.04931640625
+[2025-12-17T12:02:55.209] [INFO] debug-file - UP-TO-DATE :entry:default@GenerateLoaderJson...  
+[2025-12-17T12:02:55.210] [DEBUG] debug-file - Executing task :entry:default@ProcessLibs
+[2025-12-17T12:02:55.212] [DEBUG] debug-file - Incremental task entry:default@ProcessLibs pre-execution cost: 2 ms .
+[2025-12-17T12:02:55.212] [DEBUG] debug-file - entry : default@ProcessLibs cost memory 0.115692138671875
+[2025-12-17T12:02:55.214] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessLibs...  
+[2025-12-17T12:02:55.215] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@CompileResource
+[2025-12-17T12:02:55.216] [DEBUG] debug-file - Executing task :entry:default@CompileResource
+[2025-12-17T12:02:55.257] [DEBUG] debug-file - Incremental task entry:default@CompileResource pre-execution cost: 40 ms .
+[2025-12-17T12:02:55.257] [DEBUG] debug-file - entry : default@CompileResource cost memory 0.012786865234375
+[2025-12-17T12:02:55.258] [INFO] debug-file - UP-TO-DATE :entry:default@CompileResource...  
+[2025-12-17T12:02:55.260] [DEBUG] debug-file - Executing task :entry:default@DoNativeStrip
+[2025-12-17T12:02:55.260] [DEBUG] debug-file - Task 'entry:default@DoNativeStrip' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T12:02:55.262] [DEBUG] debug-file - Incremental task entry:default@DoNativeStrip pre-execution cost: 2 ms .
+[2025-12-17T12:02:55.262] [DEBUG] debug-file - entry : default@DoNativeStrip cost memory 0.0800323486328125
+[2025-12-17T12:02:55.262] [INFO] debug-file - UP-TO-DATE :entry:default@DoNativeStrip...  
+[2025-12-17T12:02:55.264] [DEBUG] debug-file - Executing task :entry:default@CompileArkTS
+[2025-12-17T12:02:55.264] [DEBUG] debug-file - obfuscationOptions: undefined
+[2025-12-17T12:02:55.283] [DEBUG] debug-file - entry:default@CompileArkTS is not up-to-date, since the input file 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets' has been changed.
+[2025-12-17T12:02:55.283] [DEBUG] debug-file - Incremental task entry:default@CompileArkTS pre-execution cost: 16 ms .
+[2025-12-17T12:02:55.305] [DEBUG] debug-file - build config:
+[2025-12-17T12:02:55.306] [DEBUG] debug-file - {
+  moduleType: 'entry',
+  perf: 0,
+  targetName: '.default',
+  packageManagerType: 'ohpm',
+  localPropertiesPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\local.properties',
+  isPreview: false,
+  isOhosTest: false,
+  isLocalTest: false,
+  buildMode: 'Debug',
+  hotReloadBuild: undefined,
+  watchMode: 'false',
+  aceProfilePath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\res\\default\\resources\\base\\profile',
+  etsLoaderPath: 'D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader',
+  modulePath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry',
+  testFrameworkPar: {
+    testMode: undefined,
+    coveragePathFilter: undefined,
+    coverageMode: undefined
+  },
+  needCoverageInsert: false,
+  debugLine: false,
+  projectTopDir: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity',
+  compileSdkVersion: 20,
+  compatibleSdkVersion: 17,
+  compatibleSdkVersionStage: undefined,
+  bundleName: 'c***y',
+  etsLoaderVersion: '6.0.0.47',
+  etsLoaderReleaseType: 'Release',
+  aotCompileMode: 'type',
+  apPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\modules.ap',
+  entryModuleName: 'entry',
+  entryModuleVersion: '1.0.0',
+  entryPackageName: 'entry',
+  allModuleNameHash: '46dc69cfbe882dbb4ab08d779a14723b',
+  externalApiPaths: [ 'D:\\DevEco Studio2\\sdk\\default\\hms\\ets' ],
+  compilerTypes: [],
+  isCrossplatform: false,
+  hvigorPluginFile: undefined,
+  compilePluginPath: undefined,
+  buildGeneratedProfilePath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\generated\\profile\\default',
+  bundleType: 'app',
+  arkTSVersion: undefined,
+  apiVersion: 20,
+  needCompleteSourcesMap: false,
+  isFaMode: false,
+  strictMode: undefined,
+  buildDir: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build',
+  deviceTypes: [ 'phone' ],
+  useNormalizedOHMUrl: false,
+  pkgContextInfo: undefined,
+  ohPackagePathMap: {},
+  dependencyAliasMap: {},
+  permission: { requestPermissions: [ [Object] ], definePermissions: undefined },
+  integratedHsp: false,
+  projectArkOption: undefined,
+  sourceMapDir: undefined,
+  branchElimination: false,
+  transformLib: undefined,
+  caseSensitiveCheck: false,
+  tsImportSendable: false,
+  resolveConflictMode: true,
+  depName2RootPath: {},
+  depName2DepInfo: {},
+  rootPathSet: [
+    'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity'
+  ],
+  useNativeResolver: true,
+  shouldEmitJs: true,
+  useTscResolve: false,
+  singleFileEmit: false,
+  userProjectConfig: {
+    autoLazyImport: false,
+    allowEmptyBundleName: false,
+    reExportCheckMode: 'noCheck',
+    executionMode: 'memory',
+    usePathPlaceholder: false,
+    writeRollupCache: true,
+    isExpandImportEnabled: false,
+    expandImportExclude: '',
+    ignoreCrossplatformCheck: false,
+    isPreloadSoEnabled: false
+  },
+  skipOhModulesLint: false,
+  executionMode: 'memory',
+  autoLazyImport: false,
+  allowEmptyBundleName: false,
+  reExportCheckMode: 'noCheck',
+  usePathPlaceholder: false,
+  writeRollupCache: true,
+  isExpandImportEnabled: false,
+  expandImportExclude: '',
+  ignoreCrossplatformCheck: false,
+  isPreloadSoEnabled: false,
+  arkCompileCachePath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule',
+  aceModuleJsonPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\res\\default\\ark_module.json',
+  appResource: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\res\\default\\ResourceTable.txt',
+  rawFileResource: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\res\\default\\resources\\rawfile',
+  resourceTableHash: '58702bc33f008c91a3e6596e10d0227a',
+  runtimeOS: 'HarmonyOS',
+  sdkInfo: 'false:20:6.0.0.47:Release',
+  aceModuleRoot: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets',
+  compileMode: 'esmodule',
+  aceSuperVisualPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\supervisual',
+  aceBuildJson: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\loader\\default\\loader.json',
+  cachePath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule\\debug',
+  aceModuleBuild: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\loader_out\\default\\ets',
+  supportChunks: true,
+  declaredFilesPath: undefined,
+  shouldCollectDirectImportees: false,
+  isByteCodeHarOptimize: false,
+  expandImportPath: undefined,
+  pkgNameToPkgBriefInfo: {
+    entry: {
+      pkgRoot: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry',
+      originalSourceRoots: undefined,
+      sourceRoots: [Array],
+      pkgName: 'entry'
+    }
+  },
+  projectModel: {
+    'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main': {
+      moduleName: 'entry',
+      modulePkgPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry',
+      belongProjectPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity'
+    },
+    'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry': {
+      moduleName: 'entry',
+      modulePkgPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry',
+      belongProjectPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity'
+    },
+    'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity': {
+      moduleName: 'List_commodity',
+      modulePkgPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity',
+      belongProjectPath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity'
+    }
+  },
+  pkgJsonFileHash: '73952b0c20fc6d4c363e85190646ec08',
+  allModulePaths: [
+    'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry'
+  ],
+  routerMap: {},
+  obfuscationOptions: undefined,
+  byteCodeHarToDependencyKeys: undefined,
+  compileBlockPkg: [],
+  mockParams: {
+    decorator: '@MockSetup',
+    packageName: '@ohos/hamock',
+    etsSourceRootPath: 'src/main/ets',
+    mockConfigPath: undefined,
+    mockConfigKey2ModuleInfo: {},
+    source2ModuleIdMap: {}
+  },
+  copyCodeResourceEnable: true,
+  copyCodeResourceExcludes: [],
+  copyCodeResourceIncludes: undefined,
+  uiTransformOptimization: false,
+  sdkPath: 'D:/DevEco Studio2/sdk',
+  needPreloadSoFileSet: {},
+  preloadSoFilePath: 'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\preload\\default\\preload.json',
+  useSourceHash: false,
+  localModuleParamMap: {},
+  otherPaths: {
+    'entry/*': [
+      '..\\*',
+      '..\\..\\..\\build\\default\\generated\\profile\\default\\*'
+    ]
+  },
+  collectImportersConfig: undefined
+}
+[2025-12-17T12:02:55.306] [DEBUG] debug-file - Compile arkts with external api path: D:\DevEco Studio2\sdk\default\hms\ets
+[2025-12-17T12:02:55.308] [DEBUG] debug-file - default@CompileArkTS work[68] is submitted.
+[2025-12-17T12:02:55.309] [DEBUG] debug-file - default@CompileArkTS work[68] is pushed to ready queue.
+[2025-12-17T12:02:55.309] [DEBUG] debug-file - A work dispatched to worker[15] failed because unable to get work from ready queue.
+[2025-12-17T12:02:55.309] [DEBUG] debug-file - A work dispatched to worker[14] failed because unable to get work from ready queue.
+[2025-12-17T12:02:55.309] [DEBUG] debug-file - A work dispatched to worker[13] failed because unable to get work from ready queue.
+[2025-12-17T12:02:55.309] [DEBUG] debug-file - A work dispatched to worker[12] failed because unable to get work from ready queue.
+[2025-12-17T12:02:55.309] [DEBUG] debug-file - A work dispatched to worker[11] failed because unable to get work from ready queue.
+[2025-12-17T12:02:55.309] [DEBUG] debug-file - A work dispatched to worker[10] failed because unable to get work from ready queue.
+[2025-12-17T12:02:55.309] [DEBUG] debug-file - A work dispatched to worker[9] failed because unable to get work from ready queue.
+[2025-12-17T12:02:55.309] [DEBUG] debug-file - A work dispatched to worker[8] failed because unable to get work from ready queue.
+[2025-12-17T12:02:55.309] [DEBUG] debug-file - A work dispatched to worker[7] failed because unable to get work from ready queue.
+[2025-12-17T12:02:55.309] [DEBUG] debug-file - A work dispatched to worker[6] failed because unable to get work from ready queue.
+[2025-12-17T12:02:55.309] [DEBUG] debug-file - A work dispatched to worker[5] failed because unable to get work from ready queue.
+[2025-12-17T12:02:55.309] [DEBUG] debug-file - default@CompileArkTS work[68] has been dispatched to worker[4].
+[2025-12-17T12:02:55.310] [DEBUG] debug-file - default@CompileArkTS work[68] is dispatched.
+[2025-12-17T12:02:55.310] [DEBUG] debug-file - CopyResources startTime: 383979434105700
+[2025-12-17T12:02:55.310] [DEBUG] debug-file - default@CompileArkTS work[69] is submitted.
+[2025-12-17T12:02:55.310] [DEBUG] debug-file - default@CompileArkTS work[69] is pushed to ready queue.
+[2025-12-17T12:02:55.310] [DEBUG] debug-file - A work dispatched to worker[15] failed because unable to get work from ready queue.
+[2025-12-17T12:02:55.310] [DEBUG] debug-file - Create  resident worker with id: 14.
+[2025-12-17T12:02:55.312] [DEBUG] debug-file - default@CompileArkTS work[69] has been dispatched to worker[14].
+[2025-12-17T12:02:55.312] [DEBUG] debug-file - default@CompileArkTS work[69] is dispatched.
+[2025-12-17T12:02:55.312] [DEBUG] debug-file - entry : default@CompileArkTS cost memory -0.00766754150390625
+[2025-12-17T12:02:55.314] [DEBUG] debug-file - Executing task :entry:default@BuildJS
+[2025-12-17T12:02:55.320] [DEBUG] debug-file - entry : default@BuildJS cost memory 0.13266754150390625
+[2025-12-17T12:02:55.320] [DEBUG] debug-file - runTaskFromQueue task cost before running: 306 ms 
+[2025-12-17T12:02:55.321] [INFO] debug-file - Finished :entry:default@BuildJS... after 7 ms 
+[2025-12-17T12:02:55.322] [DEBUG] debug-file - Executing task :entry:default@CacheNativeLibs
+[2025-12-17T12:02:55.323] [DEBUG] debug-file - Task 'entry:default@CacheNativeLibs' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T12:02:55.326] [DEBUG] debug-file - Incremental task entry:default@CacheNativeLibs pre-execution cost: 2 ms .
+[2025-12-17T12:02:55.326] [DEBUG] debug-file - entry : default@CacheNativeLibs cost memory 0.09540557861328125
+[2025-12-17T12:02:55.326] [INFO] debug-file - UP-TO-DATE :entry:default@CacheNativeLibs...  
+[2025-12-17T12:02:56.760] [DEBUG] debug-file - worker[14] has one work done.
+[2025-12-17T12:02:56.760] [DEBUG] debug-file - CopyResources is end, endTime: 383980884456000
+[2025-12-17T12:02:56.760] [DEBUG] debug-file - default@CompileArkTS work[69] done.
+[2025-12-17T12:02:56.760] [DEBUG] debug-file - A work dispatched to worker[14] failed because unable to get work from ready queue.
+[2025-12-17T12:02:56.767] [DEBUG] debug-file - worker[4] has one work done.
+[2025-12-17T12:02:56.768] [DEBUG] debug-file - default@CompileArkTS work[68] done.
+[2025-12-17T12:02:56.769] [DEBUG] debug-file - A work dispatched to worker[4] failed because unable to get work from ready queue.
+[2025-12-17T12:02:56.772] [INFO] debug-file - Finished :entry:default@CompileArkTS... after 1 s 503 ms 
+[2025-12-17T12:02:56.773] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgModuleJson
+[2025-12-17T12:02:56.774] [DEBUG] debug-file - File: 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\preload\default\preload.json' from 'preloadSoJsonPath' is not exists, just ignore.
+[2025-12-17T12:02:56.774] [DEBUG] debug-file - Task 'entry:default@GeneratePkgModuleJson' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T12:02:56.775] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgModuleJson pre-execution cost: 1 ms .
+[2025-12-17T12:02:56.775] [DEBUG] debug-file - entry : default@GeneratePkgModuleJson cost memory 0.09146881103515625
+[2025-12-17T12:02:56.775] [INFO] debug-file - UP-TO-DATE :entry:default@GeneratePkgModuleJson...  
+[2025-12-17T12:02:56.776] [DEBUG] debug-file - Executing task :entry:default@ProcessCompiledResources
+[2025-12-17T12:02:56.777] [DEBUG] debug-file - File: 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\preload\default\preload.json' from 'preloadSoJsonPath' is not exists, just ignore.
+[2025-12-17T12:02:56.777] [DEBUG] debug-file - Task 'entry:default@ProcessCompiledResources' cost while wrapping incremental declarations: 1 ms 
+[2025-12-17T12:02:56.777] [DEBUG] debug-file - entry : default@ProcessCompiledResources cost memory 0.06719207763671875
+[2025-12-17T12:02:56.777] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 763 ms 
+[2025-12-17T12:02:56.777] [INFO] debug-file - Finished :entry:default@ProcessCompiledResources... after 1 ms 
+[2025-12-17T12:02:56.779] [DEBUG] debug-file - Executing task :entry:default@PackageHap
+[2025-12-17T12:02:56.791] [DEBUG] debug-file - entry:default@PackageHap is not up-to-date, since the input file 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader_out\default\ets' has been changed.
+[2025-12-17T12:02:56.791] [DEBUG] debug-file - Incremental task entry:default@PackageHap pre-execution cost: 12 ms .
+[2025-12-17T12:02:56.792] [DEBUG] debug-file - Use tool [D:\DevEco Studio2\sdk\default\openharmony\toolchains\lib\app_packing_tool.jar]
+ [
+  'java',
+  '-Dfile.encoding=GBK',
+  '-jar',
+  'D:\\DevEco Studio2\\sdk\\default\\openharmony\\toolchains\\lib\\app_packing_tool.jar',
+  '--mode',
+  'hap',
+  '--force',
+  'true',
+  '--lib-path',
+  'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\stripped_native_libs\\default',
+  '--json-path',
+  'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\package\\default\\module.json',
+  '--resources-path',
+  'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\res\\default\\resources',
+  '--index-path',
+  'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\res\\default\\resources.index',
+  '--pack-info-path',
+  'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\outputs\\default\\pack.info',
+  '--out-path',
+  'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\outputs\\default\\entry-default-unsigned.hap',
+  '--ets-path',
+  'D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\build\\default\\intermediates\\loader_out\\default\\ets'
+]
+[2025-12-17T12:02:57.077] [DEBUG] debug-file - java daemon socket received message:{"code":0,"message":"pack success"}
+[2025-12-17T12:02:57.083] [DEBUG] debug-file - entry : default@PackageHap cost memory -0.54351806640625
+[2025-12-17T12:02:57.083] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 69 ms 
+[2025-12-17T12:02:57.084] [INFO] debug-file - Finished :entry:default@PackageHap... after 304 ms 
+[2025-12-17T12:02:57.086] [DEBUG] debug-file - Executing task :entry:default@PackingCheck
+[2025-12-17T12:02:57.092] [DEBUG] debug-file - entry : default@PackingCheck cost memory 0.6225051879882812
+[2025-12-17T12:02:57.092] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 78 ms 
+[2025-12-17T12:02:57.093] [INFO] debug-file - Finished :entry:default@PackingCheck... after 7 ms 
+[2025-12-17T12:02:57.094] [DEBUG] debug-file - Executing task :entry:default@SignHap
+[2025-12-17T12:02:57.094] [WARN] debug-file - Will skip sign 'hos_hap'. No signingConfigs profile is configured in current project.
+             If needed, configure the signingConfigs in D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\build-profile.json5.
+[2025-12-17T12:02:57.096] [DEBUG] debug-file - entry:default@SignHap is not up-to-date, since the input file 'D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\outputs\default\entry-default-unsigned.hap' has been changed.
+[2025-12-17T12:02:57.096] [DEBUG] debug-file - Incremental task entry:default@SignHap pre-execution cost: 1 ms .
+[2025-12-17T12:02:57.096] [DEBUG] debug-file - entry : default@SignHap cost memory 0.0997161865234375
+[2025-12-17T12:02:57.096] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 82 ms 
+[2025-12-17T12:02:57.097] [INFO] debug-file - Finished :entry:default@SignHap... after 3 ms 
+[2025-12-17T12:02:57.098] [DEBUG] debug-file - Executing task :entry:default@CollectDebugSymbol
+[2025-12-17T12:02:57.099] [DEBUG] debug-file - entry : default@CollectDebugSymbol cost memory 0.1179351806640625
+[2025-12-17T12:02:57.100] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 85 ms 
+[2025-12-17T12:02:57.100] [INFO] debug-file - Finished :entry:default@CollectDebugSymbol... after 2 ms 
+[2025-12-17T12:02:57.100] [DEBUG] debug-file - Executing task :entry:assembleHap
+[2025-12-17T12:02:57.100] [DEBUG] debug-file - entry : assembleHap cost memory 0.01337432861328125
+[2025-12-17T12:02:57.100] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 86 ms 
+[2025-12-17T12:02:57.100] [INFO] debug-file - Finished :entry:assembleHap... after 1 ms 
+[2025-12-17T12:02:57.110] [INFO] debug-file - BUILD SUCCESSFUL in 2 s 95 ms 
+[2025-12-17T12:02:57.110] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@PreBuild is up-to-date.
+[2025-12-17T12:02:57.110] [DEBUG] debug-file - Update task entry:default@CreateModuleInfo output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\generated\profile\default\ModuleInfo.ts cache.
+[2025-12-17T12:02:57.110] [DEBUG] debug-file - Incremental task entry:default@CreateModuleInfo post-execution cost:1 ms .
+[2025-12-17T12:02:57.110] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GenerateMetadata is up-to-date.
+[2025-12-17T12:02:57.111] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@MergeProfile is up-to-date.
+[2025-12-17T12:02:57.111] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CreateBuildProfile is up-to-date.
+[2025-12-17T12:02:57.111] [DEBUG] debug-file - Update task entry:default@GeneratePkgContextInfo output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader\default\pkgContextInfo.json cache.
+[2025-12-17T12:02:57.111] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgContextInfo post-execution cost:1 ms .
+[2025-12-17T12:02:57.111] [DEBUG] debug-file - Update task entry:default@ProcessIntegratedHsp output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\build\cache\default\integrated_hsp\integratedHspCache.json cache.
+[2025-12-17T12:02:57.112] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp post-execution cost:2 ms .
+[2025-12-17T12:02:57.113] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@MakePackInfo is up-to-date.
+[2025-12-17T12:02:57.113] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:D:\DevEco Studio2\sdk\default\openharmony\toolchains\syscap_tool.exe cache by regenerate.
+[2025-12-17T12:02:57.113] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:D:\DevEco Studio2\sdk\default\openharmony\ets\api\device-define cache by regenerate.
+[2025-12-17T12:02:57.115] [DEBUG] debug-file - Update task entry:default@SyscapTransform output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\syscap\default\rpcid.sc cache.
+[2025-12-17T12:02:57.115] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform post-execution cost:3 ms .
+[2025-12-17T12:02:57.115] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessProfile is up-to-date.
+[2025-12-17T12:02:57.115] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessRouterMap is up-to-date.
+[2025-12-17T12:02:57.115] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessShareConfig is up-to-date.
+[2025-12-17T12:02:57.115] [DEBUG] debug-file - Update task entry:default@ProcessStartupConfig output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\startup\default\startup_config.json cache.
+[2025-12-17T12:02:57.116] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig post-execution cost:1 ms .
+[2025-12-17T12:02:57.116] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessResource is up-to-date.
+[2025-12-17T12:02:57.116] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GenerateLoaderJson is up-to-date.
+[2025-12-17T12:02:57.116] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessLibs is up-to-date.
+[2025-12-17T12:02:57.116] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CompileResource is up-to-date.
+[2025-12-17T12:02:57.116] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@DoNativeStrip is up-to-date.
+[2025-12-17T12:02:57.118] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader\default cache by regenerate.
+[2025-12-17T12:02:57.119] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\ResourceTable.txt cache by regenerate.
+[2025-12-17T12:02:57.119] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\ark_module.json cache by regenerate.
+[2025-12-17T12:02:57.120] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\resources\base\profile cache by regenerate.
+[2025-12-17T12:02:57.120] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\src\main\ets cache from map.
+[2025-12-17T12:02:57.120] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\generated\profile\default\BuildProfile.ets cache by regenerate.
+[2025-12-17T12:02:57.121] [DEBUG] debug-file - Update task entry:default@CompileArkTS output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader_out\default\ets cache.
+[2025-12-17T12:02:57.124] [DEBUG] debug-file - Incremental task entry:default@CompileArkTS post-execution cost:8 ms .
+[2025-12-17T12:02:57.125] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader\default cache by regenerate.
+[2025-12-17T12:02:57.126] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\ResourceTable.txt cache by regenerate.
+[2025-12-17T12:02:57.126] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\ark_module.json cache by regenerate.
+[2025-12-17T12:02:57.126] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\resources\base\profile cache by regenerate.
+[2025-12-17T12:02:57.127] [DEBUG] debug-file - Update task entry:default@BuildJS output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader_out\default\js cache.
+[2025-12-17T12:02:57.127] [DEBUG] debug-file - Incremental task entry:default@BuildJS post-execution cost:4 ms .
+[2025-12-17T12:02:57.127] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CacheNativeLibs is up-to-date.
+[2025-12-17T12:02:57.128] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GeneratePkgModuleJson is up-to-date.
+[2025-12-17T12:02:57.128] [DEBUG] debug-file - Incremental task entry:default@ProcessCompiledResources post-execution cost:1 ms .
+[2025-12-17T12:02:57.129] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\stripped_native_libs\default cache by regenerate.
+[2025-12-17T12:02:57.129] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\module.json cache by regenerate.
+[2025-12-17T12:02:57.129] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\resources cache by regenerate.
+[2025-12-17T12:02:57.143] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\res\default\resources.index cache by regenerate.
+[2025-12-17T12:02:57.143] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\outputs\default\pack.info cache by regenerate.
+[2025-12-17T12:02:57.144] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader_out\default\ets cache from map.
+[2025-12-17T12:02:57.144] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader_out\default\ets\sourceMaps.map cache by regenerate.
+[2025-12-17T12:02:57.144] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\generated\profile\default\BuildProfile.ets cache by regenerate.
+[2025-12-17T12:02:57.146] [DEBUG] debug-file - Update task entry:default@PackageHap output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\outputs\default\entry-default-unsigned.hap cache.
+[2025-12-17T12:02:57.146] [DEBUG] debug-file - Update task entry:default@PackageHap output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\source_map\default\sourceMaps.map cache.
+[2025-12-17T12:02:57.147] [DEBUG] debug-file - Update task entry:default@PackageHap output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\outputs\default\mapping\sourceMaps.map cache.
+[2025-12-17T12:02:57.147] [DEBUG] debug-file - Incremental task entry:default@PackageHap post-execution cost:20 ms .
+[2025-12-17T12:02:57.148] [DEBUG] debug-file - Update task entry:default@SignHap input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\outputs\default\entry-default-unsigned.hap cache from map.
+[2025-12-17T12:02:57.148] [DEBUG] debug-file - Update task entry:default@SignHap output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\outputs\default\entry-default-signed.hap cache.
+[2025-12-17T12:02:57.148] [DEBUG] debug-file - Incremental task entry:default@SignHap post-execution cost:1 ms .
+[2025-12-17T12:02:57.149] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\loader_out\default\ets\sourceMaps.map cache by regenerate.
+[2025-12-17T12:02:57.149] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\intermediates\libs\default cache by regenerate.
+[2025-12-17T12:02:57.150] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol output file:D:\HuaweiMoveData\Users\18381\Desktop\HarmonyOS\final_project\List_commodity\entry\build\default\outputs\default\symbol cache.
+[2025-12-17T12:02:57.150] [DEBUG] debug-file - Incremental task entry:default@CollectDebugSymbol post-execution cost:2 ms .
+[2025-12-17T12:02:57.175] [DEBUG] debug-file - Cleanup worker 14.
+[2025-12-17T12:02:57.175] [DEBUG] debug-file - Worker 14 has been cleaned up.
+[2025-12-17T12:02:57.175] [DEBUG] debug-file - Current idle worker size: 1.
+[2025-12-17T12:02:57.175] [DEBUG] debug-file - Current resident worker size: 2.
+[2025-12-17T12:02:57.176] [DEBUG] debug-file - hvigor build process will be closed.
+[2025-12-17T12:02:57.176] [DEBUG] debug-file - java daemon socket close code:1000 reason:close by user
+[2025-12-17T12:02:57.182] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-12-17T12:02:57.183] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-12-17T12:02:57.183] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-17T12:02:57.184] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-17T12:02:57.184] [DEBUG] debug-file - worker[14] exits with exit code 1.

@@ -238,6 +238,10 @@ export default class PointsMallPage extends ViewPU {
             Column.margin({ left: 16, right: 16 });
             Column.onClick(() => {
                 try {
+                    if (!AuthStore.isLoggedIn()) {
+                        router.pushUrl({ url: 'pages/LoginRegisterPage' });
+                        return;
+                    }
                     router.pushUrl({ url: 'pages/GoodsDetailPage', params: { goods: item } });
                 }
                 catch (err) {

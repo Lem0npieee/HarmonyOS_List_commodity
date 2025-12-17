@@ -7,6 +7,7 @@ import { GoodsListItemType } from '../viewmodel/InitialData';
 import OrderStore from '../common/OrderStore';
 import PointsStore from '../common/PointsStore';
 import NotificationStore, { NotificationPayload } from '../common/NotificationStore';
+import AuthStore from '../common/AuthStore';
 import prompt from '@system.prompt';
 import { PointsGoodsItem } from '../viewmodel/PointsGoodsData';
 import router from '@ohos.router';
@@ -140,9 +141,23 @@ export default struct CartPage {
 
   private openDetail(product: GoodsListItemType): void {
     try {
+      if (!AuthStore.isLoggedIn()) {
+        router.pushUrl({ url: 'pages/LoginRegisterPage' });
+        return;
+      }
       router.pushUrl({ url: 'pages/GoodsDetailPage', params: { goods: product } });
     } catch (err) {
       console.error('跳转商品详情失败:', String(err));
+    }
+  }
+
+  aboutToAppear() {
+    try {
+      if (!AuthStore.isLoggedIn()) {
+        router.pushUrl({ url: 'pages/LoginRegisterPage' });
+      }
+    } catch (err) {
+      console.error('导航到登录页面失败:', String(err));
     }
   }
 

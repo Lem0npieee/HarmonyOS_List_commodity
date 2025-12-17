@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 import router from '@ohos.router';
+import AuthStore from '../common/AuthStore';
 import * as commonConst from '../common/CommonConstants';
 import { GoodsListItemType, CategoryType } from '../viewmodel/InitialData';
 import { ListDataSource, EmptyListener } from '../viewmodel/ListDataSource';
@@ -174,12 +175,20 @@ export default struct GoodsList {
       .alignItems(VerticalAlign.Center)
       .padding({ top: 12, bottom: 12 })
       .onClick(() => {
-        router.pushUrl({
-          url: 'pages/GoodsDetailPage',
-          params: { goods: item }
-        }).catch((err: Error) => {
-          console.error('跳转失败:', err.message);
-        });
+        try {
+          if (!AuthStore.isLoggedIn()) {
+            router.pushUrl({ url: 'pages/LoginRegisterPage' }).catch((err: Error) => console.error('跳转登录失败:', err.message));
+            return;
+          }
+          router.pushUrl({
+            url: 'pages/GoodsDetailPage',
+            params: { goods: item }
+          }).catch((err: Error) => {
+            console.error('跳转失败:', err.message);
+          });
+        } catch (err) {
+          console.error('跳转商品详情失败:', String(err));
+        }
       })
       
       Divider()

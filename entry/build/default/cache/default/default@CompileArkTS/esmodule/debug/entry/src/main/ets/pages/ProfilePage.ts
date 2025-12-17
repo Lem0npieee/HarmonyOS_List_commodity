@@ -590,6 +590,10 @@ export default class ProfilePage extends ViewPU {
                         ListItem.margin({ left: 4, right: 4 });
                         ListItem.onClick(() => {
                             try {
+                                if (!AuthStore.isLoggedIn()) {
+                                    router.pushUrl({ url: 'pages/LoginRegisterPage' });
+                                    return;
+                                }
                                 router.pushUrl({ url: 'pages/GoodsDetailPage', params: { goods: entry.product } });
                             }
                             catch (err) {

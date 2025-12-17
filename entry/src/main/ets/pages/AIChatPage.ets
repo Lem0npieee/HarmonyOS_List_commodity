@@ -4,6 +4,7 @@
  *       在 AI 回复气泡下展示匹配商品的卡片并支持跳转到详情页。
  */
 import router from '@ohos.router';
+import AuthStore from '../common/AuthStore';
 import http from '@ohos.net.http';
 // Note: do not import '@ohos.ace.ets' here; decorators are available globally in ETS pages
 import { goodsPool, GoodsListItemType, CategoryType } from '../viewmodel/InitialData';
@@ -189,9 +190,17 @@ export default struct AIChatPage {
                           .backgroundColor(Color.White)
                           .borderRadius(8)
                           .onClick(() => {
-                            router.pushUrl({ url: 'pages/GoodsDetailPage', params: { goods: item } }).catch((err: Error) => {
-                              console.error('跳转失败:', err.message);
-                            });
+                            try {
+                              if (!AuthStore.isLoggedIn()) {
+                                router.pushUrl({ url: 'pages/LoginRegisterPage' }).catch((err: Error) => console.error('跳转登录失败:', err.message));
+                                return;
+                              }
+                              router.pushUrl({ url: 'pages/GoodsDetailPage', params: { goods: item } }).catch((err: Error) => {
+                                console.error('跳转失败:', err.message);
+                              });
+                            } catch (err) {
+                              console.error('跳转商品详情失败:', String(err));
+                            }
                           })
                         }
                       }, (it: GoodsListItemType) => `${it.id}`)

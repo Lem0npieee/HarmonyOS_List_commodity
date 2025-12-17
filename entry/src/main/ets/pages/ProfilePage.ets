@@ -358,6 +358,10 @@ export default struct ProfilePage {
           .margin({ left: 4, right: 4 })
           .onClick(() => {
             try {
+              if (!AuthStore.isLoggedIn()) {
+                router.pushUrl({ url: 'pages/LoginRegisterPage' });
+                return;
+              }
               router.pushUrl({ url: 'pages/GoodsDetailPage', params: { goods: entry.product } });
             } catch (err) {
               console.error('跳转收藏商品详情失败:', String(err));

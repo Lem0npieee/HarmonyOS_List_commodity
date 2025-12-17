@@ -15,6 +15,7 @@ import OrderStore from "@bundle:com.example.list_harmony/entry/ets/common/OrderS
 import PointsStore from "@bundle:com.example.list_harmony/entry/ets/common/PointsStore";
 import NotificationStore from "@bundle:com.example.list_harmony/entry/ets/common/NotificationStore";
 import type { NotificationPayload } from "@bundle:com.example.list_harmony/entry/ets/common/NotificationStore";
+import AuthStore from "@bundle:com.example.list_harmony/entry/ets/common/AuthStore";
 import prompt from "@ohos:prompt";
 import type { PointsGoodsItem } from '../viewmodel/PointsGoodsData';
 import router from "@ohos:router";
@@ -186,10 +187,24 @@ export default class CartPage extends ViewPU {
     }
     private openDetail(product: GoodsListItemType): void {
         try {
+            if (!AuthStore.isLoggedIn()) {
+                router.pushUrl({ url: 'pages/LoginRegisterPage' });
+                return;
+            }
             router.pushUrl({ url: 'pages/GoodsDetailPage', params: { goods: product } });
         }
         catch (err) {
             console.error('跳转商品详情失败:', String(err));
+        }
+    }
+    aboutToAppear() {
+        try {
+            if (!AuthStore.isLoggedIn()) {
+                router.pushUrl({ url: 'pages/LoginRegisterPage' });
+            }
+        }
+        catch (err) {
+            console.error('导航到登录页面失败:', String(err));
         }
     }
     initialRender() {

@@ -140,6 +140,10 @@ export default struct PointsMallPage {
     .margin({ left: 16, right: 16 })
     .onClick(() => {
       try {
+        if (!AuthStore.isLoggedIn()) {
+          router.pushUrl({ url: 'pages/LoginRegisterPage' });
+          return;
+        }
         router.pushUrl({ url: 'pages/GoodsDetailPage', params: { goods: item } });
       } catch (err) {
         console.error('跳转积分商品详情失败:', String(err));

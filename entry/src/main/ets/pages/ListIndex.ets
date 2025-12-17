@@ -72,7 +72,15 @@ struct ListIndex {
             .justifyContent(FlexAlign.Center)
             .layoutWeight(1)
             .onClick(() => {
-              this.selectedBottomIndex = 1;
+              try {
+                if (AuthStore.isLoggedIn()) {
+                  this.selectedBottomIndex = 1;
+                } else {
+                  router.pushUrl({ url: 'pages/LoginRegisterPage' });
+                }
+              } catch (err) {
+                console.error('跳转登录注册页面失败:', String(err));
+              }
             })
 
             // 我的

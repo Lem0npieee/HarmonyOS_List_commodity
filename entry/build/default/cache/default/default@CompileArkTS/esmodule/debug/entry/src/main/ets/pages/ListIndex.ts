@@ -188,7 +188,17 @@ class ListIndex extends ViewPU {
             Column.layoutWeight(1);
             // 购物车
             Column.onClick(() => {
-                this.selectedBottomIndex = 1;
+                try {
+                    if (AuthStore.isLoggedIn()) {
+                        this.selectedBottomIndex = 1;
+                    }
+                    else {
+                        router.pushUrl({ url: 'pages/LoginRegisterPage' });
+                    }
+                }
+                catch (err) {
+                    console.error('跳转登录注册页面失败:', String(err));
+                }
             });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -250,7 +260,7 @@ class ListIndex extends ViewPU {
                 if (isInitialRender) {
                     let componentCall = new 
                     // 全局通知气泡（位于导航之上）
-                    NotificationComponent(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 114, col: 7 });
+                    NotificationComponent(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 122, col: 7 });
                     ViewPU.create(componentCall);
                     let paramsLambda = () => {
                         return {};

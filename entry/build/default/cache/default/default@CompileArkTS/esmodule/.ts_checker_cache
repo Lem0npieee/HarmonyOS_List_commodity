@@ -1598,7 +1598,7 @@
       ]
     },
     "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\CartPage.ets": {
-      "mtimeMs": 1765937412898.3528,
+      "mtimeMs": 1765943921809.5122,
       "children": [
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CommonConstants.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CartStore.ets",
@@ -1606,6 +1606,7 @@
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\OrderStore.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\PointsStore.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\NotificationStore.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\AuthStore.ets",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@system.prompt.d.ts",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\viewmodel\\PointsGoodsData.ets",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts"
@@ -1620,7 +1621,7 @@
       ]
     },
     "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\ProfilePage.ets": {
-      "mtimeMs": 1765937412899.3484,
+      "mtimeMs": 1765943921809.5122,
       "children": [
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CommonConstants.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\FavoritesStore.ets",
@@ -1678,7 +1679,7 @@
       "error": false
     },
     "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\ListIndex.ets": {
-      "mtimeMs": 1765330116695.6226,
+      "mtimeMs": 1765944148256.214,
       "children": [
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\TabBarsComponent.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\CartPage.ets",
@@ -1695,9 +1696,10 @@
       ]
     },
     "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\GoodsListComponent.ets": {
-      "mtimeMs": 1763534863419.5393,
+      "mtimeMs": 1765943921809.5122,
       "children": [
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\AuthStore.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CommonConstants.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\viewmodel\\InitialData.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\viewmodel\\ListDataSource.ets"
@@ -1811,9 +1813,10 @@
       "error": false
     },
     "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\AIChatPage.ets": {
-      "mtimeMs": 1765943127905.6309,
+      "mtimeMs": 1765943921809.5122,
       "children": [
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\AuthStore.ets",
         "D:\\DevEco Studio2\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.http.d.ts",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\viewmodel\\InitialData.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CommonConstants.ets",
@@ -2363,7 +2366,10 @@
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\ListIndex.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\ProfilePage.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\LoginRegisterPage.ets",
-        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\PointsMallPage.ets"
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\PointsMallPage.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\view\\GoodsListComponent.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\CartPage.ets",
+        "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\AIChatPage.ets"
       ],
       "error": false
     },
@@ -2409,7 +2415,7 @@
       "error": false
     },
     "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\pages\\PointsMallPage.ets": {
-      "mtimeMs": 1765937412900.3486,
+      "mtimeMs": 1765943921809.5122,
       "children": [
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\CommonConstants.ets",
         "D:\\HuaweiMoveData\\Users\\18381\\Desktop\\HarmonyOS\\final_project\\List_commodity\\entry\\src\\main\\ets\\common\\PointsStore.ets",

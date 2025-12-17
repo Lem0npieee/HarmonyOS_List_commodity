@@ -9,6 +9,7 @@ interface GoodsList_Params {
     emptyListener?: GoodsListEmptyListener;
 }
 import router from "@ohos:router";
+import AuthStore from "@bundle:com.example.list_harmony/entry/ets/common/AuthStore";
 import * as commonConst from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
 import { CategoryType } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
 import type { GoodsListItemType } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
@@ -215,12 +216,21 @@ export default class GoodsList extends ViewPU {
             Row.alignItems(VerticalAlign.Center);
             Row.padding({ top: 12, bottom: 12 });
             Row.onClick(() => {
-                router.pushUrl({
-                    url: 'pages/GoodsDetailPage',
-                    params: { goods: item }
-                }).catch((err: Error) => {
-                    console.error('跳转失败:', err.message);
-                });
+                try {
+                    if (!AuthStore.isLoggedIn()) {
+                        router.pushUrl({ url: 'pages/LoginRegisterPage' }).catch((err: Error) => console.error('跳转登录失败:', err.message));
+                        return;
+                    }
+                    router.pushUrl({
+                        url: 'pages/GoodsDetailPage',
+                        params: { goods: item }
+                    }).catch((err: Error) => {
+                        console.error('跳转失败:', err.message);
+                    });
+                }
+                catch (err) {
+                    console.error('跳转商品详情失败:', String(err));
+                }
             });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
