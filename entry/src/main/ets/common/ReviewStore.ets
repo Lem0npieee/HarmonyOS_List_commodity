@@ -1,6 +1,7 @@
 import dataPreferences from '@ohos.data.preferences';
 import { GoodsListItemType, goodsPool } from '../viewmodel/InitialData';
 import { pointsGoodsPool } from '../viewmodel/PointsGoodsData';
+import AuthStore from './AuthStore';
 
 type Preferences = dataPreferences.Preferences;
 
@@ -25,6 +26,7 @@ interface PersistedReviewState {
 }
 
 export default class ReviewStore {
+  private static allData: Record<string, PersistedReviewState> = {};
   private static pendingReviewIds: Set<string> = new Set();
   private static reviewsByGoods: Map<string, StoredReviewRecord[]> = new Map();
   private static listeners: Array<() => void> = [];
@@ -38,6 +40,7 @@ export default class ReviewStore {
     }
     ReviewStore.preferences = preferences;
     await ReviewStore.restoreFromStorage();
+    AuthStore.subscribe(() => ReviewStore.switchUser());
     ReviewStore.initialized = true;
   }
 
@@ -138,27 +141,35 @@ export default class ReviewStore {
     try {
       const storedValue = await ReviewStore.preferences.get(
         ReviewStore.REVIEW_KEY,
-        '{"pendingIds":[],"reviews":[]}'
+        '{}'
       );
       const raw: string = typeof storedValue === 'string' ? storedValue : JSON.stringify(storedValue);
       if (!raw) {
         return;
       }
-      const parsed = JSON.parse(raw) as PersistedReviewState;
-      const pendingIds = parsed?.pendingIds ?? [];
-      ReviewStore.pendingReviewIds = new Set(pendingIds.map((value: string) => String(value)));
-      const buckets = parsed?.reviews ?? [];
-      ReviewStore.reviewsByGoods.clear();
-      buckets.forEach((bucket: PersistedReviewBucket) => {
-        if (!bucket || !bucket.id) {
-          return;
-        }
-        ReviewStore.reviewsByGoods.set(String(bucket.id), bucket.entries ?? []);
-      });
-      ReviewStore.notifyListeners();
+      const parsed = JSON.parse(raw) as Record<string, PersistedReviewState> | PersistedReviewState;
+      if (parsed && !Array.isArray(parsed) && typeof parsed === 'object' && (parsed as PersistedReviewState).pendingIds !== undefined) {
+        ReviewStore.allData['__guest__'] = parsed as PersistedReviewState;
+      } else if (parsed && typeof parsed === 'object') {
+        ReviewStore.allData = parsed as Record<string, PersistedReviewState>;
+      }
+      ReviewStore.switchUser();
     } catch (err) {
       console.error('ReviewStore restore failed:', String(err));
     }
+  }
+
+  private static switchUser(): void {
+    const key = ReviewStore.userKey();
+    const state: PersistedReviewState | undefined = ReviewStore.allData[key];
+    if (state) {
+      ReviewStore.pendingReviewIds = new Set((state.pendingIds ?? []).map((value: string) => String(value)));
+      ReviewStore.reviewsByGoods = new Map((state.reviews ?? []).map((bucket: PersistedReviewBucket) => [String(bucket.id), bucket.entries ?? []]));
+    } else {
+      ReviewStore.pendingReviewIds = new Set();
+      ReviewStore.reviewsByGoods = new Map();
+    }
+    ReviewStore.notifyListeners();
   }
 
   private static persist(): void {
@@ -172,7 +183,8 @@ export default class ReviewStore {
         entries: entry[1]
       }))
     };
-    ReviewStore.preferences.put(ReviewStore.REVIEW_KEY, JSON.stringify(payload))
+    ReviewStore.allData[ReviewStore.userKey()] = payload;
+    ReviewStore.preferences.put(ReviewStore.REVIEW_KEY, JSON.stringify(ReviewStore.allData))
       .then(() => ReviewStore.preferences?.flush())
       .catch((err: Error) => console.error('ReviewStore persist failed:', String(err)));
   }
@@ -185,5 +197,10 @@ export default class ReviewStore {
     const product = goodsPool.find((item: GoodsListItemType) => item.id === numericId)
       ?? pointsGoodsPool.find((item: GoodsListItemType) => item.id === numericId);
     return product ?? null;
+  }
+
+  private static userKey(): string {
+    const phone = AuthStore.getCurrentPhone ? AuthStore.getCurrentPhone().trim() : '';
+    return phone.length > 0 ? phone : '__guest__';
   }
 }

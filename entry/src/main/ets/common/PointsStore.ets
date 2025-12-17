@@ -1,17 +1,20 @@
 import dataPreferences from '@ohos.data.preferences';
+import AuthStore from './AuthStore';
 
 type PointsListener = () => void;
 
 const POINTS_KEY: string = 'points_balance';
 
 export default class PointsStore {
+  private static allData: Record<string, number> = {};
   private static prefs?: dataPreferences.Preferences;
   private static balance: number = 0;
   private static listeners: PointsListener[] = [];
 
   static async init(prefs: dataPreferences.Preferences): Promise<void> {
     PointsStore.prefs = prefs;
-    PointsStore.balance = await PointsStore.loadBalance();
+    await PointsStore.restore();
+    AuthStore.subscribe(() => PointsStore.switchUser());
   }
 
   static getPoints(): number {
@@ -77,17 +80,10 @@ export default class PointsStore {
   }
 
   private static async loadBalance(): Promise<number> {
-    if (!PointsStore.prefs) {
-      return 0;
-    }
-    try {
-      const stored: string = (await PointsStore.prefs.get(POINTS_KEY, '0')) as string;
-      const parsed: number = Number(stored);
-      if (!Number.isNaN(parsed)) {
-        return parsed;
-      }
-    } catch (err) {
-      console.error('读取积分失败:', String(err));
+    const key = PointsStore.userKey();
+    const value = PointsStore.allData[key];
+    if (typeof value === 'number') {
+      return value;
     }
     return 0;
   }
@@ -97,10 +93,50 @@ export default class PointsStore {
       return;
     }
     try {
-      await PointsStore.prefs.put(POINTS_KEY, PointsStore.balance.toString());
+      PointsStore.allData[PointsStore.userKey()] = PointsStore.balance;
+      await PointsStore.prefs.put(POINTS_KEY, JSON.stringify(PointsStore.allData));
       await PointsStore.prefs.flush();
     } catch (err) {
       console.error('保存积分失败:', String(err));
     }
+  }
+
+  private static async restore(): Promise<void> {
+    if (!PointsStore.prefs) {
+      return;
+    }
+    try {
+      const stored = await PointsStore.prefs.get(POINTS_KEY, '{}');
+      const raw: string = typeof stored === 'string' ? stored : JSON.stringify(stored);
+      const parsed = JSON.parse(raw) as Record<string, number> | number;
+      if (typeof parsed === 'number') {
+        PointsStore.allData['__guest__'] = parsed;
+      } else if (parsed && typeof parsed === 'object') {
+        PointsStore.allData = parsed as Record<string, number>;
+      }
+      PointsStore.balance = await PointsStore.loadBalance();
+      PointsStore.notify();
+    } catch (err) {
+      console.error('读取积分失败:', String(err));
+    }
+  }
+
+  private static switchUser(): void {
+    PointsStore.balance = Math.round((PointsStore.loadBalanceSync()) * 10) / 10;
+    PointsStore.notify();
+  }
+
+  private static loadBalanceSync(): number {
+    const key = PointsStore.userKey();
+    const value = PointsStore.allData[key];
+    if (typeof value === 'number') {
+      return value;
+    }
+    return 0;
+  }
+
+  private static userKey(): string {
+    const phone = AuthStore.getCurrentPhone ? AuthStore.getCurrentPhone().trim() : '';
+    return phone.length > 0 ? phone : '__guest__';
   }
 }

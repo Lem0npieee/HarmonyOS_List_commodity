@@ -3,6 +3,7 @@ import { goodsPool } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/
 import type { GoodsListItemType } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
 import { pointsGoodsPool } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/PointsGoodsData";
 import ReviewStore from "@bundle:com.example.list_harmony/entry/ets/common/ReviewStore";
+import AuthStore from "@bundle:com.example.list_harmony/entry/ets/common/AuthStore";
 type Preferences = dataPreferences.Preferences;
 export type OrderStatus = 'pendingShip' | 'shipped' | 'arrived' | 'completed';
 interface OrderStatusRecord {
@@ -15,6 +16,7 @@ interface PersistedOrderState {
     statuses: OrderStatusRecord[];
 }
 export default class OrderStore {
+    private static allData: Record<string, PersistedOrderState> = {};
     private static pendingShipCount: number = 0;
     private static pendingReceiveCount: number = 0; // 待收货
     private static orderStatusMap: Map<string, OrderStatus> = new Map();
@@ -28,6 +30,7 @@ export default class OrderStore {
         }
         OrderStore.preferences = preferences;
         await OrderStore.restoreFromStorage();
+        AuthStore.subscribe(() => OrderStore.switchUser());
         OrderStore.initialized = true;
     }
     static getPendingShipCount(): number {
@@ -183,26 +186,43 @@ export default class OrderStore {
             return;
         }
         try {
-            const storedValue = await OrderStore.preferences.get(OrderStore.ORDER_KEY, '{"pendingShipCount":0,"pendingReceiveCount":0,"statuses":[]}');
+            const storedValue = await OrderStore.preferences.get(OrderStore.ORDER_KEY, '{}');
             const raw: string = typeof storedValue === 'string' ? storedValue : JSON.stringify(storedValue);
             if (!raw) {
                 return;
             }
-            const parsed = JSON.parse(raw) as PersistedOrderState;
-            OrderStore.pendingShipCount = parsed?.pendingShipCount ?? 0;
-            OrderStore.pendingReceiveCount = parsed?.pendingReceiveCount ?? 0;
-            const entries = (parsed?.statuses ?? []).map<[
-                string,
-                OrderStatus
-            ]>((record: OrderStatusRecord) => [record.id, record.status]);
-            OrderStore.orderStatusMap = new Map(entries);
-            // 以状态表为准重新校准计数，修正历史版本留下的不一致
-            OrderStore.recalcCountsFromMap();
-            OrderStore.notifyListeners();
+            const parsed = JSON.parse(raw) as Record<string, PersistedOrderState> | PersistedOrderState;
+            if (parsed && !Array.isArray(parsed) && typeof parsed === 'object' && (parsed as PersistedOrderState).pendingShipCount !== undefined) {
+                OrderStore.allData['__guest__'] = parsed as PersistedOrderState;
+            }
+            else if (parsed && typeof parsed === 'object') {
+                OrderStore.allData = parsed as Record<string, PersistedOrderState>;
+            }
+            OrderStore.switchUser();
         }
         catch (e) {
             console.error('OrderStore restore failed:', String(e));
         }
+    }
+    private static switchUser(): void {
+        const key = OrderStore.userKey();
+        const state: PersistedOrderState | undefined = OrderStore.allData[key];
+        if (state) {
+            OrderStore.pendingShipCount = state.pendingShipCount ?? 0;
+            OrderStore.pendingReceiveCount = state.pendingReceiveCount ?? 0;
+            const entries = (state.statuses ?? []).map<[
+                string,
+                OrderStatus
+            ]>((record: OrderStatusRecord) => [record.id, record.status]);
+            OrderStore.orderStatusMap = new Map(entries);
+        }
+        else {
+            OrderStore.pendingShipCount = 0;
+            OrderStore.pendingReceiveCount = 0;
+            OrderStore.orderStatusMap = new Map();
+        }
+        OrderStore.recalcCountsFromMap();
+        OrderStore.notifyListeners();
     }
     private static persist(): void {
         if (!OrderStore.preferences) {
@@ -216,7 +236,8 @@ export default class OrderStore {
                 status: entry[1]
             }))
         };
-        OrderStore.preferences.put(OrderStore.ORDER_KEY, JSON.stringify(payload))
+        OrderStore.allData[OrderStore.userKey()] = payload;
+        OrderStore.preferences.put(OrderStore.ORDER_KEY, JSON.stringify(OrderStore.allData))
             .then(() => OrderStore.preferences?.flush())
             .catch((err: Error) => console.error('OrderStore persist failed:', String(err)));
     }
@@ -228,5 +249,9 @@ export default class OrderStore {
         const product = goodsPool.find((item: GoodsListItemType) => item.id === numericId)
             ?? pointsGoodsPool.find((item: GoodsListItemType) => item.id === numericId);
         return product ?? null;
+    }
+    private static userKey(): string {
+        const phone = AuthStore.getCurrentPhone ? AuthStore.getCurrentPhone().trim() : '';
+        return phone.length > 0 ? phone : '__guest__';
     }
 }

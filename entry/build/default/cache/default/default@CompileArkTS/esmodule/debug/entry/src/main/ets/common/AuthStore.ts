@@ -38,6 +38,9 @@ export default class AuthStore {
         }
         return AuthStore.accounts.find((acc: UserAccount) => acc.phone === AuthStore.currentPhone) ?? null;
     }
+    static getCurrentPhone(): string {
+        return AuthStore.currentPhone ?? '';
+    }
     static getCurrentUserName(): string {
         const user: UserAccount | null = AuthStore.getCurrentUser();
         return user !== null ? user.username : '';

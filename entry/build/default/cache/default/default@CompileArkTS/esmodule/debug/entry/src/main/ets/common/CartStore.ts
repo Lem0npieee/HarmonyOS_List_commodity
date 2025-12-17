@@ -2,6 +2,7 @@ import type dataPreferences from "@ohos:data.preferences";
 import { goodsPool } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
 import type { GoodsListItemType } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
 import { pointsGoodsPool } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/PointsGoodsData";
+import AuthStore from "@bundle:com.example.list_harmony/entry/ets/common/AuthStore";
 type Preferences = dataPreferences.Preferences;
 interface StoredCartEntry {
     id: number;
@@ -12,10 +13,11 @@ export interface CartItem {
     quantity: number;
 }
 export default class CartStore {
+    private static allData: Record<string, StoredCartEntry[]> = {};
     private static cart: CartItem[] = [];
     private static listeners: Array<() => void> = [];
     private static preferences: Preferences | null = null;
-    private static readonly CART_KEY: string = 'cart_items';
+    private static readonly CART_KEY: string = 'cart_items_v2';
     private static initialized: boolean = false;
     static async init(preferences: Preferences): Promise<void> {
         if (CartStore.initialized) {
@@ -23,6 +25,7 @@ export default class CartStore {
         }
         CartStore.preferences = preferences;
         await CartStore.restoreFromStorage();
+        AuthStore.subscribe(() => CartStore.switchUser());
         CartStore.initialized = true;
     }
     static add(product: GoodsListItemType): void {
@@ -83,36 +86,54 @@ export default class CartStore {
             return;
         }
         try {
-            const storedValue = await CartStore.preferences.get(CartStore.CART_KEY, '[]');
+            const storedValue = await CartStore.preferences.get(CartStore.CART_KEY, '{}');
             const raw: string = typeof storedValue === 'string' ? storedValue : JSON.stringify(storedValue);
-            const parsed = JSON.parse(raw) as StoredCartEntry[];
-            const mapped = parsed.map((entry: StoredCartEntry) => {
-                const product = CartStore.resolveProductById(entry.id);
-                if (!product) {
-                    return null;
-                }
-                const item: CartItem = { product: product, quantity: entry.quantity };
-                return item;
-            });
-            const restored = mapped.filter((item) => item !== null) as CartItem[];
-            CartStore.cart = restored;
-            CartStore.notifyListeners();
+            const parsed = JSON.parse(raw) as Record<string, StoredCartEntry[]> | StoredCartEntry[];
+            if (Array.isArray(parsed)) {
+                CartStore.allData['__guest__'] = parsed;
+            }
+            else if (parsed && typeof parsed === 'object') {
+                CartStore.allData = parsed;
+            }
+            CartStore.switchUser();
         }
         catch (e) {
             console.error('CartStore restore failed:', String(e));
         }
+    }
+    private static switchUser(): void {
+        const key = CartStore.userKey();
+        const list = CartStore.allData[key] ?? [];
+        CartStore.cart = CartStore.deserialize(list);
+        CartStore.notifyListeners();
     }
     private static persist(): void {
         if (!CartStore.preferences) {
             return;
         }
         const payload: StoredCartEntry[] = CartStore.cart.map((item: CartItem) => {
-            const entry: StoredCartEntry = { id: item.product.id, quantity: item.quantity };
+            const entry: StoredCartEntry = { id: item.product.id, quantity: item.quantity } as StoredCartEntry;
             return entry;
         });
-        CartStore.preferences.put(CartStore.CART_KEY, JSON.stringify(payload))
+        CartStore.allData[CartStore.userKey()] = payload;
+        CartStore.preferences.put(CartStore.CART_KEY, JSON.stringify(CartStore.allData))
             .then(() => CartStore.preferences?.flush())
             .catch((err: Error) => console.error('CartStore persist failed:', String(err)));
+    }
+    private static deserialize(entries: StoredCartEntry[]): CartItem[] {
+        const mapped = entries.map((entry: StoredCartEntry) => {
+            const product = CartStore.resolveProductById(entry.id);
+            if (!product) {
+                return null;
+            }
+            const item: CartItem = { product: product, quantity: entry.quantity };
+            return item;
+        });
+        return mapped.filter((item) => item !== null) as CartItem[];
+    }
+    private static userKey(): string {
+        const phone = AuthStore.getCurrentPhone ? AuthStore.getCurrentPhone().trim() : '';
+        return phone.length > 0 ? phone : '__guest__';
     }
     private static resolveProductById(id: number): GoodsListItemType | null {
         const product = goodsPool.find((item: GoodsListItemType) => item.id === id)
