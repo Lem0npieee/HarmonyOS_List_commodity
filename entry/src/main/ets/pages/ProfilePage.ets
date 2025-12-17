@@ -26,6 +26,16 @@ export default struct ProfilePage {
   private authListener!: () => void;
   private pointsListener!: () => void;
 
+  private refreshCounts(): void {
+    try {
+      this.pendingShipCount = OrderStore.getPendingShipCount();
+      this.pendingReceiveCount = OrderStore.getPendingReceiveCount();
+      this.pendingReviewCount = ReviewStore.getPendingReviewCount();
+    } catch (err) {
+      console.error('刷新红点计数失败:', String(err));
+    }
+  }
+
   constructor() {
     super();
     this.favoritesListener = () => {
@@ -71,6 +81,18 @@ export default struct ProfilePage {
     ReviewStore.subscribe(this.reviewListener);
     AuthStore.subscribe(this.authListener);
     PointsStore.subscribe(this.pointsListener);
+  }
+
+  aboutToAppear() {
+    // 返回“我的”时同步刷新一次红点计数
+    OrderStore.syncCountsFromStatuses();
+    this.refreshCounts();
+  }
+
+  onPageShow() {
+    // 防止某些返回路径不触发 aboutToAppear，二次兜底刷新
+    OrderStore.syncCountsFromStatuses();
+    this.refreshCounts();
   }
 
   onDestroy() {

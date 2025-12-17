@@ -1,6 +1,7 @@
 import type dataPreferences from "@ohos:data.preferences";
 import { goodsPool } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
 import type { GoodsListItemType } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
+import { pointsGoodsPool } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/PointsGoodsData";
 type Preferences = dataPreferences.Preferences;
 interface StoredCartEntry {
     id: number;
@@ -40,6 +41,15 @@ export default class CartStore {
     }
     static clear(): void {
         CartStore.cart = [];
+        CartStore.persist();
+        CartStore.notifyListeners();
+    }
+    static removeByIds(ids: number[]): void {
+        if (!ids || ids.length === 0) {
+            return;
+        }
+        const idSet: Set<number> = new Set(ids);
+        CartStore.cart = CartStore.cart.filter((item: CartItem) => !idSet.has(item.product.id));
         CartStore.persist();
         CartStore.notifyListeners();
     }
@@ -105,7 +115,8 @@ export default class CartStore {
             .catch((err: Error) => console.error('CartStore persist failed:', String(err)));
     }
     private static resolveProductById(id: number): GoodsListItemType | null {
-        const product = goodsPool.find((item: GoodsListItemType) => item.id === id);
+        const product = goodsPool.find((item: GoodsListItemType) => item.id === id)
+            ?? pointsGoodsPool.find((item: GoodsListItemType) => item.id === id);
         return product ?? null;
     }
 }

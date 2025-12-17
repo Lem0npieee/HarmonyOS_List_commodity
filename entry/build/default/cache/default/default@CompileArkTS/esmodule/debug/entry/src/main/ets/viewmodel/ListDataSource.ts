@@ -206,6 +206,10 @@ export class ListDataSource extends BasicDataSource {
             this.visibleData = this.filteredData.slice(0, this.pageSize);
             this.notifyDataReload();
             this.notifyEmpty();
+            // 价格/最新排序时自动加载剩余分页，避免只展示首屏
+            if (this.query.sort === SortOption.PriceLow || this.query.sort === SortOption.PriceHigh || this.query.sort === SortOption.Newest) {
+                this.autoLoadRemainingPages();
+            }
             return;
         }
         // 其他类别:正常的过滤和排序逻辑
@@ -229,6 +233,9 @@ export class ListDataSource extends BasicDataSource {
         this.visibleData = this.filteredData.slice(0, initialLength);
         this.notifyDataReload();
         this.notifyEmpty();
+        if (this.query.sort === SortOption.PriceLow || this.query.sort === SortOption.PriceHigh || this.query.sort === SortOption.Newest) {
+            this.autoLoadRemainingPages();
+        }
     }
     private autoLoadRemainingPages(): void {
         if (this.visibleData.length >= this.filteredData.length) {

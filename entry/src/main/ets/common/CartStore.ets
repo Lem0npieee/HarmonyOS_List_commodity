@@ -1,5 +1,6 @@
 import dataPreferences from '@ohos.data.preferences';
 import { GoodsListItemType, goodsPool } from '../viewmodel/InitialData';
+import { pointsGoodsPool } from '../viewmodel/PointsGoodsData';
 
 type Preferences = dataPreferences.Preferences;
 
@@ -46,6 +47,16 @@ export default class CartStore {
 
   static clear(): void {
     CartStore.cart = [];
+    CartStore.persist();
+    CartStore.notifyListeners();
+  }
+
+  static removeByIds(ids: number[]): void {
+    if (!ids || ids.length === 0) {
+      return;
+    }
+    const idSet: Set<number> = new Set(ids);
+    CartStore.cart = CartStore.cart.filter((item: CartItem) => !idSet.has(item.product.id));
     CartStore.persist();
     CartStore.notifyListeners();
   }
@@ -112,7 +123,8 @@ export default class CartStore {
   }
 
   private static resolveProductById(id: number): GoodsListItemType | null {
-    const product = goodsPool.find((item: GoodsListItemType) => item.id === id);
+    const product = goodsPool.find((item: GoodsListItemType) => item.id === id)
+      ?? pointsGoodsPool.find((item: GoodsListItemType) => item.id === id);
     return product ?? null;
   }
 }

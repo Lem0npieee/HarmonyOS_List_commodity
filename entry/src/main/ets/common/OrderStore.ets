@@ -37,11 +37,26 @@ export default class OrderStore {
   }
 
   static getPendingShipCount(): number {
-    return OrderStore.pendingShipCount;
+    let count: number = 0;
+    OrderStore.orderStatusMap.forEach((status: OrderStatus) => {
+      if (status === 'pendingShip') {
+        count++;
+      }
+    });
+    // 同步缓存，避免与持久化状态漂移
+    OrderStore.pendingShipCount = count;
+    return count;
   }
 
   static getPendingReceiveCount(): number {
-    return OrderStore.pendingReceiveCount;
+    let count: number = 0;
+    OrderStore.orderStatusMap.forEach((status: OrderStatus) => {
+      if (status === 'arrived') {
+        count++;
+      }
+    });
+    OrderStore.pendingReceiveCount = count;
+    return count;
   }
 
   static getPendingReceiveItems(): GoodsListItemType[] {
@@ -152,6 +167,27 @@ export default class OrderStore {
     }
   }
 
+  private static recalcCountsFromMap(): void {
+    let pendingShip: number = 0;
+    let pendingReceive: number = 0;
+    OrderStore.orderStatusMap.forEach((status: OrderStatus) => {
+      if (status === 'pendingShip') {
+        pendingShip++;
+      } else if (status === 'arrived') {
+        pendingReceive++;
+      }
+    });
+    // 使用 setter 以保持通知和非负保障
+    OrderStore.setPendingShipCount(pendingShip);
+    OrderStore.setPendingReceiveCount(pendingReceive);
+  }
+
+  // 对外暴露的计数重算入口，供页面在恢复时校准红点
+  static syncCountsFromStatuses(): void {
+    OrderStore.recalcCountsFromMap();
+    OrderStore.persist();
+  }
+
   private static async restoreFromStorage(): Promise<void> {
     if (!OrderStore.preferences) {
       return;
@@ -170,6 +206,8 @@ export default class OrderStore {
       OrderStore.pendingReceiveCount = parsed?.pendingReceiveCount ?? 0;
       const entries = (parsed?.statuses ?? []).map<[string, OrderStatus]>((record: OrderStatusRecord) => [record.id, record.status]);
       OrderStore.orderStatusMap = new Map(entries);
+      // 以状态表为准重新校准计数，修正历史版本留下的不一致
+      OrderStore.recalcCountsFromMap();
       OrderStore.notifyListeners();
     } catch (e) {
       console.error('OrderStore restore failed:', String(e));
