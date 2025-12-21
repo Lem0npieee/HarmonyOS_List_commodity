@@ -141,30 +141,51 @@ export default class PendingReviewPage extends ViewPU {
             Column.backgroundColor({ "id": 16777304, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // 顶部导航与商品详情页一致样式
             Row.create();
-            Row.width(LAYOUT_WIDTH_OR_HEIGHT);
+            // 顶部导航与商品详情页一致样式
             Row.height(56);
-            Row.alignItems(VerticalAlign.Center);
-            Row.padding({ left: 12, right: 12 });
+            // 顶部导航与商品详情页一致样式
+            Row.backgroundColor(Color.White);
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Navigation.create(new NavPathStack(), { moduleName: "entry", pagePath: "entry/src/main/ets/pages/PendingReviewPage", isUserCreateStack: false });
+            Navigation.size({ width: LAYOUT_WIDTH_OR_HEIGHT, height: LAYOUT_WIDTH_OR_HEIGHT });
+            Navigation.title('待评价');
+            Navigation.titleMode(NavigationTitleMode.Mini);
+        }, Navigation);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width(LAYOUT_WIDTH_OR_HEIGHT);
+            Column.justifyContent(FlexAlign.Center);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('100%');
+            Row.height(56);
+            Row.padding({ left: 16, right: 16 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 125832663, "type": 40000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.width(24);
             Image.height(24);
             Image.fillColor(Color.Black);
-            Image.onClick(() => router.back());
+            Image.onClick(() => { router.back(); });
         }, Image);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('待评价');
-            Text.fontSize(20);
-            Text.fontWeight(FontWeight.Bold);
-            Text.margin({ left: 12 });
-        }, Text);
-        Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Blank.create();
         }, Blank);
         Blank.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Image.create({ "id": 125833751, "type": 40000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.width(24);
+            Image.height(24);
+            Image.fillColor(Color.Black);
+        }, Image);
+        Row.pop();
+        Column.pop();
+        Navigation.pop();
+        // 顶部导航与商品详情页一致样式
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();

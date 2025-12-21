@@ -91,12 +91,67 @@ export default class PointsMallPage extends ViewPU {
     }
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width(LAYOUT_WIDTH_OR_HEIGHT);
+            Column.padding({ top: (AppStorage.get<number>('statusBarHeight') ?? 0) + 10 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // 顶部导航与商品详情页一致样式
+            Row.create();
+            // 顶部导航与商品详情页一致样式
+            Row.height(56);
+            // 顶部导航与商品详情页一致样式
+            Row.backgroundColor(Color.White);
+            // 顶部导航与商品详情页一致样式
+            Row.padding({ top: 0, left: 0, right: 0 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Navigation.create(new NavPathStack(), { moduleName: "entry", pagePath: "entry/src/main/ets/pages/PointsMallPage", isUserCreateStack: false });
+            Navigation.size({ width: LAYOUT_WIDTH_OR_HEIGHT, height: LAYOUT_WIDTH_OR_HEIGHT });
+            Navigation.title('积分商城');
+            Navigation.titleMode(NavigationTitleMode.Mini);
+        }, Navigation);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width(LAYOUT_WIDTH_OR_HEIGHT);
+            Column.justifyContent(FlexAlign.Center);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('100%');
+            Row.height(56);
+            Row.padding({ left: 16, right: 16 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Image.create({ "id": 125832663, "type": 40000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.width(24);
+            Image.height(24);
+            Image.fillColor(Color.Black);
+            Image.onClick(() => { router.back(); });
+        }, Image);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+        }, Blank);
+        Blank.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Image.create({ "id": 125833751, "type": 40000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.width(24);
+            Image.height(24);
+            Image.fillColor(Color.Black);
+        }, Image);
+        Row.pop();
+        Column.pop();
+        Navigation.pop();
+        // 顶部导航与商品详情页一致样式
+        Row.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
             List.create();
             List.width(LAYOUT_WIDTH_OR_HEIGHT);
             List.edgeEffect(EdgeEffect.Spring);
             List.listDirection(Axis.Vertical);
             List.backgroundColor({ "id": 16777304, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            List.padding({ bottom: 16, top: AppStorage.get<number>('statusBarHeight') });
+            List.padding({ bottom: 16 });
+            List.layoutWeight(1);
         }, List);
         {
             const itemCreation = (elmtId, isInitialRender) => {
@@ -148,6 +203,7 @@ export default class PointsMallPage extends ViewPU {
         }, ForEach);
         ForEach.pop();
         List.pop();
+        Column.pop();
     }
     private buildHeader(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {

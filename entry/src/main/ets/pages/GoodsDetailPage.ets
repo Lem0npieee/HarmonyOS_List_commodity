@@ -423,7 +423,7 @@ struct GoodsDetailPage {
           .justifyContent(FlexAlign.Center)
         }
         .size({ width: LAYOUT_WIDTH_OR_HEIGHT, height: LAYOUT_WIDTH_OR_HEIGHT })
-        .title(STORE)
+        .title('商品详情')
         .titleMode(NavigationTitleMode.Mini)
       }
       .height(56)
@@ -1091,7 +1091,7 @@ struct GoodsDetailPage {
         .backgroundColor('#FFE8D6')
         .borderRadius(20)
         .height(40)
-        .width(90)
+        .width(110)
         .onClick(() => {
           try {
             if (this.goods) {

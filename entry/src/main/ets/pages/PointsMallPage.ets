@@ -36,22 +36,60 @@ export default struct PointsMallPage {
   }
 
   build() {
-    List() {
-      ListItem() {
-        this.buildHeader()
-      }
-      ForEach(pointsGoodsPool, (item: PointsGoodsItem, index?: number) => {
-        ListItem() {
-          this.renderGoodsCard(item)
+    Column() {
+      // 顶部导航与商品详情页一致样式
+      Row() {
+        Navigation() {
+          Column() {
+            Row() {
+              Image($r('sys.symbol.chevron_left'))
+                .width(24)
+                .height(24)
+                .fillColor(Color.Black)
+                .onClick(() => { router.back(); })
+
+              Blank()
+
+              Image($r('sys.symbol.ellipsis_circle'))
+                .width(24)
+                .height(24)
+                .fillColor(Color.Black)
+            }
+            .width('100%')
+            .height(56)
+            .padding({ left: 16, right: 16 })
+          }
+          .width(LAYOUT_WIDTH_OR_HEIGHT)
+          .justifyContent(FlexAlign.Center)
         }
-        .margin({ bottom: 12 })
-      }, (item: PointsGoodsItem) => `${item.id}`)
+        .size({ width: LAYOUT_WIDTH_OR_HEIGHT, height: LAYOUT_WIDTH_OR_HEIGHT })
+        .title('积分商城')
+        .titleMode(NavigationTitleMode.Mini)
+      }
+      .height(56)
+      .backgroundColor(Color.White)
+      .padding({ top: 0, left: 0, right: 0 })
+
+      List() {
+        ListItem() {
+          this.buildHeader()
+        }
+        ForEach(pointsGoodsPool, (item: PointsGoodsItem, index?: number) => {
+          ListItem() {
+            this.renderGoodsCard(item)
+          }
+          .margin({ bottom: 12 })
+        }, (item: PointsGoodsItem) => `${item.id}`)
+      }
+      .width(LAYOUT_WIDTH_OR_HEIGHT)
+      .edgeEffect(EdgeEffect.Spring)
+      .listDirection(Axis.Vertical)
+      .backgroundColor($r('app.color.primaryBgColor'))
+      .padding({ bottom: 16 })
+      .layoutWeight(1)
     }
     .width(LAYOUT_WIDTH_OR_HEIGHT)
-    .edgeEffect(EdgeEffect.Spring)
-    .listDirection(Axis.Vertical)
-    .backgroundColor($r('app.color.primaryBgColor'))
-    .padding({ bottom: 16, top: AppStorage.get<number>('statusBarHeight') })
+    .padding({ top: (AppStorage.get<number>('statusBarHeight') ?? 0) + 10 })
   }
 
   @Builder

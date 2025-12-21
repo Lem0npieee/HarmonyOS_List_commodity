@@ -25,7 +25,7 @@ import OrderStore from "@bundle:com.example.list_harmony/entry/ets/common/OrderS
 import PointsStore from "@bundle:com.example.list_harmony/entry/ets/common/PointsStore";
 import NotificationStore from "@bundle:com.example.list_harmony/entry/ets/common/NotificationStore";
 import type { NotificationPayload } from "@bundle:com.example.list_harmony/entry/ets/common/NotificationStore";
-import { LAYOUT_WIDTH_OR_HEIGHT, STORE } from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
+import { LAYOUT_WIDTH_OR_HEIGHT } from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
 import ReviewStore from "@bundle:com.example.list_harmony/entry/ets/common/ReviewStore";
 import type { StoredReviewRecord } from "@bundle:com.example.list_harmony/entry/ets/common/ReviewStore";
 import prompt from "@ohos:prompt";
@@ -547,7 +547,7 @@ class GoodsDetailPage extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Navigation.create(new NavPathStack(), { moduleName: "entry", pagePath: "entry/src/main/ets/pages/GoodsDetailPage", isUserCreateStack: false });
             Navigation.size({ width: LAYOUT_WIDTH_OR_HEIGHT, height: LAYOUT_WIDTH_OR_HEIGHT });
-            Navigation.title(STORE);
+            Navigation.title('商品详情');
             Navigation.titleMode(NavigationTitleMode.Mini);
         }, Navigation);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -1652,7 +1652,7 @@ class GoodsDetailPage extends ViewPU {
             // 加入购物车
             Button.height(40);
             // 加入购物车
-            Button.width(90);
+            Button.width(110);
             // 加入购物车
             Button.onClick(() => {
                 try {

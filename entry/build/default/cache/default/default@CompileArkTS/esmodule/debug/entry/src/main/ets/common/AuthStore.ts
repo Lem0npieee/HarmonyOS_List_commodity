@@ -25,6 +25,8 @@ export default class AuthStore {
         AuthStore.prefs = prefs;
         AuthStore.accounts = await AuthStore.loadAccounts();
         AuthStore.currentPhone = await AuthStore.loadCurrentPhone();
+        // 通知其他 Store 当前登录态，确保按正确用户加载持久化数据
+        AuthStore.notify();
     }
     static isReady(): boolean {
         return AuthStore.prefs !== undefined;

@@ -5,6 +5,7 @@ interface CustomerServicePage_Params {
     messages?: ChatMessage[];
     inputText?: string;
     product?: GoodsListItemType | null;
+    chatHistory?: ChatHistoryItem[];
     scroller?: Scroller;
     DEEPSEEK_API_KEY?: string;
     DEEPSEEK_URL?: string;
@@ -31,6 +32,7 @@ interface DeepSeekRequest {
     model: string;
     messages: DeepSeekMessage[];
     temperature: number;
+    max_tokens: number;
 }
 interface DeepSeekChoiceMessage {
     content?: string;
@@ -56,6 +58,10 @@ interface ChatMessage {
     sender: 'user' | 'ai';
     text: string;
 }
+interface ChatHistoryItem {
+    role: 'user' | 'assistant';
+    content: string;
+}
 export default class CustomerServicePage extends ViewPU {
     constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
         super(parent, __localStorage, elmtId, extraInfo);
@@ -67,6 +73,7 @@ export default class CustomerServicePage extends ViewPU {
         ], this, "messages");
         this.__inputText = new ObservedPropertySimplePU('', this, "inputText");
         this.__product = new ObservedPropertyObjectPU(null, this, "product");
+        this.__chatHistory = new ObservedPropertyObjectPU([], this, "chatHistory");
         this.scroller = new Scroller();
         this.DEEPSEEK_API_KEY = 'sk-0d4c8b12e11143b78fd5a008b8dcae00';
         this.DEEPSEEK_URL = 'https://api.deepseek.com/v1/chat/completions';
@@ -82,6 +89,9 @@ export default class CustomerServicePage extends ViewPU {
         }
         if (params.product !== undefined) {
             this.product = params.product;
+        }
+        if (params.chatHistory !== undefined) {
+            this.chatHistory = params.chatHistory;
         }
         if (params.scroller !== undefined) {
             this.scroller = params.scroller;
@@ -99,11 +109,13 @@ export default class CustomerServicePage extends ViewPU {
         this.__messages.purgeDependencyOnElmtId(rmElmtId);
         this.__inputText.purgeDependencyOnElmtId(rmElmtId);
         this.__product.purgeDependencyOnElmtId(rmElmtId);
+        this.__chatHistory.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
         this.__messages.aboutToBeDeleted();
         this.__inputText.aboutToBeDeleted();
         this.__product.aboutToBeDeleted();
+        this.__chatHistory.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
     }
@@ -128,6 +140,13 @@ export default class CustomerServicePage extends ViewPU {
     set product(newValue: GoodsListItemType | null) {
         this.__product.set(newValue);
     }
+    private __chatHistory: ObservedPropertyObjectPU<ChatHistoryItem[]>;
+    get chatHistory() {
+        return this.__chatHistory.get();
+    }
+    set chatHistory(newValue: ChatHistoryItem[]) {
+        this.__chatHistory.set(newValue);
+    }
     private scroller: Scroller;
     // DeepSeek 配置（与 `AIChatPage.ets` 保持一致）：必须配置有效的 API KEY，若未配置或调用失败将返回服务不可用提示（无本地回退）
     private readonly DEEPSEEK_API_KEY: string;
@@ -139,6 +158,7 @@ export default class CustomerServicePage extends ViewPU {
         try {
             // 推入用户消息
             this.messages = [...this.messages, { sender: 'user', text }];
+            this.chatHistory = [...this.chatHistory, { role: 'user', content: text }];
             this.inputText = '';
             // 推入占位 AI 回复以提示正在处理
             this.messages = [...this.messages, { sender: 'ai', text: '正在为您回复，请稍候...' }];
@@ -154,6 +174,7 @@ export default class CustomerServicePage extends ViewPU {
                     msgs.push({ sender: 'ai', text: replyText });
                 }
                 this.messages = msgs;
+                this.chatHistory = [...this.chatHistory, { role: 'assistant', content: replyText }];
             }
             catch (apiErr) {
                 console.error('DeepSeek 调用失败（无回退）：', String(apiErr));
@@ -166,6 +187,7 @@ export default class CustomerServicePage extends ViewPU {
                     msgs.push({ sender: 'ai', text: failText });
                 }
                 this.messages = msgs;
+                this.chatHistory = [...this.chatHistory, { role: 'assistant', content: failText }];
             }
         }
         catch (e) {
@@ -177,14 +199,19 @@ export default class CustomerServicePage extends ViewPU {
         const httpRequest = http.createHttp();
         try {
             const prodName = product ? String(product.title) : '该商品';
-            const systemPrompt = `你现在是专业电商平台商品咨询客服，需严格遵循以下要求：\n口头禅固定：开头必说 “亲～”，句中穿插 “呀”“呢”“哦”，结尾带 “哒”“哟”“呀”（如 “这就为你解答哒～”“有其他疑问随时问哟！”）；\n用户会传入「商品信息 + 具体咨询问题」（如商品参数、使用方法、材质、适配场景等），你需先精准提取商品关键信息（名称、规格、型号等），再针对问题给出准确、易懂的回答；\n回应逻辑：热情开场→复述商品 + 明确问题→用口语化语言答疑（避免专业术语，复杂内容分点说更清晰）→主动追问是否有其他需求；\n答疑原则：\n参数类问题（如尺寸、重量、配置）：直接给出准确答案，必要时补充实用提示；\n使用类问题（如怎么用、适配什么）：步骤清晰、简单易懂，避免冗长；\n对比类问题（如和 XX 款区别）：突出核心差异，帮用户快速 get 重点；\n不确定的信息：不瞎编！回应 “亲～你咨询的这个细节小女子帮你核实一下哟，10 分钟内给你准确答复哒～可以先说说其他想了解的吗？”；\n语气亲切、耐心，像和朋友聊天一样，不让用户觉得生硬。\n示例输入（商品信息 + 问题）：“华为 Mate 60 Pro（12+512G，黑色），请问这款手机支持 5G 吗？电池容量是多少呀？”示例回应："亲～你问的是华为 Mate 60 Pro（12+512G，黑色）的 5G 支持和电池容量对吧？这就为你解答哒～这款手机是支持 5G 网络的哟，日常上网、看视频都超流畅呢！电池容量是 5000mAh，正常使用一天下来完全没问题，重度使用也能坚持大半天哦～还有其他想了解的吗？比如充电速度、相机配置这些，随时问我呀！"\n用户传入商品信息 + 咨询问题后，直接生成符合要求的客服回复，无需额外说明！\n同时从哪一个商品详情页点进去，就要附上该商品的信息`;
+            const systemPrompt = `你现在是专业电商平台商品咨询客服，需严格遵循以下要求：\n口头禅固定：开头必说 “亲～”，句中穿插 “呀”“呢”“哦”，结尾带 “哒”“哟”“呀”（如 “这就为你解答哒～”“有其他疑问随时问哟！”）；\n用户会传入「商品信息 + 具体咨询问题」（如商品参数、使用方法、材质、适配场景等），你需先精准提取商品关键信息（名称、规格、型号等），再针对问题给出准确、易懂的回答；\n回应逻辑：热情开场→复述商品 + 明确问题→用口语化语言答疑（避免专业术语，复杂内容分点说更清晰）→主动追问是否有其他需求；\n答疑原则：\n参数类问题（如尺寸、重量、配置）：直接给出准确答案，必要时补充实用提示；\n使用类问题（如怎么用、适配什么）：步骤清晰、简单易懂，避免冗长；\n对比类问题（如和 XX 款区别）：突出核心差异，帮用户快速 get 重点；\n不确定的信息：不瞎编！回应 “亲～你咨询的这个细节小女子帮你核实一下哟，10 分钟内给你准确答复哒～可以先说说其他想了解的吗？”；\n语气亲切、耐心，像和朋友聊天一样，不让用户觉得生硬。\n示例输入（商品信息 + 问题）：“华为 Mate 60 Pro（12+512G，黑色），请问这款手机支持 5G 吗？电池容量是多少呀？”示例回应:"亲～你问的是华为 Mate 60 Pro（12+512G，黑色）的 5G 支持和电池容量对吧？这就为你解答哒～这款手机是支持 5G 网络的哟，日常上网、看视频都超流畅呢！电池容量是 5000mAh，正常使用一天下来完全没问题，重度使用也能坚持大半天哦～还有其他想了解的吗？比如充电速度、相机配置这些，随时问我呀！"\n回复必须完整不截断；如内容较多请分点列出并控制在 180 字以内，确保一句话不要戛然而止。\n用户传入商品信息 + 咨询问题后，直接生成符合要求的客服回复，无需额外说明！\n同时从哪一个商品详情页点进去，就要附上该商品的信息`;
             const p = product as ProductWithBattery | null;
             const productInfo = p ? JSON.stringify({ id: p.id, title: p.title, price: p.price, searchIndex: p.searchIndex, description: p.description, specifications: p.specifications || [], battery: p.battery ?? p.batteryCapacity }) : '无商品信息';
-            const messages: DeepSeekMessage[] = [
-                { role: 'system', content: systemPrompt },
-                { role: 'user', content: `商品信息: ${productInfo}\n用户问题: ${userText}` }
-            ];
-            const bodyObj: DeepSeekRequest = { model: 'deepseek-chat', messages: messages, temperature: 0.2 };
+            const messages: DeepSeekMessage[] = [{ role: 'system', content: systemPrompt }];
+            // 仅带入最近 6 条历史对话，避免超长导致被截断
+            const historyForContext = this.chatHistory.slice(-6);
+            historyForContext.forEach((h: ChatHistoryItem) => {
+                messages.push({ role: h.role, content: h.content });
+            });
+            // 当前用户问题
+            messages.push({ role: 'user', content: `商品信息: ${productInfo}\n用户问题: ${userText}` });
+            // 提高回复长度上限，避免长答案被截断
+            const bodyObj: DeepSeekRequest = { model: 'deepseek-chat', messages: messages, temperature: 0.2, max_tokens: 3000 };
             const body = JSON.stringify(bodyObj);
             const headerObj: Record<string, string> = {
                 'Content-Type': 'application/json',
@@ -291,16 +318,29 @@ export default class CustomerServicePage extends ViewPU {
             Column.backgroundColor({ "id": 16777304, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 顶部导航
+            // 顶部导航（与商品详情一致样式，标题为 AI客服）
             Row.create();
-            // 顶部导航
-            Row.width(LAYOUT_WIDTH_OR_HEIGHT);
-            // 顶部导航
+            // 顶部导航（与商品详情一致样式，标题为 AI客服）
             Row.height(56);
-            // 顶部导航
-            Row.alignItems(VerticalAlign.Center);
-            // 顶部导航
-            Row.padding({ left: 12, right: 12 });
+            // 顶部导航（与商品详情一致样式，标题为 AI客服）
+            Row.backgroundColor(Color.White);
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Navigation.create(new NavPathStack(), { moduleName: "entry", pagePath: "entry/src/main/ets/pages/CustomerServicePage", isUserCreateStack: false });
+            Navigation.size({ width: LAYOUT_WIDTH_OR_HEIGHT, height: LAYOUT_WIDTH_OR_HEIGHT });
+            Navigation.title('AI客服');
+            Navigation.titleMode(NavigationTitleMode.Mini);
+        }, Navigation);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width(LAYOUT_WIDTH_OR_HEIGHT);
+            Column.justifyContent(FlexAlign.Center);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('100%');
+            Row.height(56);
+            Row.padding({ left: 16, right: 16 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 125832663, "type": 40000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
@@ -314,16 +354,15 @@ export default class CustomerServicePage extends ViewPU {
         }, Blank);
         Blank.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('客服');
-            Text.fontSize(16);
-            Text.fontWeight(FontWeight.Medium);
-        }, Text);
-        Text.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Blank.create();
-        }, Blank);
-        Blank.pop();
-        // 顶部导航
+            Image.create({ "id": 125833751, "type": 40000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.width(24);
+            Image.height(24);
+            Image.fillColor(Color.Black);
+        }, Image);
+        Row.pop();
+        Column.pop();
+        Navigation.pop();
+        // 顶部导航（与商品详情一致样式，标题为 AI客服）
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 聊天列表

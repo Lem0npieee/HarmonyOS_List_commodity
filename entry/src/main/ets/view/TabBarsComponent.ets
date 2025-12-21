@@ -129,8 +129,8 @@ export default struct TabBar {
 	@Builder
 	private renderSelectedSectionBody(tab: TabMeta, state: TabUIState, index: number) {
 		SelectedComponent({
-			subCategories: tab.subCategories,
-			currentSubCategory: state.subCategory,
+			subCategories: [],
+			currentSubCategory: 'all',
 			searchValue: state.search,
 			sortOption: state.sort,
 			activeFilters: state.filters,
@@ -141,7 +141,7 @@ export default struct TabBar {
 					console.error('跳转到 AI 页面失败:', err.message);
 				});
 			},
-			onSubCategoryChange: (subId: string) => this.handleSubCategoryChange(index, subId),
+			onSubCategoryChange: (_subId: string) => {},
 			onSortChange: (sort: SortOption) => this.handleSortChange(index, sort),
 			onFilterToggle: (filter: FilterId) => this.handleFilterToggle(index, filter)
 		})
@@ -205,7 +205,7 @@ export default struct TabBar {
 		}
 		const updated: TabUIState = {
 			search: partial.search !== undefined ? partial.search : current.search,
-			subCategory: partial.subCategory !== undefined ? partial.subCategory : current.subCategory,
+			subCategory: 'all',
 			sort: partial.sort !== undefined ? partial.sort : current.sort,
 			filters: partial.filters !== undefined ? partial.filters.slice() : current.filters.slice()
 		};
@@ -230,7 +230,7 @@ export default struct TabBar {
 		const dataSource: ListDataSource = target !== undefined ? target : this.getDataSourceByIndex(index);
 		const query: ListQueryState = {
 			search: state.search,
-			subCategory: state.subCategory,
+			subCategory: 'all',
 			sort: state.sort,
 			filters: state.filters.slice()
 		};
@@ -292,10 +292,9 @@ export default struct TabBar {
 	}
 
 	private buildInitialState(tab: TabMeta): TabUIState {
-		const defaultSub: string = tab.subCategories.length > 0 ? tab.subCategories[0].id : 'all';
 		return {
 			search: '',
-			subCategory: defaultSub,
+			subCategory: 'all',
 			sort: SortOption.Comprehensive,
 			filters: []
 		};

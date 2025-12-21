@@ -65,22 +65,37 @@ export default struct PendingReviewPage {
   build() {
     Stack() {
       Column() {
+        // 顶部导航与商品详情页一致样式
         Row() {
-          Image($r('sys.symbol.chevron_left'))
-            .width(24)
-            .height(24)
-            .fillColor(Color.Black)
-            .onClick(() => router.back())
-          Text('待评价')
-            .fontSize(20)
-            .fontWeight(FontWeight.Bold)
-            .margin({ left: 12 })
-          Blank()
+          Navigation() {
+            Column() {
+              Row() {
+                Image($r('sys.symbol.chevron_left'))
+                  .width(24)
+                  .height(24)
+                  .fillColor(Color.Black)
+                  .onClick(() => { router.back(); })
+
+                Blank()
+
+                Image($r('sys.symbol.ellipsis_circle'))
+                  .width(24)
+                  .height(24)
+                  .fillColor(Color.Black)
+              }
+              .width('100%')
+              .height(56)
+              .padding({ left: 16, right: 16 })
+            }
+            .width(LAYOUT_WIDTH_OR_HEIGHT)
+            .justifyContent(FlexAlign.Center)
+          }
+          .size({ width: LAYOUT_WIDTH_OR_HEIGHT, height: LAYOUT_WIDTH_OR_HEIGHT })
+          .title('待评价')
+          .titleMode(NavigationTitleMode.Mini)
         }
-        .width(LAYOUT_WIDTH_OR_HEIGHT)
         .height(56)
-        .alignItems(VerticalAlign.Center)
-        .padding({ left: 12, right: 12 })
+        .backgroundColor(Color.White)
 
         if (this.pendingItems.length === 0) {
           Column() {

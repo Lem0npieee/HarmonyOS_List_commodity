@@ -293,8 +293,8 @@ export default class TabBar extends ViewPU {
             this.observeComponentCreation2((elmtId, isInitialRender) => {
                 if (isInitialRender) {
                     let componentCall = new SelectedComponent(this, {
-                        subCategories: tab.subCategories,
-                        currentSubCategory: state.subCategory,
+                        subCategories: [],
+                        currentSubCategory: 'all',
                         searchValue: state.search,
                         sortOption: state.sort,
                         activeFilters: state.filters,
@@ -305,15 +305,15 @@ export default class TabBar extends ViewPU {
                                 console.error('跳转到 AI 页面失败:', err.message);
                             });
                         },
-                        onSubCategoryChange: (subId: string) => this.handleSubCategoryChange(index, subId),
+                        onSubCategoryChange: (_subId: string) => { },
                         onSortChange: (sort: SortOption) => this.handleSortChange(index, sort),
                         onFilterToggle: (filter: FilterId) => this.handleFilterToggle(index, filter)
                     }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/TabBarsComponent.ets", line: 131, col: 3 });
                     ViewPU.create(componentCall);
                     let paramsLambda = () => {
                         return {
-                            subCategories: tab.subCategories,
-                            currentSubCategory: state.subCategory,
+                            subCategories: [],
+                            currentSubCategory: 'all',
                             searchValue: state.search,
                             sortOption: state.sort,
                             activeFilters: state.filters,
@@ -324,7 +324,7 @@ export default class TabBar extends ViewPU {
                                     console.error('跳转到 AI 页面失败:', err.message);
                                 });
                             },
-                            onSubCategoryChange: (subId: string) => this.handleSubCategoryChange(index, subId),
+                            onSubCategoryChange: (_subId: string) => { },
                             onSortChange: (sort: SortOption) => this.handleSortChange(index, sort),
                             onFilterToggle: (filter: FilterId) => this.handleFilterToggle(index, filter)
                         };
@@ -392,7 +392,7 @@ export default class TabBar extends ViewPU {
         }
         const updated: TabUIState = {
             search: partial.search !== undefined ? partial.search : current.search,
-            subCategory: partial.subCategory !== undefined ? partial.subCategory : current.subCategory,
+            subCategory: 'all',
             sort: partial.sort !== undefined ? partial.sort : current.sort,
             filters: partial.filters !== undefined ? partial.filters.slice() : current.filters.slice()
         };
@@ -415,7 +415,7 @@ export default class TabBar extends ViewPU {
         const dataSource: ListDataSource = target !== undefined ? target : this.getDataSourceByIndex(index);
         const query: ListQueryState = {
             search: state.search,
-            subCategory: state.subCategory,
+            subCategory: 'all',
             sort: state.sort,
             filters: state.filters.slice()
         };
@@ -477,10 +477,9 @@ export default class TabBar extends ViewPU {
         }
     }
     private buildInitialState(tab: TabMeta): TabUIState {
-        const defaultSub: string = tab.subCategories.length > 0 ? tab.subCategories[0].id : 'all';
         return {
             search: '',
-            subCategory: defaultSub,
+            subCategory: 'all',
             sort: SortOption.Comprehensive,
             filters: []
         };

@@ -14,7 +14,7 @@ import AuthStore from "@bundle:com.example.list_harmony/entry/ets/common/AuthSto
 import http from "@ohos:net.http";
 import { goodsPool, CategoryType } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
 import type { GoodsListItemType } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/InitialData";
-import { LAYOUT_WIDTH_OR_HEIGHT, STORE } from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
+import { LAYOUT_WIDTH_OR_HEIGHT } from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
 import * as commonConst from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
 interface ChatMessage {
     role: 'user' | 'ai';
@@ -176,7 +176,7 @@ export default class AIChatPage extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Navigation.create(new NavPathStack(), { moduleName: "entry", pagePath: "entry/src/main/ets/pages/AIChatPage", isUserCreateStack: false });
             Navigation.size({ width: LAYOUT_WIDTH_OR_HEIGHT, height: 56 });
-            Navigation.title(STORE);
+            Navigation.title('AI搜索');
             Navigation.titleMode(NavigationTitleMode.Mini);
         }, Navigation);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -469,6 +469,7 @@ export default class AIChatPage extends ViewPU {
         try {
             // 构建商品列表字符串
             const goodsListStr = goodsPool.map(g => `{id:${g.id}, title:'${String(g.title)}', description:'${String(g.description)}', evaluate:'${String(g.evaluate)}', price:${g.price}, category:'${g.category}', subCategory:'${g.subCategory}', keyword:'${g.keyword}', searchIndex:'${g.searchIndex}', isNew:${g.isNew}, isHot:${g.isHot}, isFreeShipping:${g.isFreeShipping}, hasCoupon:${g.hasCoupon}, originalPrice:${g.originalPrice || 'N/A'}, salesCount:${g.salesCount || 0}, rating:${g.rating || 0}, ratingCount:${g.ratingCount || 0}, shopName:'${g.shopName || ''}', specifications:${JSON.stringify(g.specifications || [])}, deliveryInfo:'${g.deliveryInfo || ''}'}`).join('\n');
+            // 构建包含历史对话的消息数组
             const messagesArr: DeepSeekMessage[] = [
                 { role: 'system', content: `你是一个专业的电商商品匹配助手，负责根据用户的自然语言查询，从给定的商品列表中精准筛选匹配的商品，并按固定格式返回JSON结果。请严格遵守以下规则执行任务：
 
@@ -525,9 +526,12 @@ export default class AIChatPage extends ViewPU {
     - 无论商品列表中有多少条商品，仅返回匹配商品的**数字ID**到items数组中，禁止返回ID以外的任何标识。
 
     以下是商品列表：
-    ${goodsListStr}` },
-                { role: 'user', content: query }
+    ${goodsListStr}` }
             ];
+            // 添加历史对话记录（保留上下文）
+            this.chatHistory.forEach((historyItem: ChatHistoryItem) => {
+                messagesArr.push({ role: historyItem.role, content: historyItem.content });
+            });
             const bodyObj: DeepSeekRequest = {
                 model: this.AI_MODEL_NAME,
                 messages: messagesArr,
